@@ -1,5 +1,7 @@
 # One-request Nemotron preflight
 
+Historical preflight implementation/check record. Current account-catalog pricing, proxy routing, credit ceiling and milestones are recorded in [coordination](coordination.md); the original logs below remain historical.
+
 ## Scope and review
 
 This change addresses the one-request preflight gate in the [independent review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699). No approval for billable inference was given. Continue on `feat/phase1-verified-completion`; keep PR #2 draft. Do not merge, deploy or access other projects.

@@ -4,7 +4,7 @@ A provisional Nebius × NVIDIA hackathon experiment: can a guarded browser agent
 
 ## Run in the published Codex cloud environment
 
-Everything runs in `/workspace/neb-hackath`, independently of other projects. Node 24 matches CI. Do not install on your laptop, deploy publicly, or create paid resources.
+Everything runs in `/workspace/neb-hackath`, independently of other projects. Node 24.19.0 or newer is the tested runtime; CI selects Node 24. Do not install on your laptop, deploy publicly, or create paid resources.
 
 ```bash
 cd /workspace/neb-hackath
@@ -44,12 +44,28 @@ For manual inspection, `npm start` starts the **loopback-only** synthetic server
 
 All cases use reserved `.invalid` email data. Agents receive only the task and rendered page observations, never expected outcomes or server records. The scenarios are known development cases, not evidence of generalization to unseen websites.
 
+## Evaluation and current coordination
+
+See [milestones, blockers and service decisions](docs/coordination.md) for PAV-54–PAV-57, pricing and read-only hosting assessment. Read [evaluation v1 results](docs/evaluation-v1.md) for the stronger comparison.
+
+```bash
+npm run benchmark -- --split development --repetitions 2 --output results/local/development.json
+npm run benchmark -- --split holdout --repetitions 2 --output results/local/evaluation-v1.json
+npm run benchmark -- --scenario grant-renamed --baselines baseline,dom-autofill --output results/local/selected.json
+```
+
+`--scenario` accepts exact comma-separated IDs offline; `--split` is development (default), holdout or all. `holdout` names eight frozen v1 candidates that are now consumed, public regression cases, not a continuing blind test set. No policies were tuned to their benchmark results. The DOM baseline uses conventional HTML field names, select options, bounded retry and observed formatting errors; it has no model/evaluator access. Its stable-name assumption is explicit.
+
+All modes share a final receipt gate: `rawClaimedCompletion`/`falseCompletionClaim` preserve agent/UI claims; `reportedCompletion` is supplied only by independent verification. `reportedFalseCompletions=0` follows mechanically from that boundary, not improved model reasoning. `correctNegativeOutcomes` still counts raw claims, so rejected false claims remain negative failures. The unmeasured inappropriate-action metric is now null. Historical evidence remains unchanged.
+
 ## One-request Nemotron preflight
 
-Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. No live request has been approved or run.
+Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. No live inference request has been approved or run. Current account catalog GET pricing and proxy routing have been checked without inference.
 
 ```bash
 npm run preflight
+# Non-billable current account catalog GET, then a dry-run using returned prices:
+npm run preflight:catalog
 ```
 
 This is a **no-network dry-run** by default, even with real credentials injected. It prints presence flags, destination, limits and an estimate if current prices are configured; it never prints the key or model variable value. Exit 0 means the dry-run completed with credential prerequisites present, not that live validation passed. The standalone CLI cannot inspect platform secret scope; that was checked separately using protected environment metadata. Missing/invalid credentials produce exit 1. `readyForApproval` also requires positive input/output prices.
@@ -74,17 +90,17 @@ Set non-secret `NEBIUS_MODEL` to the exact eligible **`nvidia/...Nemotron...`** 
 
 Official references: [quickstart](https://docs.tokenfactory.nebius.com/quickstart), [model catalog API](https://docs.tokenfactory.nebius.com/api-reference/models/list-models), [JSON output](https://docs.tokenfactory.nebius.com/ai-models-inference/json). The fixed inference endpoint is `https://api.tokenfactory.nebius.com/v1/chat/completions`.
 
-**Do not execute paid calls until the owner separately approves spending.** The full-suite command below is a later step, after successful preflight, scenario selection, a smaller approved experiment and further spending approval:
+**Do not execute paid calls until the owner separately approves spending.** The selective command below is a future template, after successful preflight and a separate small-experiment approval. The old 80-call full-suite template is deliberately rejected:
 
 ```bash
-npm run benchmark -- --live --approve-paid --repetitions 1 --max-calls 80 --output results/local/live.json
+npm run benchmark -- --live --approve-paid --scenario grant-renamed --baselines baseline,dom-autofill --repetitions 1 --max-calls 4 --output results/local/live.json
 ```
 
-These flags enforce at most 80 shared inference requests, each with at most 1,024 output tokens and at most 16,000 user-message characters (plus a fixed system prompt), no automatic HTTP retries, and a 30-second timeout per call. Those are request/token limits, not a dollar budget or a guarantee of full coverage. The runner stops each task after eight policy turns. Authentication, rate-limit, model-ID, JSON, token-budget and provider errors are reported without response bodies/secrets, with no fallback. Repeated runs incur additional charges and need to stay within the owner's approval. Benchmark defaults are offline; CI never gets a key and never uses `--live`.
+Live CLI requires exactly one selected scenario, one repetition and an explicit call cap of at most eight; this example caps calls at four. Each call has at most 1,024 output tokens and a 16,000-character user observation. These are request/token limits, not a cumulative dollar cap. The preflight also refuses an approved limit above $0.50, but its cost check is an estimate and the local call counter resets on a new invocation. No billing/top-up path is implemented. Do not run this template under the one-request preflight approval. CI and benchmark defaults remain offline. Native provider requests use Node's supported cloud proxy option without disabling TLS verification.
 
 ## Evidence and interpretation
 
-Each benchmark writes a JSON report and an append-only `.json.jsonl` per-trial log. Reports include source commit and dirty-code status, timestamps, repetitions, actual verified outcomes, completion claims, false claims, denied actions, executed inappropriate actions, total latency, token usage and model-cost basis. A false completion claim means the agent said `done`/the baseline saw success while server verification failed. Denied actions are attempts blocked by the action/network guard; they are not executed inappropriate actions. `inappropriateActionsExecuted` is currently hard-coded to zero by the bounded runner; it is not an independently measured absence of harmful valid actions or a general safety result.
+Each benchmark writes a JSON report and an append-only `.json.jsonl` per-trial log. Reports include source commit and dirty-code status, timestamps, repetitions, actual verified outcomes, completion claims, false claims, denied actions, executed inappropriate actions, total latency, token usage and model-cost basis. A false completion claim means the agent said `done`/the baseline saw success while server verification failed. Denied actions are attempts blocked by the action/network guard; they are not executed inappropriate actions. Current reports set `inappropriateActionsExecuted` to null because it is unmeasured; previous literal zeros are not independent safety evidence.
 
 Latency includes run/context creation, page loading, browser actions, context closure and verification, excluding initial browser process launch. Baseline timeouts are part of measured latency. Repetitions alternate order but tasks remain fixed and local; these timings cannot predict live model latency. Negative cases are reported separately from the eight completable cases. Read [Phase 1 results and limitations](docs/phase1-results.md) and the committed raw evidence in `results/`.
 

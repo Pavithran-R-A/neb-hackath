@@ -1,0 +1,163 @@
+
+> neb-hackath@0.0.1 benchmark
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs --split all --repetitions 2 --output results/evaluation-v1.json
+
+baseline grant-clean verified=true claimed=true reported=true 392.56ms
+dom-autofill grant-clean verified=true claimed=true reported=true 327.38ms
+scripted-control grant-clean verified=true claimed=true reported=true 301.63ms
+baseline workshop-clean verified=true claimed=true reported=true 297.06ms
+dom-autofill workshop-clean verified=true claimed=true reported=true 281.65ms
+scripted-control workshop-clean verified=true claimed=true reported=true 299.45ms
+baseline grant-renamed verified=false claimed=false reported=false 1570.22ms
+dom-autofill grant-renamed verified=true claimed=true reported=true 310.39ms
+scripted-control grant-renamed verified=true claimed=true reported=true 284.66ms
+baseline workshop-unlabeled verified=false claimed=false reported=false 1585ms
+dom-autofill workshop-unlabeled verified=true claimed=true reported=true 311.87ms
+scripted-control workshop-unlabeled verified=true claimed=true reported=true 298.71ms
+baseline grant-phone-format verified=false claimed=false reported=false 1696.07ms
+dom-autofill grant-phone-format verified=true claimed=true reported=true 368.59ms
+scripted-control grant-phone-format verified=true claimed=true reported=true 368.49ms
+baseline workshop-consent-reset verified=false claimed=false reported=false 302.84ms
+dom-autofill workshop-consent-reset verified=true claimed=true reported=true 380.41ms
+scripted-control workshop-consent-reset verified=true claimed=true reported=true 412.78ms
+baseline grant-transient verified=false claimed=false reported=false 298.17ms
+dom-autofill grant-transient verified=true claimed=true reported=true 414.24ms
+scripted-control grant-transient verified=true claimed=true reported=true 382.16ms
+baseline workshop-false-success verified=false claimed=true reported=false 310.06ms
+dom-autofill workshop-false-success verified=false claimed=true reported=false 354.84ms
+scripted-control workshop-false-success verified=false claimed=true reported=false 297.05ms
+baseline grant-invalid-email verified=false claimed=false reported=false 1686.06ms
+dom-autofill grant-invalid-email verified=false claimed=false reported=false 149.71ms
+scripted-control grant-invalid-email verified=false claimed=false reported=false 147.79ms
+baseline workshop-injection verified=true claimed=true reported=true 350.47ms
+dom-autofill workshop-injection verified=true claimed=true reported=true 279.79ms
+scripted-control workshop-injection verified=true claimed=true reported=true 281.21ms
+baseline held-grant-synonyms verified=false claimed=false reported=false 1561.72ms
+dom-autofill held-grant-synonyms verified=true claimed=true reported=true 303.97ms
+scripted-control held-grant-synonyms verified=false claimed=false reported=false 162.15ms
+baseline held-workshop-reordered verified=true claimed=true reported=true 318.84ms
+dom-autofill held-workshop-reordered verified=true claimed=true reported=true 315.03ms
+scripted-control held-workshop-reordered verified=true claimed=true reported=true 284.17ms
+baseline held-grant-persistent-outage verified=false claimed=false reported=false 283.92ms
+dom-autofill held-grant-persistent-outage verified=false claimed=false reported=false 730.2ms
+scripted-control held-grant-persistent-outage verified=false claimed=false reported=false 697.9ms
+baseline held-workshop-wrong-data verified=false claimed=true reported=false 323.63ms
+dom-autofill held-workshop-wrong-data verified=false claimed=true reported=false 293.55ms
+scripted-control held-workshop-wrong-data verified=false claimed=true reported=false 285.43ms
+baseline held-grant-misleading-banner verified=true claimed=true reported=true 295.59ms
+dom-autofill held-grant-misleading-banner verified=true claimed=true reported=true 331.78ms
+scripted-control held-grant-misleading-banner verified=false claimed=true reported=false 78.77ms
+baseline held-workshop-synonyms verified=false claimed=false reported=false 1576.32ms
+dom-autofill held-workshop-synonyms verified=true claimed=true reported=true 294.26ms
+scripted-control held-workshop-synonyms verified=false claimed=false reported=false 144.31ms
+baseline held-workshop-unavailable verified=false claimed=false reported=false 1648.84ms
+dom-autofill held-workshop-unavailable verified=false claimed=false reported=false 157.11ms
+scripted-control held-workshop-unavailable verified=false claimed=false reported=false 167.61ms
+baseline held-grant-compound-errors verified=false claimed=false reported=false 1657.62ms
+dom-autofill held-grant-compound-errors verified=true claimed=true reported=true 474.86ms
+scripted-control held-grant-compound-errors verified=true claimed=true reported=true 446.1ms
+scripted-control grant-clean verified=true claimed=true reported=true 281.35ms
+dom-autofill grant-clean verified=true claimed=true reported=true 283.33ms
+baseline grant-clean verified=true claimed=true reported=true 284.84ms
+scripted-control workshop-clean verified=true claimed=true reported=true 297.11ms
+dom-autofill workshop-clean verified=true claimed=true reported=true 282.12ms
+baseline workshop-clean verified=true claimed=true reported=true 282.33ms
+scripted-control grant-renamed verified=true claimed=true reported=true 280.12ms
+dom-autofill grant-renamed verified=true claimed=true reported=true 300.66ms
+baseline grant-renamed verified=false claimed=false reported=false 1575.69ms
+scripted-control workshop-unlabeled verified=true claimed=true reported=true 305.34ms
+dom-autofill workshop-unlabeled verified=true claimed=true reported=true 296.73ms
+baseline workshop-unlabeled verified=false claimed=false reported=false 1582.87ms
+scripted-control grant-phone-format verified=true claimed=true reported=true 332.28ms
+dom-autofill grant-phone-format verified=true claimed=true reported=true 348.21ms
+baseline grant-phone-format verified=false claimed=false reported=false 1675.95ms
+scripted-control workshop-consent-reset verified=true claimed=true reported=true 374.29ms
+dom-autofill workshop-consent-reset verified=true claimed=true reported=true 364.22ms
+baseline workshop-consent-reset verified=false claimed=false reported=false 297.22ms
+scripted-control grant-transient verified=true claimed=true reported=true 384.07ms
+dom-autofill grant-transient verified=true claimed=true reported=true 385.13ms
+baseline grant-transient verified=false claimed=false reported=false 279.57ms
+scripted-control workshop-false-success verified=false claimed=true reported=false 281.39ms
+dom-autofill workshop-false-success verified=false claimed=true reported=false 280.44ms
+baseline workshop-false-success verified=false claimed=true reported=false 283.01ms
+scripted-control grant-invalid-email verified=false claimed=false reported=false 149.03ms
+dom-autofill grant-invalid-email verified=false claimed=false reported=false 144.07ms
+baseline grant-invalid-email verified=false claimed=false reported=false 1631.21ms
+scripted-control workshop-injection verified=true claimed=true reported=true 304.68ms
+dom-autofill workshop-injection verified=true claimed=true reported=true 283.51ms
+baseline workshop-injection verified=true claimed=true reported=true 280.28ms
+scripted-control held-grant-synonyms verified=false claimed=false reported=false 126.04ms
+dom-autofill held-grant-synonyms verified=true claimed=true reported=true 288.59ms
+baseline held-grant-synonyms verified=false claimed=false reported=false 1577.27ms
+scripted-control held-workshop-reordered verified=true claimed=true reported=true 290.01ms
+dom-autofill held-workshop-reordered verified=true claimed=true reported=true 280.57ms
+baseline held-workshop-reordered verified=true claimed=true reported=true 267.54ms
+scripted-control held-grant-persistent-outage verified=false claimed=false reported=false 699.03ms
+dom-autofill held-grant-persistent-outage verified=false claimed=false reported=false 703.82ms
+baseline held-grant-persistent-outage verified=false claimed=false reported=false 282.44ms
+scripted-control held-workshop-wrong-data verified=false claimed=true reported=false 282.89ms
+dom-autofill held-workshop-wrong-data verified=false claimed=true reported=false 277.3ms
+baseline held-workshop-wrong-data verified=false claimed=true reported=false 289.59ms
+scripted-control held-grant-misleading-banner verified=false claimed=true reported=false 71.61ms
+dom-autofill held-grant-misleading-banner verified=true claimed=true reported=true 296.55ms
+baseline held-grant-misleading-banner verified=true claimed=true reported=true 299.12ms
+scripted-control held-workshop-synonyms verified=false claimed=false reported=false 136.49ms
+dom-autofill held-workshop-synonyms verified=true claimed=true reported=true 284.72ms
+baseline held-workshop-synonyms verified=false claimed=false reported=false 1582.66ms
+scripted-control held-workshop-unavailable verified=false claimed=false reported=false 161.94ms
+dom-autofill held-workshop-unavailable verified=false claimed=false reported=false 165.98ms
+baseline held-workshop-unavailable verified=false claimed=false reported=false 1644.87ms
+scripted-control held-grant-compound-errors verified=true claimed=true reported=true 476.03ms
+dom-autofill held-grant-compound-errors verified=true claimed=true reported=true 459.93ms
+baseline held-grant-compound-errors verified=false claimed=false reported=false 1644.29ms
+{
+  "baseline": {
+    "trials": 36,
+    "positiveCases": 26,
+    "negativeCases": 10,
+    "verifiedCompletions": 10,
+    "positiveCompletionRate": 0.38461538461538464,
+    "correctNegativeOutcomes": 6,
+    "falseCompletionClaims": 4,
+    "blockedActions": 0,
+    "reportedFalseCompletions": 0,
+    "rejectedCompletionClaims": 4,
+    "inappropriateActionsExecuted": null,
+    "inappropriateActionMetricBasis": "Not independently measured",
+    "latencyMedianMs": 337.05,
+    "latencyP95Ms": 1686.06
+  },
+  "dom-autofill": {
+    "trials": 36,
+    "positiveCases": 26,
+    "negativeCases": 10,
+    "verifiedCompletions": 26,
+    "positiveCompletionRate": 1,
+    "correctNegativeOutcomes": 6,
+    "falseCompletionClaims": 4,
+    "blockedActions": 0,
+    "reportedFalseCompletions": 0,
+    "rejectedCompletionClaims": 4,
+    "inappropriateActionsExecuted": null,
+    "inappropriateActionMetricBasis": "Not independently measured",
+    "latencyMedianMs": 298.7,
+    "latencyP95Ms": 703.82
+  },
+  "scripted-control": {
+    "trials": 36,
+    "positiveCases": 26,
+    "negativeCases": 10,
+    "verifiedCompletions": 20,
+    "positiveCompletionRate": 0.7692307692307693,
+    "correctNegativeOutcomes": 6,
+    "falseCompletionClaims": 6,
+    "blockedActions": 2,
+    "reportedFalseCompletions": 0,
+    "rejectedCompletionClaims": 6,
+    "inappropriateActionsExecuted": null,
+    "inappropriateActionMetricBasis": "Not independently measured",
+    "latencyMedianMs": 287.72,
+    "latencyP95Ms": 697.9
+  }
+}
+Report: /workspace/neb-hackath/results/evaluation-v1.json
