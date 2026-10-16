@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createNemotronPolicy } from '../src/agents/nebius.mjs';
 const model='nvidia/test-nemotron';
 const input={task:{name:'Avery Example'},observation:{text:'Step 1',controls:[]},history:[]};
-const response=(overrides={})=>new Response(JSON.stringify({model,choices:[{message:{content:'{"actions":[{"type":"abort"}]}'}}],usage:{prompt_tokens:100,completion_tokens:10,total_tokens:110},...overrides}));
+const response=(overrides={})=>new Response(JSON.stringify({model,choices:[{finish_reason:'stop',message:{role:'assistant',content:'{"actions":[{"type":"abort"}]}'}}],usage:{prompt_tokens:100,completion_tokens:10,total_tokens:110},...overrides}));
 test('live inference requires key, explicit paid approval and NVIDIA Nemotron model',()=>{
  assert.throws(()=>createNemotronPolicy({apiKey:'',model,approved:true}),/NEBIUS_API_KEY/);
  assert.throws(()=>createNemotronPolicy({apiKey:'test-only',model}),/approval/);
@@ -27,7 +27,7 @@ test('provider errors are sanitized, never retried or silently replaced',async()
  assert.equal(policy.metrics().calls,1);
 });
 test('wrong model, invalid JSON, missing usage and excessive output fail safely',async()=>{
- for(const payload of [ {model:'other/model'}, {choices:[{message:{content:'not JSON'}}]}, {choices:[{message:{content:'x'.repeat(9000)}}]} ]){
+ for(const payload of [ {model:'other/model'}, {choices:[{finish_reason:'stop',message:{role:'assistant',content:'not JSON'}}]}, {choices:[{finish_reason:'stop',message:{role:'assistant',content:'x'.repeat(9000)}}]} ]){
   const policy=createNemotronPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async()=>response(payload)});
   await assert.rejects(()=>policy.decide(input));
  }
@@ -36,7 +36,7 @@ test('wrong model, invalid JSON, missing usage and excessive output fail safely'
 });
 test('provider latency includes streamed response body, not just response headers',async()=>{
  const policy=createNemotronPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async()=>new Response(new ReadableStream({start(controller){
-  setTimeout(()=>{controller.enqueue(new TextEncoder().encode(JSON.stringify({model,choices:[{message:{content:'{"actions":[{"type":"abort"}]}'}}],usage:{prompt_tokens:1,completion_tokens:1}})));controller.close();},40);
+  setTimeout(()=>{controller.enqueue(new TextEncoder().encode(JSON.stringify({model,choices:[{finish_reason:'stop',message:{role:'assistant',content:'{"actions":[{"type":"abort"}]}'}}],usage:{prompt_tokens:1,completion_tokens:1,total_tokens:2}})));controller.close();},40);
  }}))});
  await policy.decide(input);assert.ok(policy.metrics().providerLatencyMs>=30);
 });

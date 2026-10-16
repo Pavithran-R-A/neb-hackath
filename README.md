@@ -44,6 +44,28 @@ For manual inspection, `npm start` starts the **loopback-only** synthetic server
 
 All cases use reserved `.invalid` email data. Agents receive only the task and rendered page observations, never expected outcomes or server records. The scenarios are known development cases, not evidence of generalization to unseen websites.
 
+## One-request Nemotron preflight
+
+Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. No live request has been approved or run.
+
+```bash
+npm run preflight
+```
+
+This is a **no-network dry-run** by default, even with real credentials injected. It prints presence flags, destination, limits and an estimate if current prices are configured; it never prints the key or model variable value. Exit 0 means the dry-run completed with credential prerequisites present, not that live validation passed. The standalone CLI cannot inspect platform secret scope; that was checked separately using protected environment metadata. Missing/invalid credentials produce exit 1. `readyForApproval` also requires positive input/output prices.
+
+After the owner separately approves an explicit spending limit, and current non-secret token rates are configured as `NEBIUS_INPUT_USD_PER_MILLION` and `NEBIUS_OUTPUT_USD_PER_MILLION`, the following **template** performs one real request. `$APPROVED_PREFLIGHT_LIMIT_USD` must be the owner's approved amount; this documentation is not approval:
+
+```bash
+npm run preflight -- --live --approve-paid --spend-limit-usd "$APPROVED_PREFLIGHT_LIMIT_USD"
+```
+
+The preflight sends at most **one** POST to the fixed Token Factory endpoint, with JSON object response format, a fixed synthetic name task, **256 maximum output tokens**, a 30-second timeout, no redirects and no retries. It validates HTTP 200, the exact returned NVIDIA Nemotron model ID, one completed assistant choice, JSON and allowed action schema, the expected name-fill/Next plan, positive token usage and consistent totals. Unknown aliases, refused/truncated responses, missing/invalid usage or mismatched task data fail closed. No browser actions are executed, so success is a provider contract check, not application-completion or hackathon-eligibility evidence.
+
+The safety estimate uses UTF-8 input bytes plus a 1,024-token framing allowance, the output-token maximum and the configured prices. A live attempt is refused if the estimate exceeds the approved limit. This is **not a provider-enforced dollar cap**; tokenizer overhead and current account pricing must be verified, and an over-limit charge cannot be undone after a response. Failure output preserves sanitized attempted-request counts and known usage/estimated cost; unknown usage remains null. No response body, model text or credential is printed.
+
+All preflight tests use explicit simulated transports and test-only credentials. `npm test` and CI never opt into live mode. Before any full live benchmark, complete the preflight, add scenario selection and approve a small bounded experiment on one baseline failure.
+
 ## Live NVIDIA Nemotron run — currently blocked, not executed
 
 In the **published `neb-hackath` cloud environment → environment settings → protected secrets**, add `NEBIUS_API_KEY`. If the platform asks for its HTTPS destination, use `api.tokenfactory.nebius.com`. Never paste the value in chat, commit it, put it in a browser bundle, or use another project's credentials. `.env.example` lists names only; this project does not automatically load `.env` files.
@@ -52,17 +74,17 @@ Set non-secret `NEBIUS_MODEL` to the exact eligible **`nvidia/...Nemotron...`** 
 
 Official references: [quickstart](https://docs.tokenfactory.nebius.com/quickstart), [model catalog API](https://docs.tokenfactory.nebius.com/api-reference/models/list-models), [JSON output](https://docs.tokenfactory.nebius.com/ai-models-inference/json). The fixed inference endpoint is `https://api.tokenfactory.nebius.com/v1/chat/completions`.
 
-**Do not execute paid calls until the owner separately approves spending.** After credentials, model selection, and approval, a bounded comparison can run:
+**Do not execute paid calls until the owner separately approves spending.** The full-suite command below is a later step, after successful preflight, scenario selection, a smaller approved experiment and further spending approval:
 
 ```bash
 npm run benchmark -- --live --approve-paid --repetitions 1 --max-calls 80 --output results/local/live.json
 ```
 
-This authorizes at most 80 shared inference requests, each with at most 1,024 output tokens and at most 16,000 user-message characters (plus a fixed system prompt), no automatic HTTP retries, and a 30-second timeout per call. Those are request/token limits, not a dollar budget or a guarantee of full coverage. The runner stops each task after eight policy turns. Authentication, rate-limit, model-ID, JSON, token-budget and provider errors are reported without response bodies/secrets, with no fallback. Repeated runs incur additional charges and need to stay within the owner's approval. Benchmark defaults are offline; CI never gets a key and never uses `--live`.
+These flags enforce at most 80 shared inference requests, each with at most 1,024 output tokens and at most 16,000 user-message characters (plus a fixed system prompt), no automatic HTTP retries, and a 30-second timeout per call. Those are request/token limits, not a dollar budget or a guarantee of full coverage. The runner stops each task after eight policy turns. Authentication, rate-limit, model-ID, JSON, token-budget and provider errors are reported without response bodies/secrets, with no fallback. Repeated runs incur additional charges and need to stay within the owner's approval. Benchmark defaults are offline; CI never gets a key and never uses `--live`.
 
 ## Evidence and interpretation
 
-Each benchmark writes a JSON report and an append-only `.json.jsonl` per-trial log. Reports include source commit and dirty-code status, timestamps, repetitions, actual verified outcomes, completion claims, false claims, denied actions, executed inappropriate actions, total latency, token usage and model-cost basis. A false completion claim means the agent said `done`/the baseline saw success while server verification failed. Denied actions are attempts blocked by the action/network guard; they are not executed inappropriate actions. The latter covers this runner's bounded action vocabulary, not a comprehensive security certification.
+Each benchmark writes a JSON report and an append-only `.json.jsonl` per-trial log. Reports include source commit and dirty-code status, timestamps, repetitions, actual verified outcomes, completion claims, false claims, denied actions, executed inappropriate actions, total latency, token usage and model-cost basis. A false completion claim means the agent said `done`/the baseline saw success while server verification failed. Denied actions are attempts blocked by the action/network guard; they are not executed inappropriate actions. `inappropriateActionsExecuted` is currently hard-coded to zero by the bounded runner; it is not an independently measured absence of harmful valid actions or a general safety result.
 
 Latency includes run/context creation, page loading, browser actions, context closure and verification, excluding initial browser process launch. Baseline timeouts are part of measured latency. Repetitions alternate order but tasks remain fixed and local; these timings cannot predict live model latency. Negative cases are reported separately from the eight completable cases. Read [Phase 1 results and limitations](docs/phase1-results.md) and the committed raw evidence in `results/`.
 

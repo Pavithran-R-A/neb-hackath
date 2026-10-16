@@ -44,7 +44,7 @@ test('Nebius adapter action contract drives the real browser (simulated transpor
  const control=createScriptedPolicy(),model='nvidia/test-nemotron';
  const policy=createNemotronPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async(url,options)=>{
   const input=JSON.parse(JSON.parse(options.body).messages[1].content);
-  return new Response(JSON.stringify({model,choices:[{message:{content:JSON.stringify(await control.decide(input))},finish_reason:'stop'}],usage:{prompt_tokens:100,completion_tokens:20}}));
+  return new Response(JSON.stringify({model,choices:[{message:{role:'assistant',content:JSON.stringify(await control.decide(input))},finish_reason:'stop'}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}}));
  }});
  const result=await runGuarded(session.page,scenario.task,policy);
  assert.equal(result.claimedCompletion,true);assert.equal(verifyCompletion(app.readRecord(run.id),scenario.task,app.key).completed,true);

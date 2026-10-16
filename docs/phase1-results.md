@@ -1,5 +1,7 @@
 # Phase 1 measured evidence and decision
 
+Historical report for the source commit below. For the later protected-configuration check and one-request preflight, see [Nemotron preflight status](nemotron-preflight.md).
+
 ## Status
 
 **Local testbed and scripted recovery feasibility: GO. NVIDIA inference effectiveness and hackathon eligibility: NOT YET DEMONSTRATED.** The actual Nemotron comparison is blocked by missing `NEBIUS_API_KEY`, missing selected `NEBIUS_MODEL`, and separate approval for paid calls. Nothing was deployed publicly. No live API calls or paid resources were used.

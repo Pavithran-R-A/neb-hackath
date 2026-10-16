@@ -1,4 +1,5 @@
-import { observe, executeAction, validateAction } from './browser.mjs';
+import { observe, executeAction } from './browser.mjs';
+import { validateBatch } from './actions.mjs';
 export async function runGuarded(page,task,policy,{maxTurns=8}={}){
  const history=[];let steps=0,blockedActions=0;
  const result=(claimedCompletion,error)=>({claimedCompletion,steps,blockedActions,inappropriateActionsExecuted:0,errors:error?[error]:[],history});
@@ -8,8 +9,7 @@ export async function runGuarded(page,task,policy,{maxTurns=8}={}){
   const actions=decision?.actions;
   // Validate the whole batch before taking any action. Navigation must be last.
   try{
-   if(!Array.isArray(actions)||actions.length<1||actions.length>6||Object.keys(decision).some(k=>k!=='actions'))throw new Error('Invalid batch');
-   actions.forEach((a,i)=>{validateAction(a,observation.controls,task);if(['click','done','abort','wait'].includes(a.type)&&i!==actions.length-1)throw new Error('Terminal action must be last');});
+   validateBatch(decision,observation.controls,task);
   }catch{blockedActions++;return result(false,'Action guard rejected policy batch');}
   const record={turn,actions:structuredClone(actions)};history.push(record);
   try{
