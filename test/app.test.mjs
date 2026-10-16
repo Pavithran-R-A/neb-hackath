@@ -1,0 +1,68 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createApp } from '../src/app/server.mjs';
+import { verifyCompletion } from '../src/verification.mjs';
+
+const expected = { flow: 'grant', name: 'Avery Example', email: 'avery@example.invalid', phone: '5550101234', detail: 'Community garden', consent: true };
+async function action(app, run, step, values = {}) {
+  const res = await fetch(`${app.origin}/api/runs/${run.id}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ step, values }) });
+  return { status: res.status, body: await res.json() };
+}
+async function complete(app, run) {
+  await action(app, run, 0, expected);
+  await action(app, run, 1, expected);
+  return action(app, run, 2, { consent: true });
+}
+test('server requires every step, valid fields, and explicit consent', async t => {
+ const app = await createApp(); t.after(() => app.close());
+ const run = app.createRun({ flow: 'grant', variant: 'clean' });
+ assert.equal((await action(app, run, 2, {consent:true})).status, 409);
+ assert.equal((await action(app, run, 0, {...expected,email:'broken'})).status, 422);
+ assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key).completed, false);
+ await action(app, run, 0, expected); await action(app, run, 1, expected);
+ assert.equal((await action(app, run, 2)).status, 422);
+ assert.equal((await action(app, run, 2, {consent:true})).status, 200);
+ assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key).completed, true);
+});
+test('receipt rejects mutation, wrong task, wrong run and duplicate submission', async t => {
+ const app = await createApp(); t.after(() => app.close());
+ const run = app.createRun({flow:'grant',variant:'clean'}); await complete(app,run);
+ const record=app.readRecord(run.id);
+ assert.equal(verifyCompletion(record,expected,app.key).completed,true);
+ assert.equal(verifyCompletion(record,{...expected,email:'other@example.invalid'},app.key).completed,false);
+ assert.equal(verifyCompletion({...record,id:'another-run'},expected,app.key).completed,false);
+ assert.equal(verifyCompletion({...record,receipt:{...record.receipt,signature:'forged'}},expected,app.key).completed,false);
+ assert.equal(verifyCompletion({...record,completionCount:2},expected,app.key).completed,false);
+ assert.equal((await action(app,run,2,{consent:true})).status,409);
+ assert.equal(app.readRecord(run.id).completionCount,1);
+});
+test('false-success display has no verifiable receipt', async t => {
+ const app=await createApp();t.after(()=>app.close());
+ const run=app.createRun({flow:'grant',variant:'false-success'});
+ const result=await complete(app,run);
+ assert.equal(result.body.displaySuccess,true);
+ assert.equal(verifyCompletion(app.readRecord(run.id),expected,app.key).completed,false);
+});
+test('format validation, one-shot transient failure, and consent reset are reproducible',async t=>{
+ const app=await createApp();t.after(()=>app.close());
+ const formatted=app.createRun({flow:'grant',variant:'format'});
+ assert.equal((await action(app,formatted,0,expected)).status,422);
+ assert.equal((await action(app,formatted,0,{...expected,phone:'555-010-1234'})).status,200);
+ const run=app.createRun({flow:'grant',variant:'transient'});
+ await action(app,run,0,expected);await action(app,run,1,expected);
+ assert.equal((await action(app,run,2,{consent:true})).status,503);
+ assert.equal((await action(app,run,2,{consent:true})).status,200);
+ const reset=app.createRun({flow:'grant',variant:'consent-reset'});
+ await action(app,reset,0,expected);await action(app,reset,1,expected);
+ assert.equal((await action(app,reset,2,{consent:true})).status,422);
+ assert.equal((await action(app,reset,2,{consent:true})).status,200);
+});
+test('unknown runs and malformed requests fail without leaking evaluator state',async t=>{
+ const app=await createApp();t.after(()=>app.close());
+ assert.equal((await fetch(app.origin+'/api/runs/missing')).status,404);
+ const run=app.createRun({flow:'workshop',variant:'clean'});
+ const state=await (await fetch(app.origin+'/api/runs/'+run.id)).json();
+ assert.equal('receipt' in state,false);assert.equal('key' in state,false);
+ const res=await fetch(app.origin+'/api/runs/'+run.id,{method:'POST',body:'{'});
+ assert.equal(res.status,400);
+});
