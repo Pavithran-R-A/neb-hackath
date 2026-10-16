@@ -15,3 +15,12 @@ test('URL guard permits only the exact synthetic run and assets, never evaluator
  for(const path of ['/form/'+run,'/api/runs/'+run,'/client.js','/style.css'])assert.equal(allowedBrowserUrl(origin+path,origin,run),true);
  for(const url of ['https://example.com','http://127.0.0.1:54321/form/'+run,origin+'/api/runs/other',origin+'/verify',origin+'/health',origin+'/form/'+run+'?evil=1'])assert.equal(allowedBrowserUrl(url,origin,run),false);
 });
+test('settling a failed click handles a later response-wait rejection',async()=>{
+ const { spawnSync }=await import('node:child_process');
+ const script=`import {clickAndSettle} from './src/agents/browser.mjs';
+ const page={waitForResponse:()=>new Promise((_,reject)=>setTimeout(()=>reject(new Error('response timeout')),20))};
+ await clickAndSettle(page,{click:async()=>{throw new Error('click failed');}}).catch(()=>{});
+ await new Promise(resolve=>setTimeout(resolve,50));`;
+ const child=spawnSync(process.execPath,['--input-type=module','-e',script],{cwd:process.cwd(),encoding:'utf8'});
+ assert.equal(child.status,0,child.stderr);
+});

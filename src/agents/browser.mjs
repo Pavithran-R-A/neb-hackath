@@ -56,8 +56,10 @@ export function validateAction(action,controls,task){
  return action;
 }
 export async function clickAndSettle(page,locator){
- const response=page.waitForResponse(r=>r.request().method()==='POST' && new URL(r.url()).pathname.startsWith('/api/runs/'));
- await locator.click();await response;
+ await Promise.all([
+  page.waitForResponse(r=>r.request().method()==='POST' && new URL(r.url()).pathname.startsWith('/api/runs/')),
+  locator.click()
+ ]);
  await page.waitForFunction(()=>!document.querySelector('main button')?.disabled);
 }
 export async function executeAction(page,action,controls,task){

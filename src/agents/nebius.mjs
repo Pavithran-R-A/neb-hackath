@@ -17,7 +17,8 @@ export function createNemotronPolicy({apiKey=process.env.NEBIUS_API_KEY,model=pr
    if(!response.ok){stats.providerLatencyMs+=performance.now()-started;stats.usageComplete=false;await response.body?.cancel();throw new Error(`Nebius HTTP ${response.status}`);}
    let data;try{data=await response.json();}catch{stats.usageComplete=false;throw new Error('Nebius response is not JSON');}
    finally{stats.providerLatencyMs+=performance.now()-started;}
-   const u=data.usage;if(u&&Number.isSafeInteger(u.prompt_tokens)&&u.prompt_tokens>=0&&Number.isSafeInteger(u.completion_tokens)&&u.completion_tokens>=0){stats.promptTokens+=u.prompt_tokens;stats.completionTokens+=u.completion_tokens;}else stats.usageComplete=false;
+   if(!data || typeof data!=='object' || Array.isArray(data)){stats.usageComplete=false;throw new Error('Nebius response envelope is invalid');}
+   const u=data.usage;if(u&&Number.isSafeInteger(u.prompt_tokens)&&u.prompt_tokens>=0&&Number.isSafeInteger(u.completion_tokens)&&u.completion_tokens>=0){stats.promptTokens+=u.prompt_tokens;stats.completionTokens+=u.completion_tokens;}else{stats.usageComplete=false;throw new Error('Nebius usage missing or invalid; decision rejected');}
    if(data.model!==model)throw new Error('Nebius returned an unexpected model; no fallback allowed');
    const raw=data.choices?.[0]?.message?.content;
    if(typeof raw!=='string'||raw.length>8192||data.choices?.[0]?.finish_reason==='length')throw new Error('Nebius returned empty, excessive or truncated actions');
