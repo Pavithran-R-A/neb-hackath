@@ -60,7 +60,7 @@ All modes share a final receipt gate: `rawClaimedCompletion`/`falseCompletionCla
 
 ## One-request Nemotron preflight
 
-Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. No live inference request has been approved or run. Current account catalog GET pricing and proxy routing have been checked without inference.
+Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. One live preflight is conditionally authorized, but has not run: current automatic charging/top-up status remains unconfirmed. Current catalog GET pricing and proxy routing have been checked without inference. See [authorization and billing gate](docs/authorized-preflight.md).
 
 ```bash
 npm run preflight
@@ -68,17 +68,19 @@ npm run preflight
 npm run preflight:catalog
 ```
 
-This is a **no-network dry-run** by default, even with real credentials injected. It prints presence flags, destination, limits and an estimate if current prices are configured; it never prints the key or model variable value. Exit 0 means the dry-run completed with credential prerequisites present, not that live validation passed. The standalone CLI cannot inspect platform secret scope; that was checked separately using protected environment metadata. Missing/invalid credentials produce exit 1. `readyForApproval` also requires positive input/output prices.
+This is a **no-network dry-run** by default, even with real credentials injected. It prints presence flags, destination, limits and an estimate if current prices are configured; it never prints the key or model variable value. Exit 0 means the dry-run completed with credential prerequisites present, not that live validation passed. The standalone CLI cannot inspect platform secret scope; that was checked separately using protected environment metadata. Missing/invalid credentials produce exit 1. `readyForApproval` also requires positive input/output prices and fresh complete credit-only billing evidence. A positive catalog check alone is insufficient.
 
-After the owner separately approves an explicit spending limit, and current non-secret token rates are configured as `NEBIUS_INPUT_USD_PER_MILLION` and `NEBIUS_OUTPUT_USD_PER_MILLION`, the following **template** performs one real request. `$APPROVED_PREFLIGHT_LIMIT_USD` must be the owner's approved amount; this documentation is not approval:
+After the credit-only billing condition is confirmed (existing one-call approval remains valid), and current non-secret token rates are configured as `NEBIUS_INPUT_USD_PER_MILLION` and `NEBIUS_OUTPUT_USD_PER_MILLION`, the following **template** performs one real request. `$APPROVED_PREFLIGHT_LIMIT_USD` must be the owner's approved amount; this documentation is not approval:
 
 ```bash
-npm run preflight -- --live --approve-paid --spend-limit-usd "$APPROVED_PREFLIGHT_LIMIT_USD"
+npm run preflight -- --live --approve-paid --spend-limit-usd "$APPROVED_PREFLIGHT_LIMIT_USD" --credit-evidence "$CREDIT_EVIDENCE_FILE"
 ```
 
 The preflight sends at most **one** POST to the fixed Token Factory endpoint, with JSON object response format, a fixed synthetic name task, **256 maximum output tokens**, a 30-second timeout, no redirects and no retries. It validates HTTP 200, the exact returned NVIDIA Nemotron model ID, one completed assistant choice, JSON and allowed action schema, the expected name-fill/Next plan, positive token usage and consistent totals. Unknown aliases, refused/truncated responses, missing/invalid usage or mismatched task data fail closed. No browser actions are executed, so success is a provider contract check, not application-completion or hackathon-eligibility evidence.
 
 The safety estimate uses UTF-8 input bytes plus a 1,024-token framing allowance, the output-token maximum and the configured prices. A live attempt is refused if the estimate exceeds the approved limit. This is **not a provider-enforced dollar cap**; tokenizer overhead and current account pricing must be verified, and an over-limit charge cannot be undone after a response. Failure output preserves sanitized attempted-request counts and known usage/estimated cost; unknown usage remains null. No response body, model text or credential is printed.
+
+The local credit evidence file is a recent owner Billing-page attestation or supported read-only billing response, not a fabricated provider check. It must confirm credits strictly exceeding the approved limit, a known expiry safely beyond the request (or explicitly no expiry), and disabled automatic charging and top-ups. It expires after 15 minutes. Keep raw financial data outside Git (for example, in `.cache/`). The CLI reads it but reports only sanitized status flags. This does not change billing settings or enforce a provider-side dollar cap.
 
 All preflight tests use explicit simulated transports and test-only credentials. `npm test` and CI never opt into live mode. Before any full live benchmark, complete the preflight, add scenario selection and approve a small bounded experiment on one baseline failure.
 
@@ -104,7 +106,7 @@ Each benchmark writes a JSON report and an append-only `.json.jsonl` per-trial l
 
 Latency includes run/context creation, page loading, browser actions, context closure and verification, excluding initial browser process launch. Baseline timeouts are part of measured latency. Repetitions alternate order but tasks remain fixed and local; these timings cannot predict live model latency. Negative cases are reported separately from the eight completable cases. Read [Phase 1 results and limitations](docs/phase1-results.md) and the committed raw evidence in `results/`.
 
-`npm test` includes server-validation tests, receipt tampering/wrong-task/duplicate negatives, guard negatives, simulated provider contracts, and real Chromium tests for all ten cases. GitHub Actions runs a frozen install, full tests and a fresh offline benchmark; its `phase1-evidence` artifact contains actual CI output.
+`npm test` includes server-validation tests, receipt tampering/wrong-task/duplicate negatives, guard negatives, simulated provider contracts, and real Chromium tests for all ten cases. GitHub Actions runs a frozen install and full verification tests. The separate offline benchmark is now opt-in through manual `workflow_dispatch`, default false, so this one-request authorization does not launch a benchmark. Its `phase1-evidence` artifact contains actual test output.
 
 ## Go/no-go boundary and next steps
 

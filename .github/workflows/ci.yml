@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      run_offline_benchmark:
+        description: Run the offline benchmark separately from verification tests
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -27,6 +33,7 @@ jobs:
           set -o pipefail
           npm run test:ci | tee test-output.log
       - name: Offline benchmark (scripted control, not Nemotron)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_offline_benchmark }}
         run: npm run benchmark -- --repetitions 1 --output results/local/ci.json
       - name: Upload actual run evidence
         if: always()

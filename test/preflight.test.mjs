@@ -6,7 +6,8 @@ import { preflight } from '../src/preflight.mjs';
 const model='nvidia/test-nemotron';
 const decision={actions:[{type:'fill',target:0,value:'Avery Example'},{type:'click',target:1}]};
 const fixture=(changes={})=>new Response(JSON.stringify({model,choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(decision)}}],usage:{prompt_tokens:100,completion_tokens:30,total_tokens:130},...changes}),{headers:{'content-type':'application/json'}});
-const options={apiKey:'test-only-preflight-secret',model,live:true,approved:true,spendLimitUsd:0.01,inputUsdPerMillion:0.06,outputUsdPerMillion:0.24};
+const creditEvidence={source:'owner-confirmed-billing-ui',checkedAt:new Date().toISOString(),availableCreditUsd:10,expiresAt:null,automaticChargingDisabled:true,automaticTopupsDisabled:true};
+const options={creditEvidence,apiKey:'test-only-preflight-secret',model,live:true,approved:true,spendLimitUsd:0.01,inputUsdPerMillion:0.06,outputUsdPerMillion:0.24};
 
 test('dry-run checks presence without any network call or disclosure',async()=>{
  let calls=0;
@@ -89,4 +90,21 @@ test('preflight refuses limits above the project promo-credit ceiling without a 
  let calls=0;
  await assert.rejects(()=>preflight({...options,spendLimitUsd:.51,fetchImpl:async()=>{calls++;return fixture();}}),/0.50/);
  assert.equal(calls,0);
+});
+
+test('approved live preflight refuses missing current credit confirmation without fetching',async()=>{
+ let calls=0;
+ await assert.rejects(()=>preflight({...options,creditEvidence:undefined,fetchImpl:async()=>{calls++;return fixture();}}),/Credit-only/);
+ assert.equal(calls,0);
+});
+
+test('dry-run with credentials and prices but no billing evidence cannot claim readiness',async()=>{
+ const result=await preflight({...options,live:false,creditEvidence:undefined});
+ assert.equal(result.readyForApproval,false);assert.equal(result.billing.creditOnlyVerified,false);assert.equal(result.requestsSent,0);
+});
+test('dry-run readiness also enforces the authorized ceiling and safety estimate',async()=>{
+ for(const spendLimitUsd of [.51,1e-10]){
+  const result=await preflight({...options,live:false,spendLimitUsd});
+  assert.equal(result.readyForApproval,false);assert.equal(result.requestsSent,0);
+ }
 });

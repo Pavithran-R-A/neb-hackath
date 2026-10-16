@@ -1,3 +1,4 @@
+import { validateCreditEvidence } from './credit-gate.mjs';
 import { isDeepStrictEqual } from 'node:util';
 import { createNemotronPolicy, endpoint, system } from './agents/nebius.mjs';
 import { validateBatch } from './agents/actions.mjs';
@@ -14,7 +15,7 @@ const expected={actions:[{type:'fill',target:0,value:input.task.name},{type:'cli
 
 // Dry-run is the default, including when credentials are injected into the process.
 // This function never executes browser actions or retries a provider request.
-export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process.env.NEBIUS_MODEL,live=false,approved=false,spendLimitUsd,inputUsdPerMillion,outputUsdPerMillion,fetchImpl=fetch}={}){
+export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process.env.NEBIUS_MODEL,live=false,approved=false,spendLimitUsd,inputUsdPerMillion,outputUsdPerMillion,creditEvidence,fetchImpl=fetch}={}){
  const credentials={apiKeyPresent:typeof apiKey==='string'&&apiKey.length>0,modelPresent:typeof model==='string'&&model.length>0,modelIsNemotron:typeof model==='string'&&/^nvidia\/[^\s]*nemotron[^\s]*$/i.test(model)};
  // Byte-length input estimate plus generous framing reserve. This is an estimate,
  // not a provider-enforced billing limit or a guarantee about future pricing.
@@ -23,12 +24,18 @@ export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process
  const safetyEstimateUsd=validPrices?(estimatedInputTokenAllowance*inputUsdPerMillion+maxOutputTokens*outputUsdPerMillion)/1e6:null;
  const plan={destination:new URL(endpoint).hostname,maxRequests:1,maxOutputTokens,responseFormat:'json_object',automaticRetries:0,estimatedInputTokenAllowance,safetyEstimateUsd,costBasis:'Configured token-rate estimate, not a hard dollar cap or billing statement'};
  const base={mode:live?'live':'dry-run',credentials,request:plan,liveValidated:false,requestsSent:0};
- if(!live)return {...base,readyForApproval:credentials.apiKeyPresent&&credentials.modelIsNemotron&&validPrices,remaining:['Explicit owner spending approval is required before live execution','Use current verified token prices and an approved spending limit','CLI cannot inspect platform network-secret scope; verify protected environment metadata separately']};
+ let billing={creditOnlyVerified:false};
+ if(!live){
+  try{billing=validateCreditEvidence(creditEvidence,{spendLimitUsd});}catch{}
+  return {...base,billing,readyForApproval:credentials.apiKeyPresent&&credentials.modelIsNemotron&&validPrices&&billing.creditOnlyVerified&&Number.isFinite(spendLimitUsd)&&spendLimitUsd>0&&spendLimitUsd<=0.50&&safetyEstimateUsd<=spendLimitUsd,remaining:['Explicit owner approval and current credit-only billing evidence are required for live execution','Use current verified token prices and an approved spending limit','CLI cannot inspect platform network-secret scope; verify protected environment metadata separately']};
+ }
  if(approved!==true)throw new Error('Explicit owner spending approval is required for live preflight');
  if(!Number.isFinite(spendLimitUsd)||spendLimitUsd<=0)throw new Error('A positive approved spending limit in USD is required');
  if(spendLimitUsd>0.50)throw new Error('Preflight safety ceiling is USD 0.50; separate owner approval is still required');
  if(!validPrices)throw new Error('Positive current input/output token prices are required');
  if(safetyEstimateUsd>spendLimitUsd)throw new Error('Preflight safety estimate exceeds the approved spending limit');
+ billing=validateCreditEvidence(creditEvidence,{spendLimitUsd});
+ base.billing=billing;
  const policy=createNemotronPolicy({apiKey,model,approved:true,maxCalls:1,maxOutputTokens,inputUsdPerMillion,outputUsdPerMillion,fetchImpl});
  const metrics=()=>{
   const m=policy.metrics();
