@@ -1,0 +1,42 @@
+
+> neb-hackath@0.0.1 preflight:catalog
+> node --use-env-proxy scripts/catalog.mjs
+
+{
+  "catalog": {
+    "checkedAt": "2026-10-16T15:36:34.576Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "readiness": {
+    "mode": "dry-run",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 256,
+      "responseFormat": "json_object",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2603,
+      "safetyEstimateUsd": 0.00021762,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 0,
+    "readyForApproval": true,
+    "remaining": [
+      "Explicit owner spending approval is required before live execution",
+      "Use current verified token prices and an approved spending limit",
+      "CLI cannot inspect platform network-secret scope; verify protected environment metadata separately"
+    ]
+  }
+}

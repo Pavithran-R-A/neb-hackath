@@ -4,15 +4,16 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "scripts": {
     "start": "node scripts/demo.mjs",
     "test": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs",
     "test:ci": "npm test",
     "browsers:install": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright playwright install chromium",
-    "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node scripts/benchmark.mjs",
-    "preflight": "node scripts/preflight.mjs"
+    "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs",
+    "preflight": "node --use-env-proxy scripts/preflight.mjs",
+    "preflight:catalog": "node --use-env-proxy scripts/catalog.mjs"
   },
   "devDependencies": {
     "playwright": "1.64.1"
