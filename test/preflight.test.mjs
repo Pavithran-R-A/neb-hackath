@@ -85,3 +85,8 @@ test('unexpected successful HTTP status is rejected',async()=>{
 test('cleanup failure preserves the sanitized HTTP error',async()=>{
  await assert.rejects(()=>preflight({...options,fetchImpl:async()=>new Response(new ReadableStream({cancel(){throw new Error(options.apiKey);}}),{status:503})}),e=>e.message==='Nebius HTTP 503');
 });
+test('preflight refuses limits above the project promo-credit ceiling without a request',async()=>{
+ let calls=0;
+ await assert.rejects(()=>preflight({...options,spendLimitUsd:.51,fetchImpl:async()=>{calls++;return fixture();}}),/0.50/);
+ assert.equal(calls,0);
+});

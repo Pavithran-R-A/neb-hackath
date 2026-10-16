@@ -26,6 +26,7 @@ export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process
  if(!live)return {...base,readyForApproval:credentials.apiKeyPresent&&credentials.modelIsNemotron&&validPrices,remaining:['Explicit owner spending approval is required before live execution','Use current verified token prices and an approved spending limit','CLI cannot inspect platform network-secret scope; verify protected environment metadata separately']};
  if(approved!==true)throw new Error('Explicit owner spending approval is required for live preflight');
  if(!Number.isFinite(spendLimitUsd)||spendLimitUsd<=0)throw new Error('A positive approved spending limit in USD is required');
+ if(spendLimitUsd>0.50)throw new Error('Preflight safety ceiling is USD 0.50; separate owner approval is still required');
  if(!validPrices)throw new Error('Positive current input/output token prices are required');
  if(safetyEstimateUsd>spendLimitUsd)throw new Error('Preflight safety estimate exceeds the approved spending limit');
  const policy=createNemotronPolicy({apiKey,model,approved:true,maxCalls:1,maxOutputTokens,inputUsdPerMillion,outputUsdPerMillion,fetchImpl});
