@@ -8,8 +8,10 @@
   },
   "scripts": {
     "start": "node scripts/demo.mjs",
+    "workbench": "node scripts/workbench.mjs",
     "test": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs",
     "test:ci": "npm test",
+    "security:check": "node scripts/security-check.mjs",
     "browsers:install": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright playwright install chromium",
     "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs",
     "preflight": "node --use-env-proxy scripts/preflight.mjs",

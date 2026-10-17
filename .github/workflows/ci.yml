@@ -25,6 +25,10 @@ jobs:
           node-version: '24'
       - name: Install frozen dependencies
         run: npm ci
+      - name: Tracked source secret check
+        run: npm run security:check
+      - name: Dependency advisory check
+        run: npm audit --audit-level=moderate
       - name: Install Chromium and system libraries
         run: npm run browsers:install -- --with-deps
       - name: Unit, HTTP, provider contract and real browser tests (no live APIs)
@@ -43,4 +47,5 @@ jobs:
           path: |
             test-output.log
             results/local/
+            .cache/qa/
           if-no-files-found: warn

@@ -73,3 +73,11 @@ test('verifier rejects an intact same-task receipt from another intended run and
  assert.equal(verifyCompletion(app.readRecord(a.id),expected,app.key).completed,false);
  assert.equal(verifyCompletion(app.readRecord(a.id),expected,app.key,{runId:a.id}).completed,true);
 });
+test('synthetic server bounds lifetime/capacity and rejects real email destinations',async t=>{
+ let now=Date.now();const app=await createApp({now:()=>now,maxRuns:1,runTtlMs:1000});t.after(()=>app.close());
+ const run=app.createRun({flow:'grant',variant:'clean'});
+ assert.throws(()=>app.createRun({flow:'grant',variant:'clean'}),/capacity/);
+ assert.equal((await action(app,run,0,{...expected,email:'person@gmail.com'})).status,422);
+ now+=1001;assert.equal((await fetch(app.origin+'/api/runs/'+run.id)).status,404);
+ assert.doesNotThrow(()=>app.createRun({flow:'grant',variant:'clean'}));
+});
