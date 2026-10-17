@@ -1,4 +1,4 @@
-const $=id=>document.getElementById(id);let session,run,generation=0;
+const $=id=>document.getElementById(id);let session,run,generation=0,diagnosis;
 async function api(path,body){const response=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});const data=await response.json();if(!response.ok)throw new Error(data.error??'Request failed');return data;}
 function fail(error){$('error').textContent=error.message;}
 function describe(){const selected=session.scenarios.find(s=>s.id===$('scenario').value);$('description').textContent=selected?.title??'';}
@@ -7,6 +7,7 @@ $('scenario').addEventListener('change',describe);
 $('create').addEventListener('click',()=>busy($('create'),async()=>{
  const current=++generation;const created=await api('/api/runs',{scenarioId:$('scenario').value});if(current!==generation)return;run=created;$('empty').hidden=true;$('run').hidden=false;$('task').replaceChildren();
  for(const [key,value] of Object.entries(run.task)){const term=document.createElement('dt'),detail=document.createElement('dd');term.textContent=key;detail.textContent=String(value);$('task').append(term,detail);}
+ diagnosis=undefined;$('diagnosis').replaceChildren();$('approval').hidden=true;$('recovery-result').replaceChildren();
  $('open').href=run.url;$('claim').checked=false;$('verdict').replaceChildren();$('export').hidden=true;$('open').focus();
 }));
 $('verify').addEventListener('click',()=>busy($('verify'),async()=>{
@@ -15,4 +16,25 @@ $('verify').addEventListener('click',()=>busy($('verify'),async()=>{
  $('verdict').replaceChildren(title,detail);$('verdict').dataset.verified=String(result.reportedCompletion);$('export').href='/api/runs/'+run.id+'/evidence';$('export').hidden=false;
 }));
 $('reset').addEventListener('click',()=>busy($('reset'),async()=>{++generation;await api('/api/reset',{});run=undefined;$('run').hidden=true;$('empty').hidden=false;$('create').focus();}));
-api('/api/session').then(data=>{session=data;$('scenario').replaceChildren(...data.scenarios.map(s=>{const option=document.createElement('option');option.value=s.id;option.textContent=s.id.replaceAll('-',' ');return option;}));$('scenario').disabled=false;$('create').disabled=false;describe();}).catch(fail);
+api('/api/session').then(data=>{session=data;$('diagnose-model').disabled=!data.liveInferenceEnabled;$('model-status').textContent=data.liveInferenceEnabled?(data.diagnosticExecutionKind==='simulated-test'?'Simulated model transport for integration testing; no live NVIDIA claim.':'NVIDIA diagnosis enabled under a bounded owner-authorized credit campaign.'):'Local rules are available. NVIDIA diagnosis is inactive until a bounded cloud campaign is configured.';$('scenario').replaceChildren(...data.scenarios.map(s=>{const option=document.createElement('option');option.value=s.id;option.textContent=s.id.replaceAll('-',' ');return option;}));$('scenario').disabled=false;$('create').disabled=false;describe();}).catch(fail);
+
+async function diagnose(mode,button){await busy(button,async()=>{
+ const current=generation,id=run.id,result=await api('/api/runs/'+id+'/diagnose',{mode});
+ if(current!==generation||run?.id!==id)return;diagnosis=result;
+ const title=document.createElement('h4'),explanation=document.createElement('p'),action=document.createElement('p'),sources=document.createElement('ul');
+ title.textContent=(result.executionKind==='deterministic'?'Rules diagnosis':result.executionKind==='simulated-test'?'Simulated model suggestion':'NVIDIA model suggestion')+' — '+result.suggestion.diagnosis.replaceAll('_',' ');
+ explanation.textContent=result.suggestion.explanation;action.textContent='Suggested recovery: '+result.suggestion.recovery.action.replaceAll('_',' ')+'. '+result.suggestion.recovery.reason;
+ for(const id of result.suggestion.evidenceIds){const e=result.trace.events.find(e=>e.id===id),li=document.createElement('li');li.textContent=id+' / '+e.source+': '+e.text;sources.append(li);}
+ const limit=document.createElement('p');limit.textContent=result.recoveryExecutable?'Recovery is available only after your explicit approval.':'This suggestion is not executable here. Stop or investigate manually.';
+ $('diagnosis').replaceChildren(title,explanation,action,sources,limit);$('approval').hidden=!result.recoveryExecutable;$('approve-recovery').checked=false;$('recover').disabled=true;$('recovery-result').replaceChildren();
+});}
+$('diagnose-rules').addEventListener('click',()=>diagnose('deterministic',$('diagnose-rules')));
+$('diagnose-model').addEventListener('click',()=>diagnose('nemotron',$('diagnose-model')));
+$('approve-recovery').addEventListener('change',()=>{$('recover').disabled=!$('approve-recovery').checked;});
+$('recover').addEventListener('click',()=>busy($('recover'),async()=>{
+ if(!$('approve-recovery').checked||!diagnosis)throw new Error('Explicit approval required');
+ const current=generation,id=run.id,result=await api('/api/runs/'+id+'/recover',{approve:true,diagnosisId:diagnosis.id,traceDigest:diagnosis.traceDigest});
+ if(current!==generation||run?.id!==id)return;
+ $('approval').hidden=true;$('recovery-result').textContent=result.verification.completed?'Recovery applied. Independent verification confirms completion.':'Recovery applied. Completion is not yet verified: '+result.verification.reason;
+ $('verdict').replaceChildren();$('export').hidden=true;
+}));

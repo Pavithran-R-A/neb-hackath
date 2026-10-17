@@ -15,8 +15,11 @@
     "browsers:install": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright playwright install chromium",
     "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs",
     "preflight": "node --use-env-proxy scripts/preflight.mjs",
+    "diagnosis:plan": "node scripts/diagnosis-campaign.mjs",
+    "diagnosis:campaign": "node --use-env-proxy scripts/diagnosis-campaign.mjs",
+    "build:manifest": "node scripts/build-manifest.mjs",
     "campaign:plan": "node scripts/campaign.mjs",
-    "campaign": "node --use-env-proxy scripts/campaign.mjs",
+    "campaign": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/campaign.mjs",
     "preflight:catalog": "node --use-env-proxy scripts/catalog.mjs"
   },
   "devDependencies": {

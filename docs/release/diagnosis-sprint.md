@@ -1,0 +1,24 @@
+# Grounded failure diagnosis sprint — October17
+
+Authority: owner standing credit-only authorization in PR#2 comment6235724302, superseding per-call approval. Only existing59 account credits; no card/top-up/hosting/deploy/merge/submission. Starting envelopes: .05 campaignA,1.95 experimental,3 integration,4 demo,50 judge reserve. Actual token estimates differ from reserved maxima; no provider-enforced hard dollar cap.
+
+CampaignA pinned8ca0f66/suite84cf0192: one POST, HTTP200,235input/531output, estimated .00014154; CLI failed generically. No restart of A. Browser launch reproduced absent project Chromium path. Exact full preflight result was not preserved; do not infer readiness. Fix entrypoint and stage evidence offline before another bounded experiment.
+
+## Design and milestones
+
+1. Independent synthetic diagnostic dataset author (separate agent, no policy access), separately reviewed labels; policy/baseline developer does not inspect cases until implementation frozen. Expert-verifiable source-tagged events and expected outcomes; disclose synthetic/agent rather than human-expert independence.
+2. Grounded diagnosis contract: diagnosis taxonomy, cited event IDs, safe recovery enum, uncertainty; model text is a suggestion, never a verdict. Validate all output/citations and task/run bindings. Deterministic diagnostic baseline uses the same visible evidence, status/receipt checks, error semantics and cautious ambiguity rules. No weakening for model advantage.
+3. Backend trace extraction from actual synthetic server journal and verifier; capability-scoped diagnose route with budget admission and no model in browser. Default model inactive unless operator supplies a bounded owner-authorized service campaign; no unrestricted endpoint.
+4. Recovery recommendations require explicit human approval and matching trace digest. Consequential actions remain synthetic/local and constrained; support only provably allowed retry/reconfirm/format, otherwise stop. Re-run private verifier after action; preserve initial and subsequent verdicts.
+5. Persistent cumulative account reservations, campaign stage artifacts, current prices/model, source/suite pins, no retries. Separate experiments documented BEFORE execution. If truncation/schema failure recurs, investigate offline rather than repeated blind calls.
+6. Integrate verifiable build/runtime/suite provenance, responsive keyboard UI, browser error/negative/session/injection tests, actual screenshots/video plan, exact-head CI and honest Oct19 proceed/pivot decision.
+
+No final model usefulness claim until blind-to-policy expected labels, strong deterministic comparison and authentic runtime outcomes are measured. At most a .05 follow-up integration campaign after fixing A's setup gap; diagnostic experiment initially <=.10, within1.95 envelope; preserve50 reserve. Bounds may narrow after observing preflight, never silently broaden.
+
+## Milestone1 implementation / independent evaluation freeze
+
+Implemented grounded suggestion schema, a competent deterministic diagnostic policy, strict NVIDIA schema client, source-tagged private event journal, diagnosis route, explicit single-use trace-bound recovery approval, and export/runtime provenance. Browser test exercises mocked provider → citations → approval → actual local retry → signed receipt; simulated execution is explicitly labeled.
+
+Independent dataset:16 cases by one agent with no policy access, reviewed by another with no implementation/results access. Reviewer saw labels and corrected only citation requirements. Not external human validation. Root policy developer read protocol but not case/answer contents before freezing. Static protocol excludes author verification from both policy inputs; optional runtime verification remains authoritative in the application. Full artifact/policy hashes: results/diagnosis-freeze-v1.json; no post-result tuning allowed.
+
+Next proposed campaignB (standing owner authority; no per-call request needed): first1024-token preflight then16 frozen diagnosis cases, max17 POSTs, diagnostic output2048 tokens, aggregate estimated reservation <=0.10; latest catalog prices required. Fixed model, temperature0, no retries/fallback, first contract failure stops. This output ceiling is a documented new diagnosis campaign setting, not a retroactive change to campaignA's1024 cap. Conservative all-request allowance20k input+2048 output at .06/.24 gives .02875584 USD; .10 is an approved internal envelope under1.95 experiment allocation. Cumulative workspace account ledger preserves50 judge reserve and records actual-known or full-reservation unknown charges. Before execution bind clean commit/suite and current owner-credit/no-card attestation; pin this plan to the new committed source. No claim of provider-enforced hard dollar cap.

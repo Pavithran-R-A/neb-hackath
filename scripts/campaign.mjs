@@ -10,6 +10,7 @@ import {benchmark} from '../src/benchmark.mjs';
 
 // Default is a completely local plan. There is no accepted approval file in Git.
 try{
+ let stage='configuration';
  const args=process.argv.slice(2),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
  if(!args.length){
   console.log(JSON.stringify({mode:'plan-only',inferenceRequestsSent:0,authorized:false,sourceCommit,suiteSha256,scenarioIds:evaluationV2.map(s=>s.id),proposed:{preflightRequests:1,maxTurnsPerTrial:8,repetitions:1,maxRequests:73,maxOutputTokens:1024,inputAllowancePerRequest:20000,inputUsdPerMillion:.06,outputUsdPerMillion:.24,worstCaseEstimateUsd:73*(20000*.06+1024*.24)/1e6},remaining:['New explicit aggregate owner approval','Fresh protected model/catalog prices and credit-only evidence','Exact source/suite-bound approval file; old one-call approval cannot be reused']},null,2));
@@ -27,7 +28,10 @@ try{
    campaign=await createCampaign({authorization:a,sourceCommit,suiteSha256,ledgerPath});
    const catalog=await checkCatalog();
    if(catalog.inputUsdPerMillion!==a.inputUsdPerMillion||catalog.outputUsdPerMillion!==a.outputUsdPerMillion)throw new Error('Campaign current catalog prices differ from approval');
+   stage='preflight';
    const first=await preflight({live:true,approved:true,spendLimitUsd:a.spendLimitUsd,maxOutputTokens:a.maxOutputTokens,inputUsdPerMillion:a.inputUsdPerMillion,outputUsdPerMillion:a.outputUsdPerMillion,creditEvidence:a.creditEvidence,fetchImpl:campaign.fetch});
+   await writeFile(resolve(base,a.id+'.preflight.json'),JSON.stringify({sourceCommit,suiteSha256,result:first},null,2)+'\n',{flag:'wx',mode:0o600});
+   stage='browser-evaluation';
    const policy=createNemotronPolicy({approved:true,maxCalls:a.maxRequests-1,maxOutputTokens:a.maxOutputTokens,inputUsdPerMillion:a.inputUsdPerMillion,outputUsdPerMillion:a.outputUsdPerMillion,fetchImpl:campaign.fetch});
    const output=resolve(base,a.id+'.report.json');await mkdir(dirname(output),{recursive:true});
    const result=await benchmark({livePolicy:policy,scenarioIds:a.scenarioIds,repetitions:a.repetitions,baselines:['dom-autofill'],onRow:async row=>{
@@ -36,6 +40,6 @@ try{
    }});
    await writeFile(output,JSON.stringify({schemaVersion:1,sourceCommit,suiteSha256,catalog,preflight:first,...result,campaign:campaign.status()},null,2)+'\n',{flag:'wx',mode:0o600});
    console.log(JSON.stringify({status:'completed',sourceCommit,suiteSha256,output,campaign:campaign.status(),summary:result.summary},null,2));
-  }finally{if(campaign)await campaign.close();}
+  }catch(error){await writeFile(resolve(base,a.id+'.failure.json'),JSON.stringify({sourceCommit,suiteSha256,stage,error:error.message.startsWith('Nebius')?error.message:'Campaign stage failed',report:error.report??null,campaign:campaign?.status()},null,2)+'\n',{flag:'wx',mode:0o600});throw error;}finally{if(campaign)await campaign.close();}
  }
 }catch{console.error('Campaign stopped safely; inspect protected local ledger and approval prerequisites. No retry is authorized automatically.');process.exitCode=1;}

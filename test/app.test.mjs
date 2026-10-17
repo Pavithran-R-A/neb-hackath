@@ -81,3 +81,9 @@ test('synthetic server bounds lifetime/capacity and rejects real email destinati
  now+=1001;assert.equal((await fetch(app.origin+'/api/runs/'+run.id)).status,404);
  assert.doesNotThrow(()=>app.createRun({flow:'grant',variant:'clean'}));
 });
+test('private workflow trace is bounded and never copies submitted contact values',async t=>{
+ const app=await createApp();t.after(()=>app.close());const run=app.createRun({flow:'grant',variant:'clean'});
+ for(let i=0;i<50;i++)await action(app,run,0,{...expected,email:'invalid'});
+ const journal=app.readRecord(run.id).journal;assert.ok(journal.length<=64);assert.equal(new Set(journal.map(e=>e.id)).size,journal.length);
+ assert.ok(!JSON.stringify(journal).includes(expected.name));assert.ok(!JSON.stringify(journal).includes(expected.phone));
+});

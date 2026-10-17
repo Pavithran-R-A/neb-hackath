@@ -65,3 +65,13 @@ test('directory durability failure refuses campaign creation before network',asy
  await assert.rejects(()=>createCampaign({authorization:authorization(),ledgerPath:join(dir,'new-parent','ledger.jsonl'),sourceCommit:sha,suiteSha256:suite,storage,fetchImpl:async()=>{calls++;return response();}}),/persist/);
  assert.equal(calls,0);assert.equal(dirSyncs,1);
 });
+test('diagnosis campaign permits documented 2048 output limit and mixed preflight/diagnosis envelopes',async t=>{
+ const fs=await import('node:fs/promises');const dir=await mkdtemp(join(tmpdir(),'neb-diagnosis-campaign-'));t.after(()=>rm(dir,{recursive:true,force:true}));
+ const a={...authorization(),maxOutputTokens:2048,responseContract:'preflight-then-diagnosis'};
+ let calls=0;const campaign=await createCampaign({authorization:a,ledgerPath:join(dir,'ledger'),sourceCommit:sha,suiteSha256:suite,fetchImpl:async()=>{
+  calls++;return new Response(JSON.stringify({model,choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(calls===1?{actions:[{type:'wait'}]}:{diagnosis:'ambiguous',explanation:'unknown',evidenceIds:['e1'],recovery:{action:'stop',reason:'insufficient'},confidence:'low'})}}],usage:{prompt_tokens:20,completion_tokens:30,total_tokens:50}}));
+ }});
+ await campaign.fetch(endpoint,{...init,body:JSON.stringify({...JSON.parse(init.body),response_format:{type:'json_schema',json_schema:{name:'synthetic_preflight'}}})});
+ await campaign.fetch(endpoint,{...init,body:JSON.stringify({...JSON.parse(init.body),max_tokens:2048,messages:[{role:'system',content:'JSON'},{role:'user',content:JSON.stringify({id:'fixture',task:{goal:'test'},events:[{id:'e1',source:'server',kind:'error',text:'unknown'}],verification:{completed:false,reason:'unknown'}})}],response_format:{type:'json_schema',json_schema:{name:'grounded_diagnosis'}}})});
+ assert.equal(campaign.status().halted,false);assert.equal(calls,2);await campaign.close();
+});

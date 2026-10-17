@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-A-owner6235724302",
+  "recordedAt": "2026-10-17T15:28:36.299Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "sourceCommit": "8ca0f666c8317a0f2a49eaf449d3fcaf1a15d307",
+  "suiteSha256": "84cf019270ab45d7786d18dc7c9858b833df78ae5422bbefeb3ff566f09e1bc9",
+  "scenarioIds": [
+    "v2-validation-chain"
+  ],
+  "repetitions": 2,
+  "maxRequests": 17,
+  "maxOutputTokens": 1024,
+  "maxReservedUsd": 0.05,
+  "worstCaseEstimateUsd": 0.02457792,
+  "preflightFirst": true,
+  "noRetries": true,
+  "catalog": {
+    "checkedAt": "2026-10-17T15:28:06.840Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "creditBasis": "Owner standing attestation of existing59 account credits and no card, less known historical estimate; not a new provider balance observation",
+  "judgeReserveUsd": 50,
+  "status": "recorded-before-execution"
+}
