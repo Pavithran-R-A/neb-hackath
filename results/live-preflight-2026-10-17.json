@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "authorizationDate": "2026-10-17",
+  "authorization": "Owner chat explicitly approves ONE request using existing credits only; no bank card ever added; $0.50 estimated maximum",
+  "startedAt": "2026-10-17T10:16:24.569Z",
+  "sourceCommit": "7a2204b557711c1989a96bd2dafc5815e5471740",
+  "sourceNote": "Local owner-attestation gate extension covered by simulated regression tests",
+  "status": "failed_after_single_attempt",
+  "inferenceAttemptsReserved": 1,
+  "inferenceRequestsSent": 1,
+  "httpStatus": 200,
+  "returnedModel": "nvidia/Nemotron-3_5-Lightning",
+  "modelMatchesConfigured": true,
+  "providerUsage": {
+    "inputTokens": 391,
+    "outputTokens": 256,
+    "totalTokens": 647
+  },
+  "latencyMs": 1062.24,
+  "estimatedCreditConsumptionUsd": 8.49e-05,
+  "benchmarkRun": false,
+  "retries": 0,
+  "catalog": {
+    "checkedAt": "2026-10-17T10:16:25.140Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "readiness": {
+    "mode": "dry-run",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 256,
+      "responseFormat": "json_object",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2603,
+      "safetyEstimateUsd": 0.00021762,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 0,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-17T10:16:25.140Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "readyForApproval": true,
+    "remaining": [
+      "Explicit owner approval and current credit-only billing evidence are required for live execution",
+      "Use current verified token prices and an approved spending limit",
+      "CLI cannot inspect platform network-secret scope; verify protected environment metadata separately"
+    ]
+  },
+  "finishReason": "length",
+  "error": "Nebius response choice is incomplete, refused or unexpected",
+  "result": {
+    "mode": "live",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 256,
+      "responseFormat": "json_object",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2603,
+      "safetyEstimateUsd": 0.00021762,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 1,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-17T10:16:25.140Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "usage": {
+      "promptTokens": 391,
+      "completionTokens": 256,
+      "totalTokens": 647,
+      "complete": true
+    },
+    "latencyMs": 1062.982848,
+    "estimatedModelCostUsd": 8.49e-05,
+    "costBasis": "configured token-rate estimate; not a billing statement"
+  },
+  "finishedAt": "2026-10-17T10:16:26.205Z",
+  "authorizationConsumed": true,
+  "noFurtherInferenceAuthorized": true,
+  "authenticationAccepted": true,
+  "jsonActionValidation": "not_completed_due_to_finish_reason_length",
+  "observableBalanceDeltaUsd": null,
+  "providerBilledCostUsd": null,
+  "financialEvidenceBasis": "Owner accepted balance screenshot and explicit no-bank-card confirmation; no independent balance/expiry or billing-setting claim",
+  "sourceFilesSha256": {
+    "src/credit-gate.mjs": "4be4b7d5b9e29a25360ed1e7c050b7ceb312abcd9ad6ad891a4d8fa8dd88e92e",
+    "src/preflight.mjs": "42a7e993e8bd5fb37b4b892de78e41da9edb017e4d4c5585254bd16d507f0e70",
+    "src/agents/nebius.mjs": "95412a531bee2df474fdb0766921187894bbf9f86630e9598c30ebb07b6b3fb4",
+    "src/agents/actions.mjs": "9ccee54bfdd42f96ab1ba32049b6eb54aa299e5905c55873485ca756d8fb67a5"
+  }
+}

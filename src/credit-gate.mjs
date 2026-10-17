@@ -2,10 +2,16 @@
 // Raw financial amounts stay in the local input and are omitted from public execution reports.
 export function validateCreditEvidence(evidence,{spendLimitUsd,now=Date.now()}={}){
  const deny=()=>{throw new Error('Credit-only billing condition is unverified, stale or insufficient; no inference permitted');};
- if(!evidence||!['owner-confirmed-billing-ui','read-only-billing-api'].includes(evidence.source))return deny();
+ if(!evidence||!['owner-confirmed-billing-ui','read-only-billing-api','owner-attested-no-card'].includes(evidence.source))return deny();
  const checkedAt=Date.parse(evidence.checkedAt);
  if(!Number.isFinite(now)||!Number.isFinite(checkedAt)||checkedAt>now+30000||now-checkedAt>15*60000)return deny();
  if(!Number.isFinite(spendLimitUsd)||spendLimitUsd<=0||!Number.isFinite(evidence.availableCreditUsd)||evidence.availableCreditUsd<=spendLimitUsd)return deny();
+ if(evidence.source==='owner-attested-no-card'){
+  if(evidence.bankCardPresent===true||evidence.automaticChargingDisabled===false||evidence.automaticTopupsDisabled===false)return deny();
+  if(evidence.expiresAt!==undefined&&evidence.expiresAt!==null){const expiry=Date.parse(evidence.expiresAt);if(!Number.isFinite(expiry)||expiry<=now+60000)return deny();}
+  if(evidence.noBankCardEverAdded!==true||evidence.existingCreditsOnlyAuthorized!==true||evidence.paidReplenishmentProhibited!==true)return deny();
+  return {creditOnlyVerified:true,source:evidence.source,checkedAt:new Date(checkedAt).toISOString(),coversAuthorizedLimit:true,noBankCardEverAdded:true,existingCreditsOnlyAuthorized:true,paidReplenishmentProhibited:true,expiryIndependentlyVerified:false,billingBasis:'Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings'};
+ }
  if(evidence.automaticChargingDisabled!==true||evidence.automaticTopupsDisabled!==true)return deny();
  if(evidence.expiresAt!==null){const expiry=Date.parse(evidence.expiresAt);if(!Number.isFinite(expiry)||expiry<=now+60000)return deny();}
  return {creditOnlyVerified:true,source:evidence.source,checkedAt:new Date(checkedAt).toISOString(),coversAuthorizedLimit:true,automaticChargingDisabled:true,automaticTopupsDisabled:true};

@@ -108,3 +108,14 @@ test('dry-run readiness also enforces the authorized ceiling and safety estimate
   assert.equal(result.readyForApproval,false);assert.equal(result.requestsSent,0);
  }
 });
+test('observed HTTP-200 token-limit outcome retains usage and rejects without retry (simulated response)',async()=>{
+ let calls=0;
+ const evidence={source:'owner-attested-no-card',checkedAt:new Date().toISOString(),availableCreditUsd:59,noBankCardEverAdded:true,existingCreditsOnlyAuthorized:true,paidReplenishmentProhibited:true};
+ await assert.rejects(()=>preflight({...options,creditEvidence:evidence,fetchImpl:async()=>{
+  calls++;return fixture({choices:[{finish_reason:'length',message:{role:'assistant',content:'{"actions":['}}],usage:{prompt_tokens:391,completion_tokens:256,total_tokens:647}});
+ }}),error=>{
+  assert.match(error.message,/response choice/);assert.equal(error.report.liveValidated,false);assert.equal(error.report.requestsSent,1);
+  assert.equal(error.report.usage.promptTokens,391);assert.equal(error.report.usage.completionTokens,256);assert.equal(error.report.estimatedModelCostUsd,.0000849);return true;
+ });
+ assert.equal(calls,1);
+});

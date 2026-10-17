@@ -60,7 +60,7 @@ All modes share a final receipt gate: `rawClaimedCompletion`/`falseCompletionCla
 
 ## One-request Nemotron preflight
 
-Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. One live preflight is conditionally authorized, but has not run: current automatic charging/top-up status remains unconfirmed. Current catalog GET pricing and proxy routing have been checked without inference. See [authorization and billing gate](docs/authorized-preflight.md).
+Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. The owner-approved single preflight has now run: HTTP 200, exact NVIDIA model identity, 391 input/256 output tokens, estimated $0.00008490. It failed closed at the 256-token output limit (`finish_reason: length`), so full JSON/action readiness did not pass. The one-call authorization is consumed; no retry is allowed. See [actual execution evidence](docs/live-preflight-2026-10-17.md). Current catalog GET pricing and proxy routing have been checked without inference. See [authorization and billing gate](docs/authorized-preflight.md).
 
 ```bash
 npm run preflight
@@ -70,7 +70,7 @@ npm run preflight:catalog
 
 This is a **no-network dry-run** by default, even with real credentials injected. It prints presence flags, destination, limits and an estimate if current prices are configured; it never prints the key or model variable value. Exit 0 means the dry-run completed with credential prerequisites present, not that live validation passed. The standalone CLI cannot inspect platform secret scope; that was checked separately using protected environment metadata. Missing/invalid credentials produce exit 1. `readyForApproval` also requires positive input/output prices and fresh complete credit-only billing evidence. A positive catalog check alone is insufficient.
 
-After the credit-only billing condition is confirmed (existing one-call approval remains valid), and current non-secret token rates are configured as `NEBIUS_INPUT_USD_PER_MILLION` and `NEBIUS_OUTPUT_USD_PER_MILLION`, the following **template** performs one real request. `$APPROVED_PREFLIGHT_LIMIT_USD` must be the owner's approved amount; this documentation is not approval:
+Only after NEW owner approval for any future inference (the first authorization is consumed), and current non-secret token rates are configured as `NEBIUS_INPUT_USD_PER_MILLION` and `NEBIUS_OUTPUT_USD_PER_MILLION`, the following **template** performs one real request. `$APPROVED_PREFLIGHT_LIMIT_USD` must be the owner's approved amount; this documentation is not approval:
 
 ```bash
 npm run preflight -- --live --approve-paid --spend-limit-usd "$APPROVED_PREFLIGHT_LIMIT_USD" --credit-evidence "$CREDIT_EVIDENCE_FILE"
@@ -80,11 +80,11 @@ The preflight sends at most **one** POST to the fixed Token Factory endpoint, wi
 
 The safety estimate uses UTF-8 input bytes plus a 1,024-token framing allowance, the output-token maximum and the configured prices. A live attempt is refused if the estimate exceeds the approved limit. This is **not a provider-enforced dollar cap**; tokenizer overhead and current account pricing must be verified, and an over-limit charge cannot be undone after a response. Failure output preserves sanitized attempted-request counts and known usage/estimated cost; unknown usage remains null. No response body, model text or credential is printed.
 
-The local credit evidence file is a recent owner Billing-page attestation or supported read-only billing response, not a fabricated provider check. It must confirm credits strictly exceeding the approved limit, a known expiry safely beyond the request (or explicitly no expiry), and disabled automatic charging and top-ups. It expires after 15 minutes. Keep raw financial data outside Git (for example, in `.cache/`). The CLI reads it but reports only sanitized status flags. This does not change billing settings or enforce a provider-side dollar cap.
+The local credit evidence file is a recent owner Billing-page attestation or supported read-only billing response, not a fabricated provider check. For Billing-page/API evidence it must confirm credits strictly exceeding the approved limit, known safe expiry (or confirmed no expiry), and disabled automatic charging/top-ups. The distinct `owner-attested-no-card` source accepts the owner's explicit screenshot/no-bank-card attestation without inventing platform toggles or expiry facts. It still rejects explicit contradictions. It expires after 15 minutes. Keep raw financial data outside Git (for example, in `.cache/`). The CLI reads it but reports only sanitized status flags. This does not change billing settings or enforce a provider-side dollar cap.
 
 All preflight tests use explicit simulated transports and test-only credentials. `npm test` and CI never opt into live mode. Before any full live benchmark, complete the preflight, add scenario selection and approve a small bounded experiment on one baseline failure.
 
-## Live NVIDIA Nemotron run — currently blocked, not executed
+## Future live agent runs — require separate approval
 
 In the **published `neb-hackath` cloud environment → environment settings → protected secrets**, add `NEBIUS_API_KEY`. If the platform asks for its HTTPS destination, use `api.tokenfactory.nebius.com`. Never paste the value in chat, commit it, put it in a browser bundle, or use another project's credentials. `.env.example` lists names only; this project does not automatically load `.env` files.
 

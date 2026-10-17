@@ -1,4 +1,6 @@
-# Authorized single preflight — billing prerequisite blocked
+# Historical blocked preflight record
+
+**Superseded October 17:** the owner accepted their screenshot/no-card attestation; one actual request was executed and the authorization is consumed. See [live outcome](live-preflight-2026-10-17.md). Everything below records the earlier blocked state, not current authorization or execution status.
 
 Scope: exactly ONE NVIDIA Nemotron inference request, using existing credits only, maximum estimated expenditure $0.50, no retry or follow-on inference. [Recorded owner authorization](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6220295986). This approval does not authorize a benchmark, merge, deployment, purchases, top-ups or billing/card changes.
 
