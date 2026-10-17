@@ -10,6 +10,7 @@ try{
  const known=new Set(['--live','--approve-paid','--repetitions','--output','--max-calls','--scenario','--split','--baselines']);
  for(let i=0;i<args.length;i++){if(!known.has(args[i]))throw new Error('Unknown benchmark argument');if(['--repetitions','--output','--max-calls','--scenario','--split','--baselines'].includes(args[i]))i++;}
  const live=args.includes('--live');
+ if(live)throw new Error('Nebius live benchmark disabled; use the approved aggregate campaign entrypoint');
  if(live&&(!args.includes('--scenario')||!args.includes('--max-calls')||Number(option('--repetitions','1'))!==1||Number(option('--max-calls','0'))>8))throw new Error('Live evaluation requires one explicit scenario, one repetition and at most 8 calls');
  if(live&&option('--scenario','').includes(','))throw new Error('Live evaluation permits only one scenario');
  if(args.includes('--approve-paid')&&!live)throw new Error('--approve-paid requires --live');

@@ -35,7 +35,7 @@ export async function benchmark({repetitions=1,livePolicy=null,onRow=()=>{},spli
      result=mode==='baseline'?await runBaseline(session.page,scenario.task):mode==='dom-autofill'?await runDomBaseline(session.page,scenario.task):await runGuarded(session.page,scenario.task,livePolicy??createScriptedPolicy());
     }catch{result={claimedCompletion:false,steps:0,blockedActions:0,inappropriateActionsExecuted:0,errors:['Browser session unavailable']};}
     finally{if(session)await session.context.close();}
-    const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key);
+    const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id});
     const after=livePolicy?.metrics();const isLive=mode==='nebius-nemotron';
     const usageComplete=isLive?before.usageComplete&&after.usageComplete:true;
     const final=finalizeAttempt(result,verdict);

@@ -12,6 +12,6 @@ export async function runBaseline(page,task){
   steps++;await clickAndSettle(page,page.getByRole('button',{name:'Next',exact:true}));steps++;
   await page.getByLabel('I consent to this fictional application',{exact:true}).check();steps++;
   await clickAndSettle(page,page.getByRole('button',{name:'Submit application',exact:true}));steps++;
-  return {claimedCompletion:await page.getByRole('heading',{name:'Application received',exact:true}).count()>0,steps,blockedActions:0,inappropriateActionsExecuted:0,errors:[]};
- }catch{return {claimedCompletion:false,steps,blockedActions:0,inappropriateActionsExecuted:0,errors:['Fixed-label workflow could not proceed']};}
+  return {claimedCompletion:await page.getByRole('heading',{name:'Application received',exact:true}).count()>0,steps,blockedActions:0,inappropriateActionsExecuted:null,errors:[]};
+ }catch{return {claimedCompletion:false,steps,blockedActions:0,inappropriateActionsExecuted:null,errors:['Fixed-label workflow could not proceed']};}
 }

@@ -24,3 +24,9 @@ test('settling a failed click handles a later response-wait rejection',async()=>
  const child=spawnSync(process.execPath,['--input-type=module','-e',script],{cwd:process.cwd(),encoding:'utf8'});
  assert.equal(child.status,0,child.stderr);
 });
+test('app-owned task binding supports unfamiliar labels without allowing new data or field names',()=>{
+ const bound=[{id:0,tag:'input',type:'text',label:'Your identity',field:'name'}];
+ assert.doesNotThrow(()=>validateAction({type:'fill',target:0,value:task.name},bound,task));
+ assert.throws(()=>validateAction({type:'fill',target:0,value:task.email},bound,task));
+ assert.throws(()=>validateAction({type:'fill',target:0,value:'secret'},[{...bound[0],field:'apiKey'}],{...task,apiKey:'secret'}));
+});

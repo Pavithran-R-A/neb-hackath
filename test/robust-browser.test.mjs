@@ -16,7 +16,7 @@ test('DOM baseline handles development and new evaluation tasks; server verifica
   const run=app.createRun(scenario),session=await createBrowserSession(browser,run);
   try{
    const attempt=await runDomBaseline(session.page,scenario.task);
-   const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key);
+   const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id});
    assert.equal(verdict.completed,scenario.expectedCompletion,JSON.stringify(attempt));
    const final=finalizeAttempt(attempt,verdict);assert.equal(final.reportedCompletion,verdict.completed);
    if(['changed-data','false-success'].includes(scenario.variant)){assert.equal(final.rawClaimedCompletion,true);assert.equal(final.rejectedCompletionClaim,true);}
@@ -28,6 +28,6 @@ test('misleading success banner cannot become a user-visible completion without 
  const scenario=holdoutScenarios.find(s=>s.variant==='misleading-banner'),run=app.createRun(scenario),session=await createBrowserSession(browser,run);t.after(()=>session.context.close());
  const attempt=await runGuarded(session.page,scenario.task,createScriptedPolicy());
  assert.equal(attempt.claimedCompletion,true);assert.equal(app.readRecord(run.id).step,0);
- const final=finalizeAttempt(attempt,verifyCompletion(app.readRecord(run.id),scenario.task,app.key));
+ const final=finalizeAttempt(attempt,verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id}));
  assert.equal(final.reportedCompletion,false);assert.equal(final.rejectedCompletionClaim,true);
 });

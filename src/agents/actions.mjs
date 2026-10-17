@@ -1,4 +1,6 @@
 export function controlField(c){
+ // App-owned public field binding; never an evaluator secret or model-selected key.
+ if(['name','email','phone','detail'].includes(c.field))return c.field;
  const hint=`${c.label} ${c.placeholder??''}`.toLowerCase();
  if(/full name|legal name/.test(hint))return 'name';
  if(/email|contact address/.test(hint))return 'email';

@@ -24,7 +24,7 @@ export async function observe(page){
  return page.evaluate(()=>({
   text:document.querySelector('main').innerText.slice(0,6000),
   controls:[...document.querySelectorAll('main input,main select,main button')].map((el,id)=>({
-   id,tag:el.tagName.toLowerCase(),type:el.type,name:el.getAttribute('name')??'',
+   id,tag:el.tagName.toLowerCase(),type:el.type,name:el.getAttribute('name')??'',field:el.getAttribute('data-task-field')??'',
    label:[...(el.labels??[])].map(l=>l.textContent.trim()).join(' ') || (el.tagName==='BUTTON'?el.textContent.trim():''),
    placeholder:el.getAttribute('placeholder')??'',value:el.value,checked:el.checked??false,disabled:el.disabled,
    options:el.tagName==='SELECT'?[...el.options].map(o=>o.value):undefined

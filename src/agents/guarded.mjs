@@ -2,7 +2,7 @@ import { observe, executeAction } from './browser.mjs';
 import { validateBatch } from './actions.mjs';
 export async function runGuarded(page,task,policy,{maxTurns=8}={}){
  const history=[];let steps=0,blockedActions=0;
- const result=(claimedCompletion,error)=>({claimedCompletion,steps,blockedActions,inappropriateActionsExecuted:0,errors:error?[error]:[],history});
+ const result=(claimedCompletion,error)=>({claimedCompletion,steps,blockedActions,inappropriateActionsExecuted:null,errors:error?[error]:[],history});
  for(let turn=0;turn<maxTurns;turn++){
   const observation=await observe(page);let decision;
   try{decision=await policy.decide({task,observation,history:history.slice(-3)});}catch(e){return result(false,e.message.startsWith('Nebius')?e.message:'Policy failed');}

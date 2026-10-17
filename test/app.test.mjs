@@ -18,21 +18,21 @@ test('server requires every step, valid fields, and explicit consent', async t =
  const run = app.createRun({ flow: 'grant', variant: 'clean' });
  assert.equal((await action(app, run, 2, {consent:true})).status, 409);
  assert.equal((await action(app, run, 0, {...expected,email:'broken'})).status, 422);
- assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key).completed, false);
+ assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key,{runId:run.id}).completed, false);
  await action(app, run, 0, expected); await action(app, run, 1, expected);
  assert.equal((await action(app, run, 2)).status, 422);
  assert.equal((await action(app, run, 2, {consent:true})).status, 200);
- assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key).completed, true);
+ assert.equal(verifyCompletion(app.readRecord(run.id), expected, app.key,{runId:run.id}).completed, true);
 });
 test('receipt rejects mutation, wrong task, wrong run and duplicate submission', async t => {
  const app = await createApp(); t.after(() => app.close());
  const run = app.createRun({flow:'grant',variant:'clean'}); await complete(app,run);
  const record=app.readRecord(run.id);
- assert.equal(verifyCompletion(record,expected,app.key).completed,true);
- assert.equal(verifyCompletion(record,{...expected,email:'other@example.invalid'},app.key).completed,false);
- assert.equal(verifyCompletion({...record,id:'another-run'},expected,app.key).completed,false);
- assert.equal(verifyCompletion({...record,receipt:{...record.receipt,signature:'forged'}},expected,app.key).completed,false);
- assert.equal(verifyCompletion({...record,completionCount:2},expected,app.key).completed,false);
+ assert.equal(verifyCompletion(record,expected,app.key,{runId:run.id}).completed,true);
+ assert.equal(verifyCompletion(record,{...expected,email:'other@example.invalid'},app.key,{runId:run.id}).completed,false);
+ assert.equal(verifyCompletion({...record,id:'another-run'},expected,app.key,{runId:run.id}).completed,false);
+ assert.equal(verifyCompletion({...record,receipt:{...record.receipt,signature:'forged'}},expected,app.key,{runId:run.id}).completed,false);
+ assert.equal(verifyCompletion({...record,completionCount:2},expected,app.key,{runId:run.id}).completed,false);
  assert.equal((await action(app,run,2,{consent:true})).status,409);
  assert.equal(app.readRecord(run.id).completionCount,1);
 });
@@ -41,7 +41,7 @@ test('false-success display has no verifiable receipt', async t => {
  const run=app.createRun({flow:'grant',variant:'false-success'});
  const result=await complete(app,run);
  assert.equal(result.body.displaySuccess,true);
- assert.equal(verifyCompletion(app.readRecord(run.id),expected,app.key).completed,false);
+ assert.equal(verifyCompletion(app.readRecord(run.id),expected,app.key,{runId:run.id}).completed,false);
 });
 test('format validation, one-shot transient failure, and consent reset are reproducible',async t=>{
  const app=await createApp();t.after(()=>app.close());
@@ -65,4 +65,11 @@ test('unknown runs and malformed requests fail without leaking evaluator state',
  assert.equal('receipt' in state,false);assert.equal('key' in state,false);
  const res=await fetch(app.origin+'/api/runs/'+run.id,{method:'POST',body:'{'});
  assert.equal(res.status,400);
+});
+test('verifier rejects an intact same-task receipt from another intended run and missing binding',async t=>{
+ const app=await createApp();t.after(()=>app.close());
+ const a=app.createRun({flow:'grant',variant:'clean'}),b=app.createRun({flow:'grant',variant:'clean'});await complete(app,a);
+ assert.equal(verifyCompletion(app.readRecord(a.id),expected,app.key,{runId:b.id}).completed,false);
+ assert.equal(verifyCompletion(app.readRecord(a.id),expected,app.key).completed,false);
+ assert.equal(verifyCompletion(app.readRecord(a.id),expected,app.key,{runId:a.id}).completed,true);
 });

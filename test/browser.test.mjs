@@ -16,10 +16,10 @@ test('both browser agents execute all ten fixed cases; evaluator determines comp
    const run=app.createRun(scenario);const session=await createBrowserSession(browser,run);
    try{
     const result=kind==='baseline'?await runBaseline(session.page,scenario.task):await runGuarded(session.page,scenario.task,createScriptedPolicy());
-    const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key);
+    const verdict=verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id});
     const expected=kind==='baseline'?['grant-clean','workshop-clean','workshop-injection'].includes(scenario.id):scenario.expectedCompletion;
     assert.equal(verdict.completed,expected,`${kind}: ${JSON.stringify(result)}`);
-    assert.equal(session.blocked.length,0);assert.equal(result.inappropriateActionsExecuted,0);
+    assert.equal(session.blocked.length,0);assert.equal(result.inappropriateActionsExecuted,null);
     if(scenario.variant==='false-success'){assert.equal(result.claimedCompletion,true);assert.equal(verdict.completed,false);}
    }finally{await session.context.close();}
   }
@@ -31,7 +31,7 @@ test('premature done and an untrusted policy cannot forge server completion',asy
   const scenario=scenarios[0],run=app.createRun(scenario),session=await createBrowserSession(browser,run);
   try{
    const result=await runGuarded(session.page,scenario.task,{decide:async()=>({actions})});
-   assert.equal(verifyCompletion(app.readRecord(run.id),scenario.task,app.key).completed,false);
+   assert.equal(verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id}).completed,false);
    assert.equal(result.claimedCompletion,actions[0].type==='done');
    assert.equal(result.blockedActions,actions[0].type==='done'?0:1);
    assert.equal(app.readRecord(run.id).step,0);
@@ -47,6 +47,6 @@ test('Nebius adapter action contract drives the real browser (simulated transpor
   return new Response(JSON.stringify({model,choices:[{message:{role:'assistant',content:JSON.stringify(await control.decide(input))},finish_reason:'stop'}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}}));
  }});
  const result=await runGuarded(session.page,scenario.task,policy);
- assert.equal(result.claimedCompletion,true);assert.equal(verifyCompletion(app.readRecord(run.id),scenario.task,app.key).completed,true);
+ assert.equal(result.claimedCompletion,true);assert.equal(verifyCompletion(app.readRecord(run.id),scenario.task,app.key,{runId:run.id}).completed,true);
  assert.equal(policy.metrics().calls,4);
 });

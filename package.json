@@ -13,6 +13,8 @@
     "browsers:install": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright playwright install chromium",
     "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs",
     "preflight": "node --use-env-proxy scripts/preflight.mjs",
+    "campaign:plan": "node scripts/campaign.mjs",
+    "campaign": "node --use-env-proxy scripts/campaign.mjs",
     "preflight:catalog": "node --use-env-proxy scripts/catalog.mjs"
   },
   "devDependencies": {
