@@ -11,7 +11,7 @@ import {verifyCompletion,digest} from '../verification.mjs';
 import {finalizeAttempt} from '../evaluation.mjs';
 const assets=new Map(await Promise.all([['/','index.html','text/html'],['/workbench.js','client.js','text/javascript'],['/workbench.css','style.css','text/css']].map(async([path,file,type])=>[path,{body:await readFile(new URL(file,import.meta.url)),type}])));
 const catalog=[...scenarios,...evaluationV2];
-export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius'}={}){
+export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius',allowedDiagnosticScenarios=null}={}){
  const provenance=await createProvenance();
  const suiteHashes={};for(const name of ['cases.json','labels.json','protocol.md','review.json']){try{suiteHashes[name]=createHash('sha256').update(await readFile(new URL('../../evaluation/diagnosis-v1/'+name,import.meta.url))).digest('hex');}catch{suiteHashes[name]=null;}}
  const app=await createApp(),sessions=new Map();let origin;
@@ -30,7 +30,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
    cleanup();
    if(req.headers.host!==new URL(origin).host||(req.headers.origin&&req.headers.origin!==origin))return send(403,{error:'Origin or host denied'});
    const path=new URL(req.url,origin).pathname;
-   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:'local-synthetic',liveInferenceEnabled:false});
+   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:'local-synthetic',liveInferenceEnabled:Boolean(diagnosticPolicy)});
    const id=/(?:^|;\s*)receiptlab=([a-f0-9]{64})(?:;|$)/.exec(req.headers.cookie??'')?.[1];let session=sessions.get(id);
    if(req.method==='GET'&&assets.has(path)){
     const headers={};
@@ -63,6 +63,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
    if(!run)return send(404,{error:'Run not found in this session'});
    if(match[2]==='diagnose'&&req.method==='POST'){
     if(!['deterministic','nemotron'].includes(body.mode)||Object.keys(body).some(k=>k!=='mode'))return send(400,{error:'Choose a known diagnostic mode'});
+    if(body.mode==='nemotron'&&allowedDiagnosticScenarios&&!allowedDiagnosticScenarios.includes(run.scenarioId))return send(409,{error:'This challenge is outside the approved model campaign'});
     if(body.mode==='nemotron'&&!diagnosticPolicy)return send(409,{error:'NVIDIA diagnosis inactive; bounded owner-authorized service configuration required'});
     if(run.diagnosing||(run.diagnoses?.length??0)>=8)return send(429,{error:'Diagnosis in progress or run limit reached'});
     run.diagnosing=true;

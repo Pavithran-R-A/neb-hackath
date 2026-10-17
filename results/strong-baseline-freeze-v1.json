@@ -1,0 +1,7 @@
+{
+  "recordedAt": "2026-10-17T15:51:24.639Z",
+  "source": "src/diagnosis/strong-baseline.mjs",
+  "sha256": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+  "authorBlindTo": "All evaluation cases, labels, existing baseline, prompts and predictions. Developed from generic contract using own34 TDD cases. Frozen before this evaluation.",
+  "chronology": "Second comparator authored after CampaignB truncation; author was not given results or code. No NVIDIA valid diagnostic output exists yet."
+}

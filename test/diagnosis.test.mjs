@@ -31,3 +31,11 @@ test('static evaluation can omit hidden verification labels without becoming a c
  const visible={id:'visible-only',task:{goal:'Finish task'},events:[{id:'e1',source:'verifier',kind:'receipt',text:'Verified completion for the current run and supplied task.'}]};
  const d=diagnoseDeterministic(visible);assert.equal(d.diagnosis,'completed');assert.equal(d.recovery.action,'none');validateDiagnosis(d,visible);
 });
+
+test('larger reasoning budget retains schema and reports reasoning usage without unsupported parameters',async()=>{
+ const policy=createDiagnosticPolicy({apiKey:'test-only',model,approved:true,maxOutputTokens:8192,fetchImpl:async(_url,init)=>{
+  const body=JSON.parse(init.body);assert.equal(body.max_tokens,8192);assert.equal(body.reasoning_effort,undefined);assert.equal(body.chat_template_kwargs,undefined);
+  return fixture({usage:{prompt_tokens:100,completion_tokens:6000,total_tokens:6100,completion_tokens_details:{reasoning_tokens:5900}}});
+ }});const result=await policy.diagnose(trace);assert.equal(result.reasoningTokens,5900);assert.equal(result.usage.outputTokens,6000);
+ assert.throws(()=>createDiagnosticPolicy({apiKey:'test-only',model,approved:true,maxOutputTokens:8193}));
+});

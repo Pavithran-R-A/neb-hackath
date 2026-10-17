@@ -33,3 +33,9 @@ test('model inactive, stale approvals and false UI completion never bypass priva
  assert.equal((await s.call('/api/runs/'+run.id+'/recover',{diagnosisId:d.data.id,traceDigest:'wrong',approve:true})).status,409);
  const other=await session(server);assert.equal((await other.call('/api/runs/'+run.id+'/diagnose',{mode:'deterministic'})).status,404);
 });
+
+test('bounded live adapter denies scenarios outside campaign before invoking model',async t=>{
+ let calls=0;const server=await createWorkbench({diagnosticPolicy:{diagnose:async()=>{calls++;throw new Error('must not call');}},allowedDiagnosticScenarios:['grant-transient']});t.after(()=>server.close());
+ const s=await session(server),run=await prepare(server,s,'workshop-false-success');
+ assert.equal((await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'})).status,409);assert.equal(calls,0);
+});

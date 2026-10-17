@@ -23,8 +23,9 @@ try{
   // Only a real, separately approved invocation can reach this branch. Exclusive
   // reservation occurs before even the catalog GET; no automatic retry/resume.
   const base=resolve('.cache/campaigns'),ledgerPath=resolve(base,a.id+'.jsonl');
-  let campaign;
+  let campaign,account;
   try{
+   account=await reserveAccountBudget({directory:'.cache/account-budget',campaignId:a.id,maxReservedUsd:a.spendLimitUsd,purpose:'Owner-approved action integration campaign',sourceCommit,suiteSha256,initialSpentUsd:.00022644});
    campaign=await createCampaign({authorization:a,sourceCommit,suiteSha256,ledgerPath});
    const catalog=await checkCatalog();
    if(catalog.inputUsdPerMillion!==a.inputUsdPerMillion||catalog.outputUsdPerMillion!==a.outputUsdPerMillion)throw new Error('Campaign current catalog prices differ from approval');
@@ -40,6 +41,6 @@ try{
    }});
    await writeFile(output,JSON.stringify({schemaVersion:1,sourceCommit,suiteSha256,catalog,preflight:first,...result,campaign:campaign.status()},null,2)+'\n',{flag:'wx',mode:0o600});
    console.log(JSON.stringify({status:'completed',sourceCommit,suiteSha256,output,campaign:campaign.status(),summary:result.summary},null,2));
-  }catch(error){await writeFile(resolve(base,a.id+'.failure.json'),JSON.stringify({sourceCommit,suiteSha256,stage,error:error.message.startsWith('Nebius')?error.message:'Campaign stage failed',report:error.report??null,campaign:campaign?.status()},null,2)+'\n',{flag:'wx',mode:0o600});throw error;}finally{if(campaign)await campaign.close();}
+  }catch(error){await writeFile(resolve(base,a.id+'.failure.json'),JSON.stringify({sourceCommit,suiteSha256,stage,error:error.message.startsWith('Nebius')?error.message:'Campaign stage failed',report:error.report??null,campaign:campaign?.status()},null,2)+'\n',{flag:'wx',mode:0o600});throw error;}finally{if(campaign)await campaign.close();if(account)await account.settle({knownCostUsd:campaign?.status().knownCostUsd??0,usageComplete:campaign?.status().usageComplete??true,requests:campaign?.status().requestsReserved??0});}
  }
 }catch{console.error('Campaign stopped safely; inspect protected local ledger and approval prerequisites. No retry is authorized automatically.');process.exitCode=1;}

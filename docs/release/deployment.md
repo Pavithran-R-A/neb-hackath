@@ -1,6 +1,6 @@
 # Isolated deployment preparation — no public service
 
-Recommended next architecture: keep evaluation/Playwright in the protected cloud workspace, with a small Node manual evidence surface as a separately approved test build. The local rehearsal image contains only Node and this repository's source; it has no npm runtime dependencies, Chromium, API key or model endpoint. It is not the complete NVIDIA-powered judge application.
+Recommended next architecture: keep evaluation/Playwright in the protected cloud workspace, with a small Node manual evidence surface as a separately approved test build. The local rehearsal image contains Node, this repository's source/scripts and lockfile, and the public `evaluation/diagnosis-v1` dataset; it has no npm runtime dependencies, Chromium, API key or model endpoint. It is not the complete NVIDIA-powered judge application.
 
 ## Local cloud rehearsal
 
@@ -12,7 +12,15 @@ DOCKER_CONFIG="$PWD/.cache/docker" docker build -f deployment/Dockerfile --build
 
 Run without publishing ports, with network disabled, read-only root filesystem, nonroot node user, 256MiB memory, 0.5CPU and 64 process limit. Feed scripts/smoke-workbench.mjs into docker exec -i CONTAINER node --input-type=module. The smoke test uses only loopback, completes three actual form POSTs, checks the signed verdict, downloads sanitized evidence and resets its session. Restart the same isolated container and repeat. Remove only that created container afterward.
 
-Actual build and smoke/restart tests passed for implementation d59089260f0a41619f8e032e3b3972faff9a097b; evidence in results/sprint-release-evidence.json. No host ports, secrets or external network were attached. Initial browser-heavy Docker experiments failed on npm registry timeout despite the supported proxy route. Separating the manual runtime eliminated that unnecessary install. The cloud development toolchain still needs pinned Playwright, npm ci and browser installation; those run successfully in local/hosted CI.
+Historical build and smoke/restart tests passed for implementation d59089260f0a41619f8e032e3b3972faff9a097b; evidence in results/sprint-release-evidence.json. No host ports, secrets or external network were attached. Initial browser-heavy Docker experiments failed on npm registry timeout despite the supported proxy route. Separating the manual runtime eliminated that unnecessary install. The cloud development toolchain still needs pinned Playwright, npm ci and browser installation; those run successfully in local/hosted CI.
+
+## Current image provenance and validation boundary
+
+The Dockerfile copies all `src/` and `scripts/` runtime inputs plus `package.json` and `package-lock.json`, then explicitly generates `src/build-manifest.json` as the nonroot `node` user. The diagnosis dataset is copied separately so exported suite hashes can be populated. No dependency installation, model calls, credentials, public listener or published ports are part of this build. The generated manifest is excluded from the build context and its own hash inputs.
+
+`SOURCE_COMMIT` is a build argument containing an operator claim, not verified Git HEAD inside the image. Exported provenance labels that origin and verifies the captured runtime file hashes against current image contents; absent Git, `codeTreeDirty` stays `null`. Matching hashes show content consistency, not signed authorship or proof that the supplied commit matches those bytes. Dataset hashes are separately included in workbench exports; they are not part of the runtime source hash.
+
+The historical Docker evidence above does **not** validate this revised Dockerfile or current application source. Current provenance unit tests cover Gitless build verification, added/modified/missing runtime files, malformed manifests, secret/cache exclusion and symlink rejection. A fresh Docker build plus isolated health, export-provenance and restart checks remains required before claiming this revision passed container validation. These checks are local cloud rehearsal only and do not authorize hosting or inference.
 
 ## Hosting research (official sources checked October17)
 

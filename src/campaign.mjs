@@ -14,7 +14,7 @@ export async function createCampaign({authorization:a,ledgerPath,sourceCommit,su
  if(!/^nvidia\/[^\s]*nemotron[^\s]*$/i.test(a.model??''))throw new Error('Campaign NVIDIA model required');
  const diagnostic=a.responseContract==='preflight-then-diagnosis';
  if(a.responseContract!==undefined&&!['actions','preflight-then-diagnosis'].includes(a.responseContract))throw new Error('Campaign response contract invalid');
- if(!Number.isInteger(a.maxRequests)||a.maxRequests<1||a.maxRequests>100||!Number.isInteger(a.maxOutputTokens)||a.maxOutputTokens<1||a.maxOutputTokens>(diagnostic?2048:1024))throw new Error('Campaign invalid request/token limits');
+ if(!Number.isInteger(a.maxRequests)||a.maxRequests<1||a.maxRequests>100||!Number.isInteger(a.maxOutputTokens)||a.maxOutputTokens<1||a.maxOutputTokens>(diagnostic?8192:1024))throw new Error('Campaign invalid request/token limits');
  if(!Number.isFinite(a.spendLimitUsd)||a.spendLimitUsd<=0||a.spendLimitUsd>.50||![a.inputUsdPerMillion,a.outputUsdPerMillion].every(n=>Number.isFinite(n)&&n>0))throw new Error('Campaign invalid credit limit or prices');
  const approved=Date.parse(a.approvedAt),expires=Date.parse(a.expiresAt);
  if(!Number.isFinite(approved)||!Number.isFinite(expires)||approved>now+30000||approved<now-900000||expires<=now||expires>approved+3600000)throw new Error('Campaign approval expired or invalid');
