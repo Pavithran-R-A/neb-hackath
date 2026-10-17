@@ -39,3 +39,7 @@ test('larger reasoning budget retains schema and reports reasoning usage without
  }});const result=await policy.diagnose(trace);assert.equal(result.reasoningTokens,5900);assert.equal(result.usage.outputTokens,6000);
  assert.throws(()=>createDiagnosticPolicy({apiKey:'test-only',model,approved:true,maxOutputTokens:8193}));
 });
+test('explicit supported sampling and alternate NVIDIA model are bounded and never changed globally',async()=>{
+ const alternative='nvidia/test-nemotron-alternative';let calls=0;const p=createDiagnosticPolicy({apiKey:'test-only',model:alternative,approved:true,temperature:1,topP:.95,maxOutputTokens:2048,fetchImpl:async(_url,init)=>{calls++;const b=JSON.parse(init.body);assert.equal(b.model,alternative);assert.equal(b.temperature,1);assert.equal(b.top_p,.95);assert.equal(b.reasoning_effort,undefined);assert.equal(b.chat_template_kwargs,undefined);return fixture({model:alternative});}});await p.diagnose(trace);assert.equal(calls,1);
+ for(const options of [{temperature:-1},{temperature:3},{topP:0},{topP:1.1}])assert.throws(()=>createDiagnosticPolicy({apiKey:'test-only',model,approved:true,...options}));
+});

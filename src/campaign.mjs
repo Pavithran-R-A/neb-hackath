@@ -39,6 +39,7 @@ export async function createCampaign({authorization:a,ledgerPath,sourceCommit,su
    let body;try{body=JSON.parse(init?.body);}catch{throw new Error('Nebius campaign invalid request');}
    if(url!==endpoint||init?.method!=='POST'||init.redirect!=='error'||body.model!==a.model||!Number.isInteger(body.max_tokens)||body.max_tokens<1||body.max_tokens>a.maxOutputTokens||body.stream===true||!Array.isArray(body.messages)||!body.messages.length||body.messages.some(m=>typeof m.content!=='string'))throw new Error('Nebius campaign request contract denied');
    if(diagnostic&&body.response_format?.json_schema?.name!==(state.requestsReserved===0?'synthetic_preflight':'grounded_diagnosis'))throw new Error('Nebius campaign phase contract denied');
+   if(a.diagnosticSampling&&state.requestsReserved>0&&(body.temperature!==a.diagnosticSampling.temperature||body.top_p!==a.diagnosticSampling.top_p||body.reasoning_effort!==undefined||body.chat_template_kwargs!==undefined))throw new Error('Nebius campaign sampling contract denied');
    const inputAllowance=Buffer.byteLength(JSON.stringify(body.messages))+Buffer.byteLength(JSON.stringify(body.response_format??{}))+1024;
    if(inputAllowance>20000)throw new Error('Nebius campaign input allowance exceeded');
    const reservation=(inputAllowance*a.inputUsdPerMillion+body.max_tokens*a.outputUsdPerMillion)/1e6;

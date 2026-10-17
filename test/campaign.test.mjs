@@ -75,3 +75,9 @@ test('diagnosis campaign permits documented 2048 output limit and mixed prefligh
  await campaign.fetch(endpoint,{...init,body:JSON.stringify({...JSON.parse(init.body),max_tokens:2048,messages:[{role:'system',content:'JSON'},{role:'user',content:JSON.stringify({id:'fixture',task:{goal:'test'},events:[{id:'e1',source:'server',kind:'error',text:'unknown'}],verification:{completed:false,reason:'unknown'}})}],response_format:{type:'json_schema',json_schema:{name:'grounded_diagnosis'}}})});
  assert.equal(campaign.status().halted,false);assert.equal(calls,2);await campaign.close();
 });
+test('diagnostic sampling is pinned before reservation and cannot add unsupported controls',async t=>{
+ let calls=0;const {campaign}=await setup(t,{responseContract:'preflight-then-diagnosis',maxOutputTokens:8192,diagnosticSampling:{temperature:1,top_p:.95}},async()=>{calls++;return response();});
+ const body={...JSON.parse(init.body),temperature:0,response_format:{type:'json_schema',json_schema:{name:'synthetic_preflight'}}};await campaign.fetch(endpoint,{...init,body:JSON.stringify(body)});
+ for(const patch of [{temperature:0,top_p:.95},{temperature:1,top_p:.95,reasoning_effort:'none'},{temperature:1,top_p:.95,chat_template_kwargs:{enable_thinking:false}}])await assert.rejects(()=>campaign.fetch(endpoint,{...init,body:JSON.stringify({...body,...patch,response_format:{type:'json_schema',json_schema:{name:'grounded_diagnosis'}}})}),/sampling/);
+ assert.equal(calls,1);assert.equal(campaign.status().requestsReserved,1);await campaign.close();
+});

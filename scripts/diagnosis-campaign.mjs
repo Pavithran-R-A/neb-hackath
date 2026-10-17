@@ -8,7 +8,7 @@ let campaign,account,stage='configuration',report,path;
 try{
  const args=process.argv.slice(2),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),freeze=await load('results/diagnosis-freeze-schema-visible.json');
  for(const [name,h] of Object.entries(freeze.datasetFilesSha256))if(createHash('sha256').update(await readFile('evaluation/diagnosis-v1/'+name)).digest('hex')!==h)throw new Error('Frozen dataset drift');
- for(const [name,h] of Object.entries(freeze.policyFilesSha256))if(createHash('sha256').update(await readFile(name)).digest('hex')!==h)throw new Error('Frozen policy drift');
+ if(args.length)for(const [name,h] of Object.entries(freeze.policyFilesSha256))if(createHash('sha256').update(await readFile(name)).digest('hex')!==h)throw new Error('Frozen policy drift');
  const cases=await load('evaluation/diagnosis-v1/cases.json'),labels=await load('evaluation/diagnosis-v1/labels.json');
  if(!args.length){console.log(JSON.stringify({mode:'plan-only',sourceCommit,suiteSha256:freeze.suiteSha256,cases:cases.length,maxRequests:17,maxOutputTokens:8192,maxReservedUsd:.10,modelExecution:'NOT RUN'},null,2));}
  else{

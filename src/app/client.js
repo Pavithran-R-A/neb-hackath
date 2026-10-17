@@ -1,5 +1,6 @@
 const root=document.querySelector('#app');
 const id=location.pathname.split('/').pop();
+const apiPrefix=location.pathname.startsWith('/forms/')?'/forms':'';
 let state;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function field(key,label,placeholder,type='text'){
@@ -28,9 +29,9 @@ function render(){
   e.preventDefault();const values={};for(const input of e.target.querySelectorAll('[data-task-field]'))values[input.dataset.taskField]=input.value;values.consent=e.target.querySelector('[name=consent]')?.checked===true;
   const button=e.target.querySelector('button');button.disabled=true;
   try{
-   const res=await fetch(`/api/runs/${id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({step:state.step,values})});
+   const res=await fetch(`${apiPrefix}/api/runs/${id}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({step:state.step,values})});
    const data=await res.json();if(!('step' in data))throw new Error('Request rejected');state=data;render();
   }catch{button.disabled=false;root.querySelector('[role=alert]').textContent='Request failed. Please retry.';}
  });
 }
-fetch(`/api/runs/${id}`).then(r=>r.json()).then(data=>{state=data;render();}).catch(()=>{root.textContent='Application unavailable';});
+fetch(`${apiPrefix}/api/runs/${id}`).then(r=>r.json()).then(data=>{state=data;render();}).catch(()=>{root.textContent='Application unavailable';});

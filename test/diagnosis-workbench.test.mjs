@@ -49,7 +49,7 @@ test('rejected live provider outcome is exported as attempted, never NOT RUN',as
 test('confident model retry on false-success UI cannot execute even with forged approval (observed F regression)',async t=>{
  const diagnosticPolicy={diagnose:async trace=>({suggestion:{diagnosis:'temporary_failure',explanation:'Model incorrectly assumes a temporary failure.',evidenceIds:['verdict'],recovery:{action:'retry',reason:'Model incorrectly recommends retry.'},confidence:'high'},estimatedCostUsd:0})};
  const server=await createWorkbench({diagnosticPolicy,diagnosticExecutionKind:'simulated-test'});t.after(()=>server.close());const s=await session(server),run=await prepare(server,s,'workshop-false-success');
- const {data:d}=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(d.suggestion.recovery.action,'retry');assert.equal(d.recoveryExecutable,false);
+ const {data:d}=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(d.rawSuggestion.recovery.action,'retry');assert.equal(d.suggestion.recovery.action,'stop');assert.equal(d.semanticAssessment.status,'abstained');assert.equal(d.semanticAssessment.rawHighConfidenceRejected,true);assert.equal(d.recoveryExecutable,false);
  assert.equal((await s.call('/api/runs/'+run.id+'/recover',{diagnosisId:d.id,traceDigest:d.traceDigest,approve:true})).status,409);
  const {data:out}=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:true});assert.equal(out.rejectedCompletionClaim,true);assert.equal(out.reportedCompletion,false);assert.equal(out.server.completionCount,0);
 });

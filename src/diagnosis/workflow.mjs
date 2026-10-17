@@ -1,3 +1,4 @@
+import {acceptDiagnosis} from './acceptance.mjs';
 import {createHash,randomUUID} from 'node:crypto';
 import {verifyCompletion} from '../verification.mjs';
 import {diagnoseDeterministic} from './baseline.mjs';
@@ -7,6 +8,7 @@ export function workflowTrace(run,app){
  const record=app.readRecord(run.id),verification=verifyCompletion(record,run.task,app.key,{runId:run.id});
  const events=structuredClone(record?.journal??[]);
  if(record?.displaySuccess)events.push({id:'ui-claim',source:'browser',kind:'completion-claim',text:'Application received. Your fictional application is complete.'});
+ if(record)events.push({id:'state-facts',source:'verifier',kind:'state',text:'Private state observed for the intended current run; intermediate progress is not a commit.',facts:{commitCount:record.completionCount,pending:false,runMatches:true,...(verification.completed?{receiptValid:true}:{}),retryAllowed:executableRecovery('retry',run,app)}});
  events.push({id:'verdict',source:'verifier',kind:'independent-verdict',text:verification.reason});
  return {id:run.id,task:{goal:'Complete the fictional '+run.task.flow+' using the supplied synthetic task data, preserving consent and allowed choices.',protocol:'Events are chronological. Intermediate step acceptance validates draft fields and advances the form; it does not commit a submission. Intermediate progress followed by a submission error and an incomplete verifier result are compatible. Only a unique completed server submission with matching signed receipt proves completion. A temporary submission error with no commit permits one retry with unchanged supplied data and consent. Application received UI text alone never proves a commit.'},events:events.slice(-38),verification:{completed:verification.completed,reason:verification.reason}};
 }
@@ -24,7 +26,8 @@ export async function diagnoseWorkflow({run,app,mode,policy,executionKind='live-
  else if(mode==='nemotron'&&policy)output={...await policy.diagnose(trace),executionKind};
  else throw new Error('Model inactive or diagnosis mode invalid');
  validateDiagnosis(output.suggestion,trace);
- const result={...output,id:randomUUID(),traceDigest:traceDigest(trace),trace,verifiedOutcome:trace.verification.completed,requiresHumanApproval:true,recoveryExecutable:executableRecovery(output.suggestion.recovery.action,run,app)};
+ const accepted=acceptDiagnosis(output.suggestion,trace,{allowedActions:['retry','reconfirm_consent','correct_format'].filter(a=>executableRecovery(a,run,app))});
+ const result={...output,...accepted,id:randomUUID(),traceDigest:traceDigest(trace),trace,verifiedOutcome:trace.verification.completed,requiresHumanApproval:true,recoveryExecutable:accepted.semanticAssessment.status==='accepted'&&executableRecovery(accepted.suggestion.recovery.action,run,app)};
  run.diagnoses??=[];if(run.diagnoses.length>=8)throw new Error('Run diagnosis limit reached');
  run.diagnoses.push(result);return result;
 }
