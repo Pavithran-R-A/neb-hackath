@@ -1,4 +1,4 @@
-# Hackathon milestones and service decisions
+# Hackathon milestones and service decisions\n\n**October17 sprint update:** [ReceiptLab product gate](release/product-decision.md), [campaign ledger](release/campaign.md), [deployment reassessment](release/deployment.md), [submission drafts](release/submission-draft.md). Revised preflight defaults to 1,024 tokens/strict schema, estimate $0.00039894; not live-tested. Previous approval consumed. Legacy live benchmark is disabled; no aggregate campaign approved. The records below are historical where superseded. PAV-54 integration pending; PAV-55 new public v2 fixtures frozen, no real comparison; PAV-56 local rehearsal only; PAV-57 drafts prepared, license/demo/video/submission outstanding.
 
 Source of scope: the owner's PAV-54–PAV-57 descriptions and latest PR #2 discussion. GitHub is the authoritative engineering record in this session. Linear is connected at account level but its tools are not exposed here; no issues were read/updated through Linear and no duplicate tasks were created. These are sync-ready status notes, not claims of external tracker updates.
 

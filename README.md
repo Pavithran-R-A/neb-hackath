@@ -1,4 +1,16 @@
-# Verified Completion Agent — Phase 1 feasibility lab
+# ReceiptLab — verified workflow evidence
+
+ReceiptLab now includes a working **local evidence workbench**: select a challenge, open its fictional form, check actual server state, and export a sanitized verdict. NVIDIA inference remains inactive in this interface. The product gate is provisional: [decision and no-go criteria](docs/release/product-decision.md).
+
+~~~bash
+npm ci
+npm run browsers:install
+npm run workbench
+~~~
+
+The workbench binds only to loopback on port 3000. Its health endpoint is /health. Sessions expire after 30 minutes; restart clears synthetic state. Forms open in a separate local tab. No public deployment, inference or submission occurs. Existing npm start still runs the raw testbed.
+
+See [architecture](docs/release/architecture.md), [bounded campaign](docs/release/campaign.md), [deployment readiness](docs/release/deployment.md), [submission drafts](docs/release/submission-draft.md) and [security/QA evidence](docs/release/security-qa.md). The repository is public but its **license is pending owner approval**; do not call it licensed open source yet.
 
 A provisional Nebius × NVIDIA hackathon experiment: can a guarded browser agent recover from confusing forms **and prove completion independently**? This is a synthetic prototype, not a completed hackathon submission. See [Issue #1](https://github.com/Pavithran-R-A/neb-hackath/issues/1).
 
@@ -94,13 +106,13 @@ Set non-secret `NEBIUS_MODEL` to the exact eligible **`nvidia/...Nemotron...`** 
 
 Official references: [quickstart](https://docs.tokenfactory.nebius.com/quickstart), [model catalog API](https://docs.tokenfactory.nebius.com/api-reference/models/list-models), [JSON output](https://docs.tokenfactory.nebius.com/ai-models-inference/json). The fixed inference endpoint is `https://api.tokenfactory.nebius.com/v1/chat/completions`.
 
-**Do not execute paid calls until the owner separately approves spending.** The selective command below is a future template, after successful preflight and a separate small-experiment approval. The old 80-call full-suite template is deliberately rejected:
+**The legacy live benchmark CLI is disabled.** Use the new source/suite-bound aggregate campaign only after NEW owner approval. Local planning makes zero requests:
 
-```bash
-npm run benchmark -- --live --approve-paid --scenario grant-renamed --baselines baseline,dom-autofill --repetitions 1 --max-calls 4 --output results/local/live.json
-```
+~~~bash
+npm run campaign:plan
+~~~
 
-Live CLI requires exactly one selected scenario, one repetition and an explicit call cap of at most eight; this example caps calls at four. Each call has at most 1,024 output tokens and a 16,000-character user observation. These are request/token limits, not a cumulative dollar cap. The preflight also refuses an approved limit above $0.50, but its cost check is an estimate and the local call counter resets on a new invocation. No billing/top-up path is implemented. Do not run this template under the one-request preflight approval. CI and benchmark defaults remain offline. Native provider requests use Node's supported cloud proxy option without disabling TLS verification.
+The campaign uses an exclusive fsynced reservation ledger, fresh credit-only evidence, positive catalog-checked prices, source/suite pins and aggregate request/output/estimated-dollar limits. Its first request is preflight; failure stops the campaign. It cannot automatically resume or retry. See [approval contract and estimates](docs/release/campaign.md). No campaign is currently authorized. Public v2 candidates are author-visible and have been consumed for DOM fixture QA, not an independent blind benchmark.
 
 ## Evidence and interpretation
 
@@ -112,6 +124,6 @@ Latency includes run/context creation, page loading, browser actions, context cl
 
 ## Go/no-go boundary and next steps
 
-A scripted recovery advantage establishes that the testbed, browser recovery path and independent verification are feasible. It does **not** demonstrate that Nemotron can choose those actions reliably or satisfy runtime eligibility. Live inference, paid cost/latency, held-out cases, repeated model runs and failure analysis remain required before making that claim. If Nemotron cannot recover at least one baseline failure with a verified receipt, report no-go or pivot rather than presenting scripted outcomes as model performance.
+The testbed, browser recovery path and independent verification are implemented; the stronger DOM comparator removed the earlier scripted advantage. It does **not** demonstrate that Nemotron can choose those actions reliably or satisfy runtime eligibility. Live inference, paid cost/latency, held-out cases, repeated model runs and failure analysis remain required before making that claim. If Nemotron cannot recover at least one baseline failure with a verified receipt, report no-go or pivot rather than presenting scripted outcomes as model performance.
 
 The public repository must contain no sensitive information. Before submission, select an open-source license, add a working demo/video, verify the competition's current eligibility rules, and record real NVIDIA inference evidence. No submission, public deployment, real form interaction or paid-resource provisioning is part of this change.

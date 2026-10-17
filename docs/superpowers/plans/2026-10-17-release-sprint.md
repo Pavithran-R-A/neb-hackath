@@ -27,20 +27,20 @@
 ### 1. Verification, comparator and bounded campaign
 Files: src/verification.mjs and call sites; src/agents/dom-baseline.mjs, actions.mjs; src/campaign.mjs; scripts/campaign.mjs; scripts/benchmark.mjs; test/campaign.test.mjs and verifier tests.
 Interfaces: verifyCompletion(record, task, key, {runId}); createCampaign({authorization,ledgerPath,sourceCommit,suiteSha256,apiKey,fetchImpl}) -> {fetch,close,status}; offline default CLI plan; execution requires matching source and approval.
-- [ ] Add run-replay, guard semantics, request reservation/budget/usage/error/reopen/parallel tests; observe failure.
-- [ ] Implement minimum interfaces, block legacy live CLI, validate targeted + full tests.
-- [ ] Commit/push first milestone.
+- [x] Add run-replay, guard semantics, request reservation/budget/usage/error/reopen/parallel tests; observe failure.
+- [x] Implement minimum interfaces, block legacy live CLI, validate targeted + full tests.
+- [x] Commit/push first milestone.
 
 ### 2. Frozen suite and useful local journey
 Files: src/evaluation-v2.mjs, src/app/{server.mjs,client.js}, src/workbench/*, scripts/workbench.mjs; test/evaluation-v2.test.mjs, workbench.test.mjs, workbench-browser.test.mjs.
 Interfaces: frozen scenario array + SHA256; workbench server createWorkbench({port}) -> {origin,close}; session-scoped create/verify/export endpoints, zero model path.
-- [ ] Add HTTP/browser tests for conditional/recovery/negative scenarios, isolation/TTL/rate/body/host bounds, false UI claims, keyboard and responsive layouts; observe failures.
-- [ ] Implement fixture and workbench; freeze candidates/comparator hash before model evaluation; don't tune on results.
-- [ ] Run tests, capture actual screenshots, commit/push milestone.
+- [x] Add HTTP/browser tests for conditional/recovery/negative scenarios, isolation/TTL/rate/body/host bounds, false UI claims, keyboard and responsive layouts; observe failures.
+- [x] Implement fixture and workbench; freeze candidates/comparator hash before model evaluation; don't tune on results.
+- [x] Run tests, capture actual screenshots, commit/push milestone.
 
 ### 3. Release evidence and readiness
 Files: deployment config/build smoke scripts, docs/release/*, README, docs/coordination.md, CI; no public creation or selected license.
-- [ ] Verify official rules and deployment runtime fit; record account/entitlement uncertainty.
-- [ ] Run all tests, npm audit, secret/source checks, local restart/build/health checks; fix failures.
-- [ ] Request independent review; fix findings; commit/push verified milestone; inspect hosted CI exact SHA and update draft PR.
-- [ ] Prepare honest submission text/storyboard/checklist and explicit model/product/deployment/license/eligibility gates.
+- [x] Verify official rules and deployment runtime fit; record account/entitlement uncertainty.
+- [x] Run all tests, npm audit, secret/source checks, local restart/build/health checks; fix failures.
+- [x] Request independent review; fix findings; commit/push verified milestone; inspect hosted CI exact SHA and update draft PR.
+- [x] Prepare honest submission text/storyboard/checklist and explicit model/product/deployment/license/eligibility gates.

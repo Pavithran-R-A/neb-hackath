@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T15:10:41.739Z",
+  "implementationCommit": "d59089260f0a41619f8e032e3b3972faff9a097b",
+  "ci": {
+    "runId": 39043646047,
+    "url": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39043646047",
+    "conclusion": "success",
+    "tests": 119,
+    "benchmarkStep": "skipped"
+  },
+  "modelExecution": {
+    "newInferenceRequests": 0,
+    "totalHistoricalInferenceRequests": 1,
+    "lastOutcome": "HTTP200 exact NVIDIA model, finish_reason:length at256; full preflight not validated",
+    "historicalEstimatedCreditUsd": 0.0000849,
+    "liveBenchmark": "NOT RUN"
+  },
+  "container": {
+    "image": "sha256:fb17bedad0250e7e4fe3d754b3494025675ba633dc4fb3237958c32b9c3b1be2",
+    "network": "none",
+    "readOnly": true,
+    "user": "node",
+    "memory": 268435456,
+    "pids": 64,
+    "build": "passed",
+    "smoke": {
+      "status": "passed",
+      "sourceCommit": "d59089260f0a41619f8e032e3b3972faff9a097b",
+      "checks": [
+        "health",
+        "isolated session",
+        "three real form steps",
+        "run-bound signed verdict",
+        "sanitized export",
+        "reset"
+      ],
+      "inferenceRequests": 0
+    },
+    "restartSmoke": {
+      "status": "passed",
+      "sourceCommit": "d59089260f0a41619f8e032e3b3972faff9a097b",
+      "checks": [
+        "health",
+        "isolated session",
+        "three real form steps",
+        "run-bound signed verdict",
+        "sanitized export",
+        "reset"
+      ],
+      "inferenceRequests": 0
+    },
+    "hostPortsPublished": 0,
+    "apiCredentialsAttached": false,
+    "createdContainersRemoved": true,
+    "productionReady": false
+  },
+  "screenshots": {
+    "sourceCommit": "412b976c3a871d7bffe3572fceb9850391e92735",
+    "command": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-name-pattern='workbench keyboard journey' test/workbench-browser.test.mjs",
+    "exitCode": 0,
+    "modelExecution": "NOT RUN; real synthetic forms driven by DOM in Chromium",
+    "widths": [
+      320,
+      768,
+      1024,
+      1440
+    ],
+    "sha256": {
+      "docs/release/screenshots/desktop.png": "d3eece38c020dfa5039ff6ff812badfd63866adfb5a58290df5c21786c356964",
+      "docs/release/screenshots/mobile.png": "b6b182d71da3efa837b6041fc117e6a2b0d0aeda913f814d4618b3a3509e5af9",
+      "results/workbench-example-evidence.json": "8692e47c7bf3a5c257daa50456d7ff58bf0b2ceb5bd65a2136036c7274cc9b29"
+    }
+  },
+  "approvals": {
+    "aggregateInference": false,
+    "publicDeployment": false,
+    "merge": false,
+    "license": false,
+    "submission": false
+  },
+  "deferredMinor": "Export source labels do not attest clean runtime contents; validate source against commit/CI.",
+  "verification": {
+    "sourceCommit": "d59089260f0a41619f8e032e3b3972faff9a097b",
+    "commands": [
+      {
+        "command": "npm run test:ci",
+        "exitCode": 0,
+        "passed": 119,
+        "failed": 0,
+        "skipped": 0,
+        "log": "results/sprint-final-tests.txt"
+      },
+      {
+        "command": "npm audit --json",
+        "exitCode": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      {
+        "command": "npm run security:check",
+        "exitCode": 0,
+        "filesChecked": 96,
+        "findings": 0
+      },
+      {
+        "command": "Frozen suite/source SHA256 comparison",
+        "exitCode": 0,
+        "mismatches": []
+      },
+      {
+        "command": "git diff --check",
+        "exitCode": 0
+      }
+    ],
+    "inferenceTransports": "Explicit mocks in provider tests; no live inference"
+  }
+}
