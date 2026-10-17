@@ -18,7 +18,7 @@ test('competent baseline grounds validation, verifier mismatch, authorization de
  }
 });
 test('diagnostic client sends one schema request and preserves actual model/usage/latency',async()=>{
- let calls=0;const policy=createDiagnosticPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async(url,init)=>{calls++;const body=JSON.parse(init.body);assert.equal(body.max_tokens,1024);assert.equal(body.response_format.type,'json_schema');assert.ok(!('reasoning_effort' in body));assert.ok(!('verifiedCompletion' in body.response_format.json_schema.schema.properties));return fixture();}});
+ let calls=0;const policy=createDiagnosticPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async(url,init)=>{calls++;const body=JSON.parse(init.body);assert.equal(body.max_tokens,1024);assert.ok(body.messages[0].content.includes(JSON.stringify(diagnosisSchema)));assert.ok(body.messages[0].content.includes('Allowed diagnosis-to-recovery mapping'));assert.equal(body.response_format.type,'json_schema');assert.ok(!('reasoning_effort' in body));assert.ok(!('verifiedCompletion' in body.response_format.json_schema.schema.properties));return fixture();}});
  const result=await policy.diagnose(trace);assert.deepEqual(result.suggestion,answer);assert.equal(result.modelValidated,true);assert.equal(result.verifiedOutcome,false);assert.equal(result.usage.totalTokens,150);assert.equal(calls,1);
 });
 test('diagnostic client refuses malformed, truncated, refused, mismatched, ungrounded and missing usage with no retry',async()=>{

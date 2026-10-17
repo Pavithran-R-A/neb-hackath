@@ -12,7 +12,7 @@ try{
  else{
   if(args.length!==2||args[0]!=='--approval')throw new Error('Explicit bounded service approval file required');
   a=JSON.parse(await readFile(args[1],'utf8'));
-  const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),freeze=JSON.parse(await readFile('results/diagnosis-freeze-budget8192.json','utf8'));
+  const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),freeze=JSON.parse(await readFile('results/diagnosis-freeze-schema-visible.json','utf8'));
   if(execFileSync('git',['status','--porcelain','--','src','scripts','test','package.json','package-lock.json'],{encoding:'utf8'}).trim()||a.sourceCommit!==sourceCommit||a.suiteSha256!==freeze.suiteSha256||a.model!==process.env.NEBIUS_MODEL||a.maxRequests!==3||a.maxOutputTokens!==8192||a.spendLimitUsd>.02||a.responseContract!=='preflight-then-diagnosis'||JSON.stringify(a.scenarioIds)!==JSON.stringify(['grant-transient','workshop-false-success']))throw new Error('Service source/suite/model/scope mismatch');
   output=resolve('.cache/campaigns',a.id+'.service-report.json');
   account=await reserveAccountBudget({directory:'.cache/account-budget',campaignId:a.id,maxReservedUsd:a.spendLimitUsd,purpose:a.purpose,sourceCommit,suiteSha256:a.suiteSha256,initialSpentUsd:.00022644});

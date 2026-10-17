@@ -1,11 +1,12 @@
 import {readFile,writeFile,mkdir,appendFile} from 'node:fs/promises';import {resolve} from 'node:path';import {execFileSync} from 'node:child_process';import {createHash} from 'node:crypto';
 import {createCampaign} from '../src/campaign.mjs';import {reserveAccountBudget} from '../src/account-budget.mjs';import {checkCatalog} from '../src/catalog.mjs';import {preflight} from '../src/preflight.mjs';
 import {diagnoseStrongDeterministic} from '../src/diagnosis/strong-baseline.mjs';
+import {diagnoseStrongDeterministic as diagnoseStrongV2} from '../src/diagnosis/strong-baseline-v2.mjs';
 import {createDiagnosticPolicy} from '../src/diagnosis/nebius.mjs';import {diagnoseDeterministic} from '../src/diagnosis/baseline.mjs';import {visibleTrace,scoreDiagnoses} from '../src/diagnosis/evaluation.mjs';
 const load=async p=>JSON.parse(await readFile(p,'utf8'));
 let campaign,account,stage='configuration',report,path;
 try{
- const args=process.argv.slice(2),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),freeze=await load('results/diagnosis-freeze-budget8192.json');
+ const args=process.argv.slice(2),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),freeze=await load('results/diagnosis-freeze-schema-visible.json');
  for(const [name,h] of Object.entries(freeze.datasetFilesSha256))if(createHash('sha256').update(await readFile('evaluation/diagnosis-v1/'+name)).digest('hex')!==h)throw new Error('Frozen dataset drift');
  for(const [name,h] of Object.entries(freeze.policyFilesSha256))if(createHash('sha256').update(await readFile(name)).digest('hex')!==h)throw new Error('Frozen policy drift');
  const cases=await load('evaluation/diagnosis-v1/cases.json'),labels=await load('evaluation/diagnosis-v1/labels.json');
@@ -43,7 +44,8 @@ try{
   // Finish deterministic predictions for coverage even if provider failed; no new inference.
   for(const trace of cases)if(!report.baseline.some(p=>p.id===trace.id))report.baseline.push({id:trace.id,suggestion:diagnoseDeterministic(visibleTrace(trace)),modelExecution:false});
   report.strongBaseline=cases.map(trace=>{const start=performance.now();try{return{id:trace.id,suggestion:diagnoseStrongDeterministic(visibleTrace(trace)),latencyMs:performance.now()-start,modelExecution:false};}catch{return{id:trace.id,error:'Baseline contract rejected'};}});
-  report.score={strongBaseline:scoreDiagnoses(cases,labels,report.strongBaseline),baseline:scoreDiagnoses(cases,labels,report.baseline),nemotron:scoreDiagnoses(cases,labels,report.predictions)};
+  report.strongBaselineV2=cases.map(trace=>{const start=performance.now();try{return{id:trace.id,suggestion:diagnoseStrongV2(visibleTrace(trace)),latencyMs:performance.now()-start,modelExecution:false};}catch{return{id:trace.id,error:'Baseline contract rejected'};}});
+  report.score={strongBaselineV2:scoreDiagnoses(cases,labels,report.strongBaselineV2),strongBaseline:scoreDiagnoses(cases,labels,report.strongBaseline),baseline:scoreDiagnoses(cases,labels,report.baseline),nemotron:scoreDiagnoses(cases,labels,report.predictions)};
   report.stage=report.status==='completed'?'completed':stage;report.finishedAt=new Date().toISOString();report.campaign=campaign?.status();report.account=account?.summary();
   await writeFile(path,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
  }

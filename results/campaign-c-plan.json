@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-C-diagnosis-budget8192-owner6235724302",
+  "recordedAt": "2026-10-17T15:58:17.692Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Configuration-feasibility repeat of frozen16case diagnosis; preserve failed B; no prompt/dataset/label tuning; compare two independently authored deterministic policies",
+  "sourceCommit": "c328eae2e3eee65db6f2c86c63b92a7f75a60195",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "maxRequests": 17,
+  "preflightOutputTokens": 1024,
+  "diagnosisOutputTokens": 8192,
+  "spendLimitUsd": 0.1,
+  "conservativeUpperEstimateUsd": 0.05210304,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39047291779",
+  "judgingReserveUsd": 50,
+  "firstCasePreviouslyAttempted": true,
+  "remainingCasesPreviouslyInferred": 0,
+  "noRetries": true,
+  "noFallbacks": true,
+  "status": "recorded-before-execution"
+}
