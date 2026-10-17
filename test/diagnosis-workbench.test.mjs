@@ -39,3 +39,10 @@ test('bounded live adapter denies scenarios outside campaign before invoking mod
  const s=await session(server),run=await prepare(server,s,'workshop-false-success');
  assert.equal((await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'})).status,409);assert.equal(calls,0);
 });
+
+test('rejected live provider outcome is exported as attempted, never NOT RUN',async t=>{
+ const diagnosticPolicy={diagnose:async()=>{const e=new Error('rejected schema');e.report={httpStatus:200,usage:{inputTokens:100,outputTokens:50,totalTokens:150},estimatedCostUsd:.000018};throw e;}};
+ const server=await createWorkbench({diagnosticPolicy});t.after(()=>server.close());const s=await session(server),run=await prepare(server,s,'grant-transient');
+ assert.equal((await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'})).status,502);
+ const {data}=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:false});assert.equal(data.model.execution,'live-nebius-attempted');assert.match(data.evidenceKind,/attempted/);assert.equal(data.model.costUsd,null);assert.equal(data.diagnosisFailures[0].providerOutcome.usage.totalTokens,150);assert.equal(data.verification.completed,false);
+});

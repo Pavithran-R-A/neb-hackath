@@ -1,8 +1,9 @@
+import {drainablePolicy} from '../src/diagnosis/drain.mjs';
 import {readFile,writeFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';import {resolve} from 'node:path';
 import {createCampaign} from '../src/campaign.mjs';import {reserveAccountBudget} from '../src/account-budget.mjs';import {checkCatalog} from '../src/catalog.mjs';import {preflight} from '../src/preflight.mjs';import {createDiagnosticPolicy} from '../src/diagnosis/nebius.mjs';import {createWorkbench} from '../src/workbench/server.mjs';
-const args=process.argv.slice(2);let campaign,account,server,ended=false,stage='configuration',output,a;
+const args=process.argv.slice(2);let campaign,account,server,tracked,ended=false,stage='configuration',output,a;
 async function finish(status,error){
- if(ended)return;ended=true;if(server)await server.close();if(campaign)await campaign.close();
+ if(ended)return;ended=true;const drained=tracked?.drain();if(server)await server.close();await drained;if(campaign)await campaign.close();
  const metrics=campaign?.status();
  if(output)await writeFile(output,JSON.stringify({schemaVersion:1,campaignId:a.id,status,stage,error,sourceCommit:a.sourceCommit,suiteSha256:a.suiteSha256,campaign:metrics,finishedAt:new Date().toISOString()},null,2)+'\n',{flag:'wx',mode:0o600});
  if(account)await account.settle({knownCostUsd:metrics?.knownCostUsd??0,usageComplete:metrics?.usageComplete??true,requests:metrics?.requestsReserved??0});
@@ -23,9 +24,10 @@ try{
   await writeFile(resolve('.cache/campaigns',a.id+'.preflight.json'),JSON.stringify(first,null,2)+'\n',{flag:'wx',mode:0o600});
   const policy=createDiagnosticPolicy({approved:true,maxOutputTokens:a.maxOutputTokens,inputUsdPerMillion:a.inputUsdPerMillion,outputUsdPerMillion:a.outputUsdPerMillion,fetchImpl:campaign.fetch});
   stage='serving-local-workbench';
-  server=await createWorkbench({port:Number(process.env.PORT??3000),diagnosticPolicy:policy,diagnosticExecutionKind:'live-nebius',allowedDiagnosticScenarios:a.scenarioIds});
+  tracked=drainablePolicy(policy);
+  server=await createWorkbench({port:Number(process.env.PORT??3000),diagnosticPolicy:tracked,diagnosticExecutionKind:'live-nebius',allowedDiagnosticScenarios:a.scenarioIds});
   console.log(JSON.stringify({status:'local-service-ready',origin:server.origin,sourceCommit,suiteSha256:a.suiteSha256,maxTotalRequests:a.maxRequests,maxEstimatedReservationUsd:a.spendLimitUsd,publicDeployment:false}));
-  const timer=setTimeout(()=>{finish('approval-expired').then(()=>process.exit(0));},Math.max(1,Date.parse(a.expiresAt)-Date.now()));timer.unref();
-  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{clearTimeout(timer);finish('closed-by-operator').then(()=>process.exit(0));});
+  const timer=setTimeout(()=>{finish('approval-expired').then(()=>process.exit(0)).catch(()=>{console.error('Shutdown evidence incomplete; preserve ledger lock for investigation.');process.exit(1);});},Math.max(1,Date.parse(a.expiresAt)-Date.now()));timer.unref();
+  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{clearTimeout(timer);finish('closed-by-operator').then(()=>process.exit(0)).catch(()=>{console.error('Shutdown evidence incomplete; preserve ledger lock for investigation.');process.exit(1);});});
  }
 }catch{await finish('stopped','Service stage failed safely; inspect protected campaign ledger');console.error('Live workbench stopped safely; no automatic retry.');process.exitCode=1;}
