@@ -1,49 +1,44 @@
 # Submission package — working drafts, not submitted
 
-Working name: **ReceiptLab — trust the receipt, inspect the claim**. Positioning is provisional until the October19 product gate. No license is selected; recommend MIT for owner review after confirming contribution ownership. Do not represent this repository as licensed open source until approval and a real LICENSE. Playwright/playwright-core are Apache-2.0; verify bundled browser/runtime notices for any distributed image.
+Working name: **ReceiptLab — trust the receipt, inspect the claim**. Product decision: proceed with a bounded verification/diagnosis workbench, pivot away from superior autonomous-form-filling claims; public release remains no-go pending security, reliability and owner release gates. Recommend MIT only after owner confirms contribution ownership and approves licensing. No LICENSE has been granted.
 
 ## Devpost description draft
 
-Browser agents can say “done” when a page only looks successful. ReceiptLab tests that boundary. A synthetic multi-step workflow produces private server state and a run-bound signed receipt. A separate verifier compares the intended task, actual submission and unique commit. The workbench exposes the claim, verdict and contact-data-free evidence export.
+Browser agents can say “done” when a page only looks successful. ReceiptLab compares those claims with private application state and a run-bound signed receipt, then helps investigate failure. Its synthetic multi-step workflows reproduce confusing controls, validation failures, consent expiry, misleading success and contradictions.
 
-Today the software supports challenge selection, real fictional forms, validation failures, misleading success, independent verification and evidence download. Agent execution, a competent deterministic comparator and a gated NVIDIA Nemotron client are implemented. The first actual Nemotron request through Nebius returned HTTP200 and the exact NVIDIA model, but truncated; full readiness and recovery effectiveness remain unproven. No public demo is deployed. **Do not submit this draft as a completed NVIDIA-powered application.**
+NVIDIA Nemotron through Nebius Token Factory examines source-tagged traces, cites evidence and recommends a constrained recovery. Suggestions have no completion authority. Recovery requires explicit approval and an independent current-state permission guard; a separate verifier checks the intended task/run, unique server commit and receipt after execution.
 
-Intended users are agent developers. Adoption, external reliability and impact are unvalidated. Synthetic signed receipts do not prove arbitrary external websites completed tasks. Track candidate: Best Apps and Agents, subject to meaningful Nemotron integration and eligibility review.
+Real cloud Chromium integration recorded a transient-failure diagnosis, approved synthetic retry and verified completion. A second real case exposed incorrect high-confidence retry advice after misleading success; the private guard blocked execution and verifier rejected completion. This failure is retained, not edited into a model safety success. All user-facing model metrics are actual provider usage/latency/estimates, clearly separate from simulated integration tests.
 
-## Video storyboard — target 2:40
+Independent synthetic diagnostic evaluation attempted7of16frozen traces:6valid outputs,5exact diagnosis/action/required-citation matches, one truncation and9not attempted. Two separately authored deterministic comparator versions performed poorly on natural language. This is incomplete agent-authored/reviewed evaluation, not external expert validation, broad efficacy or strongest-baseline superiority. Earlier form automation comparisons show no model completion-rate advantage over competent DOM automation.
 
-| Time | Actual screen / narration |
-|---|---|
-| 0:00–0:20 | “A browser says application received. Did it submit?” Show real false-success fictional form. |
-| 0:20–0:50 | Return to ReceiptLab, mark UI claim, check state. Show rejection and reason. |
-| 0:50–1:20 | Create clean run; complete supplied synthetic three-step task; verify signed receipt. |
-| 1:20–1:45 | Download JSON; distinguish run, task hash, state, private HMAC check and export checksum. |
-| 1:45–2:15 | ONLY AFTER LIVE GATE: show actual NVIDIA assistance and measured tokens/latency/verdict/comparison. Until then explicitly describe incomplete integration; no fabricated success shot. |
-| 2:15–2:40 | Architecture, limits, genuine NVIDIA/Nebius role, source/setup and measured conclusion. |
+Intended users are agent developers investigating false completion and failed workflows. External adoption, impact and arbitrary-website reliability remain unvalidated. No public demo is deployed; repository license, final eligibility and judge test-build access remain pending. Candidate track: Best Apps and Agents, subject to official eligibility review. **Do not submit this working draft as release-ready software.**
 
-Only capture functioning software. Current screenshots are manual/DOM-driven synthetic runs, not NVIDIA. No video recorded/uploaded. Use permitted media, English narration/captions, public YouTube video under three minutes.
+## Video and artifacts
+
+[Complete2:40recording plan](demo-recording-plan.md), [actual screenshots](screenshots/README.md), [raw local video hash manifest](../../results/local-video-manifest.json), [live journey evidence](../../results/campaign-f-browser-outcome.json), [cost ledger summary](../../results/credit-usage-summary.json). Raw WebM is cloud-local engineering capture, not an edited/narrated/uploaded public YouTube video. Automated synthetic approval is disclosed; no person-at-keyboard study claimed. Do not reuse simulated footage as live NVIDIA evidence or hide negative outcomes.
+
+Use English narration/captions and permitted assets. Text attribution only: NVIDIA Nemotron via Nebius Token Factory, no claimed endorsement/unapproved logos. Check model/provider terms and retain Node/Playwright/Chromium notices if distributing dependencies; no model weights are shipped.
 
 ## Constructive provider feedback
 
-- Authentication/catalog/token usage worked on the single observed call.
-- HTTP200 truncation should be distinguished clearly from functional/schema readiness.
-- Document per-model reasoning controls and whether output ceilings include reasoning; generic enums are insufficient.
-- Publish per-model schema capabilities and detailed token usage to reduce paid compatibility probes.
-- Account-level credit-only caps would be stronger than local estimated reservation ledgers.
+- Authentication, exact model identity and usage accounting worked on observed requests.
+- Model-visible schema substantially improved compatibility; decoder schema alone caused observed all-reasoning truncation.
+- Clarify model-specific supported reasoning controls and how ceilings include reasoning; generic parameters are insufficient.8192still truncated one diagnostic trace.
+- Publish per-model structured-output constraints and account-enforced credit-only caps. Workspace estimates/locks are useful but weaker than provider billing enforcement.
+- Structural output/citations do not ensure semantic safety: preserve model refusal/incorrect advice in real demonstrations and retain independent action/outcome checks.
 
-## Eligibility and release checklist
+## Remaining release checklist and approvals
 
-- [x] Working local synthetic app, private verifier and manual evidence journey.
-- [x] Exact model/HTTP/usage evidence retained honestly (full preflight validation failed).
-- [x] Source/CI evidence, synthetic-only exports and actual screenshots.
-- [ ] Meaningful NVIDIA runtime behavior and product gate passed.
-- [ ] Independent model comparison with actual failures/cost/latency.
-- [ ] Owner approves license, contribution ownership and personal eligibility.
-- [ ] Official track, English text, work since Aug26 if applicable, media/territory/affiliation checks.
-- [ ] Authorized free test-build/demo access through Dec15 noon Pacific.
-- [ ] Public licensed repository, setup/assets and final limitations.
-- [ ] Public YouTube video under three minutes with working software.
-- [ ] Final Devpost fields/tool feedback and owner review.
-- [ ] Separate approval for merge, deployment, uploads/submission and irreversible actions.
+- [x] Working local forms, source-grounded diagnosis UI, actual NVIDIA integration, private verifier/export, actual positive/negative browser evidence.
+- [x] Frozen inspectable evaluation, multiple independently authored comparators, actual costs/latency/failures and source/CI record.
+- [x] Responsive/keyboard/negative/provider/receipt tests and isolated nonroot/read-only/no-network Docker rehearsal; narrow source/advisory checks, no comprehensive certification.
+- [ ] Complete credible new unseen safety coverage and external expert/user review; improve truncation reliability and practical comparator quality without tuning consumed cases.
+- [ ] Owner approves contribution ownership/license, personal/territory/affiliation eligibility, official track and all media rights.
+- [ ] Separately authorized isolated free public test build, HTTPS/stable routing, durable state/key/budget coordination and access through December15.
+- [ ] Final licensed public repository and accurate deployment/setup instructions.
+- [ ] Edited English-captioned public YouTube video under3minutes, separately authorized upload.
+- [ ] Final Devpost fields/provider feedback/owner review and explicit submission authorization.
+- [ ] Separate merge and public-deployment authorization. Existing credit-only inference authority does not grant these.
 
-Deadline: October30 2026 10AM PDT = 17:00UTC / 22:30IST. Judging ends December15 noon PST = 20:00UTC / December16 01:30IST. Recorded video alone does not replace working project/test-build access. Official source: https://nebiusglobalaihackathon.devpost.com/rules (checked October17).
+Deadline: October30 2026 10AM PDT =17:00UTC /22:30IST. Judge access through December15 noon PST =20:00UTC /December16 01:30IST. Video alone does not replace a functioning test build. Official source: https://nebiusglobalaihackathon.devpost.com/rules (checked October17); verify again before submission.

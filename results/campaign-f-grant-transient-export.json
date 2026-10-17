@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "product": "ReceiptLab local evidence workbench",
+  "sourceCommit": "fe3ac5f330eb0baccde4560a1890a246ac985374",
+  "provenance": {
+    "schemaVersion": 1,
+    "sourceCommit": "fe3ac5f330eb0baccde4560a1890a246ac985374",
+    "sourceCommitBasis": "git-head",
+    "codeTreeDirty": false,
+    "runtimeSha256": "2a3fece29616d2e95454354edf4dbc17b88375f4443c0f31d6b318ea6387f515",
+    "filesSha256": {
+      "package-lock.json": "02f127c26778565d7672159054e20c80694e6ea13adfe5e59722c0097dc1c3e0",
+      "package.json": "4647f8d7e8fa0115ba5e5e8fe2c111643cae1e30cf6231fb6d585aebfb8d9168",
+      "scripts/benchmark.mjs": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286",
+      "scripts/build-manifest.mjs": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9",
+      "scripts/campaign.mjs": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d",
+      "scripts/capture-live-journey.mjs": "72fe5296f51df384da425dfddb9de486cef4ca22f8b92449a8b81a50e5969fe5",
+      "scripts/catalog.mjs": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf",
+      "scripts/demo.mjs": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98",
+      "scripts/diagnosis-campaign.mjs": "9e741f5e5b662764a8ac9b999b81450200198835bb73401d8a7390e313d66631",
+      "scripts/preflight.mjs": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2",
+      "scripts/security-check.mjs": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d",
+      "scripts/smoke-workbench.mjs": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a",
+      "scripts/workbench-live.mjs": "43c5ed23031fa4d9adde5ee413eff9dc5166350e5ed428b9558ee030b51f0888",
+      "scripts/workbench.mjs": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed",
+      "src/account-budget.mjs": "4edf3cfa82686bb179a60cf29fecebd48254f811fd8ed149ae769397c80aa6fb",
+      "src/agents/actions.mjs": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa",
+      "src/agents/baseline.mjs": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7",
+      "src/agents/browser.mjs": "84f3aee4b4430f154027b2d3dd8caee034494e01851f1c141cc3c0299f6e8dfe",
+      "src/agents/dom-baseline.mjs": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46",
+      "src/agents/guarded.mjs": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a",
+      "src/agents/nebius.mjs": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c",
+      "src/agents/scripted.mjs": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648",
+      "src/app/client.js": "56bae4ee7fa9961cc5a5b905faa8ce6db014bfa34812bbc3e36aa9679346ce74",
+      "src/app/index.html": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513",
+      "src/app/server.mjs": "b84e016a0dccd377f91afdd98c540cb76a5baac9b7ecb5aa0dd0480c74b32a4f",
+      "src/benchmark.mjs": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61",
+      "src/campaign.mjs": "2e3e0134df47cd16c9a1c7978c6826cf994a8ee59c73b263f411889c9e273cdc",
+      "src/catalog.mjs": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a",
+      "src/credit-gate.mjs": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb",
+      "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+      "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+      "src/diagnosis/drain.mjs": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec",
+      "src/diagnosis/evaluation.mjs": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e",
+      "src/diagnosis/nebius.mjs": "8995ce79e3f4980c871cd610c2c3da713ffc5ef597c6828ae159373e82eb8cb3",
+      "src/diagnosis/strong-baseline-v2.mjs": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+      "src/diagnosis/strong-baseline.mjs": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+      "src/diagnosis/workflow.mjs": "6c817c9f16cd0fe2a2ba857ad050f8bfc32a1005d73499f1fb06be34553f76ee",
+      "src/evaluation-v2.mjs": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283",
+      "src/evaluation.mjs": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731",
+      "src/holdout.mjs": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c",
+      "src/preflight-contract.mjs": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849",
+      "src/preflight.mjs": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f",
+      "src/provenance.mjs": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae",
+      "src/scenarios.mjs": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d",
+      "src/source-safety.mjs": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019",
+      "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+      "src/workbench/client.js": "80b8cca4b5299b11bde111060d90f82cb8cad78fa0873318a7ac8af57ba59d9f",
+      "src/workbench/index.html": "08d05f3a8a681c9f709663a095b5c178bc2de38407ffd86688bcfdb42960becc",
+      "src/workbench/server.mjs": "5ce3b97cfa4ff8f22379da1a7ac545b1ab2098771c09a5f799e033729ca3e2ac",
+      "src/workbench/style.css": "58db4aa15a54d812ea8c6e636af15930a39c1d40c477748d6708d5e285358cf0"
+    },
+    "buildManifestSha256": null,
+    "runtimeMatchesBuild": null
+  },
+  "suiteHashes": {
+    "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+    "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+    "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+    "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+  },
+  "diagnosticDataset": "evaluation/diagnosis-v1 (see separate frozen SHA manifest)",
+  "diagnoses": [
+    {
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Server returned temporary submission error (event-6) after step 3 attempt; no commit occurred. Verifier confirms no unique committed submission.",
+        "evidenceIds": [
+          "event-6"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Temporary submission error; retry permitted with unchanged data and consent per protocol."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2165,
+      "contentCharacters": 383,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 8014.613098000002,
+      "usage": {
+        "inputTokens": 830,
+        "outputTokens": 2258,
+        "totalTokens": 3088
+      },
+      "estimatedCostUsd": 0.0005917199999999999,
+      "modelValidated": true,
+      "verifiedOutcome": false,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "executionKind": "live-nebius",
+      "id": "06b66acd-4bf9-4732-afdc-9e69816506b5",
+      "traceDigest": "40451bab54e12993e1afdeb9d0edaa1e33dc784e4543d799cdffdba9ddf21fc5",
+      "requiresHumanApproval": true,
+      "recoveryExecutable": true,
+      "used": true
+    }
+  ],
+  "recoveries": [
+    {
+      "diagnosisId": "06b66acd-4bf9-4732-afdc-9e69816506b5",
+      "action": "retry",
+      "humanApproved": true,
+      "beforeTraceDigest": "40451bab54e12993e1afdeb9d0edaa1e33dc784e4543d799cdffdba9ddf21fc5",
+      "afterTraceDigest": "363df5d27e964ac0ea9e9b146b868c9bc5977027c17664a065a6c27c63f1a2a9",
+      "httpStatus": 200,
+      "verification": {
+        "completed": true,
+        "reason": "Server submission and signed task receipt verified",
+        "receiptId": "6f919851-4e2a-4bc2-a821-af1f1964cd78:1",
+        "digest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7"
+      },
+      "claimedCompletion": false
+    }
+  ],
+  "evidenceKind": "Synthetic workflow with live NVIDIA diagnostic suggestions",
+  "runId": "6f919851-4e2a-4bc2-a821-af1f1964cd78",
+  "scenarioId": "grant-transient",
+  "checkedAt": "2026-10-17T16:14:33.929Z",
+  "taskDigest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7",
+  "verification": {
+    "completed": true,
+    "reason": "Server submission and signed task receipt verified",
+    "receiptId": "6f919851-4e2a-4bc2-a821-af1f1964cd78:1",
+    "digest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7"
+  },
+  "rawClaimedCompletion": false,
+  "reportedCompletion": true,
+  "rejectedCompletionClaim": false,
+  "completionStatus": "verified",
+  "server": {
+    "status": "completed",
+    "step": 2,
+    "completionCount": 1
+  },
+  "model": {
+    "execution": "live-nebius",
+    "requests": 1,
+    "costUsd": 0.0005917199999999999
+  },
+  "diagnosisFailures": [],
+  "limitations": [
+    "HMAC verified privately in this process; export is not a public-key proof",
+    "Synthetic session state disappears on expiry or restart",
+    "Model suggestions do not prove outcomes; this run alone does not establish competitive advantage"
+  ],
+  "artifactSha256": "1c825e733874de73effdf241c7f103c78da2937c6ad3632c715c18fe4b1f7217"
+}

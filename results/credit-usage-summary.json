@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T16:16:48.633903+00:00",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "ratesUsdPerMillion": {
+    "input": 0.06,
+    "output": 0.24
+  },
+  "campaigns": [
+    {
+      "campaign": "A",
+      "requestsWithProviderResponse": 1,
+      "inputTokens": 235,
+      "outputTokens": 531,
+      "estimatedCostUsd": 0.00014154,
+      "ledgerSha256": "5d406505c1208dc4d90f43cc65d025e068f76a17e89e6948feb4cf993c393fed"
+    },
+    {
+      "campaign": "B",
+      "requestsWithProviderResponse": 2,
+      "inputTokens": 536,
+      "outputTokens": 2654,
+      "estimatedCostUsd": 0.00066912,
+      "ledgerSha256": "d0a45e13c90d858061104d38ce665e5d419654c30c608b372f7c6dea7562164f"
+    },
+    {
+      "campaign": "C",
+      "requestsWithProviderResponse": 2,
+      "inputTokens": 536,
+      "outputTokens": 8778,
+      "estimatedCostUsd": 0.0021388799999999997,
+      "ledgerSha256": "1765728e076eebc00319d5f546f820d904362c0e6c61998423486f01578f1ce7"
+    },
+    {
+      "campaign": "D",
+      "requestsWithProviderResponse": 8,
+      "inputTokens": 4759,
+      "outputTokens": 32970,
+      "estimatedCostUsd": 0.00819834,
+      "ledgerSha256": "e412c62a587fa8afcf2556cdcf3d09474acb4befa3a3dafe703c6f9a34841c0e"
+    },
+    {
+      "campaign": "E",
+      "requestsWithProviderResponse": 2,
+      "inputTokens": 987,
+      "outputTokens": 4662,
+      "estimatedCostUsd": 0.0011781,
+      "ledgerSha256": "ebead69e30fbed17cc20e258a8f0110c25ea993835526cb71c813a2436aa1061"
+    },
+    {
+      "campaign": "F",
+      "requestsWithProviderResponse": 3,
+      "inputTokens": 1925,
+      "outputTokens": 5182,
+      "estimatedCostUsd": 0.00135918,
+      "ledgerSha256": "0e5e1cb54624de142467b418e7cd73271e2861ed89e06c6745d57a9609d8357d"
+    }
+  ],
+  "thisSprint": {
+    "requests": 18,
+    "inputTokens": 8978,
+    "outputTokens": 54777,
+    "estimatedCostUsd": 0.01368516
+  },
+  "historicalPreflightEstimatedCostUsd": 8.49e-05,
+  "knownLifetimeEstimatedCostUsd": 0.01377006,
+  "remainingAccountCreditEstimateUsd": 58.98622994,
+  "judgeReserveUsd": 50,
+  "unknownUsageRequests": 0,
+  "activeCampaigns": 0,
+  "basis": "Owner-attested59 starting credit less observed provider tokens at catalog rates; not a new provider-observed balance/billing statement. Trial credit ignored. No card/top-up/hosting purchase.",
+  "limitations": [
+    "Application reservations are estimates, not provider-enforced dollar caps",
+    "Historical account credit expiry not independently observed; owner standing no-card/credit-only attestation retained",
+    "Existing local ledgers are workspace coordination, not distributed hard caps"
+  ]
+}

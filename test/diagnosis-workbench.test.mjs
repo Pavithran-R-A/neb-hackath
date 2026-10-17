@@ -46,3 +46,10 @@ test('rejected live provider outcome is exported as attempted, never NOT RUN',as
  assert.equal((await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'})).status,502);
  const {data}=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:false});assert.equal(data.model.execution,'live-nebius-attempted');assert.match(data.evidenceKind,/attempted/);assert.equal(data.model.costUsd,null);assert.equal(data.diagnosisFailures[0].providerOutcome.usage.totalTokens,150);assert.equal(data.verification.completed,false);
 });
+test('confident model retry on false-success UI cannot execute even with forged approval (observed F regression)',async t=>{
+ const diagnosticPolicy={diagnose:async trace=>({suggestion:{diagnosis:'temporary_failure',explanation:'Model incorrectly assumes a temporary failure.',evidenceIds:['verdict'],recovery:{action:'retry',reason:'Model incorrectly recommends retry.'},confidence:'high'},estimatedCostUsd:0})};
+ const server=await createWorkbench({diagnosticPolicy,diagnosticExecutionKind:'simulated-test'});t.after(()=>server.close());const s=await session(server),run=await prepare(server,s,'workshop-false-success');
+ const {data:d}=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(d.suggestion.recovery.action,'retry');assert.equal(d.recoveryExecutable,false);
+ assert.equal((await s.call('/api/runs/'+run.id+'/recover',{diagnosisId:d.id,traceDigest:d.traceDigest,approve:true})).status,409);
+ const {data:out}=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:true});assert.equal(out.rejectedCompletionClaim,true);assert.equal(out.reportedCompletion,false);assert.equal(out.server.completionCount,0);
+});

@@ -14,3 +14,19 @@ Plan: docs/superpowers/plans/2026-10-17-release-sprint.md. Owner authorized auto
 - Release drafts: official rules, product choice, provider feedback, architecture, video storyboard, Devpost/checklist, hosting assessment and local container evidence. No artifact presented as final submission or live model success.
 
 - Task3 verification: implementation d590892 rebuilt in a no-network/nonroot/read-only container; real three-step smoke and post-restart smoke passed. Fresh npm run test:ci119/119, npm audit0 known advisories, source scan0, frozen file hashes match. CI39043646047 passed119; benchmark skipped. Final documentation/evidence commit and its CI are tracked in PR#2.
+
+## Subsequent diagnosis milestones (supersedes earlier status)
+
+Owner standing credit-only inference authority is recorded in PR#2 comment6235724302; per-call permission is no longer required. No hosting/payment/merge/submission authority granted. CampaignA consumed once; no restart. Ledger-backed B/C/D/E plans/outcomes preserve actual failures and token estimates. D produced6valid diagnoses and5joint label/action/citation matches before truncation; incomplete coverage remains explicit. E was a real UI semantic failure with safe stop; no fabricated live recovery.
+
+- f0139bb: grounded diagnosis, trace-bound explicit recovery, provenance and142tests; CI39046343559 passed.
+- c328eae: shared account guard, bounded8192diagnosis and independent comparator;179tests; CI39047291779 passed.
+- e086dc4: model-visible schema and retained C failure;231tests; CI39047536679 passed.
+-26f7840: live journey/capture tool, truthful failed-attempt exports and drained shutdown;235tests in CI39047915403 passed.
+-7de1136: trusted runtime protocol context and diagnostic persistence, E evidence;235tests and CI39048252572 passed. Local Docker network-none/read-only/nonroot smoke/provenance/restart passed for this exact source snapshot; see deployment.md.
+- fe3ac5f: capture invalid-argument tests isolated from live artifacts; exact CI tracked in final PR. Final release evidence adds actual F outcome, current source/head parity and narrowed decision.
+
+Linear task descriptions/deadlines PAV-54–57 are owner-supplied authoritative milestones; connector unavailable here, so no duplicate tasks or claimed remote updates. GitHub is the technical record. Hosting/analytics/search decisions are documented without creating resources. Security scanner server unavailable; manual review/tests do not constitute certification.
+
+- Final actual NVIDIA campaignF on fe3ac5f/CI39048416815: three requests, .00135918 estimated credits. Real transient retry completed after explicit automated synthetic approval and independent signed receipt verification. False-success model retry was wrong/high-confidence; independent guard blocked it and rejected completion. Evidence/screenshots/videos retained. No further live experiments this sprint.
+- Current accounting results/credit-usage-summary.json:18POSTs this sprint,.01368516 estimated; lifetime known .01377006; estimated58.98622994 remaining of owner59, not provider-observed balance.50judging reserve preserved, all campaigns closed. No separate payments/hosting/deployment/merge/submission.

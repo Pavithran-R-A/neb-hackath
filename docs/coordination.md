@@ -17,7 +17,7 @@ The PR discussion records an external final deadline of Oct 30, 10 AM PDT (10:30
 
 Node's native fetch initially failed on the cloud route. Node 24's supported `--use-env-proxy` option fixed the GET. npm preflight, catalog and benchmark entrypoints now include it; TLS verification is preserved. Node 24.19.0 is the minimum tested runtime, matching this cloud machine. No VPN, credentials or proxy configuration was replaced.
 
-The one-request preflight's current safety estimate is **$0.00021762** using 2,603 input-token allowance and 256 maximum output tokens at the returned catalog prices. Returned response usage is now observed (391 input, 256 output); the input safety estimate is conservative and actual billed cost/balance delta remain unverified. `--spend-limit-usd` is an estimate-based per-invocation gate, **not a hard cumulative provider dollar cap**. Limits above $0.50 are refused. Repeated manual invocations would reset the local call counter; there is no account-enforced campaign ledger. No top-up, billing API, retry or second request is automatic. Do not approve/launch a campaign under the pretense of a hard $0.50 total guarantee. The single actual preflight has now executed once using the owner's accepted no-card attestation. Its authorization is consumed; no inference retry is permitted. See [authorization/billing status](authorized-preflight.md).
+The original one-request authorization is consumed and retained as historical evidence. Owner standing credit-only authorization in PR#2 comment6235724302 now permits documented bounded source/suite campaigns without routine per-call questions. Shared account/campaign ledgers reserve before POST, prevent concurrent workspace campaigns/resume/retries and preserve the planned50USD judging reserve. These are conservative workspace estimates, not provider-enforced caps or newly observed account balances. Current actual summary: results/credit-usage-summary.json. Eighteen requests this sprint used estimated .01368516USD; lifetime known .01377006; estimated58.98622994 remaining of owner59; trial ignored, no card/top-up/purchase. All campaigns closed. Current model rates rechecked each campaign remain .06/.24USD per million input/output. No public inference endpoint or full live browser benchmark launched.
 
 ## Hosting investigation — zero resources created
 
@@ -40,3 +40,13 @@ No callable Linear, Vercel, Cloudflare, Render, Firecrawl, PostHog or Tavily too
 ## Product decision from stronger evaluation
 
 The scripted recovery control's advantage against a fixed-label baseline does not establish an advantage over conventional robust DOM automation. The stronger baseline matches it on development cases and outperforms it on the new evaluation candidates. Prioritize verified completion as the functioning system boundary. Do not market a Nemotron recovery advantage before actual NVIDIA results beat this stronger comparator. No grand-prize, runtime eligibility, safety or public-demo readiness claim follows from these tests.
+
+
+## October17 milestone update
+
+- PAV-54: protected network-secret binding verified for api.tokenfactory.nebius.com, current catalog/model access, full preflight success and cumulative credit guard implemented. Provider balance remains owner-attested; truncation/reasoning reliability is an observed limitation.
+- PAV-55: independently authored/reviewed16trace dataset frozen, two independent deterministic comparator versions retained. Real D:7attempted,6valid,5joint matches,1truncated,9unattempted. F live integration: one model-assisted receipt plus one unsafe model retry blocked by guard. Full efficacy/external expert comparison incomplete; do not mark finished.
+- PAV-56: isolated loopback Docker build/provenance/smoke/restart passed, same runtimehash as actual F. Free-hosting choices assessed without resources. Public routing/durability/entitlements/authorization remain blockers.
+- PAV-57: actual desktop/mobile screenshots, raw local recordings/hashmanifest,2:40video plan, honest Devpost/provider-feedback drafts ready. License/eligibility, final public video/test-build and submission approvals remain pending.
+
+These are GitHub technical-record updates based on owner task summaries, not claimed remote Linear status changes. Product recommendation in docs/release/product-decision.md: proceed bounded verification/diagnosis; pivot away autonomous-form-filling superiority; public release no-go.
