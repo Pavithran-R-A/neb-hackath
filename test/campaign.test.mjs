@@ -55,3 +55,13 @@ test('campaign CLI defaults to a no-network source/suite-bound plan',async()=>{
  const plan=JSON.parse(child.stdout);assert.equal(plan.authorized,false);assert.equal(plan.inferenceRequestsSent,0);assert.equal(plan.scenarioIds.length,9);assert.match(plan.sourceCommit,/^[a-f0-9]{40}$/);
  const bad=spawnSync(process.execPath,['scripts/campaign.mjs','--execute'],{encoding:'utf8'});assert.equal(bad.status,1);
 });
+test('directory durability failure refuses campaign creation before network',async t=>{
+ const fs=await import('node:fs/promises');const dir=await mkdtemp(join(tmpdir(),'neb-dir-sync-'));t.after(()=>rm(dir,{recursive:true,force:true}));let calls=0,dirSyncs=0;
+ const storage={mkdir:fs.mkdir,open:async(...args)=>{
+  const handle=await fs.open(...args);
+  if((await handle.stat()).isDirectory())return {sync:async()=>{dirSyncs++;throw new Error('simulated directory fsync failure');},close:()=>handle.close()};
+  return handle;
+ }};
+ await assert.rejects(()=>createCampaign({authorization:authorization(),ledgerPath:join(dir,'new-parent','ledger.jsonl'),sourceCommit:sha,suiteSha256:suite,storage,fetchImpl:async()=>{calls++;return response();}}),/persist/);
+ assert.equal(calls,0);assert.equal(dirSyncs,1);
+});

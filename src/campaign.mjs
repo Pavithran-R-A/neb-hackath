@@ -1,12 +1,12 @@
 import {open,mkdir} from 'node:fs/promises';
-import {dirname} from 'node:path';
+import {dirname,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {validateCreditEvidence} from './credit-gate.mjs';
 import {endpoint} from './agents/nebius.mjs';
 
 // Local durable reservation ledger, NOT a provider-enforced billing cap. An approval
 // must originate with the owner; creating an arbitrary JSON file grants no authority.
-export async function createCampaign({authorization:a,ledgerPath,sourceCommit,suiteSha256,fetchImpl=fetch}={}){
+export async function createCampaign({authorization:a,ledgerPath,sourceCommit,suiteSha256,fetchImpl=fetch,storage={open,mkdir}}={}){
  const now=Date.now();
  if(!a||a.approved!==true||!/^[a-zA-Z0-9_-]{1,80}$/.test(a.id??''))throw new Error('Campaign owner approval required');
  if(!/^[a-f0-9]{40}$/.test(sourceCommit??'')||a.sourceCommit!==sourceCommit||!/^[a-f0-9]{64}$/.test(suiteSha256??'')||a.suiteSha256!==suiteSha256)throw new Error('Campaign source/suite mismatch');
@@ -16,11 +16,17 @@ export async function createCampaign({authorization:a,ledgerPath,sourceCommit,su
  const approved=Date.parse(a.approvedAt),expires=Date.parse(a.expiresAt);
  if(!Number.isFinite(approved)||!Number.isFinite(expires)||approved>now+30000||approved<now-900000||expires<=now||expires>approved+3600000)throw new Error('Campaign approval expired or invalid');
  validateCreditEvidence(a.creditEvidence,{spendLimitUsd:a.spendLimitUsd});
- await mkdir(dirname(ledgerPath),{recursive:true});
- let handle;try{handle=await open(ledgerPath,'wx',0o600);}catch{throw new Error('Campaign ledger already exists or cannot be created; no resume permitted');}
+ const firstCreated=await storage.mkdir(dirname(ledgerPath),{recursive:true});
+ let handle;try{handle=await storage.open(ledgerPath,'wx',0o600);}catch{throw new Error('Campaign ledger already exists or cannot be created; no resume permitted');}
  const state={requestsReserved:0,reservedUsd:0,knownCostUsd:0,usageComplete:true,halted:false,closed:false};let busy=false;
  const append=async event=>{await handle.write(JSON.stringify({at:new Date().toISOString(),...event})+'\n');await handle.sync();};
- try{await append({event:'created',approvalId:a.id,authorizationSha256:createHash('sha256').update(JSON.stringify(a)).digest('hex'),sourceCommit,suiteSha256,maxRequests:a.maxRequests,spendLimitUsd:a.spendLimitUsd,maxOutputTokens:a.maxOutputTokens});}catch{await handle.close();throw new Error('Campaign ledger cannot be persisted');}
+ try{await append({event:'created',approvalId:a.id,authorizationSha256:createHash('sha256').update(JSON.stringify(a)).digest('hex'),sourceCommit,suiteSha256,maxRequests:a.maxRequests,spendLimitUsd:a.spendLimitUsd,maxOutputTokens:a.maxOutputTokens});
+  // A file fsync alone cannot persist a newly created pathname. Persist the
+  // ledger's directory, all newly created ancestors, and their existing parent.
+  const last=firstCreated?dirname(resolve(firstCreated)):resolve(dirname(ledgerPath));
+  let directory=resolve(dirname(ledgerPath));
+  while(true){const parent=await storage.open(directory,'r');try{await parent.sync();}finally{await parent.close();}if(directory===last||dirname(directory)===directory)break;directory=dirname(directory);}
+ }catch{await handle.close();throw new Error('Campaign ledger cannot be persisted');}
  return {
   status:()=>({...state}),
   async close(){if(busy)throw new Error('Campaign request in progress');if(!state.closed){state.closed=true;try{await append({event:'closed',...state});}finally{await handle.close();}}},
