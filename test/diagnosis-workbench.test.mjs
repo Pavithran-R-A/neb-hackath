@@ -22,7 +22,7 @@ test('workbench diagnoses actual failed trace then requires explicit single-use 
 test('NVIDIA suggestions are distinct from verdicts and never execute automatically (mock transport)',async t=>{
  let calls=0;const diagnosticPolicy={diagnose:async trace=>{calls++;return {suggestion:{diagnosis:'temporary_failure',explanation:'Temporary failure reported by server',evidenceIds:[trace.events.find(e=>e.text.includes('Temporary')).id],recovery:{action:'retry',reason:'Check state and retry'},confidence:'high'},modelValidated:true,usage:{inputTokens:100,outputTokens:30,totalTokens:130},estimatedCostUsd:.0000132};}};
  const server=await createWorkbench({diagnosticPolicy,diagnosticExecutionKind:'simulated-test'});t.after(()=>server.close());const s=await session(server),run=await prepare(server,s,'grant-transient');
- const result=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(result.status,200);assert.equal(calls,1);assert.equal(result.data.executionKind,'simulated-test');assert.equal(result.data.verifiedOutcome,false);
+ const result=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(result.status,200);assert.equal(calls,1);assert.equal(result.data.executionKind,'simulated-test');assert.equal(result.data.verifiedOutcome,false);assert.match(result.data.trace.task.protocol,/Intermediate step acceptance/);
  const before=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:true});assert.equal(before.data.reportedCompletion,false);
  const exportResult=await s.call('/api/runs/'+run.id+'/evidence');assert.ok(exportResult.data.provenance.runtimeSha256);assert.ok(exportResult.data.diagnoses.length);
 });

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "campaign-D-schema-visible-owner6235724302",
+  "sourceCommit": "e086dc43ff0bcb35064bd59f3aee6d66ff838046",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "coverage": {
+    "available": 16,
+    "attempted": 7,
+    "accepted": 6,
+    "truncated": 1,
+    "notAttempted": 9
+  },
+  "comparison": {
+    "nemotron": {
+      "all16": {
+        "caseCount": 16,
+        "attempted": 7,
+        "validOutputs": 6,
+        "diagnosisCorrect": 5,
+        "recoveryCorrect": 5,
+        "pairCorrect": 5,
+        "requiredEvidenceCovered": 6,
+        "jointEvidenceAgreement": 5,
+        "highConfidenceWrongDiagnosis": 0,
+        "disallowedConsequentialSuggestions": 0,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "same7Attempted": {
+        "caseCount": 7,
+        "attempted": 7,
+        "validOutputs": 6,
+        "diagnosisCorrect": 5,
+        "recoveryCorrect": 5,
+        "pairCorrect": 5,
+        "requiredEvidenceCovered": 6,
+        "jointEvidenceAgreement": 5,
+        "highConfidenceWrongDiagnosis": 0,
+        "disallowedConsequentialSuggestions": 0,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "meanAcceptedLatencyMs": 17919.532035666667
+    },
+    "originalRules": {
+      "all16": {
+        "caseCount": 16,
+        "attempted": 16,
+        "validOutputs": 16,
+        "diagnosisCorrect": 1,
+        "recoveryCorrect": 6,
+        "pairCorrect": 1,
+        "requiredEvidenceCovered": 3,
+        "jointEvidenceAgreement": 0,
+        "highConfidenceWrongDiagnosis": 6,
+        "disallowedConsequentialSuggestions": 2,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "same7Attempted": {
+        "caseCount": 7,
+        "attempted": 7,
+        "validOutputs": 7,
+        "diagnosisCorrect": 0,
+        "recoveryCorrect": 2,
+        "pairCorrect": 0,
+        "requiredEvidenceCovered": 0,
+        "jointEvidenceAgreement": 0,
+        "highConfidenceWrongDiagnosis": 0,
+        "disallowedConsequentialSuggestions": 0,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "meanAcceptedLatencyMs": 0.26079028571439267
+    },
+    "strongV1": {
+      "all16": {
+        "caseCount": 16,
+        "attempted": 16,
+        "validOutputs": 16,
+        "diagnosisCorrect": 2,
+        "recoveryCorrect": 5,
+        "pairCorrect": 1,
+        "requiredEvidenceCovered": 2,
+        "jointEvidenceAgreement": 1,
+        "highConfidenceWrongDiagnosis": 10,
+        "disallowedConsequentialSuggestions": 6,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "same7Attempted": {
+        "caseCount": 7,
+        "attempted": 7,
+        "validOutputs": 7,
+        "diagnosisCorrect": 0,
+        "recoveryCorrect": 3,
+        "pairCorrect": 0,
+        "requiredEvidenceCovered": 0,
+        "jointEvidenceAgreement": 0,
+        "highConfidenceWrongDiagnosis": 3,
+        "disallowedConsequentialSuggestions": 1,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "meanAcceptedLatencyMs": 0.3886038750024454
+    },
+    "strongV2": {
+      "all16": {
+        "caseCount": 16,
+        "attempted": 16,
+        "validOutputs": 16,
+        "diagnosisCorrect": 1,
+        "recoveryCorrect": 6,
+        "pairCorrect": 1,
+        "requiredEvidenceCovered": 2,
+        "jointEvidenceAgreement": 1,
+        "highConfidenceWrongDiagnosis": 11,
+        "disallowedConsequentialSuggestions": 4,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "same7Attempted": {
+        "caseCount": 7,
+        "attempted": 7,
+        "validOutputs": 7,
+        "diagnosisCorrect": 0,
+        "recoveryCorrect": 3,
+        "pairCorrect": 0,
+        "requiredEvidenceCovered": 0,
+        "jointEvidenceAgreement": 0,
+        "highConfidenceWrongDiagnosis": 3,
+        "disallowedConsequentialSuggestions": 1,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      },
+      "meanAcceptedLatencyMs": 0.4985884375000751
+    }
+  },
+  "modelCostUsd": 0.008198339999999998,
+  "limitations": [
+    "Model run stopped on truncation; missing cases count as missing/failures, never successes",
+    "AI-agent-authored synthetic labels with reviewer labels visible; no external expert/customer validation",
+    "Rule comparators independently authored and frozen; generic source-only revision retained; empirical natural-language coverage weak",
+    "First case previously attempted in configuration probes; other6 attempted for first time; no claim of all16 blind model trial",
+    "Joint metric mechanically checks label/actions/citation-ID coverage, not semantic explanation faithfulness",
+    "Known local UI scenarios are integration QA, not independent evaluation"
+  ],
+  "recordedAt": "2026-10-17T16:06:19.069Z"
+}

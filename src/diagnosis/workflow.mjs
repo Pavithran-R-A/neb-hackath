@@ -8,7 +8,7 @@ export function workflowTrace(run,app){
  const events=structuredClone(record?.journal??[]);
  if(record?.displaySuccess)events.push({id:'ui-claim',source:'browser',kind:'completion-claim',text:'Application received. Your fictional application is complete.'});
  events.push({id:'verdict',source:'verifier',kind:'independent-verdict',text:verification.reason});
- return {id:run.id,task:{goal:'Complete the fictional '+run.task.flow+' using the supplied synthetic task data, preserving consent and allowed choices.'},events:events.slice(-38),verification:{completed:verification.completed,reason:verification.reason}};
+ return {id:run.id,task:{goal:'Complete the fictional '+run.task.flow+' using the supplied synthetic task data, preserving consent and allowed choices.',protocol:'Events are chronological. Intermediate step acceptance validates draft fields and advances the form; it does not commit a submission. Intermediate progress followed by a submission error and an incomplete verifier result are compatible. Only a unique completed server submission with matching signed receipt proves completion. A temporary submission error with no commit permits one retry with unchanged supplied data and consent. Application received UI text alone never proves a commit.'},events:events.slice(-38),verification:{completed:verification.completed,reason:verification.reason}};
 }
 export function executableRecovery(action,run,app){
  const r=app.readRecord(run.id);

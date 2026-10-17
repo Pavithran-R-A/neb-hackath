@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-E-live-workbench-owner6235724302",
+  "recordedAt": "2026-10-17T16:07:02.114Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Actual local Chromium UI diagnosis/recovery and false-success denial; known integration QA, not benchmark; automated operator approves only synthetic retry",
+  "sourceCommit": "26f784038afea644472dabb998787dead2d91c8a",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "scenarioIds": [
+    "grant-transient",
+    "workshop-false-success"
+  ],
+  "maxRequests": 3,
+  "preflightOutputTokens": 1024,
+  "diagnosisOutputTokens": 8192,
+  "spendLimitUsd": 0.02,
+  "conservativeUpperEstimateUsd": 0.00777792,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39047915403",
+  "judgingReserveUsd": 50,
+  "noRetries": true,
+  "noFallbacks": true,
+  "status": "recorded-before-execution"
+}

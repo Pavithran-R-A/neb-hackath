@@ -1,30 +1,26 @@
-# QA and security review — no certification
+# QA and security evidence — no certification
 
-Implementation source: d59089260f0a41619f8e032e3b3972faff9a097b, following 67fa080 (campaign/run binding) and 412b976 (workbench/fixtures). Current branch/CI evidence is linked in PR#2. Tests and mock/provider evidence are distinct.
+Current technical record: draft PR#2 and its exact-head GitHub Actions. Historical119-test release evidence remains in results/sprint-release-evidence.json; subsequent diagnosis/runtime milestones supersede its status, without altering historical artifacts.
 
-## Executed checks
+## Verified boundaries
 
-- npm run test:ci: **119 passed, zero failed/skipped**, including real Chromium (see results/sprint-final-tests.txt and final exact-SHA hosted CI).
-- Campaign tests: known/unknown usage, reservation before fetch, call/token/credit limits, source/suite mismatch, refusal/model/JSON/HTTP/transport failure, concurrent request denial, closed ledger reuse and directory-sync failure; explicit simulated transports only.
-- Verifier: same-task intact cross-run replay, missing run binding, tampered signature/payload, duplicate, wrong task/flow, misleading UI and wrong saved state.
-- Workbench: parallel session ownership, unauthenticated evaluator denial, host/origin/POST checks, body/rate/session/run limits, expiration, restart, keyboard navigation, delayed-verdict race, downloads and 320/768/1024/1440px layouts. No horizontal overflow/page errors in tested journey; no screen-reader/WCAG certification claimed.
-- New nine-case fixture QA: actual HTTP state transitions and Chromium DOM automation, all seven positives and both verifier-negative cases pass. These are consumed public author-designed regression cases, not blind model results.
-- npm audit: **zero known advisories** in the current locked dependency set at check time; not proof of vulnerability absence.
-- npm run security:check: no exact injected protected-value/private-key markers found in tracked source. Narrow heuristic, not a comprehensive historical secret scan.
-- Nonroot, read-only, no-network container build/three-step smoke/restart passes; no credentials or host ports attached. Not a public deployment test.
+- Real Chromium journeys cover all fixed forms, frozen v2 DOM fixture QA, keyboard navigation, evidence export, responsive320/768/1024/1440px layouts and delayed-verdict run changes. Provider transports in tests are explicit simulations; CI has no live inference.
+- Private HMAC verifier rejects wrong task/flow/run, intact cross-run receipt replay, missing binding, mutation, duplicates and misleading UI/wrong saved state. Verification, raw claims, suggestions and denied actions stay distinct.
+- Source-tagged diagnosis schema requires known unique citation IDs and constrained recovery. Exact NVIDIA identity, HTTP200, completed assistant output, refusal/tool exclusions, JSON and positive consistent usage are validated. Truncation and invalid output stop a campaign. Citation existence is mechanical; semantic faithfulness needs independent assessment.
+- Explicit synthetic recovery approval binds diagnosis and current trace digest, is single-use and cannot cross sessions or stale state. Independent action guard uses private state and supplied values, then verifier checks the result. Model suggestions alone cannot authorize arbitrary scripts, new identities, external navigation or completion.
+- Session ownership/TTL, host/origin/POST/body/rate/capacity limits, textContent rendering, XSS-in-model-output, inactive-model and named-scenario gates have non-billable regression coverage.
+- Every model-capable campaign entrypoint shares an exclusive cumulative account ledger. Reservations fsync file and directory chain before POST; unknown usage keeps reservation; consumed IDs cannot resume. Tests cover quota, request/source/suite/model/credit gates, HTTP/transport/schema/usage failures, concurrency and persistence failure. These are workspace controls, not provider billing enforcement.
+- Runtime/build/source and four frozen dataset hashes appear in exports. Gitless manifest consistency, dirty inputs, unexpected files and symlink escape cases are tested. Neither hash nor operator commit claim proves server authenticity.
+- Source scan checks exact injected protected values/private-key markers without revealing them; npm audit checks current locked advisories. Neither is exhaustive certification. The deep security scanner server is unavailable in this session; no canonical deep scan was run.
 
-## Independent review and fixes
+## Independent review fixes
 
-Initial audit identified the live benchmark's credit-gate bypass, missing intended-run identity binding, guard's unsupported-semantic ceiling, unbounded records, and hardcoded unmeasured safety zeros. The live legacy path is disabled; bounded campaigns are now the proposed path. Run identity is mandatory. Public app-owned field bindings are equally available to both policies. Synthetic records expire and have admission limits; unmeasured action counts are null.
+The October17 read-only review of e086dc4 passed15 targeted mocked/local tests and found two report/lifecycle defects. Fixed in26f7840: rejected live provider results now export attempted-live status with failure metadata instead of NOT RUN; service stops admission and drains pending provider work before campaign close/account settlement. Deferred-promise regression tests verify successful/failed drains without retries. Failure totals remain conservatively unknown if actual POST count cannot be established from the export; campaign ledger is authoritative.
 
-Final read-only review ran 30 targeted tests and found no critical issue, one important durability gap and one minor provenance limitation. **Fixed:** fsync newly created ledger directory entries/ancestors and their existing parent before network access. The fault-injection test failed first, then passed; full suite passes after the fix. Unknown outcomes keep reservations and require a new authorization, not automatic retry/resume.
+Earlier cumulative-account bypass in the old action CLI is fixed/tested; old unbounded live benchmark remains disabled. Ledger directory durability and intended-run verifier binding fixes remain intact.
 
-**Deferred minor:** workbench exports identify git HEAD or operator-provided SOURCE_COMMIT, but do not attest clean runtime contents or include suite hash. Modified/unverified deployments can therefore use an unchanged label. Export is a review record; authenticate the build against the published commit/file hashes and CI before relying on provenance. This does not bypass the private task/run verifier. Do not call the artifact checksum a public authenticity proof.
+## Operational limits
 
-## Limits and tool availability
+Synthetic form URLs and session cookies are local capabilities. Do not expose development ports or raw form origins publicly. State/signing keys are in memory and disappear on restart. Public release requires HTTPS/Secure cookies, stable isolated child-form routing, durable state/key and multi-replica budget coordination, judge access/abuse controls and approved hosting. Expired state is purged during activity; this is not production retention management.
 
-The Codex Security deep-scan server is not exposed in this session. Its [skill](skill://Plugin_1e648473be9c8191a91ac3947151af55/deep-security-scan/SKILL.md) requires: “If the tool is unavailable, stop and explain that Deep Security Scan requires the Codex Security plugin server.” No canonical deep scan was run and no security certification is claimed. Manual independent review and tests are narrower evidence.
-
-The form's random run URL is a capability within the local synthetic app. Do not share it or expose the raw app publicly. Workbench private verdicts require owner cookies, but public deployment still needs gateway/routing, HTTPS, durable state/key handling, multi-replica abuse/budget coordination and account verification. Expired records are removed during subsequent app activity; restart clears all state. Model action restrictions do not prove absence of every harmful in-vocabulary action on arbitrary websites.
-
-No full benchmark, new inference, card/payment/top-up, public resource, merge or submission occurred. Actual model evidence remains one HTTP200/model-match response with finish_reason:length and $0.00008490 estimated use. The compact/schema/1,024-token revision has only mocked validation.
+Recorded screenshots/browser assertions are not a screen-reader audit or WCAG certification. Real model campaigns are separate sanitized evidence; failed/truncated calls remain failures. A known local UI success cannot prove generalization, external workflow safety or comparative advantage. No payment method, hosting resource, merge, public deployment or submission was authorized or performed in this sprint.
