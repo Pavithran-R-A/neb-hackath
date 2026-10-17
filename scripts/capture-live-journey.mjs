@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/p
 const args=process.argv.slice(2);
 if(!args.length){console.log(JSON.stringify({mode:'plan-only',modelRequests:0,executionNeeds:'Explicit --origin loopbackURL and separately budgeted ReceiptLab live service',journey:['grant-transient diagnosis and synthetic approved recovery','workshop-false-success diagnosis and verifier rejection'],approvalActor:'authorized automated synthetic QA; not a person clicking during recording'}));}
 else{
- let browser,context;const result={schemaVersion:1,startedAt:new Date().toISOString(),executionKind:'live-nebius',approvalActor:'authorized automated synthetic QA',journeys:[],publicDeployment:false};
+ let browser,context,outputReady=false;const result={schemaVersion:1,startedAt:new Date().toISOString(),executionKind:'live-nebius',approvalActor:'authorized automated synthetic QA',journeys:[],publicDeployment:false};
  try{
   if(args.length!==2||args[0]!=='--origin')throw new Error('Explicit --origin required');const origin=new URL(args[1]);if(origin.protocol!=='http:'||origin.hostname!=='127.0.0.1'||origin.pathname!=='/'||origin.search||origin.hash||origin.username||origin.password)throw new Error('Exact loopback origin required');
   await mkdir('.cache/qa/live-video',{recursive:true});browser=await launchBrowser();context=await browser.newContext({viewport:{width:1440,height:1100},recordVideo:{dir:'.cache/qa/live-video',size:{width:1440,height:1100}}});const page=await context.newPage(),pageErrors=[];page.on('pageerror',e=>pageErrors.push(e.message));await page.goto(origin.origin);await page.waitForFunction(()=>!document.getElementById('create').disabled);
-  const session=await page.evaluate(()=>fetch('/api/session').then(r=>r.json()));if(!session.liveInferenceEnabled||session.diagnosticExecutionKind!=='live-nebius')throw new Error('An actual bounded live service is required; no mock substitution');
+  const session=await page.evaluate(()=>fetch('/api/session').then(r=>r.json()));if(!session.liveInferenceEnabled||session.diagnosticExecutionKind!=='live-nebius')throw new Error('An actual bounded live service is required; no mock substitution');outputReady=true;
   for(const scenario of ['grant-transient','workshop-false-success']){
    await page.locator('#scenario').selectOption(scenario);const created=page.waitForResponse(r=>r.url().endsWith('/api/runs')&&r.request().method()==='POST');await page.locator('#create').click();const run=await(await created).json();const opened=context.waitForEvent('page');await page.locator('#open').click();const form=await opened;await form.locator('form').waitFor();
    await form.getByLabel('Full name',{exact:true}).fill(run.task.name);await form.getByLabel('Email',{exact:true}).fill(run.task.email);await form.getByLabel('Telephone',{exact:true}).fill(run.task.phone);await clickAndSettle(form,form.getByRole('button',{name:'Next',exact:true}));
@@ -27,5 +27,5 @@ else{
   }
   assert.deepEqual(pageErrors,[]);result.pageErrors=pageErrors;result.status='completed';
  }catch(error){result.status='stopped';result.error=error.message;process.exitCode=1;}
- finally{if(context)await context.close();if(browser)await browser.close();result.finishedAt=new Date().toISOString();await mkdir('.cache/qa',{recursive:true});await writeFile('.cache/qa/live-journey-result.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({status:result.status,journeys:result.journeys.length,evidence:'.cache/qa/live-journey-result.json'}));}
+ finally{if(context)await context.close();if(browser)await browser.close();result.finishedAt=new Date().toISOString();if(outputReady){await mkdir('.cache/qa',{recursive:true});await writeFile('.cache/qa/live-journey-result.json',JSON.stringify(result,null,2)+'\n');}console.log(JSON.stringify({status:result.status,journeys:result.journeys.length,evidence:'.cache/qa/live-journey-result.json'}));}
 }
