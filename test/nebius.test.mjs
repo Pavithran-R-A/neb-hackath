@@ -46,3 +46,10 @@ test('malformed null envelope never reports a real attempted call as free',async
  assert.equal(policy.metrics().calls,1);assert.equal(policy.metrics().usageComplete,false);
  assert.equal(policy.metrics().promptTokens,null);assert.equal(policy.metrics().estimatedModelCostUsd,null);
 });
+test('provider diagnostics describe the latest attempt without retaining earlier success',async()=>{
+ let calls=0;
+ const policy=createNemotronPolicy({apiKey:'test-only',model,approved:true,fetchImpl:async()=>++calls===1?response():new Response('no',{status:503})});
+ await policy.decide(input);assert.equal(policy.metrics().provider.finishReason,'stop');
+ await assert.rejects(()=>policy.decide(input),/HTTP 503/);
+ assert.equal(policy.metrics().provider.httpStatus,503);assert.equal(policy.metrics().provider.finishReason,null);assert.equal(policy.metrics().provider.modelIdentityVerified,false);
+});

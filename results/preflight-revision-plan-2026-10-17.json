@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T14:14:55.000Z",
+  "evidenceKind": "non-billable catalog GET, official documentation and local dry-run; NOT inference",
+  "inferenceRequestsSent": 0,
+  "authorization": "Previous one-request approval consumed; separate approval required",
+  "catalog": {
+    "checkedAt": "2026-10-17T14:13:56.503Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "dryRun": {
+    "mode": "dry-run",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.00039893999999999997,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 0,
+    "billing": {
+      "creditOnlyVerified": false
+    },
+    "readyForApproval": false,
+    "remaining": [
+      "Explicit owner approval and current credit-only billing evidence are required for live execution",
+      "Use current verified token prices and an approved spending limit",
+      "CLI cannot inspect platform network-secret scope; verify protected environment metadata separately"
+    ]
+  },
+  "documentation": [
+    {
+      "url": "https://docs.tokenfactory.nebius.com/ai-models-inference/json.md",
+      "sha256": "70921c062c7122cafb3f0f8c05eb185edc48abb463149fc55c3f1358de7551e8"
+    },
+    {
+      "url": "https://docs.tokenfactory.nebius.com/api-reference/inference/create-chat-completion.md",
+      "sha256": "9274d66dc2b70e580b4089adffcddcbdc23da5d370a0fadc1e1f8e409fd957b6"
+    },
+    {
+      "url": "https://docs.tokenfactory.nebius.com/llms.txt",
+      "sha256": "8734fe9f49f1d790979bb82dd5dbec0ff9415c75693b1b78f74ed35204ad6890"
+    },
+    {
+      "url": "https://docs.tokenfactory.nebius.com/api-reference/examples/list-of-models.md",
+      "sha256": "45a4dec9948ae42c6a44f3a6ce41177e1cdb2ee85ab22a3cf15a9b56e14c40ba"
+    }
+  ]
+}

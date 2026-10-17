@@ -26,7 +26,7 @@ test('one request validates exact model, JSON batch and complete usage with sani
  const result=await preflight({...options,fetchImpl:async(url,init)=>{
   calls++;assert.equal(url,'https://api.tokenfactory.nebius.com/v1/chat/completions');assert.equal(init.method,'POST');assert.equal(init.redirect,'error');
   assert.equal(init.headers.Authorization,'Bearer '+options.apiKey);
-  const body=JSON.parse(init.body);assert.equal(body.model,model);assert.equal(body.max_tokens,256);assert.deepEqual(body.response_format,{type:'json_object'});assert.equal(body.stream,false);
+  const body=JSON.parse(init.body);assert.equal(body.model,model);assert.equal(body.max_tokens,1024);assert.equal(body.response_format.type,'json_schema');assert.equal(body.stream,false);
   assert.ok(init.signal instanceof AbortSignal);return fixture();
  }});
  assert.equal(calls,1);assert.equal(result.requestsSent,1);assert.equal(result.liveValidated,true);
@@ -56,7 +56,7 @@ test('unexpected models, malformed JSON/envelopes, truncated/refused responses a
   [{usage:{prompt_tokens:100,completion_tokens:30}},/usage missing/],
   [{usage:{prompt_tokens:100,completion_tokens:30,total_tokens:999}},/usage missing/],
   [{usage:{prompt_tokens:100,completion_tokens:0,total_tokens:100}},/positive input and output/],
-  [{usage:{prompt_tokens:100,completion_tokens:257,total_tokens:357}},/output-token budget/],
+  [{usage:{prompt_tokens:100,completion_tokens:1025,total_tokens:1125}},/output-token budget/],
   [choice('null'),/action schema rejected/],
   [choice(JSON.stringify({actions:[{type:'goto',url:'https://example.com'}]})),/action schema rejected/],
   [choice(JSON.stringify({actions:[{type:'fill',target:0,value:'Invented Name'}]})),/action schema rejected/],
@@ -111,11 +111,54 @@ test('dry-run readiness also enforces the authorized ceiling and safety estimate
 test('observed HTTP-200 token-limit outcome retains usage and rejects without retry (simulated response)',async()=>{
  let calls=0;
  const evidence={source:'owner-attested-no-card',checkedAt:new Date().toISOString(),availableCreditUsd:59,noBankCardEverAdded:true,existingCreditsOnlyAuthorized:true,paidReplenishmentProhibited:true};
- await assert.rejects(()=>preflight({...options,creditEvidence:evidence,fetchImpl:async()=>{
+ await assert.rejects(()=>preflight({...options,maxOutputTokens:256,creditEvidence:evidence,fetchImpl:async()=>{
   calls++;return fixture({choices:[{finish_reason:'length',message:{role:'assistant',content:'{"actions":['}}],usage:{prompt_tokens:391,completion_tokens:256,total_tokens:647}});
  }}),error=>{
   assert.match(error.message,/response choice/);assert.equal(error.report.liveValidated,false);assert.equal(error.report.requestsSent,1);
   assert.equal(error.report.usage.promptTokens,391);assert.equal(error.report.usage.completionTokens,256);assert.equal(error.report.estimatedModelCostUsd,.0000849);return true;
  });
  assert.equal(calls,1);
+});
+
+test('compact schema preflight defaults to 1024 tokens without enabling reasoning parameters',async()=>{
+ const result=await preflight({...options,fetchImpl:async(_url,init)=>{
+  const body=JSON.parse(init.body);
+  assert.equal(body.max_tokens,1024);
+  assert.equal(body.response_format.type,'json_schema');
+  assert.equal(body.response_format.json_schema.strict,true);
+  assert.equal(body.response_format.json_schema.schema.additionalProperties,false);
+  assert.ok(body.messages[0].content.length<600);
+  assert.equal('reasoning_effort' in body,false);assert.equal('chat_template_kwargs' in body,false);
+  return fixture();
+ }});
+ assert.equal(result.request.responseFormat,'json_schema');assert.equal(result.provider.httpStatus,200);
+ assert.equal(result.provider.finishReason,'stop');assert.equal(result.provider.modelIdentityVerified,true);
+});
+test('preflight budget is configurable, bounded before fetching and used in cost estimates',async()=>{
+ for(const maxOutputTokens of [0,1025,1.5,NaN,'1024']){
+  let calls=0;await assert.rejects(()=>preflight({...options,maxOutputTokens,fetchImpl:async()=>{calls++;return fixture();}}),/output-token budget/);assert.equal(calls,0);
+ }
+ const small=await preflight({...options,live:false,maxOutputTokens:256});
+ const large=await preflight({...options,live:false,maxOutputTokens:1024});
+ assert.ok(Math.abs(large.request.safetyEstimateUsd-small.request.safetyEstimateUsd-768*.24/1e6)<1e-12);
+ await preflight({...options,maxOutputTokens:512,fetchImpl:async(_url,init)=>{assert.equal(JSON.parse(init.body).max_tokens,512);return fixture();}});
+});
+test('truncation retains sanitized diagnostics, never reasoning or partial content and never retries',async()=>{
+ let calls=0;
+ await assert.rejects(()=>preflight({...options,fetchImpl:async()=>{
+  calls++;return fixture({choices:[{finish_reason:'length',message:{role:'assistant',content:'PRIVATE PARTIAL',reasoning_content:'PRIVATE REASONING'}}],usage:{prompt_tokens:100,completion_tokens:1024,total_tokens:1124,completion_tokens_details:{reasoning_tokens:1000}}});
+ }}),error=>{
+  assert.equal(error.report.provider.finishReason,'length');assert.equal(error.report.provider.reasoningTokens,1000);
+  assert.equal(error.report.provider.contentCharacters,15);assert.equal(error.report.provider.modelIdentityVerified,true);
+  assert.ok(!JSON.stringify(error.report).includes('PRIVATE'));return true;
+ });assert.equal(calls,1);
+});
+test('excessive content is rejected even with valid usage and stop reason',async()=>{
+ await assert.rejects(()=>preflight({...options,fetchImpl:async()=>fixture({choices:[{finish_reason:'stop',message:{role:'assistant',content:' '.repeat(8193)}}]})}),/excessive/);
+});
+test('CLI accepts safe dry-run token configuration and rejects invalid budgets',()=>{
+ const env={...process.env,NEBIUS_API_KEY:options.apiKey,NEBIUS_MODEL:model};
+ const good=spawnSync(process.execPath,['scripts/preflight.mjs','--max-output-tokens','512'],{encoding:'utf8',env});
+ assert.equal(good.status,0,good.stderr);assert.equal(JSON.parse(good.stdout).request.maxOutputTokens,512);assert.equal(JSON.parse(good.stdout).requestsSent,0);
+ for(const value of ['0','1025','oops'])assert.equal(spawnSync(process.execPath,['scripts/preflight.mjs','--max-output-tokens',value],{encoding:'utf8',env}).status,1);
 });

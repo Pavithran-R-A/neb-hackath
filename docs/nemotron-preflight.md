@@ -1,6 +1,6 @@
 # One-request Nemotron preflight
 
-Historical preflight implementation/check record. Current account-catalog pricing, proxy routing, credit ceiling and milestones are recorded in [coordination](coordination.md); the original logs below remain historical.
+Historical preflight implementation/check record. The [October 17 revision](preflight-revision-2026-10-17.md) supersedes the original 256-token/JSON-object contract described below. Current account-catalog pricing, proxy routing, credit ceiling and milestones are recorded in [coordination](coordination.md); the original logs below remain historical.
 
 ## Scope and review
 

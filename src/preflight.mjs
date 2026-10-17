@@ -1,9 +1,9 @@
 import { validateCreditEvidence } from './credit-gate.mjs';
 import { isDeepStrictEqual } from 'node:util';
-import { createNemotronPolicy, endpoint, system } from './agents/nebius.mjs';
+import { createNemotronPolicy, endpoint } from './agents/nebius.mjs';
+import { preflightSystem, preflightResponseFormat } from './preflight-contract.mjs';
 import { validateBatch } from './agents/actions.mjs';
 
-const maxOutputTokens=256;
 const input={
  task:{name:'Avery Example',email:'avery@example.invalid',phone:'5550101234',flow:'grant',detail:'Community garden',consent:true},
  observation:{text:'Synthetic preflight: enter the supplied full name and press Next. Only these two controls exist. This is not a completed application.',controls:[
@@ -15,14 +15,15 @@ const expected={actions:[{type:'fill',target:0,value:input.task.name},{type:'cli
 
 // Dry-run is the default, including when credentials are injected into the process.
 // This function never executes browser actions or retries a provider request.
-export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process.env.NEBIUS_MODEL,live=false,approved=false,spendLimitUsd,inputUsdPerMillion,outputUsdPerMillion,creditEvidence,fetchImpl=fetch}={}){
+export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process.env.NEBIUS_MODEL,live=false,approved=false,maxOutputTokens=1024,spendLimitUsd,inputUsdPerMillion,outputUsdPerMillion,creditEvidence,fetchImpl=fetch}={}){
+ if(!Number.isInteger(maxOutputTokens)||maxOutputTokens<1||maxOutputTokens>1024)throw new Error('Invalid output-token budget');
  const credentials={apiKeyPresent:typeof apiKey==='string'&&apiKey.length>0,modelPresent:typeof model==='string'&&model.length>0,modelIsNemotron:typeof model==='string'&&/^nvidia\/[^\s]*nemotron[^\s]*$/i.test(model)};
  // Byte-length input estimate plus generous framing reserve. This is an estimate,
  // not a provider-enforced billing limit or a guarantee about future pricing.
- const estimatedInputTokenAllowance=Buffer.byteLength(system)+Buffer.byteLength(JSON.stringify(input))+1024;
+ const estimatedInputTokenAllowance=Buffer.byteLength(preflightSystem)+Buffer.byteLength(JSON.stringify(input))+Buffer.byteLength(JSON.stringify(preflightResponseFormat))+1024;
  const validPrices=[inputUsdPerMillion,outputUsdPerMillion].every(rate=>Number.isFinite(rate)&&rate>0);
  const safetyEstimateUsd=validPrices?(estimatedInputTokenAllowance*inputUsdPerMillion+maxOutputTokens*outputUsdPerMillion)/1e6:null;
- const plan={destination:new URL(endpoint).hostname,maxRequests:1,maxOutputTokens,responseFormat:'json_object',automaticRetries:0,estimatedInputTokenAllowance,safetyEstimateUsd,costBasis:'Configured token-rate estimate, not a hard dollar cap or billing statement'};
+ const plan={destination:new URL(endpoint).hostname,maxRequests:1,maxOutputTokens,responseFormat:'json_schema',reasoningControls:'omitted: model-specific support not verified',automaticRetries:0,estimatedInputTokenAllowance,safetyEstimateUsd,costBasis:'Configured token-rate estimate, not a hard dollar cap or billing statement'};
  const base={mode:live?'live':'dry-run',credentials,request:plan,liveValidated:false,requestsSent:0};
  let billing={creditOnlyVerified:false};
  if(!live){
@@ -36,10 +37,10 @@ export async function preflight({apiKey=process.env.NEBIUS_API_KEY,model=process
  if(safetyEstimateUsd>spendLimitUsd)throw new Error('Preflight safety estimate exceeds the approved spending limit');
  billing=validateCreditEvidence(creditEvidence,{spendLimitUsd});
  base.billing=billing;
- const policy=createNemotronPolicy({apiKey,model,approved:true,maxCalls:1,maxOutputTokens,inputUsdPerMillion,outputUsdPerMillion,fetchImpl});
+ const policy=createNemotronPolicy({apiKey,model,approved:true,maxCalls:1,maxOutputTokens,responseContract:'preflight',inputUsdPerMillion,outputUsdPerMillion,fetchImpl});
  const metrics=()=>{
   const m=policy.metrics();
-  return {requestsSent:m.calls,usage:{promptTokens:m.promptTokens,completionTokens:m.completionTokens,totalTokens:m.totalTokens,complete:m.usageComplete},latencyMs:m.providerLatencyMs,estimatedModelCostUsd:m.estimatedModelCostUsd,costBasis:m.costBasis};
+  return {requestsSent:m.calls,provider:m.provider,usage:{promptTokens:m.promptTokens,completionTokens:m.completionTokens,totalTokens:m.totalTokens,complete:m.usageComplete},latencyMs:m.providerLatencyMs,estimatedModelCostUsd:m.estimatedModelCostUsd,costBasis:m.costBasis};
  };
  try{
   const decision=await policy.decide(input);

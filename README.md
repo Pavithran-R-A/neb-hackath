@@ -60,6 +60,8 @@ All modes share a final receipt gate: `rawClaimedCompletion`/`falseCompletionCla
 
 ## One-request Nemotron preflight
 
+The [non-billable truncation investigation and revised request proposal](docs/preflight-revision-2026-10-17.md) documents the new 1,024-token/schema contract. It has not been tested live; another inference requires separate approval.
+
 Read the [external review on PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6214657699) and [preflight status](docs/nemotron-preflight.md). The protected variables are now present, and the published network-secret metadata scopes `NEBIUS_API_KEY` only to `api.tokenfactory.nebius.com`. Presence and scope do not prove authentication, account model access, or inference success. The owner-approved single preflight has now run: HTTP 200, exact NVIDIA model identity, 391 input/256 output tokens, estimated $0.00008490. It failed closed at the 256-token output limit (`finish_reason: length`), so full JSON/action readiness did not pass. The one-call authorization is consumed; no retry is allowed. See [actual execution evidence](docs/live-preflight-2026-10-17.md). Current catalog GET pricing and proxy routing have been checked without inference. See [authorization and billing gate](docs/authorized-preflight.md).
 
 ```bash
@@ -76,7 +78,7 @@ Only after NEW owner approval for any future inference (the first authorization 
 npm run preflight -- --live --approve-paid --spend-limit-usd "$APPROVED_PREFLIGHT_LIMIT_USD" --credit-evidence "$CREDIT_EVIDENCE_FILE"
 ```
 
-The preflight sends at most **one** POST to the fixed Token Factory endpoint, with JSON object response format, a fixed synthetic name task, **256 maximum output tokens**, a 30-second timeout, no redirects and no retries. It validates HTTP 200, the exact returned NVIDIA Nemotron model ID, one completed assistant choice, JSON and allowed action schema, the expected name-fill/Next plan, positive token usage and consistent totals. Unknown aliases, refused/truncated responses, missing/invalid usage or mismatched task data fail closed. No browser actions are executed, so success is a provider contract check, not application-completion or hackathon-eligibility evidence.
+The preflight sends at most **one** POST to the fixed Token Factory endpoint, with a named strict JSON-schema response format, a compact synthetic name task, **1,024 maximum output tokens by default** (configurable from 1–1,024 with `--max-output-tokens`), a 30-second timeout, no redirects and no retries. It validates HTTP 200, the exact returned NVIDIA Nemotron model ID, one completed assistant choice, JSON and allowed action schema, the expected name-fill/Next plan, positive token usage and consistent totals. Unknown aliases, refused/truncated responses, missing/invalid usage or mismatched task data fail closed. No browser actions are executed, so success is a provider contract check, not application-completion or hackathon-eligibility evidence.
 
 The safety estimate uses UTF-8 input bytes plus a 1,024-token framing allowance, the output-token maximum and the configured prices. A live attempt is refused if the estimate exceeds the approved limit. This is **not a provider-enforced dollar cap**; tokenizer overhead and current account pricing must be verified, and an over-limit charge cannot be undone after a response. Failure output preserves sanitized attempted-request counts and known usage/estimated cost; unknown usage remains null. No response body, model text or credential is printed.
 
