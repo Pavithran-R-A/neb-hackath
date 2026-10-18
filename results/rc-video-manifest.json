@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39095156804",
+  "campaignId": "rc-L-private-https-ui",
+  "recordedAt": "2026-10-18T03:56:28.997Z",
+  "executionKind": "live-nebius",
+  "approvalActor": "authorized automated synthetic QA",
+  "assets": [
+    {
+      "cloudPath": ".cache/qa/live-video/page@bf51246dff09d42977533667cd5e8db3.webm",
+      "bytes": 4706301,
+      "sha256": "977ef1a561e2771ddf847651c77f8ae369f862feb8a1636a0160f16fb754c603",
+      "durationSeconds": 36.36
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@171ecf65a988442a94f91927423f41ed.webm",
+      "bytes": 905433,
+      "sha256": "3623f9791ca73a0e0381751dd1c7d5ab0cb6db6f01f66dfa56037dece586a32a",
+      "durationSeconds": 22.88
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@2cfeeedc3b4da4cacffa17845755ba6d.webm",
+      "bytes": 602966,
+      "sha256": "1d5928c300e29137df75cce71a60c9b64d3b3e6862bea72cba3db1d1371c2155",
+      "durationSeconds": 10.72
+    },
+    {
+      "cloudPath": ".cache/qa/rc-demo-preview.mp4",
+      "bytes": 1296810,
+      "sha256": "e40a68845e8eecb216649df8c780bb61b6da045f8a534cc99b8e1c5a08040d42",
+      "durationSeconds": 36.36
+    }
+  ],
+  "preview": {
+    "path": ".cache/qa/rc-demo-preview.mp4",
+    "durationSeconds": 36.36,
+    "editing": "Continuous original workbench-page capture, no cuts or speed changes; English captions and factual private-HTTPS/actual-NVIDIA/automated-QA footer added. Separate raw form-page videos preserved.",
+    "audio": "none",
+    "publicUpload": false,
+    "status": "Engineering preview; not a final narrated submission video"
+  },
+  "limitations": [
+    "No human usability study or person-at-keyboard approval claim.",
+    "Private loopback certificate SPKI pin; no public certificate or deployment.",
+    "Known integration cases, not a fresh benchmark.",
+    "Historical F model failure and K capture failure retained separately; this video does not replace the evaluation disclosures."
+  ],
+  "failedKCapture": {
+    "status": "Stopped before diagnoses; raw capture-helper failure preserved, not a successful NVIDIA journey",
+    "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+    "assets": [
+      {
+        "cloudPath": ".cache/qa/live-video/page@f020a658cd478661cc357ac3062e9c75.webm",
+        "bytes": 2989306,
+        "sha256": "63bd6661b1152c6c44fda8ba9b57cad92fda25dfc8ba376b2297a113861593ef",
+        "durationSeconds": 30.24
+      },
+      {
+        "cloudPath": ".cache/qa/live-video/page@2aaa54689b185abbb24c8e595172679f.webm",
+        "bytes": 937474,
+        "sha256": "28b7e57cee4a0071fd79a2e675666b8b993353a6b09a1af2e71de77a9048dd13",
+        "durationSeconds": 29.96
+      }
+    ]
+  }
+}

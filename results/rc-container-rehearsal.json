@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "kind": "private-network-none-container-retained-state-rehearsal",
-  "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
-  "startedAt": "2026-10-18T03:49:01.981Z",
-  "finishedAt": "2026-10-18T03:49:21.417Z",
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "startedAt": "2026-10-18T03:56:36.751Z",
+  "finishedAt": "2026-10-18T03:56:54.920Z",
   "outcome": "passed",
   "build": {
-    "command": "DOCKER_CONFIG=\"$PWD/.cache/docker\" docker build --network=none -f deployment/Dockerfile --build-arg SOURCE_COMMIT=922a9cb8bd317b4df606354bd55945b3f590142f -t neb-hackath-rc:922a9cb .",
+    "command": "DOCKER_CONFIG=\"$PWD/.cache/docker\" docker build --network=none -f deployment/Dockerfile --build-arg SOURCE_COMMIT=7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0 -t neb-hackath-rc:7f6e5f55 .",
     "exitCode": 0,
-    "imageId": "sha256:aae1a32321e30ccbe0321e4771322ae281656d85dad8ad8f99e203a8b0eada41",
+    "imageId": "sha256:e8b8523c2f18babdf80dcc12999e1523d7f9c29effd21ad0207911439c2de184",
     "baseImage": "node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df",
     "sourceCommitBasis": "operator build argument; runtime content verified against generated manifest"
   },
@@ -50,13 +50,13 @@
       "forwardedSpoofDenied": true,
       "secureCookie": "observed during creation",
       "modelRequests": 0,
-      "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
       "provenance": {
         "sourceCommitBasis": "build-manifest",
         "codeTreeDirty": null,
         "runtimeMatchesBuild": true,
-        "runtimeSha256": "b0801bb70910c4398c4a2f2444a4add16759827db79b65d0e8418c6bdbce05b9",
-        "buildManifestSha256": "1e91271ecdedebb37aa5894af12ede5c7831b1fb41c0e33b072c1f9a01ed6ef6"
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
       },
       "suiteHashes": {
         "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
@@ -79,13 +79,13 @@
       "forwardedSpoofDenied": true,
       "secureCookie": "retained session from initial phase",
       "modelRequests": 0,
-      "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
       "provenance": {
         "sourceCommitBasis": "build-manifest",
         "codeTreeDirty": null,
         "runtimeMatchesBuild": true,
-        "runtimeSha256": "b0801bb70910c4398c4a2f2444a4add16759827db79b65d0e8418c6bdbce05b9",
-        "buildManifestSha256": "1e91271ecdedebb37aa5894af12ede5c7831b1fb41c0e33b072c1f9a01ed6ef6"
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
       },
       "suiteHashes": {
         "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
@@ -108,13 +108,13 @@
       "forwardedSpoofDenied": true,
       "secureCookie": "retained session from initial phase",
       "modelRequests": 0,
-      "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
       "provenance": {
         "sourceCommitBasis": "build-manifest",
         "codeTreeDirty": null,
         "runtimeMatchesBuild": true,
-        "runtimeSha256": "b0801bb70910c4398c4a2f2444a4add16759827db79b65d0e8418c6bdbce05b9",
-        "buildManifestSha256": "1e91271ecdedebb37aa5894af12ede5c7831b1fb41c0e33b072c1f9a01ed6ef6"
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
       },
       "suiteHashes": {
         "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
@@ -135,5 +135,24 @@
     "Separate actual-Caddy TLS evidence is recorded in results/rc-caddy-rehearsal.json.",
     "Retained local filesystem mount demonstrates container restart/replacement durability, not provider volume entitlement, backup or hosted availability.",
     "No model call or budget ledger modification; inference remained disabled."
-  ]
+  ],
+  "runtimeParity": {
+    "checkoutSourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+    "checkoutCodeTreeDirty": false,
+    "checkoutRuntimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+    "recordedCampaignExports": [
+      {
+        "file": "results/rc-L-grant-transient-live-export.json",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec"
+      },
+      {
+        "file": "results/rc-L-workshop-false-success-live-export.json",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec"
+      }
+    ],
+    "allMatch": true,
+    "meaning": "Runtime content consistency; rehearsal makes no inference call and does not independently reproduce recorded model results"
+  }
 }

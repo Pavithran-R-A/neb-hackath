@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "rc-L-private-https-ui",
+  "status": "closed-by-operator",
+  "stage": "preflight",
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "suiteSha256": "e6be598a257c94f8606fe954ac7324e62535cb54024e72d64ab7afb2e152b19c",
+  "campaign": {
+    "requestsReserved": 3,
+    "reservedUsd": 0.005089740000000001,
+    "knownCostUsd": 0.0023293199999999997,
+    "usageComplete": true,
+    "halted": false,
+    "closed": true
+  },
+  "finishedAt": "2026-10-18T03:54:49.823Z"
+}

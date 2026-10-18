@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-18T03:52:00.694Z",
+  "recordedAt": "2026-10-18T03:55:17.396Z",
   "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
   "historicalKnownEstimateUsd": 0.01377006,
   "campaigns": [
@@ -104,17 +104,34 @@
       "usageComplete": true,
       "conservativeCommittedUsd": 0.00014945999999999997,
       "closed": true
+    },
+    {
+      "id": "rc-L-private-https-ui",
+      "ledgerSha256": "4a4df71a8f58d7e1c8028b99d575083081799ef601efb32c67d5fe82391d8b03",
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+      "requestsReserved": 3,
+      "httpStatuses": [
+        200,
+        200,
+        200
+      ],
+      "inputTokensKnown": 2042,
+      "outputTokensKnown": 9195,
+      "knownTokenEstimateUsd": 0.0023293199999999997,
+      "usageComplete": true,
+      "conservativeCommittedUsd": 0.0023293199999999997,
+      "closed": true
     }
   ],
   "thisSprint": {
-    "requests": 31,
-    "inputTokensKnown": 17403,
-    "outputTokensKnown": 74139,
-    "knownTokenEstimateUsd": 0.01897512
+    "requests": 34,
+    "inputTokensKnown": 19445,
+    "outputTokensKnown": 83334,
+    "knownTokenEstimateUsd": 0.02130444
   },
-  "lifetimeKnownTokenEstimateUsd": 0.03274518,
-  "conservativeLifetimeCommittedUsd": 0.08256398000000001,
-  "conservativeRemainingEstimateUsd": 58.91743602,
+  "lifetimeKnownTokenEstimateUsd": 0.0350745,
+  "conservativeLifetimeCommittedUsd": 0.0848933,
+  "conservativeRemainingEstimateUsd": 58.9151067,
   "judgeReserveUsd": 50,
   "unknownUsageRequests": 1,
   "activeCampaigns": 0,

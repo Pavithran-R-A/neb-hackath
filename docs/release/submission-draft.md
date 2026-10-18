@@ -46,3 +46,7 @@ Use English narration/captions and permitted assets. Text attribution only: NVID
 - [ ] Separate merge and public-deployment authorization. Existing credit-only inference authority does not grant these.
 
 Deadline: October30 2026 10AM PDT =17:00UTC /22:30IST. Judge access through December15 noon PST =20:00UTC /December16 01:30IST. Video alone does not replace a functioning test build. Official source: https://nebiusglobalaihackathon.devpost.com/rules (checked October17); verify again before submission.
+
+Latest candidate evidence: separate campaignL at7f6e5f55 completed both actual private HTTPS NVIDIA journeys, total3POST/$0.00232932 estimated. Positive temporary_failure/retry required explicit automated synthetic-QA approval and obtained a privately verified receipt; negative unverified_claim/stop stayed unverified with no executable recovery. These are known integration cases, not independent evaluation. Preserve historical F model error and K harness failure. See [L outcome](../../results/rc-L-browser-outcome.json), [current costs](../../results/rc-credit-usage-summary.json) and [screenshots](screenshots/README.md). No public deployment/upload/submission.
+
+Prepared local media asset: a36.36-second English-captioned continuous engineering preview of actual L behavior, without cuts/speed changes/audio, with separate raw form videos and [hash manifest](../../results/rc-video-manifest.json). It is not a final narrated public YouTube video; owner media review/upload authorization remains required.

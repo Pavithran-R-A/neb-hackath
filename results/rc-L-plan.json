@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-L-private-https-ui",
+  "approved": true,
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "New source-pinned release rehearsal after offline verified exact public-response-path fix; K stopped before diagnoses and is not resumed. End-to-end private HTTPS durable-session UI rehearsal: one live transient diagnosis with synthetic explicit approval and signed receipt; one false-success diagnosis safely rejected. Known integration QA, not fresh benchmark.",
+  "approvedAt": "2026-10-18T03:54:09.864Z",
+  "expiresAt": "2026-10-18T04:08:09.864Z",
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+  "suiteSha256": "e6be598a257c94f8606fe954ac7324e62535cb54024e72d64ab7afb2e152b19c",
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "maxRequests": 3,
+  "maxOutputTokens": 8192,
+  "responseContract": "preflight-then-diagnosis",
+  "scenarioIds": [
+    "grant-transient",
+    "workshop-false-success"
+  ],
+  "diagnosticSampling": {
+    "temperature": 1,
+    "top_p": 1
+  },
+  "spendLimitUsd": 0.02,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39095156804",
+  "judgingReserveUsd": 50,
+  "noRetries": true,
+  "noFallbacks": true,
+  "publicDeployment": false,
+  "recordedBeforeExecution": true
+}
