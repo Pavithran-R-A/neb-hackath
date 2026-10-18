@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T03:38:46.888900+00:00",
+  "policyFilesSha256": {
+    "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+    "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+    "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+    "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7"
+  },
+  "datasetFilesSha256": {
+    "cases.json": "9c4909d949d8f5269fe254a1348823e2f7a15ff86cd480deb4020019c6509aae",
+    "labels.json": "df07f8eebd6f3d58ac84bfea7de2d6b108b20f53350de426c33ab37df293caa1",
+    "protocol.md": "fc5fa8181b2575818c8a14b8521a627111e48e5aca2b10dad817825a07863a28",
+    "review.json": "c27ff10c55d218adb7959148d517e7e91500e87d08bab3c61021a2b3bce74675"
+  },
+  "suiteSha256": "9c4909d949d8f5269fe254a1348823e2f7a15ff86cd480deb4020019c6509aae",
+  "independence": "Separate dataset author and label reviewer blind to implementation; separate baseline author blind to dataset/prompts/results. Coordinator had not read cases or labels before freeze. Reviewer disclosed two case-label details (fresh10, fresh13) after gate/baseline implementation but before client sampling-only amendment/freeze; no policies changed against that information. AI-authored labels-visible review, not external human expert validation. Preserve this partial coordinator leakage; do not claim pristine blind independent evaluation.",
+  "preEvaluationAmendment": {
+    "recordedAt": "2026-10-17T17:05:53.626156+00:00",
+    "reason": "Independent source review, without case access/evaluation, found historical failure advice accepted after current verified completion. Red/green generic regression; abstain on stale failure contradicted by current verified completion. No dataset/label changes or model execution."
+  },
+  "consumedSuite": true,
+  "postEvaluationPolicy": "Review-required corroboration added after I results; replayonly evidence at results/rc-semantic-review-amendment.json. Any repeat of these cases under this policy is consumed-regression evaluation, never new held-out evidence. Original freeze/results retained unchanged."
+}

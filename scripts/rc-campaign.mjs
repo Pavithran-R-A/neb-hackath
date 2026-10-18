@@ -4,10 +4,12 @@ import {createCampaign} from '../src/campaign.mjs';import {reserveAccountBudget}
 const load=async p=>JSON.parse(await readFile(p,'utf8'));let campaign,account,report,path,stage='configuration';
 try{
  if(resolve('.')!==resolve(fileURLToPath(new URL('../',import.meta.url))))throw new Error('Run experiment from its pinned repository root');
- const args=process.argv.slice(2),freeze=await load('results/rc-v2-freeze.json'),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+ const args=process.argv.slice(2);let freeze=await load('results/rc-v2-freeze.json'),sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
  if(!args.length){console.log(JSON.stringify({mode:'plan-only',sourceCommit,suiteSha256:freeze.suiteSha256,modelExecution:'NOT RUN',maxOutputTokens:8192,noRetries:true,explicitModelAndSampling:true}));}
  else{
   if(args.length!==3||args[0]!=='--execute'||args[1]!=='--approval')throw new Error('Explicit experiment approval required');const a=await load(args[2]);
+  if(a.freezeManifest!==undefined&&!['results/rc-v2-freeze.json','results/rc-v2-freeze-review.json'].includes(a.freezeManifest))throw new Error('Known frozen policy manifest required');
+  if(a.freezeManifest)freeze=await load(a.freezeManifest);
   const cases=a.suiteId==='config-probes-v1'?await load('evaluation/config-probes-v1.json'):a.suiteId==='diagnosis-v1-remaining'?(await load('evaluation/diagnosis-v1/cases.json')).slice(7):await load('evaluation/diagnosis-v2/cases.json');
   const suiteSha256=createHash('sha256').update(JSON.stringify(cases)).digest('hex');validateExperiment(a,cases);
   if(execFileSync('git',['status','--porcelain','--','src','scripts','test','package.json','package-lock.json','evaluation'],{encoding:'utf8'}).trim())throw new Error('Clean committed source/suite required');

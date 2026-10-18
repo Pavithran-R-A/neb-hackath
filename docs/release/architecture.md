@@ -1,29 +1,35 @@
-# ReceiptLab architecture and trust boundaries
+# ReceiptLab release-candidate architecture
 
 ```mermaid
 flowchart LR
- U[Local tester] --> W[Session-owned loopback workbench]
- W --> F[Fictional three-step application]
- F --> R[Private journal, state and HMAC receipt]
- R --> V[Independent run/task verifier]
- V --> W
- W --> T[Source-tagged trace and actual verifier result]
- T --> D[Local rules or bounded NVIDIA diagnosis]
- C[Standing credit authority and persistent ledgers] --> D
- D --> N[Nemotron via Nebius Token Factory]
- N --> S[Schema-checked cited suggestion]
- S --> U
- U --> A[Explicit trace-bound single-use approval]
- A --> G[Independent recovery permission/state guard]
- G --> F
- V --> E[Sanitized export and runtime/build/suite hashes]
+ J[Judge browser] --> TLS[Canonical HTTPS gateway]
+ TLS --> W[Session-owned workbench]
+ W --> F[Same-origin owned /forms routes]
+ F --> APP[Private loopback synthetic app]
+ APP --> DB[Atomic retained SQLite state + receipt key]
+ W --> DB
+ APP --> V[Independent task/run/commit/receipt verifier]
+ W --> T[Source-tagged retained trace]
+ T --> M[Bounded NVIDIA diagnosis]
+ B[Persistent account/campaign reservation ledgers] --> M
+ M --> S[Raw suggestion + schema checks]
+ S --> A[Authoritative evidence acceptance / abstention]
+ A --> H[Explicit user approval]
+ H --> G[Independent current-state action guard]
+ G --> APP
+ V --> E[Sanitized evidence with source/build/suite hashes]
  S --> E
+ A --> E
 ```
 
-The default manual workbench has no model policy. An explicitly started local service campaign admits a fixed model, source/suite, named scenarios and3POST/.02 estimated reservation. First request must pass strict preflight. Model diagnosis uses the exact output schema in prompt and response_format, fixed endpoint, no retries/redirect/fallback and positive consistent usage. Admission closes and pending work drains before ledger settlement. Failed provider/schema responses remain attempted-live evidence; unknown request/cost totals remain null, with the campaign ledger authoritative.
+Local mode remains a loopback-only development lab with ephemeral sessions. Prepared public mode requires an exact configured HTTPS origin and absolute retained-state directory; it still binds the backend to loopback for a separately approved TLS gateway. Caller-supplied Host/Origin and forwarded-header spoofing are rejected. Caddy strips proxy metadata and preserves the configured canonical Host; forms and their assets/API are routed beneath /forms, with session ownership checked before forwarding. Raw app/evaluator/signing key stay private. No public origin is currently deployed.
 
-Diagnosis never executes recovery. The recovery guard supports only supplied-phone formatting, expired supplied consent or retry after a known transient synthetic error. It checks private current state, task values and unchanged trace; approval is single-use. The verifier rechecks resulting state, intended task/run, unique commit and receipt independently of suggestions. UI claims, completed diagnoses and confidence have no completion authority. Static diagnostic evaluation hides author verification labels from both policies; runtime application verification is real evidence and remains authoritative.
+Public state uses Node built-in SQLite with synchronous commits, one atomic snapshot of sessions/records/receipt key and used approvals, and a separate SQLite OS-released exclusive instance lease. Completed receipts/sessions survive process restart and SIGKILL. In-flight operations are quarantined instead of replayed. Corrupt/read-only/failed storage poisons the runtime and fails closed; the system never seeds new verification state to hide failure. The model budget requires a real retained root and imported cumulative account history; it does not initialize a new59USD balance when a volume disappears. This is a single-active-instance design, not distributed/HA coordination.
 
-HttpOnly/SameSite=Strict capability sessions, exact host/origin checks, same-origin POSTs, body/rate/session/run/TTL limits, no third-party assets and textContent rendering bound the local demo. Provider credentials and reasoning remain server-side. Browser-agent contexts additionally restrict traffic/actions to their own fictional run. Public field semantics are equally available to policies. Exported hashes/checksums indicate content consistency; HMAC is verified privately, not a public-key certificate.
+Default startup never calls a model. An explicit owner-authorized live service pins source/runtime/suite/model/current prices, named scenarios, calls/output/reservation and existing-credit-only evidence. It opens/validates the runtime before capability preflight and admits diagnoses only after preflight succeeds. Shared account/campaign file reservations fsync before POST, retain unknown usage conservatively, disallow resume/retry/fallback and drain in-flight work before settlement. Gitless images require runtime-manifest match plus authorization-pinned runtime hash; operator commit claims alone are insufficient. Short campaign expiry/crash intentionally stops inference; no automatic renewal is configured.
 
-Restart clears sessions/state/signing keys. Fsynced campaign/account files are workspace-local coordination and conservative token estimates, not a distributed provider billing cap. Public release still needs HTTPS/Secure cookies, isolated routing for dynamic child forms, durable state/keys, shared multi-replica budgets, access/abuse controls and separately approved hosting. Never expose the raw app or current unrestricted development ports publicly.
+Raw model output is preserved separately from accepted advice. Strict schema/citation checks are followed by conservative support tests: cited authoritative cause, current pending/commit/retry state and runtime private permissions. Unsupported/high-confidence/wrong-state advice is replaced by explicit ambiguous/stop abstention, with the raw confidence error visible only in warned audit details. Current verified completion supersedes historical failures. This is not a universal semantic truth oracle. Misclassification or unsupported prose can remain; independent explicit approval, private action restrictions and receipt verification are still essential.
+
+A diagnosis never executes recovery or proves completion. The private guard only permits currently eligible synthetic retry, supplied consent renewal or supplied-number formatting. Approval binds diagnosis/run/current trace and is single-use. The verifier independently checks intended task/run, exact normalized values, one commit and HMAC receipt after action. Export contains verdicts, raw/accepted metadata, usage/cost estimates and hashes; it omits keys, signatures, raw contacts and reasoning. HMAC is privately checked; exported hashes are content-consistency records, not public-key authenticity certificates.
+
+Test evidence includes real Chromium HTTPS/restart, separate-process crash/replay/storage negatives, actual local Caddy gateway/header stripping, mocked provider boundaries and source-pinned paid experiments. None establishes hosting entitlement, public DNS/ACME, uptime through December15, external expert validation or arbitrary-website efficacy. Owner license/eligibility and public hosting/merge/media/submission approvals remain separate.

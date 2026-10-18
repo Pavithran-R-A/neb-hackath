@@ -1,3 +1,4 @@
+import {diagnoseTelemetry} from './telemetry-baseline.mjs';
 import {validateDiagnosis} from './contract.mjs';
 const authoritative=e=>e.source==='server'||e.source==='verifier';
 const negative=/\b(no|zero|0)\s+(unique\s+)?(committed|commit|submission|record)|not\s+(completed|committed)|missing\s+receipt/i;
@@ -41,8 +42,13 @@ export function acceptDiagnosis(rawSuggestion,trace,{allowedActions}={}){
  if(a==='restart')reasons.push('Restart may discard state and requires additional review; no automatic endorsement.');
  if(a==='wait'&&facts.pending!==true&&!cited.some(e=>supports('temporary_failure',e)))reasons.push('A pending operation or transient condition supporting wait is not established.');
  if(allowedActions&&!['stop','none','wait'].includes(a)&&!allowedActions.includes(a))reasons.push('Independent private state does not permit the recommended recovery.');
+ let reviewRequired=false,independentReview;
+ if(!reasons.length&&rawSuggestion.confidence==='high'&&!allowedActions?.includes(a)){
+  const peer=diagnoseTelemetry(trace);independentReview={diagnosis:peer.diagnosis,action:peer.recovery.action,confidence:peer.confidence};
+  if(peer.diagnosis!==d||peer.recovery.action!==a){reviewRequired=true;reasons.push('Independent telemetry interpretation disagrees with the high-confidence model advice; additional source review is required.');}
+ }
  const rejected=reasons.length>0;
  const suggestion=rejected?{diagnosis:'ambiguous',explanation:'ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.',evidenceIds:rawSuggestion.evidenceIds,recovery:{action:'stop',reason:'No recovery is approved by this diagnostic assessment. Independent verification and additional review are required.'},confidence:'low'}:structuredClone(rawSuggestion);
  validateDiagnosis(suggestion,trace);
- return {suggestion,rawSuggestion:structuredClone(rawSuggestion),semanticAssessment:{status:rejected?'abstained':'accepted',reasons,rawHighConfidenceRejected:rejected&&rawSuggestion.confidence==='high',scope:'Conservative support checks, not semantic certification; private action guard and verifier remain authoritative'}};
+ return {suggestion,rawSuggestion:structuredClone(rawSuggestion),semanticAssessment:{status:reviewRequired?'review-required':rejected?'abstained':'accepted',...(independentReview?{independentReview}:{}),reasons,rawHighConfidenceRejected:rejected&&rawSuggestion.confidence==='high',scope:'Conservative support checks, not semantic certification; private action guard and verifier remain authoritative'}};
 }

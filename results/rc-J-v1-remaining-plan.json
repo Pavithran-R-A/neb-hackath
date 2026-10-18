@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-J-v1-remaining",
+  "recordedAt": "2026-10-18T03:32:42.141Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Complete previously unattempted9v1traces with supported alternate model; consumed/public suite, not independent fresh evidence",
+  "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+  "suiteSha256": "7902d498d6726fff6384117cf9c4eaed29485f19e404b95792d9c0c6cf70fe22",
+  "suiteId": "diagnosis-v1-remaining",
+  "caseIds": [
+    "dv1-08",
+    "dv1-09",
+    "dv1-10",
+    "dv1-11",
+    "dv1-12",
+    "dv1-13",
+    "dv1-14",
+    "dv1-15",
+    "dv1-16"
+  ],
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "maxRequests": 10,
+  "preflightOutputLimit": 1024,
+  "preflightTemperature": 0,
+  "diagnosticSampling": {
+    "temperature": 1,
+    "top_p": 1
+  },
+  "maxOutputTokens": 8192,
+  "spendLimitUsd": 0.05,
+  "worstCaseEstimateUsd": 0.02994048,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39052789817",
+  "noRetries": true,
+  "noFallback": true,
+  "judgeReserveUsd": 50,
+  "estimatedSpentBeforeUsd": 0.07531166,
+  "balanceBasis": "Standing owner59 credit/no-card attestation less persistent ledger estimates; timestamp derives authorization metadata now, not a new provider balance",
+  "status": "recorded-before-execution"
+}

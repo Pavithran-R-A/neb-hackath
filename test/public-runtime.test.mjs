@@ -87,3 +87,7 @@ test('interrupted recovery is quarantined after restart with consumed approval r
  store=openDurableState(directory);t.after(()=>store.close());const run=store.state.sessions.get('session').runs.get('run');
  assert.equal(run.interrupted,true);assert.equal(run.recovering,false);assert.equal(run.diagnoses[0].used,true);
 });
+test('session metadata distinguishes retained public state from ephemeral local mode',async t=>{
+ const stateDirectory=await fixture(t),s=await createWorkbench({publicMode:true,stateDirectory,canonicalOrigin});t.after(()=>s.close());const cookie=await session(s),data=await(await call(s,'/api/session',{cookie})).json();assert.equal(data.storageMode,'retained');
+ const local=await createWorkbench();t.after(()=>local.close());const home=await fetch(local.origin),token=home.headers.get('set-cookie').split(';')[0],localData=await(await fetch(local.origin+'/api/session',{headers:{cookie:token}})).json();assert.equal(localData.storageMode,'ephemeral');
+});

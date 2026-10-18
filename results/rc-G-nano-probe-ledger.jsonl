@@ -1,0 +1,4 @@
+{"at":"2026-10-18T03:26:29.482Z","event":"created","approvalId":"rc-G-nano-probe","authorizationSha256":"7b51698ac10b2ea28eaf94a03e069f6b17c217f68a49128b885f08d7ecf74f4f","sourceCommit":"71386e4359de872fe9c4c536b1854516dfc55ae3","suiteSha256":"50b3721c3fd69b7c477de3fe1b208eeff72b9bc13a185daee62458a684dd7728","maxRequests":3,"spendLimitUsd":0.02,"maxOutputTokens":8192}
+{"at":"2026-10-18T03:26:29.744Z","event":"reserved","request":1,"inputAllowance":2706,"outputLimit":1024,"reservationUsd":0.00040812}
+{"at":"2026-10-18T03:26:30.543Z","event":"response","request":1,"httpStatus":200,"promptTokens":235,"completionTokens":143,"totalTokens":378,"estimatedCostUsd":0.00004842,"modelIdentityVerified":true,"finishReason":"stop","latencyMs":797.89034,"halted":true}
+{"at":"2026-10-18T03:26:30.549Z","event":"closed","requestsReserved":1,"reservedUsd":0.00040812,"knownCostUsd":0.00004842,"usageComplete":true,"halted":true,"closed":true}

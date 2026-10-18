@@ -21,3 +21,7 @@ test('current verified completion invalidates historical-failure advice even whe
  const t={id:'after-recovery',task:{goal:'Complete task'},events:[{id:'s',source:'server',kind:'error',text:'Temporary submission error; retry once.'},{id:'new',source:'verifier',kind:'state',text:'Current receipt verified',facts:{commitCount:1,receiptValid:true,runMatches:true,pending:false,retryAllowed:false}}],verification:{completed:true,reason:'Current submission verified'}};
  const r=acceptDiagnosis({...decision,recovery:{action:'wait',reason:'Operation remains blocked'}},t,{allowedActions:[]});assert.equal(r.semanticAssessment.status,'abstained');assert.equal(r.semanticAssessment.rawHighConfidenceRejected,true);
 });
+test('high-confidence interpretation that disagrees with independent telemetry requires review',()=>{
+ const t=trace([{id:'task',source:'task',kind:'constraint',text:'Use supplied details only. Do not invent a membership code.'},{id:'s',source:'server',kind:'error',text:'Required field is missing; request rejected.',facts:{httpStatus:422,commitCount:0,errorCode:'REQUIRED',field:'memberCode'}}]);
+ const raw={diagnosis:'instruction_conflict',explanation:'The task and form requirements conflict.',evidenceIds:['task','s'],recovery:{action:'stop',reason:'Obtain missing authorized data.'},confidence:'high'};const r=acceptDiagnosis(raw,t);assert.equal(r.semanticAssessment.status,'review-required');assert.equal(r.suggestion.confidence,'low');assert.equal(r.suggestion.recovery.action,'stop');assert.equal(r.rawSuggestion.confidence,'high');
+});

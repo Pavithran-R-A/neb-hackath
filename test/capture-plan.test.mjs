@@ -11,3 +11,9 @@ test('live browser capture defaults to no-request plan and rejects non-loopback 
  assert.equal(readFileSync(join(directory,'sentinel'),'utf8'),'keep');
  }finally{rmSync(directory,{recursive:true,force:true});}
 });
+test('private HTTPS capture requires an explicit certificate pin and rejects untrusted origins',()=>{
+ const cli=new URL('../scripts/capture-live-journey.mjs',import.meta.url).pathname;
+ for(const args of [['--origin','https://127.0.0.1:9443'],['--origin','https://example.invalid','--tls-spki','a'.repeat(43)+'='],['--origin','https://127.0.0.1:9443','--tls-spki','invalid']]){
+ const r=spawnSync(process.execPath,[cli,...args],{encoding:'utf8'});assert.equal(r.status,1);assert.equal(JSON.parse(r.stdout).journeys,0);
+ }
+});
