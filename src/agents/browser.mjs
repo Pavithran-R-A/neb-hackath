@@ -32,8 +32,11 @@ export async function observe(page){
  }));
 }
 export async function clickAndSettle(page,locator){
+ const form=new URL(page.url()),match=/^(\/forms)?\/form\/([\w-]+)$/.exec(form.pathname);
+ if(!match||!['http:','https:'].includes(form.protocol)||form.search||form.hash||form.username||form.password)throw new Error('Expected a run-bound synthetic form URL');
+ const endpoint=form.origin+(match[1]??'')+'/api/runs/'+match[2];
  await Promise.all([
-  page.waitForResponse(r=>r.request().method()==='POST' && new URL(r.url()).pathname.startsWith('/api/runs/')),
+  page.waitForResponse(r=>r.request().method()==='POST' && r.url()===endpoint),
   locator.click()
  ]);
  await page.waitForFunction(()=>!document.querySelector('main button')?.disabled);

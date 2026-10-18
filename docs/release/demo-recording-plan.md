@@ -11,7 +11,7 @@ Target final edit:2:40, English narration/captions. Record only the running clou
 | 0:45–1:20 | Grant workflow fails temporarily. Click Ask NVIDIA Nemotron in a source-pinned bounded service campaign. Show actual cited explanation, safe recommendation, tokens/latency/estimate. Wait normally; edit only disclosed waiting time. |
 | 1:20–1:45 | Recovery button disabled before explicit approval. Approve the synthetic retry, then check independent state and signed receipt. Model text alone never switches the verdict. |
 | 1:45–2:05 | Inspect/download sanitized before/after export: runtime/build/suite hashes, actual provider metrics, verdict and restrictions. Explain HMAC is privately checked, not a public-key certificate. |
-| 2:05–2:25 | Display measured independent trace evaluation and competent comparator limitations. Distinguish model correctness, mechanical citation checks and verified outcomes. Preserve failures/truncation and disclose synthetic AI-authored labels. |
+| 2:05–2:25 | Display I raw pair10/16 versus telemetry8/16, then the post-hoc gate:9accepted/4abstained/3review-required and displayed pair6/16. Explain the safety/coverage tradeoff, two observed high-confidence errors and AI review limits. Preserve G/H failures; no autonomous superiority claim. |
 | 2:25–2:40 | Show repository/setup, actual test-build access if separately deployed, source/CI and remaining scope. Credit NVIDIA Nemotron via Nebius Token Factory factually. |
 
 ## Capture procedure
@@ -21,7 +21,9 @@ Target final edit:2:40, English narration/captions. Record only the running clou
 - `PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node scripts/capture-live-journey.mjs --origin http://127.0.0.1:PORT` drives only the predeclared two scenarios, captures real Chromium video and screenshots, and stops on failure without retry. Actual inference admission belongs to the service campaign. The script clicks the synthetic approval as authorized automated QA; do not claim a person was at the keyboard during that recording.
 - Preserve `.cache/qa/live-journey-result.json`, campaign ledger, screenshots and raw separate page WebM recordings. Review for secrets before publishing any selected artifact. Recordings contain only synthetic contact values and temporary local capability paths; server key/provider reasoning are never in browser data.
 - Final public video needs a separate human-narrated/edited under3minute version, captions, permission for all media, and owner upload authorization. Do not present mocked transport footage as live NVIDIA execution. Actual raw captures are engineering evidence, not the final submission video.
-- A judge needs a functioning authorized test build through December15; a video alone is insufficient. Public deployment/HTTPS/durable state/budget abuse controls remain separate gates.
+- Private actual-Caddy HTTPS and restart rehearsal passed with zero inference. For private TLS capture use `--origin https://127.0.0.1:PORT --tls-spki PIN`; only loopback is accepted and the exception is certificate-pinned. This is not a public certificate or deployment.
+- CampaignK stopped after its one successful preflight (.00014946 estimated), before any diagnosis: the capture helper did not recognize the public form response prefix. Preserve this failure and its raw video; no successful K journey may be claimed. A corrected source needs non-billable public-browser regression and exact-head CI before a separately bounded rehearsal.
+- A judge needs a functioning authorized test build through December16 01:30India time; a video alone is insufficient. Public hosting/retained-volume entitlement, judge operating/budget plan and owner publication approval remain separate gates. Submission deadline is October30 22:30India time.
 
 ## Branding and analytics
 

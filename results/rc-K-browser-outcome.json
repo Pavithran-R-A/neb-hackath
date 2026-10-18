@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-18T03:49:17.475Z",
+  "executionKind": "live-nebius",
+  "approvalActor": "authorized automated synthetic QA",
+  "journeys": [],
+  "publicDeployment": false,
+  "tls": {
+    "privateLoopbackCertificatePinned": true,
+    "publicCertificate": false
+  },
+  "status": "stopped",
+  "error": "page.waitForResponse: Timeout 30000ms exceeded while waiting for event \"response\"",
+  "finishedAt": "2026-10-18T03:49:50.583Z"
+}

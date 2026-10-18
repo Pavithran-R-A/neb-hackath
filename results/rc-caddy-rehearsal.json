@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "kind": "private-loopback-actual-Caddy-HTTPS-rehearsal",
-  "sourceCommit": "e0f59b13ec716324932ef7cad5e5d7b4e483e856",
-  "startedAt": "2026-10-18T03:42:32.148Z",
-  "finishedAt": "2026-10-18T03:42:32.756Z",
+  "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+  "startedAt": "2026-10-18T03:48:43.980Z",
+  "finishedAt": "2026-10-18T03:48:44.437Z",
   "outcome": "passed",
   "caddyVersion": "v2.11.7 h1:yj0Y4fYZGPkSvibBJ1sTWE33xC0fxztVyXEW5iIdUT4=",
   "caddyBinarySha256": "678ade3bfc088749c81a681adc603333ee0bb023b6a6cfe3c0f58bef8ff854e9",
   "candidateCaddyfileSha256": "0577a8d8f08d702a345f6d575d295251c82694524da80772bda487e1904929f5",
-  "rehearsalCaddyfileSha256": "38723a4b44a9d2c3efab0d3167f0098731f9c6a5fc81d02e520efab1b8174894",
+  "rehearsalCaddyfileSha256": "aa3dc34b7fd60fb2d9ad74c3f265692f1c5aad66b7da61f901b4c38cac845969",
   "tls": {
     "certificate": "temporary one-day self-signed certificate, trusted explicitly for this test",
     "serverNameVerified": true,

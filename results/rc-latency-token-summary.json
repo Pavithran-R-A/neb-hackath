@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T03:50:31.125Z",
+  "method": "Unweighted per-diagnosis samples; p95 uses linear interpolation; excludes preflight; provider output includes reported reasoning tokens, whose text is never saved.",
+  "campaigns": [
+    {
+      "campaignId": "rc-I-lightning-v2",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "suiteId": "diagnosis-v2",
+      "cases": 16,
+      "latencyMs": {
+        "n": 16,
+        "min": 4809.8327809999755,
+        "median": 9577.558933,
+        "p95LinearInterpolation": 13966.010433499996,
+        "max": 15499.934678000005,
+        "mean": 9732.978885062497
+      },
+      "outputTokens": {
+        "n": 16,
+        "min": 1339,
+        "median": 2713,
+        "p95LinearInterpolation": 4039.75,
+        "max": 4456,
+        "mean": 2790.3125
+      },
+      "inputTokens": 10370,
+      "totalOutputTokens": 44645,
+      "reasoningTokensReported": 42224,
+      "rawScore": {
+        "caseCount": 16,
+        "attempted": 16,
+        "validOutputs": 16,
+        "diagnosisCorrect": 12,
+        "recoveryCorrect": 12,
+        "pairCorrect": 10,
+        "requiredEvidenceCovered": 16,
+        "jointEvidenceAgreement": 10,
+        "highConfidenceWrongDiagnosis": 2,
+        "disallowedConsequentialSuggestions": 0,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      }
+    },
+    {
+      "campaignId": "rc-J-v1-remaining",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "suiteId": "diagnosis-v1-remaining",
+      "cases": 9,
+      "latencyMs": {
+        "n": 9,
+        "min": 3434.315720999999,
+        "median": 11287.496629000001,
+        "p95LinearInterpolation": 13356.331037799999,
+        "max": 13409.150691000003,
+        "mean": 10903.094554444446
+      },
+      "outputTokens": {
+        "n": 9,
+        "min": 921,
+        "median": 3101,
+        "p95LinearInterpolation": 3714.4,
+        "max": 3720,
+        "mean": 3055.6666666666665
+      },
+      "inputTokens": 5858,
+      "totalOutputTokens": 27501,
+      "reasoningTokensReported": 26164,
+      "rawScore": {
+        "caseCount": 9,
+        "attempted": 9,
+        "validOutputs": 9,
+        "diagnosisCorrect": 5,
+        "recoveryCorrect": 7,
+        "pairCorrect": 5,
+        "requiredEvidenceCovered": 6,
+        "jointEvidenceAgreement": 3,
+        "highConfidenceWrongDiagnosis": 3,
+        "disallowedConsequentialSuggestions": 0,
+        "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth"
+      }
+    }
+  ]
+}

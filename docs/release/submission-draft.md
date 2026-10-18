@@ -10,9 +10,11 @@ NVIDIA Nemotron through Nebius Token Factory examines source-tagged traces, cite
 
 Real cloud Chromium integration recorded a transient-failure diagnosis, approved synthetic retry and verified completion. A second real case exposed incorrect high-confidence retry advice after misleading success; the private guard blocked execution and verifier rejected completion. This failure is retained, not edited into a model safety success. All user-facing model metrics are actual provider usage/latency/estimates, clearly separate from simulated integration tests.
 
-Independent synthetic diagnostic evaluation attempted7of16frozen traces:6valid outputs,5exact diagnosis/action/required-citation matches, one truncation and9not attempted. Two separately authored deterministic comparator versions performed poorly on natural language. This is incomplete agent-authored/reviewed evaluation, not external expert validation, broad efficacy or strongest-baseline superiority. Earlier form automation comparisons show no model completion-rate advantage over competent DOM automation.
+The October18 synthetic v2 evaluation completed16/16diagnoses with NVIDIA Nemotron Lightning: raw diagnosis12/16, recovery12/16, paired agreement10/16. An independently authored telemetry comparator scored12/16,10/16and8/16 respectively. Two model diagnoses were incorrect at high confidence. A subsequent review gate replayed the same consumed outputs with zero inference:9accepted,4abstained,3review-required; neither observed high-confidence error remained accepted, while displayed pair agreement fell to6/16. This is post-hoc safety adaptation, not fresh held-out validation. A separate remaining-v1 run completed9/9traces with raw pair agreement5/9; earlier failures remain preserved. AI-authored, labels-visible independent review is not external human expert validation. No general diagnostic or autonomous-completion superiority is claimed. Earlier form comparisons found no completion-rate advantage over competent DOM automation.
 
 Intended users are agent developers investigating false completion and failed workflows. External adoption, impact and arbitrary-website reliability remain unvalidated. No public demo is deployed; repository license, final eligibility and judge test-build access remain pending. Candidate track: Best Apps and Agents, subject to official eligibility review. **Do not submit this working draft as release-ready software.**
+
+A private actual-Caddy HTTPS rehearsal passed canonical single-origin routing, Secure cookies, session-owned forms and retained receipts across backend restart with zero model calls. Atomic SQLite state, an exclusive instance lease and retained cumulative budgets support the prepared architecture. This is local integration evidence, not public deployment, public certificate or free-hosting entitlement. Private UI campaignK stopped after one successful preflight and before diagnosis because the capture helper waited for the old local form path. Its failure and $0.00014946 estimated usage are preserved. The corrected helper passes a real HTTPS browser regression; a new bounded campaign would be separate evidence.
 
 ## Video and artifacts
 
@@ -22,20 +24,22 @@ Use English narration/captions and permitted assets. Text attribution only: NVID
 
 ## Constructive provider feedback
 
-- Authentication, exact model identity and usage accounting worked on observed requests.
-- Model-visible schema substantially improved compatibility; decoder schema alone caused observed all-reasoning truncation.
-- Clarify model-specific supported reasoning controls and how ceilings include reasoning; generic parameters are insufficient.8192still truncated one diagnostic trace.
-- Publish per-model structured-output constraints and account-enforced credit-only caps. Workspace estimates/locks are useful but weaker than provider billing enforcement.
-- Structural output/citations do not ensure semantic safety: preserve model refusal/incorrect advice in real demonstrations and retain independent action/outcome checks.
+- Exact model identity and usage accounting worked on observed successful requests; catalog prices were refreshed before bounded campaigns.
+- Schema-visible Lightning with temperature1/top_p1 completed16v2 and9remaining-v1 diagnoses under the unchanged8192cap. This is observed compatibility, not proof that sampling alone caused the improvement. Model-specific reasoning-off support remains unconfirmed.
+- Alternate Nano returned exact-model HTTP200/stop but failed the JSON/action preflight. Alternate Super passed preflight then returned HTTP500 on its first diagnosis; usage for that request is unknown and the full campaign envelope remains conservatively charged.
+- Publish model-specific structured-output and reasoning controls, clear HTTP500 usage/accounting guidance, and provider-enforced credit-only caps. Local reservations are estimates rather than billing enforcement.
+- Structural citations and confident explanations do not establish semantic correctness. Two high-confidence v2 diagnosis errors prompted a disclosed post-hoc review/coverage tradeoff; preserve raw outputs and independent action/outcome checks.
 
 ## Remaining release checklist and approvals
 
 - [x] Working local forms, source-grounded diagnosis UI, actual NVIDIA integration, private verifier/export, actual positive/negative browser evidence.
 - [x] Frozen inspectable evaluation, multiple independently authored comparators, actual costs/latency/failures and source/CI record.
 - [x] Responsive/keyboard/negative/provider/receipt tests and isolated nonroot/read-only/no-network Docker rehearsal; narrow source/advisory checks, no comprehensive certification.
-- [ ] Complete credible new unseen safety coverage and external expert/user review; improve truncation reliability and practical comparator quality without tuning consumed cases.
+- [x] Complete the frozen16case v2 run and remaining9v1 regressions; preserve G/H failures and disclose the post-hoc review gate and coverage loss.
+- [ ] Obtain external expert/user review and fresh validation of the amended gate; common model/comparator errors remain possible.
 - [ ] Owner approves contribution ownership/license, personal/territory/affiliation eligibility, official track and all media rights.
-- [ ] Separately authorized isolated free public test build, HTTPS/stable routing, durable state/key/budget coordination and access through December15.
+- [x] Private actual-Caddy HTTPS rehearsal with Secure sessions, single-origin owned forms and retained receipts across process restart; no public hosting entitlement established.
+- [ ] Separately authorized isolated no-charge public test build and retained volume, stable public HTTPS, judge operating/budget plan and access through December16 01:30India time.
 - [ ] Final licensed public repository and accurate deployment/setup instructions.
 - [ ] Edited English-captioned public YouTube video under3minutes, separately authorized upload.
 - [ ] Final Devpost fields/provider feedback/owner review and explicit submission authorization.

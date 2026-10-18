@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T03:52:00.694Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "historicalKnownEstimateUsd": 0.01377006,
+  "campaigns": [
+    {
+      "id": "rc-G-nano-probe",
+      "ledgerSha256": "1376a71c99c47cf492c81688ec209f2d543290488377fe112922c0aa470f31f6",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "requestsReserved": 1,
+      "httpStatuses": [
+        200
+      ],
+      "inputTokensKnown": 235,
+      "outputTokensKnown": 143,
+      "knownTokenEstimateUsd": 0.00004842,
+      "usageComplete": true,
+      "conservativeCommittedUsd": 0.00004842,
+      "closed": true
+    },
+    {
+      "id": "rc-H-super-probe",
+      "ledgerSha256": "70eec00c5a5106818098188857270773a6c7143123396bebd539ec424e0b3faa",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "requestsReserved": 2,
+      "httpStatuses": [
+        200,
+        500
+      ],
+      "inputTokensKnown": 235,
+      "outputTokensKnown": 123,
+      "knownTokenEstimateUsd": 0.00018119999999999999,
+      "usageComplete": false,
+      "conservativeCommittedUsd": 0.05,
+      "closed": true
+    },
+    {
+      "id": "rc-I-lightning-v2",
+      "ledgerSha256": "5b7a8f73c50d9b4107341f1373d9c094286e7679af2cade944e1dc276bacf0c6",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "requestsReserved": 17,
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "inputTokensKnown": 10605,
+      "outputTokensKnown": 45237,
+      "knownTokenEstimateUsd": 0.01149318,
+      "usageComplete": true,
+      "conservativeCommittedUsd": 0.01149318,
+      "closed": true
+    },
+    {
+      "id": "rc-J-v1-remaining",
+      "ledgerSha256": "466373cb5ea452378a2c47e74a9034fa3e8ac146b5c6375bd9f75bd119568fdc",
+      "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+      "requestsReserved": 10,
+      "httpStatuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "inputTokensKnown": 6093,
+      "outputTokensKnown": 28072,
+      "knownTokenEstimateUsd": 0.00710286,
+      "usageComplete": true,
+      "conservativeCommittedUsd": 0.00710286,
+      "closed": true
+    },
+    {
+      "id": "rc-K-private-https-ui",
+      "ledgerSha256": "10c9f0b492cbfb7875979f2c09886baaebdc239edec1e7b4ec57935a8e814f1c",
+      "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+      "requestsReserved": 1,
+      "httpStatuses": [
+        200
+      ],
+      "inputTokensKnown": 235,
+      "outputTokensKnown": 564,
+      "knownTokenEstimateUsd": 0.00014945999999999997,
+      "usageComplete": true,
+      "conservativeCommittedUsd": 0.00014945999999999997,
+      "closed": true
+    }
+  ],
+  "thisSprint": {
+    "requests": 31,
+    "inputTokensKnown": 17403,
+    "outputTokensKnown": 74139,
+    "knownTokenEstimateUsd": 0.01897512
+  },
+  "lifetimeKnownTokenEstimateUsd": 0.03274518,
+  "conservativeLifetimeCommittedUsd": 0.08256398000000001,
+  "conservativeRemainingEstimateUsd": 58.91743602,
+  "judgeReserveUsd": 50,
+  "unknownUsageRequests": 1,
+  "activeCampaigns": 0,
+  "basis": "Owner-attested existing59 account credits less known provider token estimates; full .05 H envelope held instead of its known subtotal because first diagnosis HTTP500 had unknown usage. Not a current provider-observed balance/billing statement or provider-enforced cap. Trial ignored; no card, topup, hosting purchase.",
+  "limitations": [
+    "Single canonical retained ledger, exclusive campaign lock; not a distributed accounting service.",
+    "Account credit expiry not independently observed; no separate trial assumed.",
+    "Model/token prices are per-campaign catalog observations."
+  ]
+}

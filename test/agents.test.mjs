@@ -18,7 +18,7 @@ test('URL guard permits only the exact synthetic run and assets, never evaluator
 test('settling a failed click handles a later response-wait rejection',async()=>{
  const { spawnSync }=await import('node:child_process');
  const script=`import {clickAndSettle} from './src/agents/browser.mjs';
- const page={waitForResponse:()=>new Promise((_,reject)=>setTimeout(()=>reject(new Error('response timeout')),20))};
+ const page={url:()=>"http://127.0.0.1:12345/form/run-123",waitForResponse:()=>new Promise((_,reject)=>setTimeout(()=>reject(new Error('response timeout')),20))};
  await clickAndSettle(page,{click:async()=>{throw new Error('click failed');}}).catch(()=>{});
  await new Promise(resolve=>setTimeout(resolve,50));`;
  const child=spawnSync(process.execPath,['--input-type=module','-e',script],{cwd:process.cwd(),encoding:'utf8'});
