@@ -1,0 +1,11 @@
+{
+  "adaptation": "Contract replaces Buffer.byteLength with TextEncoder; crypto ports canonical digest/HMAC to WebCrypto; other diagnosis source files are identical. Provider diagnosticSystem is copied exactly and checked by parity test.",
+  "sources": {
+    "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+    "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+    "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+    "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+    "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+    "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4"
+  }
+}

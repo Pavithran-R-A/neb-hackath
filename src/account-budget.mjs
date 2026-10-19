@@ -20,6 +20,7 @@ export async function reserveAccountBudget({directory,campaignId,maxReservedUsd,
   await append({event:'reserved',campaignId,maxReservedUsd,purpose,sourceCommit,suiteSha256,engineeringCommittedBeforeUsd:committed});
  }catch(error){await handle.close();await unlink(lock);await syncDirs();throw error;}
  return {
+  async retainReservation(){if(closed)throw new Error('Account campaign already settled');await handle.close();},
   summary:()=>({initialAccountUsd:59,judgeReserveUsd:50,engineeringCommittedUsd:committed,activeReservationUsd:closed?0:maxReservedUsd,remainingEstimatedCreditUsd:59-committed-(closed?0:maxReservedUsd),balanceBasis:'Owner59 minus known token estimates; unresolved campaigns charged full reservations'}),
   async settle({knownCostUsd,usageComplete,requests}){
    if(closed)throw new Error('Account campaign already settled');

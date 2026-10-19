@@ -12,8 +12,8 @@ import {verifyCompletion,digest} from '../verification.mjs';
 import {finalizeAttempt} from '../evaluation.mjs';
 const assets=new Map(await Promise.all([['/','index.html','text/html'],['/workbench.js','client.js','text/javascript'],['/workbench.css','style.css','text/css']].map(async([path,file,type])=>[path,{body:await readFile(new URL(file,import.meta.url)),type}])));
 const catalog=[...scenarios,...evaluationV2];
-export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius',allowedDiagnosticScenarios=null,publicMode=false,canonicalOrigin,stateDirectory,diagnosticBudgetDirectory}={}){
- validatePublicConfiguration({publicMode,canonicalOrigin,stateDirectory,diagnosticPolicy,diagnosticBudgetDirectory});
+export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius',allowedDiagnosticScenarios=null,publicMode=false,canonicalOrigin,stateDirectory,diagnosticBudgetDirectory,judgeOperating=null}={}){
+ validatePublicConfiguration({publicMode,canonicalOrigin,stateDirectory,diagnosticPolicy:diagnosticPolicy??judgeOperating,diagnosticBudgetDirectory});
  const provenance=await createProvenance();
  const suiteHashes={};for(const name of ['cases.json','labels.json','protocol.md','review.json']){try{suiteHashes[name]=createHash('sha256').update(await readFile(new URL('../../evaluation/diagnosis-v1/'+name,import.meta.url))).digest('hex');}catch{suiteHashes[name]=null;}}
  const durable=stateDirectory?openDurableState(stateDirectory):null;
@@ -38,7 +38,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
    const expectedOrigin=trustedOrigin();
    if(req.headers.host!==new URL(expectedOrigin).host||(req.headers.origin&&req.headers.origin!==expectedOrigin)||(publicMode&&(req.headers.forwarded||req.headers['x-forwarded-host']||req.headers['x-forwarded-proto'])))return send(403,{error:'Origin or host denied'});
    const path=new URL(req.url,origin).pathname;
-   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',liveInferenceEnabled:Boolean(diagnosticPolicy)});
+   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating)});
    const id=/(?:^|;\s*)receiptlab=([a-f0-9]{64})(?:;|$)/.exec(req.headers.cookie??'')?.[1];let session=sessions.get(id);
    if(req.method==='GET'&&assets.has(path)){
     const headers={};
@@ -67,7 +67,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
     // Only browser-visible state is proxied; evaluator records, receipts and key stay private.
     return send(response.status,type==='application/json'?JSON.parse(data):data,type,{'content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
    }
-   if(path==='/api/session'&&req.method==='GET')return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy),diagnosticExecutionKind,expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
+   if(path==='/api/session'&&req.method==='GET')return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating),diagnosticExecutionKind,judgeOperatingMode:Boolean(judgeOperating),judgeAccessRequired:Boolean(judgeOperating&&!judgeOperating.authorized(id)),expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
    if(!['GET','POST'].includes(req.method))return send(405,{error:'Method denied'});
    let body;
    if(req.method==='POST'){
@@ -76,6 +76,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
     try{body=JSON.parse(raw);}catch{return send(400,{error:'Invalid JSON'});}
     if(!body||typeof body!=='object'||Array.isArray(body))return send(400,{error:'Invalid request'});
    }
+   if(path==='/api/judge-access'&&req.method==='POST'&&judgeOperating){if(typeof body.code!=='string'||body.code.length>200||Object.keys(body).some(k=>k!=='code'))return send(400,{error:'A judge access code is required'});try{return judgeOperating.authorize(id,body.code)?send(200,{authorized:true}):send(403,{error:'Judge access denied'});}catch{return send(429,{error:'Judge access attempt limit reached'});}}
    if(path==='/api/runs'&&req.method==='POST'){
     const scenario=catalog.find(s=>s.id===body.scenarioId);if(!scenario||Object.keys(body).some(k=>k!=='scenarioId'))return send(400,{error:'Choose a known synthetic challenge'});
     if(session.runs.size>=maxRunsPerSession)return send(429,{error:'Session run limit reached; reset the workbench'});
@@ -87,11 +88,12 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
    if(match[2]==='diagnose'&&req.method==='POST'){
     if(!['deterministic','nemotron'].includes(body.mode)||Object.keys(body).some(k=>k!=='mode'))return send(400,{error:'Choose a known diagnostic mode'});
     if(body.mode==='nemotron'&&allowedDiagnosticScenarios&&!allowedDiagnosticScenarios.includes(run.scenarioId))return send(409,{error:'This challenge is outside the approved model campaign'});
-    if(body.mode==='nemotron'&&!diagnosticPolicy)return send(409,{error:'NVIDIA diagnosis inactive; bounded owner-authorized service configuration required'});
+    if(body.mode==='nemotron'&&!diagnosticPolicy&&!judgeOperating)return send(409,{error:'NVIDIA diagnosis inactive; bounded owner-authorized service configuration required'});
+    if(body.mode==='nemotron'&&judgeOperating&&!judgeOperating.authorized(id))return send(403,{error:'Explicit judge access required'});
     if(run.diagnosing||(run.diagnoses?.length??0)>=8)return send(429,{error:'Diagnosis in progress or run limit reached'});
     if(run.interrupted)return send(409,{error:'Interrupted action requires a fresh challenge'});
     run.diagnosing=true;persist();
-    try{return send(200,await diagnoseWorkflow({run,app,mode:body.mode,policy:diagnosticPolicy,executionKind:diagnosticExecutionKind}));}catch(error){run.diagnosisFailures??=[];run.diagnosisFailures.push({mode:body.mode,executionKind:diagnosticExecutionKind,providerOutcome:error.report??null,error:'Diagnosis failed safely; actual POST count is authoritative in the campaign ledger'});return send(502,{error:'Diagnosis failed safely; no recovery action executed'});}finally{run.diagnosing=false;persist();}
+    try{return send(200,await diagnoseWorkflow({run,app,mode:body.mode,policy:judgeOperating?.policyFor({sessionId:id,runId:run.id,scenarioId:run.scenarioId})??diagnosticPolicy,executionKind:diagnosticExecutionKind}));}catch(error){if(error.code==='JUDGE_ADMISSION_DENIED')return send(429,{error:'Judge inference quota, expiry or review limit reached; no provider request was sent. Use local rules or contact the operator.'});run.diagnosisFailures??=[];run.diagnosisFailures.push({mode:body.mode,executionKind:diagnosticExecutionKind,providerOutcome:error.report??null,error:'Diagnosis failed safely; actual POST count is authoritative in the campaign ledger'});return send(502,{error:'Diagnosis failed safely; no recovery action executed'});}finally{run.diagnosing=false;persist();}
    }
    if(match[2]==='recover'&&req.method==='POST'){
     if(run.interrupted)return send(409,{error:'Interrupted action requires a fresh challenge'});

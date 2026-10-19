@@ -4,6 +4,8 @@ Proposed repository license: MIT. Do not create LICENSE or imply this repository
 
 MIT would permit reuse, modification, distribution and commercial use with its copyright/permission notice retained, without warranty. This changes recipients' legal rights, so the proposal alone does not apply it. Review source/assets for third-party material and verify hackathon personal/territorial/employment eligibility. Node runtime, Playwright and bundled browser notices retain their separate terms. No NVIDIA weights are redistributed; hosted API/model/provider terms and factual branding attribution remain separate. No copied NVIDIA/Nebius logos or implied endorsement.
 
+The [actual third-party inventory](third-party-inventory.md) records every current lockfile entry and observed Node/Chromium/Caddy/media-tool notices. It does not clear redistribution, change third-party terms, or establish ownership. The proposed MIT grant covers only material the owner is entitled to license after approval; hosted model/API terms and third-party notices stay separate. The source-only runtime image does not install the dev npm toolchain or Chromium.
+
 Proposed exact license text follows for owner review:
 
 MIT License

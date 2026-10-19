@@ -1,0 +1,860 @@
+{
+  "schemaVersion": 1,
+  "sourceCommitPrefix": "2066626",
+  "researchedAt": "2026-10-18T06:20:04.549691+00:00",
+  "scope": "Official public documentation only; no deployment, account creation, inference or resource mutations.",
+  "method": "Python urllib.request HTTPS GET through existing environment proxy; TLS verification retained; HTML stripped to text; body and normalized-text SHA256 retained. Hashes describe fetched bytes, not immutable provider contracts.",
+  "status": "PUBLIC_PLAN_FEASIBILITY_ONLY_ACCOUNT_AND_HOSTED_GATES_BLOCKED",
+  "providerAccountEvidence": {
+    "callableProviderConnectorNames": [],
+    "providerRelatedEnvironmentVariableNames": [],
+    "nameFilter": [
+      "CLOUDFLARE",
+      "VERCEL",
+      "RENDER",
+      "WRANGLER"
+    ],
+    "accountPlan": "unverified",
+    "paymentMethodStatus": "unverified",
+    "accountFreeQuotaRemaining": "unverified",
+    "accountNoCardEntitlement": "unverified",
+    "operationTested": "none: no scoped provider authentication available",
+    "secretsRead": false
+  },
+  "verifiedPublicFacts": [
+    "Workers public product page offers free start without credit card",
+    "Workers Free 100000 requests/day/account and 10ms CPU/invocation",
+    "Awaited network/database time does not count as Worker CPU; parsing/auth/signing/serialization still executes",
+    "Workers request quota returns 1027; CPU/memory overrun 1102; route fail-open bypass must not be used",
+    "D1 Free 5000000 rows read/day and 100000 rows written/day; account daily UTC reset",
+    "D1 Free 500MB/database,5GB/account,10databases/account;7day TimeTravel",
+    "D1 batch SQL transactions roll back on statement failure",
+    "Render Free cannot attach persistent disk; local SQLite lost on restart/spindown; Free Postgres expires after30days",
+    "Vercel Hobby personal noncommercial free tier; relational database is separate marketplace provider entitlement",
+    "Neon advertises $0/no time limit/no credit card,100CU-hour/month/project,1GB/project; usage can pause database"
+  ],
+  "assumptionsNotMeasurements": {
+    "sessionsPerDay": 100,
+    "dynamicRequestsPerSession": 100,
+    "healthRequestsPerDay": 1440,
+    "d1RowsReadPerSessionIncludingScans": 5000,
+    "d1RowsWrittenPerSessionIncludingIndexes": 250,
+    "cleanupAndAdminWritesPerDay": 5000,
+    "retainedEvidenceBytesPerSession": 20000,
+    "storageOverheadReserveBytes": 50000000,
+    "windowCalendarDays": 59,
+    "dailyDynamicRequests": 11440,
+    "dailyRowsRead": 500000,
+    "dailyRowsWritten": 30000,
+    "retainedEvidenceAt59DaysBytes": 118000000,
+    "totalWithReserveBytes": 168000000,
+    "hostedCpuMilliseconds": null,
+    "hostedLatencyMilliseconds": null,
+    "browserSessionLimit": null,
+    "judgeCount": null
+  },
+  "unverified": [
+    "actual account/card status and no-paid-plan entitlement",
+    "provider settings/quotas and other account usage",
+    "Worker CPU/memory and D1 rows/storage under actual workload",
+    "distributed approval/receipt/budget atomicity under actual D1 faults",
+    "public DNS/TLS/browser/session behavior",
+    "backup/recovery reconciliation of spent model credits and consumed approvals",
+    "availability through2026-12-15T20:00:00Z",
+    "published NVIDIA journey and actual hosting cost"
+  ],
+  "sources": [
+    {
+      "id": "workers-pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "finalUrl": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "retrievedAt": "2026-10-18T06:17:23.899904+00:00",
+      "status": 200,
+      "bodySha256": "51db193c105a81ed123cf73c5f3d036020f8808b3135b17fb3e923ce92525fbd",
+      "textSha256": "216b5f3a4a9cfbcd0f8fd3720211c3ad3af19139a0ebb315e6dcdd70b45eab35",
+      "excerpts": [
+        {
+          "text": "By default, users have access to the Workers Free plan. The Workers Free plan includes limited usage of Workers, Pages Functions, Workers KV and Hyperdrive. Read more about the Free plan limits.",
+          "sha256": "ba915c2ec81f6cf9a500ffb4ea8380e895d6be92c2dc4714f826981a938bd6c2"
+        },
+        {
+          "text": "The Workers Paid plan includes Workers, Pages Functions, Workers KV, Hyperdrive, and Durable Objects usage for a minimum charge of $5 USD per month for an account. The plan includes increased initial usage allotments, with clear charges for usage that exceeds the base plan. There are no additional charges for data transfer (egress) or throughput (bandwidth).",
+          "sha256": "3c8dcca9d1fa7a4ca35ac00be5d202f1b314cf01753ab533600b22926ecd3fea"
+        },
+        {
+          "text": "100,000 per day",
+          "sha256": "76ad759fc984231ad93583889e677e32ec88b6aa24c522d53bf872553498277a"
+        },
+        {
+          "text": "10 milliseconds of CPU time per invocation",
+          "sha256": "836ec376352c683dba191c80b0ab6472de48d7dbb099a099ba34a1cd8600e816"
+        },
+        {
+          "text": "3 Requests to static assets are free and unlimited.",
+          "sha256": "acf507f48e65f688901358b4768061e8ea4883eea06af095697d78b5cd91fdd7"
+        },
+        {
+          "text": "Requests to static assets are free and unlimited. This project would have the following estimated costs:",
+          "sha256": "9e8a123e28c4d44228fc8930bd4c8864dd7f620663e2ff5912f062a09f59ed53"
+        },
+        {
+          "text": "100,000 per day (shared with Workers requests)",
+          "sha256": "43849fd096a886d342560f80d4af7468a9b9dfd23e4835f22da3d465a083f57b"
+        }
+      ]
+    },
+    {
+      "id": "workers-limits",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "finalUrl": "https://developers.cloudflare.com/workers/platform/limits/",
+      "retrievedAt": "2026-10-18T06:17:23.900725+00:00",
+      "status": 200,
+      "bodySha256": "70cc29a9c5eac69be57aff448d4c20b4ad7483e725fa08f1be6feaa43de79724",
+      "textSha256": "fa34e7d46d94247dbf2705ea3aa69791028fdbca99119c5380223dad3f12785d",
+      "excerpts": [
+        {
+          "text": "10 ms",
+          "sha256": "0ebffbb8d9f3b043a72f342deb8161b59e65a28dbb84909ccef77547ac67847d"
+        },
+        {
+          "text": "128 MB",
+          "sha256": "ba1d4d2c9a2f238dd5a7fccdd469667b39c9cd688f3da8c1386eebc3b50057f4"
+        },
+        {
+          "text": "CPU time measures how long the CPU spends executing your Worker code. Waiting on network requests (such as fetch() calls, KV reads, or database queries) does not count toward CPU time.",
+          "sha256": "3d3d05f47bda291d01140c7b307969033a1f150a013189057feda28408689da3"
+        },
+        {
+          "text": "When a Worker exceeds its CPU time limit, Cloudflare returns Error 1102 to the client with the message Worker exceeded resource limits. In the dashboard, this appears as Exceeded CPU Time Limits under Metrics > Errors > Invocation Statuses. In analytics and Logpush, the invocation outcome is exceededCpu.",
+          "sha256": "dae5df6face00275ceebd03490fbe8b77f43042854080cd30e63d6df48af99d1"
+        },
+        {
+          "text": "Each isolate can consume up to 128 MB of memory, including the JavaScript heap and WebAssembly allocations. This limit is per-isolate, not per-invocation. A single isolate can handle many concurrent requests.",
+          "sha256": "3e84f8942404f2dc8129295e991b5c44cb61ded76ba984e0c008339a6df74160"
+        },
+        {
+          "text": "When an isolate exceeds 128 MB, the Workers runtime lets in-flight requests complete and creates a new isolate for subsequent requests. During extremely high load, the runtime may cancel some incoming requests to maintain stability.",
+          "sha256": "8c44e2ef5da73b118675173eff2a1a49c326386a443c5e2c982ed805fc259f9a"
+        },
+        {
+          "text": "When a Worker exceeds its memory limit, Cloudflare returns Error 1102 to the client with the message Worker exceeded resource limits. In the dashboard, this appears as Exceeded Memory under Metrics > Errors > Invocation Statuses. In analytics and Logpush, the invocation outcome is exceededMemory.",
+          "sha256": "486f039ee9f775e96cb5cd73fc6d63f6c19aec90e1c819363413775cb7c97c7b"
+        },
+        {
+          "text": "There is no hard limit on duration for HTTP-triggered Workers. As long as the client remains connected, the Worker can continue processing, making subrequests, and streaming a response body. When the client disconnects or the response is complete, tasks associated with that request may be canceled. Use ctx.waitUntil() to perform work after returning a response. waitUntil() can extend execution for up to 30 seconds after the response is sent or the client disconnects.",
+          "sha256": "991cd65384b05b147c8ff35253e684bcc6bfc213f6af131381eae4fe05ee2d99"
+        },
+        {
+          "text": "Crashes, resource pressure, and shutdowns can interrupt work earlier. Design long-running applications to handle disconnections and safely retry interrupted work.",
+          "sha256": "7fbfe8382a5b4d5eb9297c9c763397882090f17f004817c7c74c205df6923e01"
+        },
+        {
+          "text": "Accounts on the Workers Free plan have a daily request limit of 100,000 requests, resetting at midnight UTC. When a Worker exceeds this limit, Cloudflare returns Error 1027.",
+          "sha256": "8158fa4ac67cd73139da526fdca49ce4bea486c255eb2d7883ec1d36c0fb294b"
+        },
+        {
+          "text": "Fail open",
+          "sha256": "cd230288fec8e33a895802d48e3d706eab372358bda8974542077fb407406870"
+        },
+        {
+          "text": "Bypasses the Worker. Requests behave as if no Worker is configured.",
+          "sha256": "3330aba915fe3d5b0772339b224a051ae2ce84f8a8292c9cfe50c0c82ba73096"
+        },
+        {
+          "text": "Fail closed",
+          "sha256": "eac20c4006bb41e117b00473c9e6f45a3025cbd2dc0e2557a7f981aee05f2a07"
+        },
+        {
+          "text": "Returns a Cloudflare 1027 error page. Use this for security-critical Workers.",
+          "sha256": "d5101b0c2dd20288e883038aef2ce7f4687aa9652fa76383fc26b597ae8f99a7"
+        }
+      ]
+    },
+    {
+      "id": "workers-free",
+      "url": "https://developers.cloudflare.com/workers/get-started/guide/",
+      "finalUrl": "https://developers.cloudflare.com/workers/get-started/guide/",
+      "retrievedAt": "2026-10-18T06:17:23.901609+00:00",
+      "status": 200,
+      "bodySha256": "ffe450c23a5b2ce048bce09bc1f2dc15d560836e44749610690f6d4aaf168990",
+      "textSha256": "e22c16367392156b937dfd2362c9c9daabd69d678ff1d26ff3b55a196e825335",
+      "excerpts": [
+        {
+          "text": "Sign up for a Cloudflare account \u2197\ufe0e.",
+          "sha256": "f2898002028b340387df5a9c835ea1764803fd3c12e86050339c8c164443595e"
+        }
+      ]
+    },
+    {
+      "id": "d1-pricing",
+      "url": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "finalUrl": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "retrievedAt": "2026-10-18T06:17:23.902345+00:00",
+      "status": 200,
+      "bodySha256": "ab1abc06df9b082d9170afc268269b590b85f3e86c4d49dd4ebe278e500e2a7c",
+      "textSha256": "b6f48820e8ee0de95ff9f368132e644815911665212d322f6e5b9049b6ffe9ea",
+      "excerpts": [
+        {
+          "text": "5 million / day",
+          "sha256": "4ce04207dfd7b33a3fce9af1784724c18bbe5d1a709d9a5a74addd9a6820df67"
+        },
+        {
+          "text": "100,000 / day",
+          "sha256": "107b501d1d326da7642d47705fa35ac858b8d730deefd4ab9bdeb2205a46dac0"
+        },
+        {
+          "text": "5 GB (total)",
+          "sha256": "e90b9441f8924b34effb8d47f5ff1df9f1ea0d8fafffaa4a4f239e7b4bbca2b7"
+        },
+        {
+          "text": "Rows read measure how many rows a query reads (scans), regardless of the size of each row. For example, if you have a table with 5000 rows and run a SELECT * FROM table as a full table scan, this would count as 5,000 rows read. A query that filters on an unindexed column may return fewer rows to your Worker, but is still required to read (scan) more rows to determine which subset to return.",
+          "sha256": "d8effbad4cbd0c21b974215a864c46efe5c085d4984e71345582d01b7f26978d"
+        },
+        {
+          "text": "Indexes will add an additional written row when writes include the indexed column, as there are two rows written: one to the table itself, and one to the index. The performance benefit of an index and reduction in rows read will, in nearly all cases, offset this additional write.",
+          "sha256": "25acd68c3f988f8b51a16dad94dc8d39d48117ac5b9ddfd9e632271016d680ff"
+        },
+        {
+          "text": "Free limits reset daily at 00:00 UTC. Monthly included limits reset based on your monthly subscription renewal date, which is determined by the day you first subscribed.",
+          "sha256": "7bb4c41f3caad4d1816c288bc5f295e65c4c7c8f5f7c4b60e58ccf765d1440b9"
+        },
+        {
+          "text": "There are no data transfer (egress) or throughput (bandwidth) charges for data accessed from D1.",
+          "sha256": "88fc9b407486b4dcf820cb8e3396a6ea625864bcb49476d0037666888a3b465b"
+        },
+        {
+          "text": "When your account hits the daily read and/or write limits, you will not be able to run queries against D1. D1 API will return errors to your client indicating that your daily limits have been exceeded. Once you have reached your included storage limit, you will need to delete unused databases or clean up stale data before you can insert new data, create or alter tables or create indexes and triggers.",
+          "sha256": "d7178c9d80a7286ad67a4c0f2a0f3960657c14248b2dce6ba80ecce5a29511df"
+        },
+        {
+          "text": "You will be billed for the additional reads, writes and storage according to D1's pricing metrics.",
+          "sha256": "4fd90e70aa6260a020891aa69328de284edb752d5e0e514dc41315591014d33d"
+        }
+      ]
+    },
+    {
+      "id": "d1-limits",
+      "url": "https://developers.cloudflare.com/d1/platform/limits/",
+      "finalUrl": "https://developers.cloudflare.com/d1/platform/limits/",
+      "retrievedAt": "2026-10-18T06:17:23.903385+00:00",
+      "status": 200,
+      "bodySha256": "faa798e91149fdaae9d59f18331b4568b36e704a79555fcca61c35d615f4c4b0",
+      "textSha256": "25483d73c4466297c2d4335f6f3efe34209050a33a9a172785518db478bc7b60",
+      "excerpts": [
+        {
+          "text": "50,000 (Workers Paid) 1 / 10 (Free)",
+          "sha256": "731924fb0dc1b515ef94101506588d95f58bc3914b3e4bf00e47315a5956b0e0"
+        },
+        {
+          "text": "10 GB (Workers Paid) / 500 MB (Free)",
+          "sha256": "6fcfeb91148bbf428b20e73155c594e1ee802b44187c717cbe7084576e14242b"
+        },
+        {
+          "text": "30 days (Workers Paid) / 7 days (Free)",
+          "sha256": "a6db2e7d24a7362b767482e75224983a1b234a5c51886e88fab63adab64bd236"
+        },
+        {
+          "text": "1000 (Workers Paid) / 50 (Free)",
+          "sha256": "6dd268646070a407e8cc8c7c5542887f78e8582ff0f153509a9f6c8851cf76cf"
+        },
+        {
+          "text": "100",
+          "sha256": "ad57366865126e55649ecb23ae1d48887544976efea46a48eb5d85a6eeb4d306"
+        },
+        {
+          "text": "2,000,000 bytes (2 MB)",
+          "sha256": "3dc92a69108bcbdb1a3a792fa78926cba07916a4823c8434bfaafe0d79df7d5b"
+        },
+        {
+          "text": "100,000 bytes (100 KB)",
+          "sha256": "e296836a82c3bc76df7d65ce61b112e635419f9b58f79e882825b5b35e5eb133"
+        },
+        {
+          "text": "30 seconds 4",
+          "sha256": "4c78130db7602ca38a91192719081433346af14e5fdfe17a1dac2688aacaa28d"
+        },
+        {
+          "text": "Limits for individual queries (listed above) apply to each individual statement contained within a batch statement. For example, the maximum SQL statement length of 100 KB applies to each statement inside a db.batch().",
+          "sha256": "e01d37c7835a963a16c808881ab5d36898efa0aee15149318a0a7f7a3146b95e"
+        },
+        {
+          "text": "Each individual D1 database is inherently single-threaded, and processes queries one at a time.",
+          "sha256": "c3dbb9c4fd5f52c74d126f1b8b95539f3b43dfbe278cfde8df5a1881acc27114"
+        },
+        {
+          "text": "If your average query takes 100 ms, you can run at most 10 queries per second.",
+          "sha256": "6da52af798ab118264195a529335747c31802b16c9d3fdb6978b9b24de782704"
+        },
+        {
+          "text": "A database that receives too many concurrent requests will first attempt to queue them. If the queue becomes full, the database will return an \"overloaded\" error.",
+          "sha256": "e6908d44d7cfdce6d1fdca7aefbec29dc59c5e1a2934a29a9bbfee3e1cb8716e"
+        },
+        {
+          "text": "Write queries like INSERT or UPDATE can take several milliseconds for SQL duration, and depend on the number of rows written. Writes need to be durably persisted across several locations - learn more on how D1 persists data under the hood \u2197\ufe0e.",
+          "sha256": "cebc4cf3f1fcfcb16c5938c414f4dbac07be6ee5ec604f36a280ac6ef9bd74c1"
+        },
+        {
+          "text": "Operations on a D1 database, including query execution and result serialization, run within the Workers platform CPU and memory limits.",
+          "sha256": "811d806814129d6219e0f031115b1aaa2682879d0e46ed107bcdbbd7ba33b58d"
+        },
+        {
+          "text": "Requests to Cloudflare API must resolve in 30 seconds. Therefore, this duration limit also applies to the entire batch call. \u21a9",
+          "sha256": "00285efae6a147efae31bc4d6f66d74a0484bc0949302c8366608df11464fe03"
+        }
+      ]
+    },
+    {
+      "id": "d1-batch",
+      "url": "https://developers.cloudflare.com/d1/worker-api/d1-database/",
+      "finalUrl": "https://developers.cloudflare.com/d1/worker-api/d1-database/",
+      "retrievedAt": "2026-10-18T06:17:23.903784+00:00",
+      "status": 200,
+      "bodySha256": "8111ad2f87e305f93d96d8e5d9e1bc460b0008e95240defc1b3439f04bec1457",
+      "textSha256": "2ed78b1416a6be615104d2b18742a54b837aed89fdce061bfb364e4231e53259",
+      "excerpts": [
+        {
+          "text": "Sends multiple SQL statements inside a single call to the database. This can have a huge performance impact as it reduces latency from network round trips to D1. D1 operates in auto-commit. Our implementation guarantees that each statement in the list will execute and commit, sequentially, non-concurrently.",
+          "sha256": "d5c7081f0ae0b1bbb3eab31adf900fd1dc47ae8bd5c42c35e5029e253d55f711"
+        },
+        {
+          "text": "Batched statements are SQL transactions \u2197\ufe0e. If a statement in the sequence fails, then an error is returned for that specific statement, and it aborts or rolls back the entire sequence.",
+          "sha256": "00c382047aeef6edb5c3a1480baf4d1978085eaa8240993e85e72b46249bf595"
+        },
+        {
+          "text": "first-primary: StringOptional",
+          "sha256": "4787f774bb6161964b07a7cd22fa68215f1e87f4900ed71b2457def4f2b51257"
+        },
+        {
+          "text": "Directs the first query in the Session (whether read or write) to the primary database instance. Use this option if you need to start the Session with the most up-to-date data from the primary database instance.",
+          "sha256": "a7ac8d8385cae626e48f6e399acebf44b57cd1729f30a770112e331a2fa0716c"
+        },
+        {
+          "text": "Directs the first query in the Session (whether read or write) to any database instance. Use this option if you do not need to start the Session with the most up-to-date data, and wish to prioritize minimizing query latency from the very start of the Session.",
+          "sha256": "79b3e7ea6ab5649dc4bb9d993eb5f1e73d0de334e34a76a3b91a1b5e877f6956"
+        },
+        {
+          "text": "To use read replication, you have to use the D1 Sessions API, otherwise all queries will continue to be executed only by the primary database.",
+          "sha256": "671a07273d59f2d168652c96420442cbbf3aa3f890dcd16cc554cf78f44875bd"
+        }
+      ]
+    },
+    {
+      "id": "d1-replicas",
+      "url": "https://developers.cloudflare.com/d1/best-practices/read-replication/",
+      "finalUrl": "https://developers.cloudflare.com/d1/best-practices/read-replication/",
+      "retrievedAt": "2026-10-18T06:17:24.077257+00:00",
+      "status": 200,
+      "bodySha256": "7b2f3203ed00e91c1979e938bea3f8a00f1f5bc3bc2e34437eb06bc17ca4fbc1",
+      "textSha256": "455b0a25cab3d2d9172177864863b28709704d4d0b11bd8ac5f0bbd353b4c71c",
+      "excerpts": [
+        {
+          "text": "To use read replication, you must use the D1 Sessions API, otherwise all queries will continue to be executed only by the primary database.",
+          "sha256": "294b3345483a53a598225caa60ecd43c232372f5794f30d0d1157ea662d9d815"
+        },
+        {
+          "text": "A session encapsulates all the queries from one logical session for your application. For example, a session may correspond to all queries coming from a particular web browser session. All queries within a session read from a database instance which is as up-to-date as your query needs it to be. Sessions API ensures sequential consistency for all queries in a session.",
+          "sha256": "c22ee2044ed3ffaa316f85dd5425c449b35e354d9360d6d241f98278ad76535b"
+        },
+        {
+          "text": "When using D1 without read replication, D1 routes all queries (both read and write) to a specific database instance in one location in the world, known as the primary database instance . D1 request latency is dependent on the physical proximity of a user to the primary database instance. Users located further away from the primary database instance experience longer request latency due to network round-trip time \u2197\ufe0e.",
+          "sha256": "605a6a48269ed7397fdffe9e67527e8e5165ef03522879379d705381263f4d2d"
+        },
+        {
+          "text": "When using read replication, D1 creates multiple asynchronously replicated copies of the primary database instance, which only serve read requests, called read replicas . D1 creates the read replicas in multiple regions throughout the world across Cloudflare's network.",
+          "sha256": "3ec620f4f1c546e0b66864edf974bc6cc2a94170235867ce87fcaab35ae732cd"
+        },
+        {
+          "text": "Even though a user may be located far away from the primary database instance, they could be close to a read replica. When D1 routes read requests to the read replica instead of the primary database instance, the user enjoys faster responses for their read queries.",
+          "sha256": "81e21e364c2ac3a2baa91757ed052f5a2b55ebb20e3a962e12d497dc59a8b119"
+        },
+        {
+          "text": "D1 asynchronously replicates changes from the primary database instance to all read replicas. This means that at any given time, a read replica may be arbitrarily out of date. The time it takes for the latest committed data in the primary database instance to be replicated to the read replica is known as the replica lag . Replica lag and non-deterministic routing to individual replicas can lead to application data consistency issues.",
+          "sha256": "082de52060e6821bffe157483b6df199a4db801407b6ec3d865ce6ae16bfc47b"
+        },
+        {
+          "text": "The D1 Sessions API solves this by ensuring sequential consistency.",
+          "sha256": "b81aac4064f8a52b61537b078421219a70f52f1ffd6c0e494c8998e72281ef46"
+        },
+        {
+          "text": "All write queries are still forwarded to the primary database instance. Read replication only improves the response time for read query requests.",
+          "sha256": "da4be01b0a4fbb308cf3a0cde5a892ba6c30b9d4f90384e2e0793e3a665045b3"
+        },
+        {
+          "text": "A database instance containing a copy of the original database which asynchronously receives updates from the primary database instance",
+          "sha256": "fa7f3fdbbcbaffb6b5825e167898ec35c91b80feb693f1d23f12f073e1488d2b"
+        },
+        {
+          "text": "Forwards any write queries to the primary database instance",
+          "sha256": "514e461b37d8f8ebbb147ffa0ba18bf52313f4098c1e5c6790bd62be4f3e6630"
+        },
+        {
+          "text": "By using Sessions API for read replication, all of your queries from a single session read from a version of the database which ensures sequential consistency. This ensures that the version of the database you are reading is logically consistent even if the queries are handled by different read replicas.",
+          "sha256": "23592d69fff6427cdee8e71ae6057e993832a863e66ec013901e92e68d928f07"
+        },
+        {
+          "text": "To create a session from any available database version, use withSession() without any parameters, which will route the first query to any database instance, either the primary database instance or a read replica.",
+          "sha256": "26ead803c145c3a1688f361d9bd0ede6a9928c8036554c54d99d578cc1643fb2"
+        },
+        {
+          "text": "// query executes on either primary database or a read replica",
+          "sha256": "7801a2354e42c9b8951bde4cb0963e5b0d1ccadc80fd15c3015a223b88e319fd"
+        },
+        {
+          "text": "This approach is best when your application does not require the latest database version. All queries in a session ensure sequential consistency.",
+          "sha256": "275cabeffc50ca70bad0eb245f7067b855747eac2e847dcf91ef65dfdb21ce67"
+        },
+        {
+          "text": "To create a session from the latest database version, use withSession(\"first-primary\"), which will route the first query to the primary database instance.",
+          "sha256": "49acdc9a7a5f31f41eac296fd406e6e868dd597c3881b5ee1d7f4f5fa425bf69"
+        },
+        {
+          "text": "// query executes on primary database",
+          "sha256": "407cc25413c792905c988e7b3ccbb66b962bd1f819d85dc235abf77bed866416"
+        },
+        {
+          "text": "This approach is best when your application requires the latest database version. All queries in a session ensure sequential consistency.",
+          "sha256": "77f3db328cf73b31db5bbb25b7c49db6e0c129965359fbe143cb87da43f90766"
+        },
+        {
+          "text": "Currently, D1 automatically creates a read replica in every supported region, including the region where the primary database instance is located. These regions are:",
+          "sha256": "8771d637c930d209bdeefb2e5d80998679394fc1f9d6af6e8bb61c6e70f2b773"
+        },
+        {
+          "text": "Your SQL write query is processed by the primary database instance.",
+          "sha256": "2eda8e4d6504a765b1f1031ca84f3d7ae64c095d7b63aff4c682746785afcb02"
+        },
+        {
+          "text": "SQL write query is processed by the primary database instance.",
+          "sha256": "dcde430f7b722edde90ec81b81374ec341a0143d3e55eca3af29c5c959075200"
+        },
+        {
+          "text": "Sessions API provides sequential consistency",
+          "sha256": "26503ddb62eb24220ab0858c72699cbc4f480ec751f9f674bc83d1e71ead352f"
+        },
+        {
+          "text": "D1 read replication offers sequential consistency \u2197\ufe0e. D1 creates a global order of all operations which have taken place on the database, and can identify the latest version of the database that a query has seen, using bookmarks. It then serves the query with a database instance that is at least as up-to-date as the bookmark passed along with the query to execute.",
+          "sha256": "e8e0dde13a1be3904e08245521873fb06438bdf95ca0fde0650d6803d9a4e8bd"
+        }
+      ]
+    },
+    {
+      "id": "d1-time-travel",
+      "url": "https://developers.cloudflare.com/d1/reference/time-travel/",
+      "finalUrl": "https://developers.cloudflare.com/d1/reference/time-travel/",
+      "retrievedAt": "2026-10-18T06:17:24.122045+00:00",
+      "status": 200,
+      "bodySha256": "75349d8e19ab58d2b41194f38282b891f1d353a123613d6f88753426e261f612",
+      "textSha256": "139204dd8349bd411a03596ab2c49519f508762bcab774455ca0450d5328246a",
+      "excerpts": [
+        {
+          "text": "You do not need to enable Time Travel. It is always on.",
+          "sha256": "fd0ee04d1ccde3dcbf6bc4f7129e7f7a22531107e982599ff8cfd5031e0271fd"
+        },
+        {
+          "text": "Database history and restoring a database incur no additional costs.",
+          "sha256": "1f330fdde7b0cd05a0559726b7e46e4141f0cde09a59008cc66faf548d8198b2"
+        },
+        {
+          "text": "Restoring a database to a specific point-in-time is a destructive operation, and overwrites the database in place. In the future, D1 will support branching & cloning databases using Time Travel.",
+          "sha256": "e4c6718ba78f4cf8f28dd05386b182c2acc995cd7c57fe62187599f0145e188e"
+        },
+        {
+          "text": "In-flight queries and transactions will be cancelled.",
+          "sha256": "a03b43066f1181ca66ab2fcbebbff18723c74ad184c6ee63560e97f8745a9815"
+        },
+        {
+          "text": "Queries in flight will be cancelled, and an error returned to the client.",
+          "sha256": "b08f2e4ea3288477d241a9e6195f5f11b8682bec7e23424e2c7afe4d42ee3230"
+        },
+        {
+          "text": "You can restore a database back to a point in time up to 30 days in the past (Workers Paid plan) or 7 days (Workers Free plan). Refer to Limits for details on Time Travel's limits.",
+          "sha256": "c72b00977b5ce6930a6241e58a0f85db3a7708a2a91efe97251ab3bc25e8ef5d"
+        }
+      ]
+    },
+    {
+      "id": "d1-export",
+      "url": "https://developers.cloudflare.com/d1/best-practices/import-export-data/",
+      "finalUrl": "https://developers.cloudflare.com/d1/best-practices/import-export-data/",
+      "retrievedAt": "2026-10-18T06:17:24.122540+00:00",
+      "status": 200,
+      "bodySha256": "982e457eb48030d1be911d025c98a6bcc2148541fa464eabae064f62ccbe33a3",
+      "textSha256": "198cfbb4ec466f241766a20a7a01b3e329711b444f7e06af6b2c64db078746a1",
+      "excerpts": [
+        {
+          "text": "Import and export data \u00b7 Cloudflare D1 docsSkip to contentDocumentation Index",
+          "sha256": "76d5ab9bf9a184fe5a26304106ce8625568bd73cbf04e4742b799a3a74059cbc"
+        },
+        {
+          "text": "Import and export data",
+          "sha256": "380f02b832d84a8d2a065840e469a63459569fca9cebdbc11dc5c2f5de085f43"
+        },
+        {
+          "text": "D1 also allows you to export a database. This can be useful for local development or testing.",
+          "sha256": "5864630c2ad3bbb06b2de65790b321841ebd3732636e08e02f6f3b31acde62b7"
+        },
+        {
+          "text": "For example, consider the following users_export.sql schema & values, which includes a CREATE TABLE IF NOT EXISTS statement:",
+          "sha256": "b5345215d2ed5fc4866433ba6796e82edaf6853ef6e560e78c9963383e80b6de"
+        },
+        {
+          "text": "With your users_export.sql file in the current working directory, you can pass the --file=users_export.sql flag to d1 execute to execute (import) our table schema and values:",
+          "sha256": "36711120a9f866bcb2af14cc392327cd49f150e5d239d3558300073b4790bc5c"
+        },
+        {
+          "text": "npx wrangler d1 execute example-db --remote --file=users_export.sql",
+          "sha256": "aeb9f56be7a3e65a8a622896cf189055cffa6f805005642d0b4e83809356c701"
+        },
+        {
+          "text": "In addition to importing existing SQLite databases, you might want to export a D1 database for local development or testing. You can export a D1 database to a .sql file using wrangler d1 export and then execute (import) with d1 execute --file.",
+          "sha256": "d430a495b0df29705fc793817ade47a981eabc98189112543860d826d2a6b3cc"
+        },
+        {
+          "text": "To export full D1 database schema and data:",
+          "sha256": "4f84b6e739328bee24bb2e99781783257d5025c1c7fe76e330fd69dbaac84d47"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --output=./database.sql",
+          "sha256": "add9452a14062986a6386efddf15e098275f97653fe2785098990c007b1b1856"
+        },
+        {
+          "text": "To export single table schema and data:",
+          "sha256": "b9aee9c0f0c336fb8df3522c618deb003570942f8cdb16ec876e20711866c07c"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --table=<table_name> --output=./table.sql",
+          "sha256": "adbb2c9f6b4fa8f7e3f848b6839455a8f3e1737a8c8cd1636b991b4e02e3cf7c"
+        },
+        {
+          "text": "To export only D1 database schema:",
+          "sha256": "31ceb42ecbd22fabb67650ed984cf894d229397726ffa07cd863726f37c497c5"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --output=./schema.sql --no-data",
+          "sha256": "e445e1dbd94c9315ecf315955527a797d0bfd98711d2cb6334e35a285334e2b6"
+        },
+        {
+          "text": "To export only D1 table schema:",
+          "sha256": "e5babac89b342c6935334962f3ae1866bb6620ccc9429befa3b7c3bdd6b4cbba"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --table=<table_name> --output=./schema.sql --no-data",
+          "sha256": "eded0531867a786e26c7778b1cafce4c028eaa5553b4a7099d011f30658488e8"
+        },
+        {
+          "text": "To export only D1 database data:",
+          "sha256": "70c98572f8c88466c011ece585550f347c3bffc94af0867ec2ef47f36e69d079"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --output=./data.sql --no-schema",
+          "sha256": "7167f28c9e218484208ebdcf39c00ddb89e3eb5bb845873d376e2d3d9e6fa172"
+        },
+        {
+          "text": "To export only D1 table data:",
+          "sha256": "5d6636d1aca9a0a7a859433dc3dce30292b9f6f896913c38068f0ab349cf173c"
+        },
+        {
+          "text": "npx wrangler d1 export <database_name> --remote --table=<table_name> --output=./data.sql --no-schema",
+          "sha256": "c62eeb22b57bb4628c860213da643506b2435a2bed56172c67e8fbe45d0621e6"
+        },
+        {
+          "text": "Export is not supported for virtual tables, including databases with virtual tables. D1 supports virtual tables for full-text search using SQLite's FTS5 module \u2197\ufe0e. As a workaround, delete any virtual tables, export, and then recreate virtual tables.",
+          "sha256": "8668252c49c5be9878582bb8f72445cb18f0d70630bbd55fb5a9af6ad19baade"
+        },
+        {
+          "text": "A running export will block other database requests.",
+          "sha256": "bb22c066e42f7d86160d1fb1667e32a928010a9bec68956a7b1aa7cda0c50a0e"
+        }
+      ]
+    },
+    {
+      "id": "workers-errors",
+      "url": "https://developers.cloudflare.com/workers/observability/errors/",
+      "finalUrl": "https://developers.cloudflare.com/workers/observability/errors/",
+      "retrievedAt": "2026-10-18T06:17:24.124709+00:00",
+      "status": 200,
+      "bodySha256": "7a1557bfaca72ab9ec7c2d782ec2890d9cdbeb2854d0b07b168a88caf53f64bd",
+      "textSha256": "154ecb2cc4975cf35868d5ddd1860dda9067c6c652d856f88fe903e2da08acad",
+      "excerpts": [
+        {
+          "text": "1102",
+          "sha256": "277375b99e186c72ac38ac47b03199038342fe0389be8765476fa2be0c5b5649"
+        },
+        {
+          "text": "1027",
+          "sha256": "60f256c7ccbc748036024fa0440e45fe1574db20a874e4041a16faf0105a01ff"
+        }
+      ]
+    },
+    {
+      "id": "render-free",
+      "url": "https://render.com/docs/free",
+      "finalUrl": "https://render.com/docs/free",
+      "retrievedAt": "2026-10-18T06:17:24.132873+00:00",
+      "status": 200,
+      "bodySha256": "5dbc50bc0d899a3b3c8fb16b746b87068dd162c89b33c45f25dd95692c5540b0",
+      "textSha256": "55632a4bce890a36fdab9427219d0e31edd9c89178cdcd995789527b39405234",
+      "excerpts": [
+        {
+          "text": "Render spins down a Free web service that goes 15 minutes without receiving any inbound traffic. This includes both HTTP requests and WebSocket messages from existing connections.",
+          "sha256": "d36b8301e41aa98b4d41c7d5079e4555ec7604dce37bcc1bc856c1056766428e"
+        },
+        {
+          "text": "A Free web service spins back up whenever it next receives an HTTP request or new WebSocket connection. This process takes about one minute. Render displays a loading page to connecting browsers while a service is spinning up.",
+          "sha256": "cd963a4fa42b90e56d2174e2989e2b5fb7d970ba94317d5d3429c6c3baf838da"
+        },
+        {
+          "text": "Like all Render services, Free web services have an ephemeral filesystem. This means that any changes to your web service's filesystem (uploaded images, local SQLite databases, etc.) are lost every time the service redeploys, restarts, or spins down.",
+          "sha256": "01dd39fba974eabd8d32282f20836513f5aa5ff9001849f3b5f05f9c6a973e9b"
+        },
+        {
+          "text": "Paid services can preserve local filesystem changes by attaching a persistent disk, but Free web services cannot.",
+          "sha256": "4a077f2d5686345941d3acb2086efe25ab1d5c047c78484cce479e640124ef5a"
+        },
+        {
+          "text": "Note that Free Render Postgres databases expire 30 days after creation.",
+          "sha256": "57c05a6db3c4573dd989fc9f33d06daae6bde2f82fbdf2d47e0f599eeae9eca1"
+        },
+        {
+          "text": "Render grants 750 Free instance hours to each workspace per calendar month:",
+          "sha256": "1321b651114f04ab716d8938f477e837e60dc0b6bac258e5620f90eb9966f3fc"
+        },
+        {
+          "text": "If you consume all of your Free instance hours during a given month, Render suspends all of your Free web services until the start of the next month.",
+          "sha256": "c828af00fd349155fef7f35f887e09c48203f5e629386058211da8c35bd56c3c"
+        },
+        {
+          "text": "At the start of each month, your Free instance hours reset to 750 (remaining hours don't roll over).",
+          "sha256": "13b6b43bd3a6c32b6eec9b0a8adaf6df98b601914897fb3118f9045b25f28d18"
+        },
+        {
+          "text": "If you consume all of your outbound bandwidth during a given month, Render bills you for a supplementary amount.",
+          "sha256": "06bfe880d667311a21fd1eae9d067a1097f8f1390336f0843d5ab14d75204ab8"
+        },
+        {
+          "text": "If you haven't added a payment method, Render instead suspends all of your Free services for the remainder of the month.",
+          "sha256": "00da1d1e0d582f7abfdff30002e964135d106cef232a187f2da7091cd032c112"
+        },
+        {
+          "text": "If you consume all of your build pipeline minutes during a given month, Render bills you for a supplementary amount (unless you've reached your spend limit).",
+          "sha256": "782332f2743e805941ae6ed1087406beca08c15f76a1e4cf077a382d1fd87418"
+        },
+        {
+          "text": "If you haven't added a payment method or you reach your spend limit, Render instead disables all new builds for your workspace for the remainder of the month.",
+          "sha256": "662dbb5904dc8a39c65744492a8681b25ea888cd19d08dfb7418d1b101af3f8f"
+        },
+        {
+          "text": "Render may suspend a Free web service that initiates an uncommonly high volume of traffic over the public internet.",
+          "sha256": "9764007000f3987a5d99cf4c8afc8f619052ca0abf1682350c676b28ddd47a4c"
+        },
+        {
+          "text": "If your service is suspended this way, you can restore it by moving it to any paid compute plan.",
+          "sha256": "ca72de141155efb73c2d41e75b490b4bee0ae5d111a2e7217485edfc90261d2f"
+        },
+        {
+          "text": "Free Render Postgres databases expire 30 days after creation. An expired Free database is inaccessible unless you upgrade it to a paid compute plan.",
+          "sha256": "67549ba44ba49b94f2aff846596b8665cbe430b2dfc4d5841d53420fcfe29074"
+        }
+      ]
+    },
+    {
+      "id": "render-first",
+      "url": "https://render.com/docs/your-first-deploy",
+      "finalUrl": "https://render.com/docs/your-first-deploy",
+      "retrievedAt": "2026-10-18T06:17:24.159914+00:00",
+      "status": 200,
+      "bodySha256": "d19ed17b9976f5066f7ab97537d2383fca4f7b0f4c03d00ee0314c5a52d612d1",
+      "textSha256": "e2afc9173aa257893831d90ed2aae694dbadbf6cba206bbe521c747690c2aa6c",
+      "excerpts": [
+        {
+          "text": "This tutorial uses free Render resources. No payment is required. All you need is a repository connected to a supported Git provider with the web app you want to deploy.",
+          "sha256": "11fd0a024a84759719a55d11fd338ad40691af7bf8187b0cef963849d12c058d"
+        }
+      ]
+    },
+    {
+      "id": "vercel-hobby",
+      "url": "https://vercel.com/docs/plans/hobby",
+      "finalUrl": "https://vercel.com/docs/plans/hobby",
+      "retrievedAt": "2026-10-18T06:17:24.254672+00:00",
+      "status": 200,
+      "bodySha256": "e5461b9c4e0b5277ced60d34318d18381b50139f0f61d626eba294da4d8f1c38",
+      "textSha256": "bd18ad33a91a06b6e10673c5c7886d67e47398efdf2faa0788d8ce282aa117e4",
+      "excerpts": [
+        {
+          "text": "The Hobby plan is **free** and aimed at developers with personal projects, and small-scale applications. It offers a generous set of features for individual users on a **per month** basis:",
+          "sha256": "2ec33d5ac4f62895a9eaa72923b3eb5b01cf784ef27efee78d5d8f97397da5b5"
+        },
+        {
+          "text": "As the Hobby plan is a free tier there are no billing cycles. In most cases, if you exceed your usage limits on the Hobby plan, you will have to wait until 30 days have passed before you can use the feature again.",
+          "sha256": "6c11be5f2391cf96036a475450a2d45d6573b2c35c1f624bcb8861390ab10bf9"
+        },
+        {
+          "text": "As stated in the [fair use guidelines](/docs/limits/fair-use-guidelines#commercial-usage), the Hobby plan restricts users to non-commercial, personal use only.",
+          "sha256": "93f6cf48fb11c3ce4b65d2792b5810f571c89c7c6e71abdaa62c3520db6dced6"
+        },
+        {
+          "text": "| Vercel Function maximum duration | 300s (5 minutes) | 300s (default) - [configurable up to 800s](/docs/functions/configuring-functions/duration); [extended max duration up to 1800s](/docs/functions/configuring-functions/duration#extended-max-duration-beta) (30 minutes, beta) |",
+          "sha256": "e84e3fea54c37a918c41f716fbe0b6ada405f1773f8f4704112d1b15360ef3d1"
+        },
+        {
+          "text": "| Spend Management | N/A | [Configurable](/docs/spend-management) |",
+          "sha256": "1a8bf249f1d355ea3d050a999d81b216c322ed3c08d03d1f034b5a43c75ae5a5"
+        }
+      ]
+    },
+    {
+      "id": "vercel-storage",
+      "url": "https://vercel.com/docs/storage",
+      "finalUrl": "https://vercel.com/docs/storage",
+      "retrievedAt": "2026-10-18T06:17:24.276346+00:00",
+      "status": 200,
+      "bodySha256": "c1075e57a174d550c511de41bef0ff97e85075f14515e192b106758f491529c8",
+      "textSha256": "20705920e6af90307e9147b3317d67c635a865220f2087bdd2951365cb505a9d",
+      "excerpts": [
+        {
+          "text": "| [Marketplace storage](/docs/marketplace-storage) | Provider-dependent | Provider-dependent | Relational, key-value, NoSQL, and vector data | Provider-specific | Provider-specific |",
+          "sha256": "e931d5083bc3e1e31feb2e884af8613ba3e4efe44b350c38bdf7fc88eeb5a40b"
+        },
+        {
+          "text": "The [Vercel Marketplace](https://vercel.com/marketplace?category=storage) connects agents and applications to relational data, sessions, rate limits, embeddings, and semantic search through providers like Neon, Upstash, and Supabase. Vercel injects provisioned resource credentials as environment variables.",
+          "sha256": "e22b16b56bd46a3e832540ac2b5ae6a17119f6e0d43650e32c5870acf6c05f92"
+        },
+        {
+          "text": "You should use Marketplace storage if you need to:",
+          "sha256": "fcceb27ce14641688d5132de617b5a2da3f91bbd7333b8b7c349ba82269bab20"
+        },
+        {
+          "text": "You can provision a Marketplace storage resource in one command with the CLI. This installs the integration, connects it to the linked project, and pulls credentials into `.env.local`:",
+          "sha256": "ccf7369ba68d65fc0481a1a5bab77e77496f9ceae0330b4cbb332f579d4bcdc8"
+        }
+      ]
+    },
+    {
+      "id": "cloudflare-free-blog",
+      "url": "https://blog.cloudflare.com/workers-free/",
+      "retrievedAt": "2026-10-18T06:17:24.284401+00:00",
+      "error": "HTTP Error 404: Not Found",
+      "excerpts": []
+    },
+    {
+      "id": "workers-product",
+      "url": "https://workers.cloudflare.com/",
+      "finalUrl": "https://www.cloudflare.com/products/workers/",
+      "retrievedAt": "2026-10-18T06:18:03.493164+00:00",
+      "status": 200,
+      "bodySha256": "46cba9f90a27971ff4b841103a9144c1d54a52daf5b523c5c5730fce7f12ed0a",
+      "textSha256": "827708aec9ddd7a6546bc785946c42985d07496c131ab215bfced9abd526ed4c",
+      "excerpts": [
+        {
+          "text": " 100k / day ",
+          "sha256": "56b148c6b3a3cf5e410b79c4ff347723e39bb097e1cd9b43c1f89d3045bdfc3a"
+        },
+        {
+          "text": " 10 ms / request ",
+          "sha256": "801f9229e966e29d3aad0c7c592412fed36504bf1a523af51a02aa46d61fbfd2"
+        },
+        {
+          "text": " Join thousands of developers who've eliminated infrastructure complexity and deployed globally with Cloudflare. Start building for free \u2014 no credit card required. ",
+          "sha256": "a2b0327541e89b83d8b2650dbd0e2a4c544163de7405170ba413af99dca55e0a"
+        }
+      ]
+    },
+    {
+      "id": "workers-product-platform",
+      "url": "https://www.cloudflare.com/developer-platform/products/workers/",
+      "finalUrl": "https://www.cloudflare.com/products/workers/",
+      "retrievedAt": "2026-10-18T06:18:03.926523+00:00",
+      "status": 200,
+      "bodySha256": "46cba9f90a27971ff4b841103a9144c1d54a52daf5b523c5c5730fce7f12ed0a",
+      "textSha256": "827708aec9ddd7a6546bc785946c42985d07496c131ab215bfced9abd526ed4c",
+      "excerpts": [
+        {
+          "text": " Join thousands of developers who've eliminated infrastructure complexity and deployed globally with Cloudflare. Start building for free \u2014 no credit card required. ",
+          "sha256": "a2b0327541e89b83d8b2650dbd0e2a4c544163de7405170ba413af99dca55e0a"
+        }
+      ]
+    },
+    {
+      "id": "d1-faq",
+      "url": "https://developers.cloudflare.com/d1/reference/faq/",
+      "finalUrl": "https://developers.cloudflare.com/d1/reference/faq/",
+      "retrievedAt": "2026-10-18T06:18:04.310206+00:00",
+      "status": 200,
+      "bodySha256": "fd0ba6d221e1b0da866affad25492fd1ddb2e4a99c89966b41266fff99423a13",
+      "textSha256": "4769025c6245d4a845286ad83063da1436118716b8d2ba4b5c904dd7a3d5d0a1",
+      "excerpts": [
+        {
+          "text": "Write queries like INSERT or UPDATE can take several milliseconds for SQL duration, and depend on the number of rows written. Writes need to be durably persisted across several locations - learn more on how D1 persists data under the hood \u2197\ufe0e.",
+          "sha256": "cebc4cf3f1fcfcb16c5938c414f4dbac07be6ee5ec604f36a280ac6ef9bd74c1"
+        }
+      ]
+    },
+    {
+      "id": "supabase-free",
+      "url": "https://supabase.com/pricing",
+      "finalUrl": "https://supabase.com/pricing",
+      "retrievedAt": "2026-10-18T06:18:04.407455+00:00",
+      "status": 200,
+      "bodySha256": "2e63368c0ab22acaa59aa12007875067875373f59f409109997ab63bc6e42265",
+      "textSha256": "a2ade1b148d7315a42d9c3835b19b4d2f8447fa43edaa852c8b0f10b6abbe6dd",
+      "excerpts": [
+        {
+          "text": "500 MB database size",
+          "sha256": "69c079391843a37e76768df3f51c1da87696db57207d2988db8d2b6f551e21e6"
+        },
+        {
+          "text": "5 GB egress",
+          "sha256": "4e8da6c3da1324985fc3f4c971d3907e19928a7c6693f9b812da3246aed47302"
+        },
+        {
+          "text": "Free projects are paused after 1 week of inactivity. Limit of 2 active projects.",
+          "sha256": "965eb7921732b6d0df29cefa5d35820245ed7fe9c0e2a76b865bc46648d15d2c"
+        },
+        {
+          "text": "Uptime SLAsNot included in free",
+          "sha256": "84367f2b951352e1375b2166b94925885376f7da1ed833115c3c278357b200a2"
+        }
+      ]
+    },
+    {
+      "id": "neon-free",
+      "url": "https://neon.com/pricing",
+      "finalUrl": "https://neon.com/pricing",
+      "retrievedAt": "2026-10-18T06:18:04.600823+00:00",
+      "status": 200,
+      "bodySha256": "c99c30be33fa40931e3de991b3cffeef54cf9b208b1e4ad5ed726b2432d3246c",
+      "textSha256": "a7840eda81ef051afbac6c59529055d34ac68cd2606148e6d14e1c59eaf8688b",
+      "excerpts": [
+        {
+          "text": "Build and learn free with no time limits and no credit card required.Try Neon",
+          "sha256": "773f6019fd4503ab3a9295d8ea37d4ad2a39d9b7ac2b11f234972a0240be1bc3"
+        },
+        {
+          "text": "100 CU-hrs monthly per project",
+          "sha256": "3bdb0775074da7e237eccdb38b6c1ad5a71b79c13c661d1a8716617043284abd"
+        },
+        {
+          "text": "1 GB of storage per project",
+          "sha256": "5df6ab8caff1efa3a6112d07db9d1a766822713d995fc951fe4766ba00b46833"
+        },
+        {
+          "text": "5 GB included",
+          "sha256": "da1429ed00719134d9ee4400226e0059d5bf9f99925a8a5724c7f8aa46d49180"
+        },
+        {
+          "text": "At 0.25 CU, 100 CU-hours covers about 400 hours of active compute, more than half the hours in a month",
+          "sha256": "1f026c854b00ebf24bb13e513fbd29bdeb7d9c2e177bc44a98e0c88c989d2693"
+        },
+        {
+          "text": "You care about production guarantees, such as consistent availability, predictable performance, and never having your database paused due to usage limits",
+          "sha256": "344d01fdea4151e8868b8f3bf59b029aae3c633aa8304a7fdb4db4dec0c994f6"
+        }
+      ]
+    }
+  ],
+  "engineeringImplications": [
+    "D1 zero-row conditional updates are not statement errors: application must enforce dependent-write invariants",
+    "A SQL transaction does not span a Nebius HTTP request: persist reservation/intents and fail closed on uncertainty."
+  ]
+}

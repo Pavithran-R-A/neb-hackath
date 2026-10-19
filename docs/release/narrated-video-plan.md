@@ -1,0 +1,25 @@
+# Narrated video — produced cloud-local review draft
+
+The actual draft is `.cache/qa/rc-narrated-review.mp4`, **143.861333 seconds (2:23.86)**, below three minutes. It is not uploaded, submitted, publicly deployed or owner-approved. [Machine-readable manifest](../../results/rc-narrated-video-manifest.json) records full spoken text, slate text, edit boundaries, raw source hashes, evidence hashes, generated assets and output SHA256. No further inference or paid speech service was used.
+
+The soundtrack is original **synthetic English narration**, generated locally using FFmpeg's existing Flite filter and built-in `slt` voice. Intro, live overlay and credits disclose synthetic voice and automated synthetic QA. NVIDIA Nemotron via Nebius Token Factory receives factual spoken and visible attribution; no logo or endorsement claim is used. The entire 36.36-second historical L preview is included as one continuous source segment at original speed, re-encoded with an added top disclosure band. Three original raw WebM captures and original engineering MP4 retain their separate hashes; source remains commit `7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0`, independent of later working-tree changes.
+
+| Timeline | Segment | Evidence treatment |
+| --- | --- | --- |
+| 0.00–19.92s | intro | Explicit editorial text slate; no UI reenactment |
+| 19.92–56.28s | live | Uncut actual L screen capture; original speed |
+| 56.28–91.64s | eval | Explicit editorial text slate; no UI reenactment |
+| 91.64–121.32s | failures | Explicit editorial text slate; no UI reenactment |
+| 121.32–143.84s | end | Explicit editorial text slate; no UI reenactment |
+
+The L segment is genuine private HTTPS NVIDIA workbench capture: temporary-failure/retry plus misleading-success/stop, with explicit authorized automated synthetic-QA approval and separate private receipt verification. The positive/negative case footage is known integration evidence, not a new evaluation or human usability study. No cut or speed change occurs inside that segment. The added slates are visibly separate, so the full edited video is not described as a continuous end-to-end recording.
+
+Campaign I metrics are a **separate evaluation summary**, not fabricated evaluation screen capture. It discloses raw12/16 diagnosis,12/16 recovery,10/16 pair; comparator12/16,10/16,8/16; two raw high-confidence diagnosis errors; post-hoc replay9accepted/4abstained/3review-required and6/16 displayed pair agreement. AI authorship, labels-visible review and lack of external human experts remain explicit. Historical F incorrect retry advice, G Nano contract failure, H Super HTTP500/unknown usage, and K capture-helper failure are both spoken and shown on a summary slate; those slates are not claimed as footage of the historical failures. No autonomous or arbitrary-site superiority is claimed.
+
+The output has H.264 video1440×1200, AAC stereo48kHz audio, and a selectable English `mov_text` subtitle track. Existing English live captions remain burned into the source. Complete narration captions are also retained in `.cache/qa/narrated/narration.en.srt`; sentence timings are proportional estimates, not speech-aligned certification. On-screen summary text carries the factual content even when a player does not display optional captions. Some original live captions describe case outcomes ahead of their final screen appearance; use the full source capture and export evidence for exact event chronology.
+
+Technical verification: `ffprobe -v error -show_streams -show_format .cache/qa/rc-narrated-review.mp4` confirms video/audio/subtitles and actual duration; `ffmpeg -v error -i .cache/qa/rc-narrated-review.mp4 -map 0:v -map 0:a -f null -` completes full decode. `volumedetect` reports mean−19.6dB/max−6.4dB, establishing non-silent encoded audio. Frames from intro, live, evaluation, failures and ending were inspected for readable text. This does not substitute for owner listening review, pronunciation/caption timing polish or media-rights approval.
+
+Ignored reproducibility assets: `.cache/qa/narrated/build.py` creates local Flite WAVs, explicit text slates and five video segments; `.cache/qa/narrated/finalize.py` creates captions, remuxes output and builds the manifest. Run build then finalize from this checkout only; both are cloud-local helpers, not app/runtime/package changes. FFmpeg emitted font-cache write warnings but returned0 and rendered inspected frames. Runtime/voice/license provenance is in the manifest and [third-party inventory](third-party-inventory.md). Media remains inside ignored cloud storage and has not been copied to a laptop.
+
+Owner review gates remain: rights holder and MIT proposal, contribution/media ownership, eligibility, track/rules, voice quality/captions, hosting/judge access, public upload authorization and final submission authorization. Workers feasibility and account entitlement remain pending; local Caddy/state rehearsal proves no public availability. A video alone does not replace a functioning judge test build. No publication action is authorized or performed here.
