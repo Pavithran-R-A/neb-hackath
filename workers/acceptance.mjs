@@ -20,6 +20,19 @@ function supports(d,e){
   default:return false;
  }
 }
+const uncertaintyText=/\b(outcome|write|storage|commit|result)\b.{0,70}\b(unknown|uncertain|cannot|can't|not determined|undetermined)\b|\b(cannot|can't|unable to)\b.{0,70}\b(determine|tell|confirm)\b.{0,70}\b(whether|if)\b.{0,50}\b(saved|accepted|committed|succeeded|storage|write)\b|does not (?:indicate|say) whether (?:storage|the write|the request) was? (?:accepted|saved|committed)|says nothing about whether .{0,80}\b(write|storage|request|commit|submission)\b/i;
+function unresolvedWriteOutcome(trace){
+ if(trace.verification?.completed===true||trace.events.some(e=>e.source==='verifier'&&e.facts?.receiptValid===true&&e.facts?.runMatches===true&&e.facts?.commitCount===1))return false;
+ const events=trace.events;
+ for(let i=0;i<events.length;i++){
+  const event=events[i];if(!authoritative(event))continue;const facts=event.facts??{},uncertain=facts.pending===true||uncertaintyText.test(event.text);
+  if(!uncertain)continue;const operationId=facts.operationId;
+  const later=events.slice(i+1).filter(e=>authoritative(e)&&((operationId&&e.facts?.operationId===operationId)||(!operationId&&!e.facts?.operationId)));
+  const resolved=later.some(e=>e.facts?.pending===false&&(Number.isSafeInteger(e.facts?.commitCount)||typeof e.facts?.receiptValid==='boolean')&&!uncertaintyText.test(e.text));
+  if(!resolved)return true;
+ }
+ return false;
+}
 // This is a conservative acceptance boundary, not a semantic truth oracle. Source
 // facts must come from trusted application/verifier adapters, never model output.
 export function acceptDiagnosis(rawSuggestion,trace,{allowedActions}={}){
@@ -42,7 +55,8 @@ export function acceptDiagnosis(rawSuggestion,trace,{allowedActions}={}){
  if(a==='restart')reasons.push('Restart may discard state and requires additional review; no automatic endorsement.');
  if(a==='wait'&&facts.pending!==true&&!cited.some(e=>supports('temporary_failure',e)))reasons.push('A pending operation or transient condition supporting wait is not established.');
  if(allowedActions&&!['stop','none','wait'].includes(a)&&!allowedActions.includes(a))reasons.push('Independent private state does not permit the recommended recovery.');
- let reviewRequired=false,independentReview;
+ let reviewRequired=false,independentReview,reviewReason;
+ if(!reasons.length&&unresolvedWriteOutcome(trace)){reviewRequired=true;reviewReason='Authoritative write outcome remains pending or unknown; inspect status before treating this advice as resolved.';}
  if(!reasons.length&&rawSuggestion.confidence==='high'&&!allowedActions?.includes(a)){
   const peer=diagnoseTelemetry(trace);independentReview={diagnosis:peer.diagnosis,action:peer.recovery.action,confidence:peer.confidence};
   if(peer.diagnosis!==d||peer.recovery.action!==a){reviewRequired=true;reasons.push('Independent telemetry interpretation disagrees with the high-confidence model advice; additional source review is required.');}
@@ -50,5 +64,5 @@ export function acceptDiagnosis(rawSuggestion,trace,{allowedActions}={}){
  const rejected=reasons.length>0;
  const suggestion=rejected?{diagnosis:'ambiguous',explanation:'ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.',evidenceIds:rawSuggestion.evidenceIds,recovery:{action:'stop',reason:'No recovery is approved by this diagnostic assessment. Independent verification and additional review are required.'},confidence:'low'}:structuredClone(rawSuggestion);
  validateDiagnosis(suggestion,trace);
- return {suggestion,rawSuggestion:structuredClone(rawSuggestion),semanticAssessment:{status:reviewRequired?'review-required':rejected?'abstained':'accepted',...(independentReview?{independentReview}:{}),reasons,rawHighConfidenceRejected:rejected&&rawSuggestion.confidence==='high',scope:'Conservative support checks, not semantic certification; private action guard and verifier remain authoritative'}};
+ return {suggestion,rawSuggestion:structuredClone(rawSuggestion),semanticAssessment:{status:reviewRequired?'review-required':rejected?'abstained':'accepted',...(independentReview?{independentReview}:{}),reasons:reviewReason?[...reasons,reviewReason]:reasons,rawHighConfidenceRejected:rejected&&rawSuggestion.confidence==='high',scope:'Conservative support checks, not semantic certification; private action guard and verifier remain authoritative'}};
 }

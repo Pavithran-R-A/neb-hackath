@@ -1,6 +1,6 @@
 # Isolated Workers + D1 candidate
 
-This candidate preserves the Node runtime unchanged. It has a native Worker fetch API, a separate guided synthetic-form UI, native WebCrypto receipts and real D1 SQL storage. It is **not approved for deployment**. The local proof passes functional boundaries, but does not establish that every hosted request fits Workers Free's 10ms CPU limit. In the reproducible local inspector run, mocked-model sampled active V8 time had p95 12.663ms and maximum 20.387ms; recovery p95 was 6.193ms and maximum 6.245ms. These are debugger samples, not Cloudflare CPU accounting. The model route exceeds 10ms even in this narrower sample; keep the Node fallback.
+This candidate preserves the Node runtime unchanged. It has a native Worker fetch API, a separate guided synthetic-form UI, native WebCrypto receipts and real D1 SQL storage. It is **not approved for deployment**. The local proof passes functional boundaries, but does not establish that every hosted request fits Workers Free's 10ms CPU limit. In the reproducible local inspector run, mocked-model sampled active V8 time had p95 15.003ms and maximum 20.410ms; recovery p95 was 8.689ms and maximum 13.074ms. These are debugger samples, not Cloudflare CPU accounting. The model route exceeds 10ms even in this narrower sample; keep the Node fallback.
 
 ## Reproduce locally
 
@@ -25,7 +25,7 @@ node scripts/workers-benchmark.mjs .cache/workers-benchmark.json
 
 ## Import account history before any inference
 
-`account-history.jsonl` is a non-secret snapshot of the canonical existing account history, not a provider balance statement. It contains the owner-attested59start and50judge reserve plus historical B–L costs, including the full unknown H reservation. Refresh from the canonical retained ledger immediately before a separately approved migration; later Node activity makes a prior snapshot stale.
+`account-history.jsonl` is a non-secret snapshot of the canonical existing account history, not a provider balance statement. It contains the owner-attested59start and50judge reserve plus historical B–M costs, including the full unknown H reservation and M's known partial-run usage. Its current imported total is $0.09000044. Refresh from the canonical retained ledger immediately before a separately approved migration; later Node activity makes a prior snapshot stale.
 
 ```sh
 node scripts/workers-import-account.mjs workers/account-history.jsonl .cache/workers-account-import.sql

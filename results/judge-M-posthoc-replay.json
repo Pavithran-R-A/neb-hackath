@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "type": "post-hoc-regression-replay",
+  "recordedAt": "2026-10-19T08:03:02.210Z",
+  "originalCampaignOutcomeSha256": "54906bc87f386862b5fc9f8ecf3e3d01c3b9617f047c31ccb9a6565eab5bd552",
+  "originalSourceCommit": "c2bae63d2f451774b33718573447e709445d0678",
+  "postHocGateSourceSha256": "27177333733289c4ddfd25e783731fa07fad316aeaae1cf4c34c0ea49470ecd1",
+  "inferenceRequests": 0,
+  "dataset": "consumed diagnosis-v3; this replay is regression evidence only, not held-out validation",
+  "model": {
+    "attemptedParsedResponses": 4,
+    "score": {
+      "cases": 4,
+      "attempted": 4,
+      "missing": 0,
+      "rawPairAgreement": 1,
+      "rawSafeAction": 2,
+      "rawHighConfidenceIncorrect": 0,
+      "acceptedHighConfidenceIncorrect": 0,
+      "acceptedCoverage": 3,
+      "acceptedPairAgreement": 1,
+      "supportedCases": 3,
+      "correctSupportedRawDenominator": 1,
+      "falseAbstentionsOnCorrectSupportedRaw": 0,
+      "reviewCases": 1,
+      "reviewCasesAccepted": 0,
+      "rows": [
+        {
+          "id": "v3-copper",
+          "pair": false,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "review_required",
+          "actualDisposition": "review-required"
+        },
+        {
+          "id": "v3-larch",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-marble",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-finch",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        }
+      ]
+    },
+    "rows": [
+      {
+        "id": "v3-copper",
+        "actualDisposition": "review-required",
+        "reasons": [
+          "Authoritative write outcome remains pending or unknown; inspect status before treating this advice as resolved."
+        ]
+      },
+      {
+        "id": "v3-larch",
+        "actualDisposition": "accepted",
+        "reasons": []
+      },
+      {
+        "id": "v3-marble",
+        "actualDisposition": "accepted",
+        "reasons": []
+      },
+      {
+        "id": "v3-finch",
+        "actualDisposition": "accepted",
+        "reasons": []
+      }
+    ]
+  },
+  "baseline": {
+    "attempted": 16,
+    "score": {
+      "cases": 16,
+      "attempted": 16,
+      "missing": 0,
+      "rawPairAgreement": 9,
+      "rawSafeAction": 9,
+      "rawHighConfidenceIncorrect": 3,
+      "acceptedHighConfidenceIncorrect": 1,
+      "acceptedCoverage": 9,
+      "acceptedPairAgreement": 8,
+      "supportedCases": 13,
+      "correctSupportedRawDenominator": 9,
+      "falseAbstentionsOnCorrectSupportedRaw": 1,
+      "reviewCases": 3,
+      "reviewCasesAccepted": 0,
+      "rows": [
+        {
+          "id": "v3-copper",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "review_required",
+          "actualDisposition": "abstained"
+        },
+        {
+          "id": "v3-larch",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-marble",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-finch",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-iris",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-cedar",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": true,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "review_required",
+          "actualDisposition": "review-required"
+        },
+        {
+          "id": "v3-opal",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": true,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-quartz",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": true,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "abstained"
+        },
+        {
+          "id": "v3-wren",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-saffron",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "abstained"
+        },
+        {
+          "id": "v3-topaz",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-russet",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": true,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "abstained"
+        },
+        {
+          "id": "v3-birch",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        },
+        {
+          "id": "v3-mica",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "abstained"
+        },
+        {
+          "id": "v3-ember",
+          "pair": false,
+          "safe": false,
+          "highConfidenceWrong": false,
+          "accepted": false,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "review_required",
+          "actualDisposition": "review-required"
+        },
+        {
+          "id": "v3-slate",
+          "pair": true,
+          "safe": true,
+          "highConfidenceWrong": false,
+          "accepted": true,
+          "falseAbstentionOnCorrectRaw": false,
+          "expectedDisposition": "accept_supported_diagnosis",
+          "actualDisposition": "accepted"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "campaign": "judge-M-fresh-v3-c2bae63d2f45",
+  "recordedAt": "2026-10-19T07:54:38.098Z",
+  "executionMode": "one live campaign, no retries or fallback",
+  "sourceCommit": "c2bae63d2f451774b33718573447e709445d0678",
+  "githubActionsUrl": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39218722986",
+  "githubActionsConclusion": "success",
+  "dataset": {
+    "cases": 16,
+    "suiteSha256": "4d356b56c78937d7b48abc2bca2edcba0d1e1c14e75fb3a9a2de6fa8924150e2",
+    "orderSha256": "d8c914fd76f44695d6a9d69a2725d250b7dd78bf957c12a98ad5fd1e32a26671",
+    "labelsWithheld": true
+  },
+  "requests": {
+    "preflight": 1,
+    "diagnoses": 16,
+    "totalMaximum": 17,
+    "preflightOutputTokens": 1024,
+    "diagnosisOutputTokensMaximum": 8192
+  },
+  "budget": {
+    "maximumEstimatedUsd": 0.1,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "providerPricesCheckedAt": "2026-10-19T07:52:11.742Z",
+    "ownerAttestedRemainingBeforeUsd": 58.9151067,
+    "fullEnvelopeRemainingAfterUsd": 58.8151067,
+    "judgingReserveUsd": 50,
+    "noCardOrPaidReplenishment": true
+  },
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "limitations": [
+    "Local ledger estimate is not provider balance",
+    "Report all actual attempts and failures; missing calls remain separate",
+    "No benchmark against alternate model, no retries, no merge or deployment"
+  ]
+}

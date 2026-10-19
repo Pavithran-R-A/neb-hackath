@@ -65,8 +65,8 @@ test('mocked NVIDIA over real Worker fetch/D1 reserves first, validates provider
 test('canonical account history import preserves known costs and full unknown reservation',async t=>{
  const {accountImport}=await import('../scripts/workers-import-account.mjs');
  const raw=await readFile(new URL('../workers/account-history.jsonl',import.meta.url),'utf8');const plan=accountImport(raw);
- assert.equal(plan.committedNano,84893300);assert.deepEqual(plan.unresolved,[]);assert.equal(plan.reservations,11);
- const {db}=await fixture(t);await db.exec(plan.sql);assert.equal((await db.prepare('SELECT committed_nano FROM accounts').first()).committed_nano,84893300);await assert.rejects(db.exec(plan.sql));
+ assert.equal(plan.committedNano,90000440);assert.deepEqual(plan.unresolved,[]);assert.equal(plan.reservations,12);
+ const {db}=await fixture(t);await db.exec(plan.sql);assert.equal((await db.prepare('SELECT committed_nano FROM accounts').first()).committed_nano,90000440);await assert.rejects(db.exec(plan.sql));
  const header=JSON.stringify({event:'initial',initialAccountUsd:59,judgeReserveUsd:50,initialSpentUsd:0});const unresolved=accountImport(header+'\n'+JSON.stringify({event:'reserved',campaignId:'interrupted',maxReservedUsd:.02}));assert.equal(unresolved.committedNano,20000000);assert.deepEqual(unresolved.unresolved,['interrupted']);
  assert.throws(()=>accountImport(header+'\n'+JSON.stringify({event:'settled',campaignId:'missing',usageComplete:true,knownCostUsd:0})));
 });
