@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   hosted-journey:
-    if: ${{ github.event.action == 'synchronize' && github.repository == 'Pavithran-R-A/neb-hackath' && github.event.pull_request.head.repo.full_name == 'Pavithran-R-A/neb-hackath' && github.event.pull_request.number == 2 && github.event.pull_request.head.ref == 'feat/phase1-verified-completion' && github.event.pull_request.base.ref == 'main' }}
+    if: ${{ github.event.action == 'synchronize' && github.repository == 'Pavithran-R-A/neb-hackath' && github.event.pull_request.head.repo.full_name == 'Pavithran-R-A/neb-hackath' && github.event.pull_request.number == 2 && github.event.pull_request.head.ref == 'feat/phase1-verified-completion' && github.event.pull_request.base.ref == 'main' && vars.RECEIPTLAB_EXPERIMENT_URL != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -26,5 +26,5 @@ jobs:
           node-version: '24'
       - name: Send one bounded authenticated HTTPS journey
         env:
-          RECEIPTLAB_EXPERIMENT_URL: https://receiptlab-judge-experiment-20261020.pavithranraar.workers.dev/
+          RECEIPTLAB_EXPERIMENT_URL: ${{ vars.RECEIPTLAB_EXPERIMENT_URL }}
         run: node scripts/cloudflare-experiment-client.mjs
