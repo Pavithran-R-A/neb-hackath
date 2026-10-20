@@ -6,7 +6,15 @@
   "workers_dev": true,
   "preview_urls": false,
   "vars": {
-    "INFERENCE_ENABLED": "false"
+    "INFERENCE_ENABLED": "false",
+    "EXPERIMENT_AUTH_REQUIRED": "true",
+    "GITHUB_OIDC_AUDIENCE": "receiptlab-cloudflare-experiment",
+    "GITHUB_REPOSITORY": "Pavithran-R-A/neb-hackath",
+    "GITHUB_REPOSITORY_ID": "1422019854",
+    "GITHUB_REF": "refs/pull/2/merge",
+    "GITHUB_HEAD_REF": "feat/phase1-verified-completion",
+    "GITHUB_BASE_REF": "main",
+    "GITHUB_WORKFLOW_PATH": "Pavithran-R-A/neb-hackath/.github/workflows/cloudflare-experiment.yml"
   },
   "d1_databases": [
     {

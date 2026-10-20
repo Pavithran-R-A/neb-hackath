@@ -7,6 +7,7 @@ import {diagnoseDeterministic} from './baseline.mjs';
 import {diagnosisSchema,validateDiagnosis} from './contract.mjs';
 import {sha,receipt,verify,canonical} from './crypto.mjs';
 import {stmt,reserve,settle} from './store.mjs';
+import {verifyGitHubOidc} from './github-oidc.mjs';
 const json=(body,status=200,headers={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store',...headers}});
 const problem=(status,message)=>{throw Object.assign(new Error(message),{status});};
 const executable=s=>s.status!=='completed'&&!s.displaySuccess&&s.task.consent===true&&(s.step===2&&(s.error==='temporary_failure'||s.error==='consent_expired')||s.step===0&&s.variant==='format'&&s.error==='validation'&&/^\d{10}$/.test(s.task.phone));
@@ -33,6 +34,12 @@ export async function modelDiagnosis(t,env,body,sessionId){
  const suggestion=JSON.parse(c.message.content);validateDiagnosis(suggestion,t);const costNano=Math.ceil(u.prompt_tokens*campaign.input_nano+u.completion_tokens*campaign.output_nano);await settle(env.DB,reservation,costNano);return {suggestion,modelValidated:true,usage:u,estimatedCostUsd:costNano/1e9};
 }
 export async function handle(request,env){try{
+ if(env.EXPERIMENT_AUTH_REQUIRED==='true'){
+  const authorization=request.headers.get('authorization')??'';
+  const token=authorization.startsWith('Bearer ')?authorization.slice(7):'';
+  try{await verifyGitHubOidc(token,{audience:env.GITHUB_OIDC_AUDIENCE,repository:env.GITHUB_REPOSITORY,repositoryId:env.GITHUB_REPOSITORY_ID,ref:env.GITHUB_REF,headRef:env.GITHUB_HEAD_REF,baseRef:env.GITHUB_BASE_REF,workflowPath:env.GITHUB_WORKFLOW_PATH});}
+  catch{problem(401,'GitHub Actions identity required');}
+ }
  if(request.method==='GET'&&new URL(request.url).pathname==='/')return new Response(html,{headers:{'content-type':'text/html;charset=utf-8','cache-control':'no-store','content-security-policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"}});
  if(request.method==='GET'&&new URL(request.url).pathname==='/candidate.css')return new Response(css,{headers:{'content-type':'text/css;charset=utf-8','cache-control':'no-store'}});
  if(request.method==='GET'&&new URL(request.url).pathname==='/candidate.js')return new Response(javascript,{headers:{'content-type':'application/javascript','cache-control':'no-store'}});
