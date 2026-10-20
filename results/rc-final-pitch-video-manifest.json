@@ -1,0 +1,121 @@
+{
+  "status": "owner-review draft; not uploaded, submitted, publicly deployed or licensed",
+  "supersedes": "The older 155-second narrated review cut remains preserved by results/rc-narrated-video-manifest.json; this is a new derivative candidate.",
+  "video": ".cache/qa/receiptlab-judge-pitch.mp4",
+  "sha256": "cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6",
+  "bytes": 3507128,
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2
+      },
+      {
+        "codec_name": "mov_text",
+        "codec_type": "subtitle"
+      }
+    ],
+    "format": {
+      "duration": "119.261333",
+      "size": "3507128"
+    }
+  },
+  "durationSeconds": 119.261333,
+  "narration": "Synthetic English CMU Flite slt voice, local/offline; not a human voice",
+  "footage": "Actual Chromium recordings only: current local deterministic-only workbench and genuine earlier campaign L private-HTTPS NVIDIA/Nebius capture; synthetic QA interactions, not human user study. Current local section sends zero provider requests. Live section is a historical real campaign and is disclosed on screen.",
+  "editing": "No speed changes. 90.3 seconds of source browser video/interaction at original speed plus 8.4 seconds of genuine historical Campaign L screenshots; 20.5 seconds editorial results/end slates. Product clips are normalized and labeled; v3 evidence remains negative and partial. English captions are selectable; sentence timing is approximate.",
+  "sourceAssets": [
+    {
+      "path": ".cache/qa/release-demo-1792487446048/raw/page@db1d47ae27c1da5170576000266405d5.webm",
+      "sha256": "69e4f6e35526eff497bdd9137d2e19d3fae21013ffb820d8a56ff800f31e94c4",
+      "bytes": 8316058
+    },
+    {
+      "path": ".cache/qa/release-demo-1792487446048/raw/page@13e08c9c709cd267eb0aa7f4c055ebef.webm",
+      "sha256": "f515d073126a88c5994be9f1478a766a5821fbe868a864a31aa543e4bafad553",
+      "bytes": 797319
+    },
+    {
+      "path": ".cache/qa/release-demo-1792487446048/raw/page@bed32d057c62063ad7ebfba43c1a750a.webm",
+      "sha256": "efcd53204d638211055870572fb4a7d2598e4a219954e32f55fedc78e0aad664",
+      "bytes": 955611
+    },
+    {
+      "path": ".cache/qa/live-video/page@bf51246dff09d42977533667cd5e8db3.webm",
+      "sha256": "977ef1a561e2771ddf847651c77f8ae369f862feb8a1636a0160f16fb754c603",
+      "bytes": 4706301
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-grant-transient-live-diagnosis.png",
+      "sha256": "a35d46f1c86e086cd716488597f9867c9cf1bb3a0e8b2b962a186f527c5e9640",
+      "bytes": 409662
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-grant-transient-live-outcome.png",
+      "sha256": "c2905f65789cc485964942fb9fe06ca9416a8ddcc2011150658d1a5ad9e6d766",
+      "bytes": 409401
+    },
+    {
+      "path": ".cache/qa/release-demo-1792487446048/capture-manifest.json",
+      "sha256": "d3af8831a75d81abe4b8180a9309732bf9bf8ec7bce010ddf3336f9418c9fc63",
+      "bytes": 3513
+    },
+    {
+      "path": "results/rc-video-manifest.json",
+      "sha256": "54ae1271917b2a3a886f9b2ee210c115882e1f5c835b9c7e9c2bb2dc7a6f7e46",
+      "bytes": 2802
+    },
+    {
+      "path": "results/rc-L-browser-outcome.json",
+      "sha256": "bfb7442aa4a0140026223bed8e67e5177e81f3cadd52a98b6035be11f9f85061",
+      "bytes": 52578
+    },
+    {
+      "path": "results/rc-L-preflight.json",
+      "sha256": "926d11629f6df29eccdc138e007083eabc2ffc188716e0f3bf3827a48931e6b2",
+      "bytes": 1674
+    },
+    {
+      "path": "results/rc-L-plan.json",
+      "sha256": "d268424d1bb4a059701e4c63f3495c830eebb7861dee39d4ec7314803862e64b",
+      "bytes": 1475
+    },
+    {
+      "path": "scripts/record-release-demo.mjs",
+      "sha256": "3c7d3df1fd46e456aadae2e1e24f0fcab21d3e5c503f98a34642a70a15dd3f03",
+      "bytes": 8661
+    },
+    {
+      "path": ".cache/qa/build-final-pitch.py",
+      "sha256": "0de8295dbe743ac6db5087c9e4a7f55035f26458b49500432942ba51c0646af5",
+      "bytes": 11245
+    }
+  ],
+  "captureAssertions": {
+    "label": "completed",
+    "atSeconds": 69.062,
+    "pageErrors": [],
+    "providerRequests": 0,
+    "positiveVerified": true,
+    "negativeRejected": true,
+    "negativeVerified": false
+  },
+  "modelCostForNewVideo": 0,
+  "newInferenceRequests": 0,
+  "limitations": [
+    "Historical live campaign is not current behavior and must remain labeled as such.",
+    "Synthetic QA is not human usability evidence.",
+    "No public host; owner license, brand/media, upload and submission approval remain pending.",
+    "Voice/caption quality requires owner review."
+  ]
+}

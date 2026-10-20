@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "testedRuntimeSourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39095156804",
+  "localVerification": {"command": "npm test", "exitCode": 0, "passed": 301, "failed": 0, "skipped": 0, "durationMs": 41346.720843, "logCloudPath": ".cache/qa/rc-final-tests.txt"},
+  "hostedSourceVerification": {"passed": 301, "failed": 0, "skipped": 0, "npmAuditFindings": 0, "offlineBenchmark": "skipped; not requested"},
+  "liveEvidence": "rc-L-browser-outcome.json",
+  "evaluation": "rc-I-lightning-v2-outcome.json",
+  "posthocReview": "rc-semantic-review-amendment.json",
+  "creditAccounting": "rc-credit-usage-summary.json",
+  "privateGateway": "rc-caddy-rehearsal.json",
+  "isolatedContainer": "rc-container-rehearsal.json",
+  "video": "rc-video-manifest.json",
+  "independentReview": {"scope": "Read-only AI review, not external expert validation or comprehensive security certification", "shutdownLifecycleFocusedTests": 23, "browserResponseBindingFocusedTests": 7, "finalEvidenceReconciliation": "Campaign L raw evidence, four export checksums, canonical cumulative ledger and costs reconciled without a blocking finding"},
+  "protectedCredentials": {"apiKeyPresent": true, "configuredModelPresent": true, "savedKeyBinding": true, "allowedDomains": ["api.tokenfactory.nebius.com"], "valuesExposed": false},
+  "remainingLimitations": [
+    "Synthetic AI-authored/reviewed dataset; no external expert or human usability study.",
+    "Amended semantic gate is a post-hoc consumed-output replay, not fresh held-out validation; common errors and false abstention remain possible.",
+    "One Super HTTP500 has unknown usage; its full .05 campaign envelope is held conservatively.",
+    "L service-report.stage remains preflight after readiness; immutable browser and ledger artifacts establish actual completed journeys. Do not infer task stage from that metadata label.",
+    "Captioned 36.36-second preview has no narration and is not the final public submission video.",
+    "Default public entrypoint has inference disabled; short-lived bounded live campaigns need an approved judge operating schedule, retained host and ledger; no unrestricted public inference endpoint.",
+    "No account-specific free-host/retained-volume entitlement or public deployment was verified; hosting, license/ownership/eligibility and publication approvals remain.",
+    "Connected hosting, Linear and comprehensive security-scan tools were unavailable in this session; no remote resource/task update or certification is claimed."
+  ],
+  "inferenceFurtherPlannedThisSprint": false,
+  "publicDeployment": false,
+  "merged": false,
+  "uploaded": false,
+  "submitted": false
+}

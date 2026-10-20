@@ -8,3 +8,9 @@ playwright-report/
 test-results/
 *.log
 .DS_Store
+
+.cache/
+.npm/
+results/local/
+
+/src/build-manifest.json

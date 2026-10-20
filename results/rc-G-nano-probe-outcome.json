@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-G-nano-probe",
+  "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+  "suiteSha256": "50b3721c3fd69b7c477de3fe1b208eeff72b9bc13a185daee62458a684dd7728",
+  "suiteId": "config-probes-v1",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "sampling": {
+    "temperature": 1,
+    "top_p": 1
+  },
+  "startedAt": "2026-10-18T03:26:29.482Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "modelExecution": "live-nebius",
+  "raw": [],
+  "accepted": [],
+  "baseline": [
+    {
+      "id": "consumed-runtime-probe-1",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "verdict",
+          "event-5"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 3.9856680000000324
+    },
+    {
+      "id": "consumed-runtime-probe-2",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "verdict",
+          "ui-claim"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.23557499999992615
+    }
+  ],
+  "stage": "preflight",
+  "noRetries": true,
+  "catalog": {
+    "checkedAt": "2026-10-18T03:26:29.743Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "status": "stopped",
+  "failedStage": "preflight",
+  "error": "Campaign stopped safely; no retry",
+  "providerOutcome": {
+    "mode": "live",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.00039893999999999997,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 1,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-18T03:26:23.826Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "provider": {
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "refused": false,
+      "contentCharacters": 160,
+      "reasoningTokens": null
+    },
+    "usage": {
+      "promptTokens": 235,
+      "completionTokens": 143,
+      "totalTokens": 378,
+      "complete": true
+    },
+    "latencyMs": 800.140042,
+    "estimatedModelCostUsd": 0.00004842,
+    "costBasis": "configured token-rate estimate; not a billing statement"
+  },
+  "semantic": {
+    "accepted": 0,
+    "abstained": 0,
+    "rawHighConfidenceRejected": 0
+  },
+  "finishedAt": "2026-10-18T03:26:30.549Z",
+  "campaign": {
+    "requestsReserved": 1,
+    "reservedUsd": 0.00040812,
+    "knownCostUsd": 0.00004842,
+    "usageComplete": true,
+    "halted": true,
+    "closed": true
+  }
+}

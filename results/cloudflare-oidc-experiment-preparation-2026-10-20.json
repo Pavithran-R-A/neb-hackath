@@ -1,0 +1,47 @@
+{
+  "recorded_at_utc": "2026-10-20",
+  "purpose": "Sanitized evidence for GitHub OIDC Cloudflare HTTPS experiment preparation",
+  "baseline_remote_head": "bfd80e83149f66e0bdc7a87968809cb600de935e",
+  "cloudflare_account": "Personal Cloudflare account (owner-selected; exact account ID omitted)",
+  "cloudflare_provisioning": "not performed; Wrangler reported not authenticated; no CLOUDFLARE_* variable names were present; GitHub Actions secret listing returned HTTP 403",
+  "worker_resources_created": 0,
+  "hosted_https_requests": 0,
+  "cloudflare_cpu_samples": null,
+  "cloudflare_d1_usage_metrics": null,
+  "inference_requests": 0,
+  "local_validation": {
+    "node": "24.19.0",
+    "focused_oidc_tests_after_final_auth_changes": {
+      "passed": 5,
+      "failed": 0
+    },
+    "full_nonbillable_suite": {
+      "command": "npm test",
+      "passed": 346,
+      "failed": 0,
+      "skipped": 0
+    },
+    "secret_scan": {
+      "files_checked": 337,
+      "findings": 0
+    },
+    "npm_audit_vulnerabilities": 0,
+    "wrangler_dry_run": "passed; only the intended D1 binding and inference-disabled/OIDC identity variables were listed; no account operation was made",
+    "workflow_yaml": "parsed successfully",
+    "local_workerd_d1_harness": "19 local workerd/D1 HTTP requests; recovery independently receipt-verified; approval replay rejected; false-success remained incomplete; cross-session read rejected; deterministic advice only"
+  },
+  "limitations": [
+    "No live GitHub OIDC token was requested in this environment; signed local fixtures used a generated test key and mocked GitHub JWKS response.",
+    "No hosted Worker/D1 endpoint or Cloudflare analytics access was available; CPU/Free-plan feasibility remains INCONCLUSIVE.",
+    "Vercel Hobby + Neon Free remains an unverified account entitlement and unimplemented durable port; public hosting decision is NO-GO pending proof."
+  ],
+  "source_sha256": {
+    ".github/workflows/cloudflare-experiment.yml": "471914eee80b17d82c623fd560be1ad9f4670ebc9acea548eaaf631440292091",
+    "scripts/cloudflare-experiment-client.mjs": "3f1cca8cb748995420a58656a5df39a5e34baa7a1f832abd858fb0e0d950bfe9",
+    "workers/github-oidc.mjs": "2de9215b207e3fae381604df7629b117561b0fd4be74819277ccb08baed853be",
+    "workers/index.mjs": "2bacb616d9635a1988313921c04eb6230da6dcb1700ea2ce7908209280862101",
+    "workers/wrangler.experiment.jsonc": "37080b30e4515d11e6e243b885ad31f0c558623b3ab5921cbfe2eff032494c12",
+    "test/github-oidc.test.mjs": "3992d8e08d8d7e6dd6f1ca5c49fb58847ca38049fde56d5a8641764163178027",
+    "docs/release/cloudflare-experiment-runbook.md": "9fef5446f49dcce2dec96000f7f21d02179d2a1060ffc13f896b7e3d7ca8d2d3"
+  }
+}

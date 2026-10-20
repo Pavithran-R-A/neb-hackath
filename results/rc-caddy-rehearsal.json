@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "kind": "private-loopback-actual-Caddy-HTTPS-rehearsal",
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "startedAt": "2026-10-18T03:56:29.056Z",
+  "finishedAt": "2026-10-18T03:56:29.519Z",
+  "outcome": "passed",
+  "caddyVersion": "v2.11.7 h1:yj0Y4fYZGPkSvibBJ1sTWE33xC0fxztVyXEW5iIdUT4=",
+  "caddyBinarySha256": "678ade3bfc088749c81a681adc603333ee0bb023b6a6cfe3c0f58bef8ff854e9",
+  "candidateCaddyfileSha256": "0577a8d8f08d702a345f6d575d295251c82694524da80772bda487e1904929f5",
+  "rehearsalCaddyfileSha256": "4a546004e3cbd35471e93e258639e9a5ed3152fc9470e54329cd0fee8ff2a6ce",
+  "tls": {
+    "certificate": "temporary one-day self-signed certificate, trusted explicitly for this test",
+    "serverNameVerified": true,
+    "acmeDisabled": true,
+    "certificateAndPrivateKeyRemovedDuringCleanup": true
+  },
+  "checks": {
+    "actualCaddyConfigValidated": true,
+    "adminDisabled": true,
+    "automaticHttpsDisabled": true,
+    "listenersLoopbackOnly": true,
+    "httpsHealthAndInferenceDisabled": true,
+    "directSpoofDenied": true,
+    "secureHttpOnlySameSiteCookie": true,
+    "singleOriginCanonicalFormLink": true,
+    "sameOriginFormAndAssets": true,
+    "serverReceiptVerifiedBeforeRestart": true,
+    "serverReceiptAndSessionSurviveActualBackendProcessRestart": true,
+    "otherSessionCannotReadForm": true,
+    "duplicateSubmissionDeniedAfterRestart": true,
+    "safeExport": true,
+    "actualCaddyStripsAllForwardedHeaders": true
+  },
+  "observedUpstreamRequests": 15,
+  "allUpstreamRequestsCanonicalHostAndNoForwardedHeaders": true,
+  "modelRequests": 0,
+  "resourcesCreated": "temporary private loopback processes and temporary filesystem data only",
+  "publicDeployment": false,
+  "limitations": [
+    "No public DNS, public listener, external certificate issuance or hosting resource.",
+    "Uses an ephemeral loopback observation hop to inspect Caddy outbound headers before the unchanged runtime.",
+    "Source runtime and default public entrypoint are tested; prepared systemd unit is not installed or exercised.",
+    "Does not establish provider quotas, durable-volume entitlement, hosted availability, no-charge guarantees or NVIDIA model behavior."
+  ]
+}

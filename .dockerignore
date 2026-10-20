@@ -1,0 +1,16 @@
+**
+!package.json
+!package-lock.json
+!.npmrc
+!src/
+!src/**
+!scripts/
+!scripts/**
+!evaluation/
+!evaluation/diagnosis-v1/
+!evaluation/diagnosis-v1/**
+# Never send generated provenance or local secret/cache inputs in runtime trees.
+src/build-manifest.json
+**/.env
+**/.env.*
+**/.cache/

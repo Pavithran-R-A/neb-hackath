@@ -1,0 +1,31 @@
+{
+  "recordings": [
+    {
+      "cloudPath": ".cache/qa/live-video/page@5575a64d8c0e2697857262945c244583.webm",
+      "bytes": 969648,
+      "sha256": "99d2137ce1d592998a18494827933b771911db6e88f2fe2e1502137a3384a6d5"
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@387f28f716e11a746fa5e7ecce82af86.webm",
+      "bytes": 3001785,
+      "sha256": "a61284a4a09fb34e6c93cc53e789a6ab28ffae9c501e0338554a29d349fc4102"
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@9148b2c536f968043d32c272c1a2c431.webm",
+      "bytes": 474090,
+      "sha256": "e73caeb3da76682a1434474188651a811474d7b5dd2fda9c69cea7fcd1f598ee"
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@9635e37132753fad618fee3aa301bb55.webm",
+      "bytes": 359067,
+      "sha256": "eb89e538a39d9ab25eac881b97fd21ca441b50128f9a27f156bd146374a54d85"
+    },
+    {
+      "cloudPath": ".cache/qa/live-video/page@87784bcd925fd6cc3f44f802df5c4209.webm",
+      "bytes": 1707540,
+      "sha256": "0234e64b1557c69872627f16fa32c9d810e52410ebe4c540398ba7ce96659aa2"
+    }
+  ],
+  "status": "Raw local engineering browser recordings; no audio/edit/public upload/submission. E failed, F positive/guarded-negative evidence; use timestamps and browser outcomes to distinguish pages.",
+  "plan": "docs/release/demo-recording-plan.md"
+}

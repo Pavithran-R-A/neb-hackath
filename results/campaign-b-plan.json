@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-B-diagnosis-v1-owner6235724302",
+  "recordedAt": "2026-10-17T15:45:47.207Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Independent16case grounded failure diagnosis vs frozen competent rules baseline; no browser actions",
+  "sourceCommit": "f0139bbf0fdb46d7f016c2fc56700d4a20b95fbd",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "caseCount": 16,
+  "maxRequests": 17,
+  "preflightMaxOutputTokens": 1024,
+  "diagnosisMaxOutputTokens": 2048,
+  "maxReservedUsd": 0.1,
+  "worstCaseEstimateUsd": 0.02875584,
+  "catalog": {
+    "checkedAt": "2026-10-17T15:44:22.519Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "judgeReserveUsd": 50,
+  "financialBasis": "Standing owner59 credit/no-card attestation, less prior known token-cost estimates; no provider balance claim",
+  "standingAllocation": "1.95 experimental envelope; 50 judge reserve retained",
+  "status": "recorded-before-execution",
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39046343559"
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-H-super-probe",
+  "recordedAt": "2026-10-18T03:27:30.068Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Supported alternative model/sampling on two consumed real runtime traces; fixed8192cap; no reasoning overrides, no retry",
+  "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+  "suiteSha256": "50b3721c3fd69b7c477de3fe1b208eeff72b9bc13a185daee62458a684dd7728",
+  "suiteId": "config-probes-v1",
+  "caseIds": [
+    "consumed-runtime-probe-1",
+    "consumed-runtime-probe-2"
+  ],
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "maxRequests": 3,
+  "preflightOutputLimit": 1024,
+  "preflightTemperature": 0,
+  "diagnosticSampling": {
+    "temperature": 1,
+    "top_p": 0.95
+  },
+  "maxOutputTokens": 8192,
+  "spendLimitUsd": 0.05,
+  "worstCaseEstimateUsd": 0.033667199999999994,
+  "inputUsdPerMillion": 0.3,
+  "outputUsdPerMillion": 0.9,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39052789817",
+  "noRetries": true,
+  "noFallback": true,
+  "judgeReserveUsd": 50,
+  "estimatedSpentBeforeUsd": 0.013818479999999998,
+  "balanceBasis": "Standing owner59 credit/no-card attestation less persistent ledger estimates; timestamp derives authorization metadata now, not a new provider balance",
+  "status": "recorded-before-execution"
+}

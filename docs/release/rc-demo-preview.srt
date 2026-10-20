@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:10,000
+Positive case: a transient error. Actual NVIDIA diagnosis is advice, not completion proof.
+
+2
+00:00:10,000 --> 00:00:14,000
+Explicit automated synthetic-QA approval. The independent verifier confirms a signed receipt.
+
+3
+00:00:14,000 --> 00:00:35,000
+Negative case: misleading success. The actual model wait is shown; no automatic retry.
+
+4
+00:00:35,000 --> 00:00:36,360
+Model recommends stop. No receipt exists; completion claim stays rejected.

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T15:33:38.792Z",
+  "filesSha256": {
+    "src/diagnosis/baseline.mjs": "4d42996cfe7a08bf97cbf8770740de5a237039f7094964817c695e5978e6ff40",
+    "src/diagnosis/contract.mjs": "8c85401ae6e5f7a0e3f6d10dab7491767d9f4dc661d746309fd1458ee790d0a5",
+    "src/diagnosis/nebius.mjs": "c0a1c45006494c8625850e124d3fb2155c573151f11a68083ca8178862b7c22e"
+  },
+  "independence": "Policy/baseline authored before root read independently authored cases or labels. Dataset reviewer has no policy access. Cases synthetic, not external human ground truth.",
+  "evaluation": "NOT RUN",
+  "tuningProhibitedAfterEvaluation": true
+}

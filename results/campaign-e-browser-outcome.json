@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-17T16:07:14.586Z",
+  "executionKind": "live-nebius",
+  "approvalActor": "authorized automated synthetic QA",
+  "journeys": [],
+  "publicDeployment": false,
+  "status": "stopped",
+  "error": "Expected values to be strictly equal:\n\n'stop' !== 'retry'\n",
+  "finishedAt": "2026-10-17T16:07:35.233Z"
+}

@@ -1,0 +1,82 @@
+
+> neb-hackath@0.0.1 test:ci
+> npm test
+
+
+> neb-hackath@0.0.1 test
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs
+
+✔ guard denies invented data, arbitrary selectors, navigation, JS and unknown controls (1.193668ms)
+✔ URL guard permits only the exact synthetic run and assets, never evaluator endpoints (0.286672ms)
+✔ settling a failed click handles a later response-wait rejection (351.372296ms)
+✔ server requires every step, valid fields, and explicit consent (44.640594ms)
+✔ receipt rejects mutation, wrong task, wrong run and duplicate submission (15.564723ms)
+✔ false-success display has no verifiable receipt (7.433886ms)
+✔ format validation, one-shot transient failure, and consent reset are reproducible (20.829982ms)
+✔ unknown runs and malformed requests fail without leaking evaluator state (7.365294ms)
+✔ summary separates expected negatives, false claims, blocked actions and actual completion (0.888588ms)
+▶ both browser agents execute all ten fixed cases; evaluator determines completion
+  ✔ grant-clean (730.227983ms)
+  ✔ workshop-clean (646.272199ms)
+  ✔ grant-renamed (1896.38651ms)
+  ✔ workshop-unlabeled (1848.752778ms)
+  ✔ grant-phone-format (2033.380405ms)
+  ✔ workshop-consent-reset (665.998414ms)
+  ✔ grant-transient (668.040534ms)
+  ✔ workshop-false-success (567.159127ms)
+  ✔ grant-invalid-email (1823.006543ms)
+  ✔ workshop-injection (577.882176ms)
+✔ both browser agents execute all ten fixed cases; evaluator determines completion (11722.789793ms)
+✔ premature done and an untrusted policy cannot forge server completion (474.768916ms)
+✔ Nebius adapter action contract drives the real browser (simulated transport; no inference) (572.730654ms)
+✔ non-billable verbose catalog selects only configured model and normalizes per-token pricing (21.49845ms)
+✔ catalog rejects absent/duplicate models, malformed or non-token pricing, errors without disclosure (1.793029ms)
+✔ application completion claims require independent verification; raw failures remain visible (0.818583ms)
+✔ scenario selectors validate exact IDs and frozen evaluation split (0.823ms)
+✔ the initial cloud-only test harness runs (0.958303ms)
+✔ the foundation smoke test does not need live API access (0.115544ms)
+✔ live inference requires key, explicit paid approval and NVIDIA Nemotron model (1.046005ms)
+✔ Nemotron client sends bounded JSON to official endpoint and accounts for measured usage (26.561278ms)
+✔ provider errors are sanitized, never retried or silently replaced (0.497719ms)
+✔ wrong model, invalid JSON, missing usage and excessive output fail safely (1.316743ms)
+✔ provider latency includes streamed response body, not just response headers (40.998283ms)
+✔ malformed null envelope never reports a real attempted call as free (0.707335ms)
+✔ dry-run checks presence without any network call or disclosure (1.094157ms)
+✔ no request without explicit approval, a positive spending limit, valid prices and credentials (1.27528ms)
+✔ one request validates exact model, JSON batch and complete usage with sanitized results (20.830249ms)
+✔ HTTP errors, transport failures and timeouts do not retry or leak provider text (2.850211ms)
+✔ unexpected models, malformed JSON/envelopes, truncated/refused responses and bad usage fail closed (5.270175ms)
+✔ CLI defaults to no network and cannot opt into billing accidentally (221.738285ms)
+✔ valid JSON key ordering does not affect the action contract (0.645111ms)
+✔ unexpected successful HTTP status is rejected (0.456377ms)
+✔ cleanup failure preserves the sanitized HTTP error (5.871539ms)
+✔ preflight refuses limits above the project promo-credit ceiling without a request (0.359612ms)
+▶ DOM baseline handles development and new evaluation tasks; server verification gates every report
+  ✔ grant-clean (417.591502ms)
+  ✔ workshop-clean (310.007974ms)
+  ✔ grant-renamed (301.828256ms)
+  ✔ workshop-unlabeled (318.454962ms)
+  ✔ grant-phone-format (361.874137ms)
+  ✔ workshop-consent-reset (382.341513ms)
+  ✔ grant-transient (412.961842ms)
+  ✔ workshop-false-success (285.622583ms)
+  ✔ grant-invalid-email (149.689156ms)
+  ✔ workshop-injection (301.282948ms)
+  ✔ held-grant-synonyms (300.610517ms)
+  ✔ held-workshop-reordered (300.556589ms)
+  ✔ held-grant-persistent-outage (713.612515ms)
+  ✔ held-workshop-wrong-data (314.429079ms)
+  ✔ held-grant-misleading-banner (300.467819ms)
+  ✔ held-workshop-synonyms (300.92696ms)
+  ✔ held-workshop-unavailable (163.734288ms)
+  ✔ held-grant-compound-errors (473.765152ms)
+✔ DOM baseline handles development and new evaluation tasks; server verification gates every report (6411.291966ms)
+✔ misleading success banner cannot become a user-visible completion without a server receipt (337.083621ms)
+ℹ tests 64
+ℹ suites 0
+ℹ pass 64
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22023.995426

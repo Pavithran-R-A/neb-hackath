@@ -1,0 +1,47 @@
+
+> neb-hackath@0.0.1 test:ci
+> npm test
+
+
+> neb-hackath@0.0.1 test
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs
+
+✔ guard denies invented data, arbitrary selectors, navigation, JS and unknown controls (2.003037ms)
+✔ URL guard permits only the exact synthetic run and assets, never evaluator endpoints (9.569546ms)
+✔ settling a failed click handles a later response-wait rejection (463.361419ms)
+✔ server requires every step, valid fields, and explicit consent (70.130852ms)
+✔ receipt rejects mutation, wrong task, wrong run and duplicate submission (20.271027ms)
+✔ false-success display has no verifiable receipt (10.142076ms)
+✔ format validation, one-shot transient failure, and consent reset are reproducible (26.698488ms)
+✔ unknown runs and malformed requests fail without leaking evaluator state (9.701541ms)
+✔ summary separates expected negatives, false claims, blocked actions and actual completion (1.368057ms)
+▶ both browser agents execute all ten fixed cases; evaluator determines completion
+  ✔ grant-clean (932.837176ms)
+  ✔ workshop-clean (677.313002ms)
+  ✔ grant-renamed (1987.198966ms)
+  ✔ workshop-unlabeled (2017.581919ms)
+  ✔ grant-phone-format (2126.776738ms)
+  ✔ workshop-consent-reset (785.356892ms)
+  ✔ grant-transient (712.983971ms)
+  ✔ workshop-false-success (717.569364ms)
+  ✔ grant-invalid-email (1872.399828ms)
+  ✔ workshop-injection (611.311898ms)
+✔ both browser agents execute all ten fixed cases; evaluator determines completion (12803.979451ms)
+✔ premature done and an untrusted policy cannot forge server completion (631.132902ms)
+✔ Nebius adapter action contract drives the real browser (simulated transport; no inference) (661.165514ms)
+✔ the initial cloud-only test harness runs (0.88046ms)
+✔ the foundation smoke test does not need live API access (0.134431ms)
+✔ live inference requires key, explicit paid approval and NVIDIA Nemotron model (2.240029ms)
+✔ Nemotron client sends bounded JSON to official endpoint and accounts for measured usage (40.117951ms)
+✔ provider errors are sanitized, never retried or silently replaced (1.108249ms)
+✔ wrong model, invalid JSON, missing usage and excessive output fail safely (2.383161ms)
+✔ provider latency includes streamed response body, not just response headers (41.892353ms)
+✔ malformed null envelope never reports a real attempted call as free (0.830578ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16408.232206

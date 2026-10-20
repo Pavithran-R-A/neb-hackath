@@ -1,0 +1,4 @@
+{"at":"2026-10-18T03:49:14.325Z","event":"created","approvalId":"rc-K-private-https-ui","authorizationSha256":"aa1f2863182e00e8d0fa7b0955c5f9fcdb7a47c8faa1f8dc172545039676e7cd","sourceCommit":"922a9cb8bd317b4df606354bd55945b3f590142f","suiteSha256":"e6be598a257c94f8606fe954ac7324e62535cb54024e72d64ab7afb2e152b19c","maxRequests":3,"spendLimitUsd":0.02,"maxOutputTokens":8192}
+{"at":"2026-10-18T03:49:14.944Z","event":"reserved","request":1,"inputAllowance":2706,"outputLimit":1024,"reservationUsd":0.00040812}
+{"at":"2026-10-18T03:49:17.091Z","event":"response","request":1,"httpStatus":200,"promptTokens":235,"completionTokens":564,"totalTokens":799,"estimatedCostUsd":0.00014945999999999997,"modelIdentityVerified":true,"finishReason":"stop","latencyMs":2145.0750660000003,"halted":false}
+{"at":"2026-10-18T03:49:50.594Z","event":"closed","requestsReserved":1,"reservedUsd":0.00040812,"knownCostUsd":0.00014945999999999997,"usageComplete":true,"halted":false,"closed":true}

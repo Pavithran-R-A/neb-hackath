@@ -1,0 +1,17 @@
+# PREPARED ONLY: requires separate owner approval and verified no-charge hosting.
+# Run Caddy on the same host/network namespace as the loopback Node runtime.
+# The canonical origin is https://{$RECEIPTLAB_HOST}; omit paths and trailing slash.
+{$RECEIPTLAB_HOST} {
+ header Strict-Transport-Security "max-age=31536000"
+ request_body {
+  max_size 16KB
+ }
+ reverse_proxy 127.0.0.1:3000 {
+  # Node trusts the explicit canonical Host, never client-supplied proxy metadata.
+  header_up Host {$RECEIPTLAB_HOST}
+  header_up -Forwarded
+  header_up -X-Forwarded-Host
+  header_up -X-Forwarded-Proto
+  header_up -X-Forwarded-For
+ }
+}

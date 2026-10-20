@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-D-schema-visible-owner6235724302",
+  "recordedAt": "2026-10-17T16:01:51.857Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Test documented schema-in-prompt correction after all-reasoning truncation; same frozen16cases and strict schema; no dataset/label tuning; compare retained deterministic policies",
+  "sourceCommit": "e086dc43ff0bcb35064bd59f3aee6d66ff838046",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "maxRequests": 17,
+  "preflightOutputTokens": 1024,
+  "diagnosisOutputTokens": 8192,
+  "spendLimitUsd": 0.1,
+  "conservativeUpperEstimateUsd": 0.05210304,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39047536679",
+  "judgingReserveUsd": 50,
+  "firstCasePreviouslyAttempted": 2,
+  "remainingCasesPreviouslyInferred": 0,
+  "noRetries": true,
+  "noFallbacks": true,
+  "status": "recorded-before-execution"
+}

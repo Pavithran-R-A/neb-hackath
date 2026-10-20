@@ -1,0 +1,13 @@
+# Authorized release sprint design
+
+Authority: owner's uploaded Autonomous Development and Release Sprint, October 17. Ordinary engineering/product decisions and development-branch pushes are authorized. No design/plan approval pause; no inference budget, public deployment, merge, external submission, paid resources or license/ownership decisions are authorized.
+
+Goal: prepare a credible NVIDIA-powered verified-workflow product, with reproducible evidence rather than model completion claims. Existing DOM automation wins all completable v1 cases; no Nemotron advantage exists in the evidence. Product gate remains provisional until real evaluation, decision deadline October 19. Do not tune on consumed cases and claim unseen generalization.
+
+Architecture: keep the local Node24/Playwright testbed and independent HMAC verifier. Bind verdicts to intended run IDs. A persistent, exclusively created campaign ledger reserves conservative per-request credit estimates before the provider POST. Approval must bind source commit, frozen suite hash, model, prices, aggregate request/token/dollar limits and fresh credit-only attestation. Stop on incomplete usage, unknown outcomes, overrun or failed preflight; no restart/resume/retry. CLI dry-run is default. Remove legacy live benchmark bypass.
+
+Improve the competent deterministic comparator with existing accessible semantics before freezing v2. New author-visible scenarios cover conditional stages, unfamiliar labels, conflicting instructions, validation/recovery, unavailable options, injection and false completion. They are reproducible public candidates, not blind external validation. Run protocol/fixture/browser tests now, not a live campaign.
+
+Build a loopback-only ReceiptLab evidence workbench: choose a synthetic challenge, inspect supplied task, open the real form, request an independent run-bound verdict, export a sanitized report. Workbench sessions are HttpOnly/SameSite capabilities with origin/host validation, TTL, bounded resources and no model endpoint. Agent contexts cannot access evaluator controls. Explain inactive inference honestly. This reusable verification product surface does not constitute passage of the model product gate.
+
+Release preparation: official rules, deployment/build smoke test, source/evidence inventory, dependency/secret checks, responsive/keyboard/session-isolation tests, Devpost and <3min storyboard drafts based only on working capabilities. No license selected without owner legal approval; no public resources or submission. No claim of security certification, real Nemotron benchmark, production readiness or personal eligibility without evidence.

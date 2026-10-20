@@ -1,0 +1,32 @@
+# PREPARED ONLY; install/start only after explicit hosting approval.
+# Assumes a provisioned nonroot receiptlab user and /var/lib/receiptlab local volume.
+[Unit]
+Description=ReceiptLab persistent synthetic demo runtime
+After=network.target
+
+[Service]
+Type=simple
+User=receiptlab
+Group=receiptlab
+WorkingDirectory=/opt/receiptlab
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=RECEIPTLAB_STATE_DIRECTORY=/var/lib/receiptlab
+EnvironmentFile=/etc/receiptlab/runtime.env
+ExecStart=/usr/bin/node scripts/workbench-public.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/receiptlab
+StateDirectory=receiptlab
+StateDirectoryMode=0700
+LimitNOFILE=1024
+TasksMax=64
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

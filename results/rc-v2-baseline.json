@@ -1,0 +1,1254 @@
+{
+  "schemaVersion": 1,
+  "freeze": "results/rc-v2-freeze.json",
+  "predictions": [
+    {
+      "id": "fresh-01",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-01-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 2.696795999999999
+    },
+    {
+      "id": "fresh-02",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-02-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.675378000000002
+    },
+    {
+      "id": "fresh-03",
+      "suggestion": {
+        "diagnosis": "consent_expired",
+        "explanation": "Trusted telemetry reports missing or expired consent.",
+        "evidenceIds": [
+          "fresh-03-e2"
+        ],
+        "recovery": {
+          "action": "reconfirm_consent",
+          "reason": "Request fresh user consent before another submission."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.07329000000000008
+    },
+    {
+      "id": "fresh-04",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-04-e1"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.24779399999999896
+    },
+    {
+      "id": "fresh-05",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-05-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.24151399999999512
+    },
+    {
+      "id": "fresh-06",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-06-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.13360099999999875
+    },
+    {
+      "id": "fresh-07",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "fresh-07-e3",
+          "fresh-07-e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.060462000000001126
+    },
+    {
+      "id": "fresh-08",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "fresh-08-e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.07049700000000314
+    },
+    {
+      "id": "fresh-09",
+      "suggestion": {
+        "diagnosis": "authorization_denied",
+        "explanation": "The server denied authorization.",
+        "evidenceIds": [
+          "fresh-09-e1"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop and obtain the required authorization before proceeding."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.08994500000000016
+    },
+    {
+      "id": "fresh-10",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-10-e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Check operation status first; a failed response does not prove that the submission did not commit."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.07027500000000231
+    },
+    {
+      "id": "fresh-11",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-11-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.08103200000000044
+    },
+    {
+      "id": "fresh-12",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-12-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.06853399999999965
+    },
+    {
+      "id": "fresh-13",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "The operation is still pending; completion is not established.",
+        "evidenceIds": [
+          "fresh-13-e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for trusted terminal status and a receipt bound to this run; do not resubmit."
+        },
+        "confidence": "medium"
+      },
+      "latencyMs": 0.2081540000000004
+    },
+    {
+      "id": "fresh-14",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-14-e3"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.07340099999999694
+    },
+    {
+      "id": "fresh-15",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-15-e2"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.031897999999998206
+    },
+    {
+      "id": "fresh-16",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-16-e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.049475000000001046
+    }
+  ],
+  "score": {
+    "caseCount": 16,
+    "attempted": 16,
+    "validOutputs": 16,
+    "diagnosisCorrect": 12,
+    "recoveryCorrect": 10,
+    "pairCorrect": 8,
+    "requiredEvidenceCovered": 5,
+    "jointEvidenceAgreement": 3,
+    "highConfidenceWrongDiagnosis": 2,
+    "disallowedConsequentialSuggestions": 4,
+    "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+    "rows": [
+      {
+        "id": "fresh-01",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-02",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-03",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-04",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-05",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": true,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-06",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-07",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-08",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-09",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-10",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": true,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-11",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-12",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-13",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-14",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-15",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-16",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      }
+    ]
+  },
+  "accepted": [
+    {
+      "id": "fresh-01",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-01-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-01-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-02",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-02-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-02-e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-03",
+      "suggestion": {
+        "diagnosis": "consent_expired",
+        "explanation": "Trusted telemetry reports missing or expired consent.",
+        "evidenceIds": [
+          "fresh-03-e2"
+        ],
+        "recovery": {
+          "action": "reconfirm_consent",
+          "reason": "Request fresh user consent before another submission."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "consent_expired",
+        "explanation": "Trusted telemetry reports missing or expired consent.",
+        "evidenceIds": [
+          "fresh-03-e2"
+        ],
+        "recovery": {
+          "action": "reconfirm_consent",
+          "reason": "Request fresh user consent before another submission."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-04",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-04-e1"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-04-e1"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-05",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "fresh-05-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-05-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-06",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-06-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-06-e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-07",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "fresh-07-e3",
+          "fresh-07-e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "rawSuggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "fresh-07-e3",
+          "fresh-07-e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis.",
+          "A pending operation or transient condition supporting wait is not established."
+        ],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-08",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "fresh-08-e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "rawSuggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "fresh-08-e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "A pending operation or transient condition supporting wait is not established."
+        ],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-09",
+      "suggestion": {
+        "diagnosis": "authorization_denied",
+        "explanation": "The server denied authorization.",
+        "evidenceIds": [
+          "fresh-09-e1"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop and obtain the required authorization before proceeding."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "authorization_denied",
+        "explanation": "The server denied authorization.",
+        "evidenceIds": [
+          "fresh-09-e1"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop and obtain the required authorization before proceeding."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-10",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-10-e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Check operation status first; a failed response does not prove that the submission did not commit."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-10-e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Check operation status first; a failed response does not prove that the submission did not commit."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-11",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-11-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-11-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-12",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-12-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "completed",
+        "explanation": "Trusted telemetry confirms a valid receipt bound to this run.",
+        "evidenceIds": [
+          "fresh-12-e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Completion is verified; no further submission is needed."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-13",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "fresh-13-e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "rawSuggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "The operation is still pending; completion is not established.",
+        "evidenceIds": [
+          "fresh-13-e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for trusted terminal status and a receipt bound to this run; do not resubmit."
+        },
+        "confidence": "medium"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-14",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-14-e3"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "fresh-14-e3"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "The server explicitly permits retry and confirms zero commits and no pending operation."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-15",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-15-e2"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "validation",
+        "explanation": "The server rejected the submitted field format or required input.",
+        "evidenceIds": [
+          "fresh-15-e2"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct only the reported format using user-supplied information; ask for missing values."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "fresh-16",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "fresh-16-e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Trusted telemetry reports incompatible operation, receipt, or state information.",
+        "evidenceIds": [
+          "fresh-16-e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Reconcile the operation and current state before taking another action."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    }
+  ],
+  "acceptedScore": {
+    "caseCount": 16,
+    "attempted": 16,
+    "validOutputs": 16,
+    "diagnosisCorrect": 11,
+    "recoveryCorrect": 11,
+    "pairCorrect": 7,
+    "requiredEvidenceCovered": 5,
+    "jointEvidenceAgreement": 3,
+    "highConfidenceWrongDiagnosis": 1,
+    "disallowedConsequentialSuggestions": 2,
+    "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+    "rows": [
+      {
+        "id": "fresh-01",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-02",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-03",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-04",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-05",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-06",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-07",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-08",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-09",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": true,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-10",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": true,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": true,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-11",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-12",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-13",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-14",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": true,
+        "pairCorrect": true,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      },
+      {
+        "id": "fresh-15",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": true,
+        "recoveryCorrect": false,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": true
+      },
+      {
+        "id": "fresh-16",
+        "attempted": true,
+        "valid": true,
+        "diagnosisCorrect": false,
+        "recoveryCorrect": true,
+        "pairCorrect": false,
+        "citationsValid": true,
+        "requiredEvidenceCovered": false,
+        "jointEvidenceAgreement": false,
+        "highConfidenceWrongDiagnosis": false,
+        "disallowedConsequentialSuggestion": false
+      }
+    ]
+  },
+  "modelExecution": "NOT RUN",
+  "chronology": "First coordinator content/evaluation access after policy freeze; no tuning after this result"
+}

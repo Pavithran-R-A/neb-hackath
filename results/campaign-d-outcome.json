@@ -1,0 +1,2034 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "campaign-D-schema-visible-owner6235724302",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "sourceCommit": "e086dc43ff0bcb35064bd59f3aee6d66ff838046",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "startedAt": "2026-10-17T16:01:57.033Z",
+  "stage": "diagnostic-evaluation",
+  "predictions": [
+    {
+      "id": "dv1-01",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "Phone number 2025550141 lacks required hyphenated format '3-3-4'; server rejected request r1 (e3), Continue button returned to same step (e2), and no registration committed (e4). Task constraint e1 permits reformatting digits without changing them.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "System requires '3-3-4' hyphenated phone format; reformatting per e1 (no digit changes) addresses the validation failure."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 4158,
+      "contentCharacters": 534,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 21193.101587,
+      "usage": {
+        "inputTokens": 650,
+        "outputTokens": 4311,
+        "totalTokens": 4961
+      },
+      "estimatedCostUsd": 0.0010736399999999998,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-02",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "Supplied contact email 'lin@' lacks domain; server rejected (e3) with 'domain is missing'; constraint e1 requires exact use without invention; no application saved (e4).",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Invalid format per e3; constraint e1 prevents agent from correcting without replacement; stop requires human approval."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 4741,
+      "contentCharacters": 442,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 20486.130202999997,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 4859,
+        "totalTokens": 5481
+      },
+      "estimatedCostUsd": 0.0012034799999999998,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-03",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "At 09:00 (e1) the terms checkbox was selected and project description edited. At 09:01 (e2) the server accepted description revision 8 but noted terms acknowledgment was for revision 7, disabling submission until revision 8 is acknowledged. Current review (e3) shows revision 8 and an unchecked acknowledgment box with all fields populated. The verifier ledger (e4) confirms no committed application exists. This reveals a state mismatch: description revision 8 outpaces terms acknowledgment revision 7, blocking submission.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Terms acknowledgment revision 7 mismatches current description revision 8; submission disabled; no committed application exists; requires human approval to reconcile or restart."
+        },
+        "confidence": "medium"
+      },
+      "reasoningTokens": 3742,
+      "contentCharacters": 862,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 15166.184462000005,
+      "usage": {
+        "inputTokens": 644,
+        "outputTokens": 3950,
+        "totalTokens": 4594
+      },
+      "estimatedCostUsd": 0.00098664,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-04",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Job j4 was accepted at 12:00:00 (e2) and reported pending at observation time 12:00:07 (e3). Verifier ledger e4 confirms j4 has not committed a registration at 12:00:07. Browser notice e1 shows a processing notice with no cancel or resubmit controls. Server e2 explicitly instructs: do not resubmit while pending; next status check is permitted at 12:00:20.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Pending status; server prohibits resubmit until 12:00:20; waiting for allowed polling window."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2058,
+      "contentCharacters": 612,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 10222.669839000002,
+      "usage": {
+        "inputTokens": 664,
+        "outputTokens": 2255,
+        "totalTokens": 2919
+      },
+      "estimatedCostUsd": 0.00058104,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-05",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "At 15:20:00 attempt k5 returned service unavailable before write transaction started (e1). By 15:20:12 submission service reports ready (e3). Key k5 has no commit or pending transaction (e4). Form still contains all task values and Submit is enabled (e2). Service outage resolved with no committed transaction; idempotency key reuse supported after 15:20:10.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Service recovered; key k5 has no commit but reuse permitted after 15:20:10 per e1; form intact; safe to retry submission with same idempotency key."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 3344,
+      "contentCharacters": 668,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 16023.240928,
+      "usage": {
+        "inputTokens": 656,
+        "outputTokens": 3542,
+        "totalTokens": 4198
+      },
+      "estimatedCostUsd": 0.0008894399999999999,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-06",
+      "suggestion": {
+        "diagnosis": "option_unavailable",
+        "explanation": "Morning repair has no seats and is disabled (e3, e4). Constraint e1 states either supplied session is acceptable. Evening repair has three seats per e3 and is the supplied alternative. Browser observation e2 reports morning selected but verifier ledger e5 confirms no reservation, indicating state conflict; however the primary issue is option unavailability.",
+        "evidenceIds": [
+          "e1",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "choose_supplied_option",
+          "reason": "Morning repair unavailable per e3, e4; evening repair has three seats per e3 and is the supplied alternative per constraint e1."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 5106,
+      "contentCharacters": 667,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 24425.86519499999,
+      "usage": {
+        "inputTokens": 652,
+        "outputTokens": 5269,
+        "totalTokens": 5921
+      },
+      "estimatedCostUsd": 0.0013036799999999998,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-07",
+      "error": "Provider/schema/grounding failure",
+      "report": {
+        "reasoningTokens": 8192,
+        "contentCharacters": null,
+        "httpStatus": 200,
+        "modelIdentityVerified": true,
+        "finishReason": "length",
+        "latencyMs": 36573.560356,
+        "usage": {
+          "inputTokens": 636,
+          "outputTokens": 8192,
+          "totalTokens": 8828
+        },
+        "estimatedCostUsd": 0.00200424
+      }
+    }
+  ],
+  "baseline": [
+    {
+      "id": "dv1-01",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 1.2602900000001682,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-02",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.2173480000019481,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-03",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.1030659999960335,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-04",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.07538299999578157,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-05",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.05493300000671297,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-06",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.05450199999904726,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-07",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.06001000000105705,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "option_unavailable",
+        "explanation": "The requested option cannot be selected as supplied.",
+        "evidenceIds": [
+          "e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Do not choose an unapproved substitute; ask the task owner to revise the request."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "The application reports a temporary failure rather than a verified completion.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Retry only after checking current state and explicit human approval."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "A completion claim exists, but the independent verifier has not confirmed completion.",
+        "evidenceIds": [
+          "e1"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop and inspect authoritative state; avoid a duplicate submission."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "The application reports a temporary failure rather than a verified completion.",
+        "evidenceIds": [
+          "e2"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Retry only after checking current state and explicit human approval."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "Server validation rejected the supplied field representation.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop if the supplied task data is invalid; obtain a corrected task rather than inventing data."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The retained observations do not establish a reliable failure cause.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop safely and obtain missing authoritative evidence."
+        },
+        "confidence": "low"
+      },
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "A completion claim exists, but the independent verifier has not confirmed completion.",
+        "evidenceIds": [
+          "e1"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Stop and inspect authoritative state; avoid a duplicate submission."
+        },
+        "confidence": "high"
+      },
+      "modelExecution": false
+    }
+  ],
+  "strongBaseline": [
+    {
+      "id": "dv1-01",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: Run r1 contains zero committed registrations. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 3.1848310000204947,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-02",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: Contact address rejected: domain is missing. Nothing was saved. A completion claim requires independent confirmation before it can be accepted.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "A completion claim requires independent confirmation before it can be accepted."
+        },
+        "confidence": "medium"
+      },
+      "latencyMs": 0.27859000000171363,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-03",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No committed application exists. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.21565499997814186,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-04",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: At 12:00:00 job j4 was accepted but is still pending; status polling is allowed. Do not resubmit while pending. Next status check is permitted at 12:00:20. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e2"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.1861510000017006,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-05",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: Key k5 has no commit and no pending transaction. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.40007299999706447,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-06",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No reservation exists. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.1082530000130646,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-07",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No reservation was created. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.16427800001110882,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: There are no pending or committed writes for s8. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.1094149999844376,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: Authoritative check for the current run: zero committed applications and zero pending writes. The green panel is a client-only notice. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.16780299998936243,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: The receipt authenticates a previous run r09. Run r10 has zero committed records; receipts must match both current task values and current run. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.2097559999965597,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: The local application is awaiting review; no external identity review is part of its supported protocol. No submission control is currently available. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.1501869999920018,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: No application or pending write exists. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.27326100002392195,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: The verifier is unreachable at this cutoff; no ledger or receipt result is available. Independent evidence does not establish successful completion.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Independent evidence does not establish successful completion."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.155484000017168,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "verifier evidence: Exactly one record exists for this run, all required task values match, and the run-bound receipt signature is valid. Correct the rejected field using the task-supplied value and required format.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct the rejected field using the task-supplied value and required format."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.23068800001055934,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: At 10:10:08 there is exactly one matching current-run commit and its receipt authenticates successfully. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.22190400000545196,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: At 11:00:00 snapshot revision 42 for run r16: zero committed records, receipt c16 has no corresponding commit. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.1613329999963753,
+      "modelExecution": false
+    }
+  ],
+  "modelExecution": "live-nebius",
+  "noAutomaticRetries": true,
+  "catalog": {
+    "checkedAt": "2026-10-17T16:01:57.562Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "preflight": {
+    "mode": "live",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.00039893999999999997,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": true,
+    "requestsSent": 1,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-17T16:01:51.857Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "provider": {
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "refused": false,
+      "contentCharacters": 102,
+      "reasoningTokens": 553
+    },
+    "usage": {
+      "promptTokens": 235,
+      "completionTokens": 592,
+      "totalTokens": 827,
+      "complete": true
+    },
+    "latencyMs": 4280.989845,
+    "estimatedModelCostUsd": 0.00015617999999999999,
+    "costBasis": "configured token-rate estimate; not a billing statement",
+    "authenticationVerified": true,
+    "modelIdentityVerified": true,
+    "jsonResponseVerified": true,
+    "actionSchemaVerified": true,
+    "browserTaskCompleted": false
+  },
+  "status": "stopped",
+  "failedStage": "diagnostic-evaluation",
+  "error": "Diagnosis model or completion rejected",
+  "failureMetadata": {
+    "reasoningTokens": 8192,
+    "contentCharacters": null,
+    "httpStatus": 200,
+    "modelIdentityVerified": true,
+    "finishReason": "length",
+    "latencyMs": 36573.560356,
+    "usage": {
+      "inputTokens": 636,
+      "outputTokens": 8192,
+      "totalTokens": 8828
+    },
+    "estimatedCostUsd": 0.00200424
+  },
+  "strongBaselineV2": [
+    {
+      "id": "dv1-01",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: Run r1 contains zero committed registrations. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 3.3901500000210945,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-02",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: Contact address rejected: domain is missing. Nothing was saved. A completion claim requires independent confirmation before it can be accepted.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "A completion claim requires independent confirmation before it can be accepted."
+        },
+        "confidence": "medium"
+      },
+      "latencyMs": 0.25964200001908466,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-03",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No committed application exists. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.2116389999864623,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-04",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: At 12:00:00 job j4 was accepted but is still pending; status polling is allowed. Do not resubmit while pending. Next status check is permitted at 12:00:20. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e2"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.26310700000612997,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-05",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: Key k5 has no commit and no pending transaction. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.27164899997296743,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-06",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No reservation exists. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 2.3249139999970794,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-07",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "verifier evidence: No reservation was created. The available observations do not establish a specific cause or a safe next action.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "The available observations do not establish a specific cause or a safe next action."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.09805800000322051,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: There are no pending or committed writes for s8. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.0813120000238996,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: Authoritative check for the current run: zero committed applications and zero pending writes. The green panel is a client-only notice. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.08344600000418723,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: The receipt authenticates a previous run r09. Run r10 has zero committed records; receipts must match both current task values and current run. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.40182599998661317,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "server evidence: The local application is awaiting review; no external identity review is part of its supported protocol. No submission control is currently available. Independent evidence is absent or failed; completion is not established.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Independent evidence is absent or failed; completion is not established."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.1448789999994915,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: No application or pending write exists. Wait for independent confirmation of the existing operation; avoid a duplicate write.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Wait for independent confirmation of the existing operation; avoid a duplicate write."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.10840399999869987,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "verifier evidence: The verifier is unreachable at this cutoff; no ledger or receipt result is available. Independent evidence does not establish successful completion.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Independent evidence does not establish successful completion."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.06589900000835769,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "validation",
+        "explanation": "verifier evidence: Exactly one record exists for this run, all required task values match, and the run-bound receipt signature is valid. Correct the rejected field using the task-supplied value and required format.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "correct_format",
+          "reason": "Correct the rejected field using the task-supplied value and required format."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.06566900000325404,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: At 10:10:08 there is exactly one matching current-run commit and its receipt authenticates successfully. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.10689099997398444,
+      "modelExecution": false
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "completed",
+        "explanation": "verifier evidence: At 11:00:00 snapshot revision 42 for run r16: zero committed records, receipt c16 has no corresponding commit. Independent evidence confirms the requested operation completed.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "none",
+          "reason": "Independent evidence confirms the requested operation completed."
+        },
+        "confidence": "high"
+      },
+      "latencyMs": 0.09992999999667518,
+      "modelExecution": false
+    }
+  ],
+  "score": {
+    "strongBaselineV2": {
+      "caseCount": 16,
+      "attempted": 16,
+      "validOutputs": 16,
+      "diagnosisCorrect": 1,
+      "recoveryCorrect": 6,
+      "pairCorrect": 1,
+      "requiredEvidenceCovered": 2,
+      "jointEvidenceAgreement": 1,
+      "highConfidenceWrongDiagnosis": 11,
+      "disallowedConsequentialSuggestions": 4,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-01",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-02",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-03",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-04",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-05",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-06",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-07",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    },
+    "strongBaseline": {
+      "caseCount": 16,
+      "attempted": 16,
+      "validOutputs": 16,
+      "diagnosisCorrect": 2,
+      "recoveryCorrect": 5,
+      "pairCorrect": 1,
+      "requiredEvidenceCovered": 2,
+      "jointEvidenceAgreement": 1,
+      "highConfidenceWrongDiagnosis": 10,
+      "disallowedConsequentialSuggestions": 6,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-01",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-02",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-03",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-04",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-05",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-06",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-07",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    },
+    "baseline": {
+      "caseCount": 16,
+      "attempted": 16,
+      "validOutputs": 16,
+      "diagnosisCorrect": 1,
+      "recoveryCorrect": 6,
+      "pairCorrect": 1,
+      "requiredEvidenceCovered": 3,
+      "jointEvidenceAgreement": 0,
+      "highConfidenceWrongDiagnosis": 6,
+      "disallowedConsequentialSuggestions": 2,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-01",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-02",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-03",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-04",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-05",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-06",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-07",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    },
+    "nemotron": {
+      "caseCount": 16,
+      "attempted": 7,
+      "validOutputs": 6,
+      "diagnosisCorrect": 5,
+      "recoveryCorrect": 5,
+      "pairCorrect": 5,
+      "requiredEvidenceCovered": 6,
+      "jointEvidenceAgreement": 5,
+      "highConfidenceWrongDiagnosis": 0,
+      "disallowedConsequentialSuggestions": 0,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-01",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-02",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-03",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-04",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-05",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-06",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-07",
+          "attempted": true,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-08",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-09",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-10",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-13",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-15",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": false,
+          "valid": false,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": false,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-10-17T16:04:25.959Z",
+  "campaign": {
+    "requestsReserved": 8,
+    "reservedUsd": 0.01625082,
+    "knownCostUsd": 0.008198339999999998,
+    "usageComplete": true,
+    "halted": true,
+    "closed": false
+  },
+  "account": {
+    "initialAccountUsd": 59,
+    "judgeReserveUsd": 50,
+    "engineeringCommittedUsd": 0.00303444,
+    "activeReservationUsd": 0.1,
+    "remainingEstimatedCreditUsd": 58.89696556,
+    "balanceBasis": "Owner59 minus known token estimates; unresolved campaigns charged full reservations"
+  }
+}

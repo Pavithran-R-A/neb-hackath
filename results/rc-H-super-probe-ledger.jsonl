@@ -1,0 +1,6 @@
+{"at":"2026-10-18T03:27:35.573Z","event":"created","approvalId":"rc-H-super-probe","authorizationSha256":"02cfddc43486544bddb6f827bb2e28e5325dc4caaf9c0b3812f08e1a0bfee71a","sourceCommit":"71386e4359de872fe9c4c536b1854516dfc55ae3","suiteSha256":"50b3721c3fd69b7c477de3fe1b208eeff72b9bc13a185daee62458a684dd7728","maxRequests":3,"spendLimitUsd":0.05,"maxOutputTokens":8192}
+{"at":"2026-10-18T03:27:35.859Z","event":"reserved","request":1,"inputAllowance":2706,"outputLimit":1024,"reservationUsd":0.0017334000000000002}
+{"at":"2026-10-18T03:27:37.018Z","event":"response","request":1,"httpStatus":200,"promptTokens":235,"completionTokens":123,"totalTokens":358,"estimatedCostUsd":0.00018119999999999999,"modelIdentityVerified":true,"finishReason":"stop","latencyMs":1158.0893449999999,"halted":false}
+{"at":"2026-10-18T03:27:37.021Z","event":"reserved","request":2,"inputAllowance":5805,"outputLimit":8192,"reservationUsd":0.009114299999999999}
+{"at":"2026-10-18T03:27:37.364Z","event":"http-failure","httpStatus":500,"request":2}
+{"at":"2026-10-18T03:27:37.372Z","event":"closed","requestsReserved":2,"reservedUsd":0.010847699999999998,"knownCostUsd":0.00018119999999999999,"usageComplete":false,"halted":true,"closed":true}

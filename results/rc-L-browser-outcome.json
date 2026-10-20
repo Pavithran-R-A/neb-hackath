@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-18T03:54:13.013Z",
+  "executionKind": "live-nebius",
+  "approvalActor": "authorized automated synthetic QA",
+  "journeys": [
+    {
+      "scenario": "grant-transient",
+      "diagnosis": "temporary_failure",
+      "recommendedAction": "retry",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+        "evidenceIds": [
+          "event-2",
+          "event-4",
+          "event-5",
+          "event-6"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+        },
+        "confidence": "high"
+      },
+      "rawSuggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+        "evidenceIds": [
+          "event-2",
+          "event-4",
+          "event-5",
+          "event-6"
+        ],
+        "recovery": {
+          "action": "retry",
+          "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      },
+      "provider": {
+        "usage": {
+          "inputTokens": 889,
+          "outputTokens": 2731,
+          "totalTokens": 3620
+        },
+        "estimatedCostUsd": 0.00070878,
+        "latencyMs": 9552.626376,
+        "modelIdentityVerified": true
+      },
+      "before": {
+        "schemaVersion": 1,
+        "product": "ReceiptLab local evidence workbench",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "provenance": {
+          "schemaVersion": 1,
+          "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+          "sourceCommitBasis": "git-head",
+          "codeTreeDirty": false,
+          "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+          "filesSha256": {
+            "package-lock.json": "02f127c26778565d7672159054e20c80694e6ea13adfe5e59722c0097dc1c3e0",
+            "package.json": "4647f8d7e8fa0115ba5e5e8fe2c111643cae1e30cf6231fb6d585aebfb8d9168",
+            "scripts/benchmark.mjs": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286",
+            "scripts/build-manifest.mjs": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9",
+            "scripts/campaign.mjs": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d",
+            "scripts/capture-live-journey.mjs": "e8736ff347d111abdb5b853fb11d7c302795d428fdfad725eccb2864d563d458",
+            "scripts/catalog.mjs": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf",
+            "scripts/demo.mjs": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98",
+            "scripts/diagnosis-campaign.mjs": "9dcd44708aa1db0f5dee351b55039d2407a1a9fb919d47b343329fc68f8d9200",
+            "scripts/preflight.mjs": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2",
+            "scripts/rc-campaign.mjs": "5366c3d1c282e62d53c29c214a204da3711a7ed4a7c26edc113eaa160271873d",
+            "scripts/rehearse-caddy.mjs": "7b5941dc88af3fc188bcdea6c1aa01e896639c78f24f2b81dd0ebd37d6377dc9",
+            "scripts/security-check.mjs": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d",
+            "scripts/smoke-workbench.mjs": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a",
+            "scripts/workbench-live.mjs": "7868532f4d412d7fc4732dec252e3c80ae8276b549be48d412d23d14ec097a4e",
+            "scripts/workbench-public.mjs": "1d31c809784e4451938b9b13b635585013d5cfb1185c4cb0586d199621c75d5b",
+            "scripts/workbench.mjs": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed",
+            "src/account-budget.mjs": "4edf3cfa82686bb179a60cf29fecebd48254f811fd8ed149ae769397c80aa6fb",
+            "src/agents/actions.mjs": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa",
+            "src/agents/baseline.mjs": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7",
+            "src/agents/browser.mjs": "6f903d35c085637b301b7970c5a33085cc82fc4f28577fc398d1d1337871004d",
+            "src/agents/dom-baseline.mjs": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46",
+            "src/agents/guarded.mjs": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a",
+            "src/agents/nebius.mjs": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c",
+            "src/agents/scripted.mjs": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648",
+            "src/app/client.js": "b5204d047bde7814bf82825b10c58fdab704a14dce06d76ff55d62f30b8d1eae",
+            "src/app/index.html": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513",
+            "src/app/server.mjs": "a341b37f9bf51863998499f2643a51e50ca81ee8b125e45b591a67bca2fa1a3c",
+            "src/benchmark.mjs": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61",
+            "src/campaign.mjs": "862b80c865b437183e22c85a27e82444516ced49337964e442148e6d097e9d79",
+            "src/catalog.mjs": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a",
+            "src/credit-gate.mjs": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb",
+            "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+            "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+            "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+            "src/diagnosis/drain.mjs": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec",
+            "src/diagnosis/evaluation.mjs": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e",
+            "src/diagnosis/experiment.mjs": "e81588564efbce8fe837abc791ce81fbba334ddec8863b03f118f039c6699891",
+            "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+            "src/diagnosis/strong-baseline-v2.mjs": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+            "src/diagnosis/strong-baseline.mjs": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+            "src/diagnosis/telemetry-baseline-policy.md": "263d6c73aac9657756434e9cdc0d2d06deb3b3a86f9d044bf90f803bfe9fe5bb",
+            "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+            "src/diagnosis/workflow.mjs": "7a6911f39518b0ed5b02cda6d14f7c62a45f97f9069eade30d6fd8e28931d8ea",
+            "src/evaluation-v2.mjs": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283",
+            "src/evaluation.mjs": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731",
+            "src/holdout.mjs": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c",
+            "src/preflight-contract.mjs": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849",
+            "src/preflight.mjs": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f",
+            "src/provenance.mjs": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae",
+            "src/runtime/campaign-paths.mjs": "c34a7b63bc52d07a2a1f537173673f39dbce34b3f4522a69b7906b88225f9b90",
+            "src/runtime/capture-target.mjs": "6776f1dbc36ad80ef093d5dc3272c523b5bdfb7a422f767c5c84bccfb3462161",
+            "src/runtime/durable-state.mjs": "626d359beb79278666b53f3f2c015b012d88488c7be6a37c27aa09d3523fa2ad",
+            "src/scenarios.mjs": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d",
+            "src/source-safety.mjs": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019",
+            "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+            "src/workbench/client.js": "95acb5148f4a6bdae5bb48024d5c00428ca766d0107428b8869d8284417276d4",
+            "src/workbench/index.html": "8c009a19944718caad35682c006fad65f2a37705e1c7a2c65a40b41e71784079",
+            "src/workbench/server.mjs": "91057343d51c5cd562aca2a5ff441e4aaacf49b8eb6082363389ad136ae0993f",
+            "src/workbench/style.css": "26f9d0613188a837d10caca7e91b8967075a03243ef2c8e448016a7f9925c22d"
+          },
+          "buildManifestSha256": null,
+          "runtimeMatchesBuild": null
+        },
+        "suiteHashes": {
+          "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+          "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+          "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+          "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+        },
+        "diagnosticDataset": "evaluation/diagnosis-v1 (see separate frozen SHA manifest)",
+        "diagnoses": [
+          {
+            "suggestion": {
+              "diagnosis": "temporary_failure",
+              "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+              "evidenceIds": [
+                "event-2",
+                "event-4",
+                "event-5",
+                "event-6"
+              ],
+              "recovery": {
+                "action": "retry",
+                "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+              },
+              "confidence": "high"
+            },
+            "reasoningTokens": 2592,
+            "contentCharacters": 575,
+            "httpStatus": 200,
+            "modelIdentityVerified": true,
+            "finishReason": "stop",
+            "latencyMs": 9552.626376,
+            "usage": {
+              "inputTokens": 889,
+              "outputTokens": 2731,
+              "totalTokens": 3620
+            },
+            "estimatedCostUsd": 0.00070878,
+            "modelValidated": true,
+            "verifiedOutcome": false,
+            "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+            "executionKind": "live-nebius",
+            "rawSuggestion": {
+              "diagnosis": "temporary_failure",
+              "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+              "evidenceIds": [
+                "event-2",
+                "event-4",
+                "event-5",
+                "event-6"
+              ],
+              "recovery": {
+                "action": "retry",
+                "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+              },
+              "confidence": "high"
+            },
+            "semanticAssessment": {
+              "status": "accepted",
+              "reasons": [],
+              "rawHighConfidenceRejected": false,
+              "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+            },
+            "id": "e669c137-11f1-4f70-96d4-dd045df0932f",
+            "traceDigest": "e4f8c6ef1f9d50f9bba23db2e52c393ec8ef6eab31a99dbe6d26c9c985a801ec",
+            "requiresHumanApproval": true,
+            "recoveryExecutable": true
+          }
+        ],
+        "recoveries": [],
+        "evidenceKind": "Synthetic workflow with live NVIDIA diagnostic suggestions",
+        "runId": "f0a3d8b8-0294-43aa-a870-477efdc44125",
+        "scenarioId": "grant-transient",
+        "checkedAt": "2026-10-18T03:54:23.573Z",
+        "taskDigest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7",
+        "verification": {
+          "completed": false,
+          "reason": "No unique committed server submission"
+        },
+        "rawClaimedCompletion": false,
+        "reportedCompletion": false,
+        "rejectedCompletionClaim": false,
+        "completionStatus": "not-completed",
+        "server": {
+          "status": "draft",
+          "step": 2,
+          "completionCount": 0
+        },
+        "model": {
+          "execution": "live-nebius",
+          "requests": 1,
+          "costUsd": 0.00070878
+        },
+        "diagnosisFailures": [],
+        "limitations": [
+          "HMAC verified privately in this process; export is not a public-key proof",
+          "Retained synthetic state survives restart until expiry; availability depends on retained storage",
+          "Model suggestions do not prove outcomes; this run alone does not establish competitive advantage"
+        ],
+        "artifactSha256": "6457bd6e2668f58d2780072f6c3dc6afb41f3311c42387e4fd002ccfa83d6238"
+      },
+      "after": {
+        "schemaVersion": 1,
+        "product": "ReceiptLab local evidence workbench",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "provenance": {
+          "schemaVersion": 1,
+          "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+          "sourceCommitBasis": "git-head",
+          "codeTreeDirty": false,
+          "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+          "filesSha256": {
+            "package-lock.json": "02f127c26778565d7672159054e20c80694e6ea13adfe5e59722c0097dc1c3e0",
+            "package.json": "4647f8d7e8fa0115ba5e5e8fe2c111643cae1e30cf6231fb6d585aebfb8d9168",
+            "scripts/benchmark.mjs": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286",
+            "scripts/build-manifest.mjs": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9",
+            "scripts/campaign.mjs": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d",
+            "scripts/capture-live-journey.mjs": "e8736ff347d111abdb5b853fb11d7c302795d428fdfad725eccb2864d563d458",
+            "scripts/catalog.mjs": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf",
+            "scripts/demo.mjs": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98",
+            "scripts/diagnosis-campaign.mjs": "9dcd44708aa1db0f5dee351b55039d2407a1a9fb919d47b343329fc68f8d9200",
+            "scripts/preflight.mjs": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2",
+            "scripts/rc-campaign.mjs": "5366c3d1c282e62d53c29c214a204da3711a7ed4a7c26edc113eaa160271873d",
+            "scripts/rehearse-caddy.mjs": "7b5941dc88af3fc188bcdea6c1aa01e896639c78f24f2b81dd0ebd37d6377dc9",
+            "scripts/security-check.mjs": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d",
+            "scripts/smoke-workbench.mjs": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a",
+            "scripts/workbench-live.mjs": "7868532f4d412d7fc4732dec252e3c80ae8276b549be48d412d23d14ec097a4e",
+            "scripts/workbench-public.mjs": "1d31c809784e4451938b9b13b635585013d5cfb1185c4cb0586d199621c75d5b",
+            "scripts/workbench.mjs": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed",
+            "src/account-budget.mjs": "4edf3cfa82686bb179a60cf29fecebd48254f811fd8ed149ae769397c80aa6fb",
+            "src/agents/actions.mjs": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa",
+            "src/agents/baseline.mjs": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7",
+            "src/agents/browser.mjs": "6f903d35c085637b301b7970c5a33085cc82fc4f28577fc398d1d1337871004d",
+            "src/agents/dom-baseline.mjs": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46",
+            "src/agents/guarded.mjs": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a",
+            "src/agents/nebius.mjs": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c",
+            "src/agents/scripted.mjs": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648",
+            "src/app/client.js": "b5204d047bde7814bf82825b10c58fdab704a14dce06d76ff55d62f30b8d1eae",
+            "src/app/index.html": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513",
+            "src/app/server.mjs": "a341b37f9bf51863998499f2643a51e50ca81ee8b125e45b591a67bca2fa1a3c",
+            "src/benchmark.mjs": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61",
+            "src/campaign.mjs": "862b80c865b437183e22c85a27e82444516ced49337964e442148e6d097e9d79",
+            "src/catalog.mjs": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a",
+            "src/credit-gate.mjs": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb",
+            "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+            "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+            "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+            "src/diagnosis/drain.mjs": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec",
+            "src/diagnosis/evaluation.mjs": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e",
+            "src/diagnosis/experiment.mjs": "e81588564efbce8fe837abc791ce81fbba334ddec8863b03f118f039c6699891",
+            "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+            "src/diagnosis/strong-baseline-v2.mjs": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+            "src/diagnosis/strong-baseline.mjs": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+            "src/diagnosis/telemetry-baseline-policy.md": "263d6c73aac9657756434e9cdc0d2d06deb3b3a86f9d044bf90f803bfe9fe5bb",
+            "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+            "src/diagnosis/workflow.mjs": "7a6911f39518b0ed5b02cda6d14f7c62a45f97f9069eade30d6fd8e28931d8ea",
+            "src/evaluation-v2.mjs": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283",
+            "src/evaluation.mjs": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731",
+            "src/holdout.mjs": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c",
+            "src/preflight-contract.mjs": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849",
+            "src/preflight.mjs": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f",
+            "src/provenance.mjs": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae",
+            "src/runtime/campaign-paths.mjs": "c34a7b63bc52d07a2a1f537173673f39dbce34b3f4522a69b7906b88225f9b90",
+            "src/runtime/capture-target.mjs": "6776f1dbc36ad80ef093d5dc3272c523b5bdfb7a422f767c5c84bccfb3462161",
+            "src/runtime/durable-state.mjs": "626d359beb79278666b53f3f2c015b012d88488c7be6a37c27aa09d3523fa2ad",
+            "src/scenarios.mjs": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d",
+            "src/source-safety.mjs": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019",
+            "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+            "src/workbench/client.js": "95acb5148f4a6bdae5bb48024d5c00428ca766d0107428b8869d8284417276d4",
+            "src/workbench/index.html": "8c009a19944718caad35682c006fad65f2a37705e1c7a2c65a40b41e71784079",
+            "src/workbench/server.mjs": "91057343d51c5cd562aca2a5ff441e4aaacf49b8eb6082363389ad136ae0993f",
+            "src/workbench/style.css": "26f9d0613188a837d10caca7e91b8967075a03243ef2c8e448016a7f9925c22d"
+          },
+          "buildManifestSha256": null,
+          "runtimeMatchesBuild": null
+        },
+        "suiteHashes": {
+          "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+          "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+          "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+          "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+        },
+        "diagnosticDataset": "evaluation/diagnosis-v1 (see separate frozen SHA manifest)",
+        "diagnoses": [
+          {
+            "suggestion": {
+              "diagnosis": "temporary_failure",
+              "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+              "evidenceIds": [
+                "event-2",
+                "event-4",
+                "event-5",
+                "event-6"
+              ],
+              "recovery": {
+                "action": "retry",
+                "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+              },
+              "confidence": "high"
+            },
+            "reasoningTokens": 2592,
+            "contentCharacters": 575,
+            "httpStatus": 200,
+            "modelIdentityVerified": true,
+            "finishReason": "stop",
+            "latencyMs": 9552.626376,
+            "usage": {
+              "inputTokens": 889,
+              "outputTokens": 2731,
+              "totalTokens": 3620
+            },
+            "estimatedCostUsd": 0.00070878,
+            "modelValidated": true,
+            "verifiedOutcome": false,
+            "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+            "executionKind": "live-nebius",
+            "rawSuggestion": {
+              "diagnosis": "temporary_failure",
+              "explanation": "Server returned 'Temporary submission error. Please retry once.' after step 3 was accepted. No commit occurred (commitCount:0). State facts confirm retryAllowed:true and that intermediate progress does not constitute a commit. One retry with unchanged data and consent is permitted.",
+              "evidenceIds": [
+                "event-2",
+                "event-4",
+                "event-5",
+                "event-6"
+              ],
+              "recovery": {
+                "action": "retry",
+                "reason": "Server returned temporary error after step 3; retry permitted with unchanged data and consent per state facts."
+              },
+              "confidence": "high"
+            },
+            "semanticAssessment": {
+              "status": "accepted",
+              "reasons": [],
+              "rawHighConfidenceRejected": false,
+              "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+            },
+            "id": "e669c137-11f1-4f70-96d4-dd045df0932f",
+            "traceDigest": "e4f8c6ef1f9d50f9bba23db2e52c393ec8ef6eab31a99dbe6d26c9c985a801ec",
+            "requiresHumanApproval": true,
+            "recoveryExecutable": true,
+            "used": true
+          }
+        ],
+        "recoveries": [
+          {
+            "diagnosisId": "e669c137-11f1-4f70-96d4-dd045df0932f",
+            "action": "retry",
+            "humanApproved": true,
+            "beforeTraceDigest": "e4f8c6ef1f9d50f9bba23db2e52c393ec8ef6eab31a99dbe6d26c9c985a801ec",
+            "afterTraceDigest": "25bffd660f193aaa07ab873396434d3f322a10c0d2d993a7b213c112ca40262d",
+            "httpStatus": 200,
+            "verification": {
+              "completed": true,
+              "reason": "Server submission and signed task receipt verified",
+              "receiptId": "f0a3d8b8-0294-43aa-a870-477efdc44125:1",
+              "digest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7"
+            },
+            "claimedCompletion": false
+          }
+        ],
+        "evidenceKind": "Synthetic workflow with live NVIDIA diagnostic suggestions",
+        "runId": "f0a3d8b8-0294-43aa-a870-477efdc44125",
+        "scenarioId": "grant-transient",
+        "checkedAt": "2026-10-18T03:54:23.978Z",
+        "taskDigest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7",
+        "verification": {
+          "completed": true,
+          "reason": "Server submission and signed task receipt verified",
+          "receiptId": "f0a3d8b8-0294-43aa-a870-477efdc44125:1",
+          "digest": "e01553988441464aa8894c7d360e5c6a2193ea937c88551474e3bd5d6bc422a7"
+        },
+        "rawClaimedCompletion": false,
+        "reportedCompletion": true,
+        "rejectedCompletionClaim": false,
+        "completionStatus": "verified",
+        "server": {
+          "status": "completed",
+          "step": 2,
+          "completionCount": 1
+        },
+        "model": {
+          "execution": "live-nebius",
+          "requests": 1,
+          "costUsd": 0.00070878
+        },
+        "diagnosisFailures": [],
+        "limitations": [
+          "HMAC verified privately in this process; export is not a public-key proof",
+          "Retained synthetic state survives restart until expiry; availability depends on retained storage",
+          "Model suggestions do not prove outcomes; this run alone does not establish competitive advantage"
+        ],
+        "artifactSha256": "7fa7bfb97d1c9b3d2b68002fef411c1f7a27ab89624ff97cbf64c32356d2fb48"
+      }
+    },
+    {
+      "scenario": "workshop-false-success",
+      "diagnosis": "unverified_claim",
+      "recommendedAction": "stop",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+        "evidenceIds": [
+          "event-0",
+          "ui-claim",
+          "state-facts"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+        },
+        "confidence": "medium"
+      },
+      "rawSuggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+        "evidenceIds": [
+          "event-0",
+          "ui-claim",
+          "state-facts"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+        },
+        "confidence": "medium"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      },
+      "provider": {
+        "usage": {
+          "inputTokens": 918,
+          "outputTokens": 5891,
+          "totalTokens": 6809
+        },
+        "estimatedCostUsd": 0.0014689199999999999,
+        "latencyMs": 21898.891443999997,
+        "modelIdentityVerified": true
+      },
+      "before": {
+        "schemaVersion": 1,
+        "product": "ReceiptLab local evidence workbench",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "provenance": {
+          "schemaVersion": 1,
+          "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+          "sourceCommitBasis": "git-head",
+          "codeTreeDirty": false,
+          "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+          "filesSha256": {
+            "package-lock.json": "02f127c26778565d7672159054e20c80694e6ea13adfe5e59722c0097dc1c3e0",
+            "package.json": "4647f8d7e8fa0115ba5e5e8fe2c111643cae1e30cf6231fb6d585aebfb8d9168",
+            "scripts/benchmark.mjs": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286",
+            "scripts/build-manifest.mjs": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9",
+            "scripts/campaign.mjs": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d",
+            "scripts/capture-live-journey.mjs": "e8736ff347d111abdb5b853fb11d7c302795d428fdfad725eccb2864d563d458",
+            "scripts/catalog.mjs": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf",
+            "scripts/demo.mjs": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98",
+            "scripts/diagnosis-campaign.mjs": "9dcd44708aa1db0f5dee351b55039d2407a1a9fb919d47b343329fc68f8d9200",
+            "scripts/preflight.mjs": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2",
+            "scripts/rc-campaign.mjs": "5366c3d1c282e62d53c29c214a204da3711a7ed4a7c26edc113eaa160271873d",
+            "scripts/rehearse-caddy.mjs": "7b5941dc88af3fc188bcdea6c1aa01e896639c78f24f2b81dd0ebd37d6377dc9",
+            "scripts/security-check.mjs": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d",
+            "scripts/smoke-workbench.mjs": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a",
+            "scripts/workbench-live.mjs": "7868532f4d412d7fc4732dec252e3c80ae8276b549be48d412d23d14ec097a4e",
+            "scripts/workbench-public.mjs": "1d31c809784e4451938b9b13b635585013d5cfb1185c4cb0586d199621c75d5b",
+            "scripts/workbench.mjs": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed",
+            "src/account-budget.mjs": "4edf3cfa82686bb179a60cf29fecebd48254f811fd8ed149ae769397c80aa6fb",
+            "src/agents/actions.mjs": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa",
+            "src/agents/baseline.mjs": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7",
+            "src/agents/browser.mjs": "6f903d35c085637b301b7970c5a33085cc82fc4f28577fc398d1d1337871004d",
+            "src/agents/dom-baseline.mjs": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46",
+            "src/agents/guarded.mjs": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a",
+            "src/agents/nebius.mjs": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c",
+            "src/agents/scripted.mjs": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648",
+            "src/app/client.js": "b5204d047bde7814bf82825b10c58fdab704a14dce06d76ff55d62f30b8d1eae",
+            "src/app/index.html": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513",
+            "src/app/server.mjs": "a341b37f9bf51863998499f2643a51e50ca81ee8b125e45b591a67bca2fa1a3c",
+            "src/benchmark.mjs": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61",
+            "src/campaign.mjs": "862b80c865b437183e22c85a27e82444516ced49337964e442148e6d097e9d79",
+            "src/catalog.mjs": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a",
+            "src/credit-gate.mjs": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb",
+            "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+            "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+            "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+            "src/diagnosis/drain.mjs": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec",
+            "src/diagnosis/evaluation.mjs": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e",
+            "src/diagnosis/experiment.mjs": "e81588564efbce8fe837abc791ce81fbba334ddec8863b03f118f039c6699891",
+            "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+            "src/diagnosis/strong-baseline-v2.mjs": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+            "src/diagnosis/strong-baseline.mjs": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+            "src/diagnosis/telemetry-baseline-policy.md": "263d6c73aac9657756434e9cdc0d2d06deb3b3a86f9d044bf90f803bfe9fe5bb",
+            "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+            "src/diagnosis/workflow.mjs": "7a6911f39518b0ed5b02cda6d14f7c62a45f97f9069eade30d6fd8e28931d8ea",
+            "src/evaluation-v2.mjs": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283",
+            "src/evaluation.mjs": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731",
+            "src/holdout.mjs": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c",
+            "src/preflight-contract.mjs": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849",
+            "src/preflight.mjs": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f",
+            "src/provenance.mjs": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae",
+            "src/runtime/campaign-paths.mjs": "c34a7b63bc52d07a2a1f537173673f39dbce34b3f4522a69b7906b88225f9b90",
+            "src/runtime/capture-target.mjs": "6776f1dbc36ad80ef093d5dc3272c523b5bdfb7a422f767c5c84bccfb3462161",
+            "src/runtime/durable-state.mjs": "626d359beb79278666b53f3f2c015b012d88488c7be6a37c27aa09d3523fa2ad",
+            "src/scenarios.mjs": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d",
+            "src/source-safety.mjs": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019",
+            "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+            "src/workbench/client.js": "95acb5148f4a6bdae5bb48024d5c00428ca766d0107428b8869d8284417276d4",
+            "src/workbench/index.html": "8c009a19944718caad35682c006fad65f2a37705e1c7a2c65a40b41e71784079",
+            "src/workbench/server.mjs": "91057343d51c5cd562aca2a5ff441e4aaacf49b8eb6082363389ad136ae0993f",
+            "src/workbench/style.css": "26f9d0613188a837d10caca7e91b8967075a03243ef2c8e448016a7f9925c22d"
+          },
+          "buildManifestSha256": null,
+          "runtimeMatchesBuild": null
+        },
+        "suiteHashes": {
+          "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+          "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+          "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+          "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+        },
+        "diagnosticDataset": "evaluation/diagnosis-v1 (see separate frozen SHA manifest)",
+        "diagnoses": [
+          {
+            "suggestion": {
+              "diagnosis": "unverified_claim",
+              "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+              "evidenceIds": [
+                "event-0",
+                "ui-claim",
+                "state-facts"
+              ],
+              "recovery": {
+                "action": "stop",
+                "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+              },
+              "confidence": "medium"
+            },
+            "reasoningTokens": 5765,
+            "contentCharacters": 559,
+            "httpStatus": 200,
+            "modelIdentityVerified": true,
+            "finishReason": "stop",
+            "latencyMs": 21898.891443999997,
+            "usage": {
+              "inputTokens": 918,
+              "outputTokens": 5891,
+              "totalTokens": 6809
+            },
+            "estimatedCostUsd": 0.0014689199999999999,
+            "modelValidated": true,
+            "verifiedOutcome": false,
+            "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+            "executionKind": "live-nebius",
+            "rawSuggestion": {
+              "diagnosis": "unverified_claim",
+              "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+              "evidenceIds": [
+                "event-0",
+                "ui-claim",
+                "state-facts"
+              ],
+              "recovery": {
+                "action": "stop",
+                "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+              },
+              "confidence": "medium"
+            },
+            "semanticAssessment": {
+              "status": "accepted",
+              "reasons": [],
+              "rawHighConfidenceRejected": false,
+              "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+            },
+            "id": "f7cc59a9-c336-4ae8-a6dd-70bc514d8b66",
+            "traceDigest": "9e80be8b90b7ba085b2a6b5ab78057eaae7a2820109b76b9f8b45810028bca3f",
+            "requiresHumanApproval": true,
+            "recoveryExecutable": false
+          }
+        ],
+        "recoveries": [],
+        "evidenceKind": "Synthetic workflow with live NVIDIA diagnostic suggestions",
+        "runId": "24fef999-4390-4891-b1bd-b8102554480f",
+        "scenarioId": "workshop-false-success",
+        "checkedAt": "2026-10-18T03:54:47.667Z",
+        "taskDigest": "a2b60901548da9bfb11580f1846bc21b4c193ea868aa88041b5d06400b89ff6f",
+        "verification": {
+          "completed": false,
+          "reason": "No unique committed server submission"
+        },
+        "rawClaimedCompletion": true,
+        "reportedCompletion": false,
+        "rejectedCompletionClaim": true,
+        "completionStatus": "verification-failed",
+        "server": {
+          "status": "draft",
+          "step": 2,
+          "completionCount": 0
+        },
+        "model": {
+          "execution": "live-nebius",
+          "requests": 1,
+          "costUsd": 0.0014689199999999999
+        },
+        "diagnosisFailures": [],
+        "limitations": [
+          "HMAC verified privately in this process; export is not a public-key proof",
+          "Retained synthetic state survives restart until expiry; availability depends on retained storage",
+          "Model suggestions do not prove outcomes; this run alone does not establish competitive advantage"
+        ],
+        "artifactSha256": "a917969cf1a2d63401fa48ea1ab38f1e517419fb206f20cd13e5bb5c1c1b143f"
+      },
+      "after": {
+        "schemaVersion": 1,
+        "product": "ReceiptLab local evidence workbench",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "provenance": {
+          "schemaVersion": 1,
+          "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+          "sourceCommitBasis": "git-head",
+          "codeTreeDirty": false,
+          "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+          "filesSha256": {
+            "package-lock.json": "02f127c26778565d7672159054e20c80694e6ea13adfe5e59722c0097dc1c3e0",
+            "package.json": "4647f8d7e8fa0115ba5e5e8fe2c111643cae1e30cf6231fb6d585aebfb8d9168",
+            "scripts/benchmark.mjs": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286",
+            "scripts/build-manifest.mjs": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9",
+            "scripts/campaign.mjs": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d",
+            "scripts/capture-live-journey.mjs": "e8736ff347d111abdb5b853fb11d7c302795d428fdfad725eccb2864d563d458",
+            "scripts/catalog.mjs": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf",
+            "scripts/demo.mjs": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98",
+            "scripts/diagnosis-campaign.mjs": "9dcd44708aa1db0f5dee351b55039d2407a1a9fb919d47b343329fc68f8d9200",
+            "scripts/preflight.mjs": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2",
+            "scripts/rc-campaign.mjs": "5366c3d1c282e62d53c29c214a204da3711a7ed4a7c26edc113eaa160271873d",
+            "scripts/rehearse-caddy.mjs": "7b5941dc88af3fc188bcdea6c1aa01e896639c78f24f2b81dd0ebd37d6377dc9",
+            "scripts/security-check.mjs": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d",
+            "scripts/smoke-workbench.mjs": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a",
+            "scripts/workbench-live.mjs": "7868532f4d412d7fc4732dec252e3c80ae8276b549be48d412d23d14ec097a4e",
+            "scripts/workbench-public.mjs": "1d31c809784e4451938b9b13b635585013d5cfb1185c4cb0586d199621c75d5b",
+            "scripts/workbench.mjs": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed",
+            "src/account-budget.mjs": "4edf3cfa82686bb179a60cf29fecebd48254f811fd8ed149ae769397c80aa6fb",
+            "src/agents/actions.mjs": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa",
+            "src/agents/baseline.mjs": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7",
+            "src/agents/browser.mjs": "6f903d35c085637b301b7970c5a33085cc82fc4f28577fc398d1d1337871004d",
+            "src/agents/dom-baseline.mjs": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46",
+            "src/agents/guarded.mjs": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a",
+            "src/agents/nebius.mjs": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c",
+            "src/agents/scripted.mjs": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648",
+            "src/app/client.js": "b5204d047bde7814bf82825b10c58fdab704a14dce06d76ff55d62f30b8d1eae",
+            "src/app/index.html": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513",
+            "src/app/server.mjs": "a341b37f9bf51863998499f2643a51e50ca81ee8b125e45b591a67bca2fa1a3c",
+            "src/benchmark.mjs": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61",
+            "src/campaign.mjs": "862b80c865b437183e22c85a27e82444516ced49337964e442148e6d097e9d79",
+            "src/catalog.mjs": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a",
+            "src/credit-gate.mjs": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb",
+            "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+            "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+            "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+            "src/diagnosis/drain.mjs": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec",
+            "src/diagnosis/evaluation.mjs": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e",
+            "src/diagnosis/experiment.mjs": "e81588564efbce8fe837abc791ce81fbba334ddec8863b03f118f039c6699891",
+            "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+            "src/diagnosis/strong-baseline-v2.mjs": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+            "src/diagnosis/strong-baseline.mjs": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5",
+            "src/diagnosis/telemetry-baseline-policy.md": "263d6c73aac9657756434e9cdc0d2d06deb3b3a86f9d044bf90f803bfe9fe5bb",
+            "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+            "src/diagnosis/workflow.mjs": "7a6911f39518b0ed5b02cda6d14f7c62a45f97f9069eade30d6fd8e28931d8ea",
+            "src/evaluation-v2.mjs": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283",
+            "src/evaluation.mjs": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731",
+            "src/holdout.mjs": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c",
+            "src/preflight-contract.mjs": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849",
+            "src/preflight.mjs": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f",
+            "src/provenance.mjs": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae",
+            "src/runtime/campaign-paths.mjs": "c34a7b63bc52d07a2a1f537173673f39dbce34b3f4522a69b7906b88225f9b90",
+            "src/runtime/capture-target.mjs": "6776f1dbc36ad80ef093d5dc3272c523b5bdfb7a422f767c5c84bccfb3462161",
+            "src/runtime/durable-state.mjs": "626d359beb79278666b53f3f2c015b012d88488c7be6a37c27aa09d3523fa2ad",
+            "src/scenarios.mjs": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d",
+            "src/source-safety.mjs": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019",
+            "src/verification.mjs": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52",
+            "src/workbench/client.js": "95acb5148f4a6bdae5bb48024d5c00428ca766d0107428b8869d8284417276d4",
+            "src/workbench/index.html": "8c009a19944718caad35682c006fad65f2a37705e1c7a2c65a40b41e71784079",
+            "src/workbench/server.mjs": "91057343d51c5cd562aca2a5ff441e4aaacf49b8eb6082363389ad136ae0993f",
+            "src/workbench/style.css": "26f9d0613188a837d10caca7e91b8967075a03243ef2c8e448016a7f9925c22d"
+          },
+          "buildManifestSha256": null,
+          "runtimeMatchesBuild": null
+        },
+        "suiteHashes": {
+          "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+          "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+          "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+          "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+        },
+        "diagnosticDataset": "evaluation/diagnosis-v1 (see separate frozen SHA manifest)",
+        "diagnoses": [
+          {
+            "suggestion": {
+              "diagnosis": "unverified_claim",
+              "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+              "evidenceIds": [
+                "event-0",
+                "ui-claim",
+                "state-facts"
+              ],
+              "recovery": {
+                "action": "stop",
+                "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+              },
+              "confidence": "medium"
+            },
+            "reasoningTokens": 5765,
+            "contentCharacters": 559,
+            "httpStatus": 200,
+            "modelIdentityVerified": true,
+            "finishReason": "stop",
+            "latencyMs": 21898.891443999997,
+            "usage": {
+              "inputTokens": 918,
+              "outputTokens": 5891,
+              "totalTokens": 6809
+            },
+            "estimatedCostUsd": 0.0014689199999999999,
+            "modelValidated": true,
+            "verifiedOutcome": false,
+            "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+            "executionKind": "live-nebius",
+            "rawSuggestion": {
+              "diagnosis": "unverified_claim",
+              "explanation": "Browser claimed completion via UI text, but verifier state confirms commitCount:0 and no unique committed server submission exists. Intermediate step acceptances do not constitute a final commit; UI text alone never proves completion per protocol.",
+              "evidenceIds": [
+                "event-0",
+                "ui-claim",
+                "state-facts"
+              ],
+              "recovery": {
+                "action": "stop",
+                "reason": "No committed server submission found; completion claim is unverified and cannot be assumed from intermediate progress or UI text alone."
+              },
+              "confidence": "medium"
+            },
+            "semanticAssessment": {
+              "status": "accepted",
+              "reasons": [],
+              "rawHighConfidenceRejected": false,
+              "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+            },
+            "id": "f7cc59a9-c336-4ae8-a6dd-70bc514d8b66",
+            "traceDigest": "9e80be8b90b7ba085b2a6b5ab78057eaae7a2820109b76b9f8b45810028bca3f",
+            "requiresHumanApproval": true,
+            "recoveryExecutable": false
+          }
+        ],
+        "recoveries": [],
+        "evidenceKind": "Synthetic workflow with live NVIDIA diagnostic suggestions",
+        "runId": "24fef999-4390-4891-b1bd-b8102554480f",
+        "scenarioId": "workshop-false-success",
+        "checkedAt": "2026-10-18T03:54:47.848Z",
+        "taskDigest": "a2b60901548da9bfb11580f1846bc21b4c193ea868aa88041b5d06400b89ff6f",
+        "verification": {
+          "completed": false,
+          "reason": "No unique committed server submission"
+        },
+        "rawClaimedCompletion": true,
+        "reportedCompletion": false,
+        "rejectedCompletionClaim": true,
+        "completionStatus": "verification-failed",
+        "server": {
+          "status": "draft",
+          "step": 2,
+          "completionCount": 0
+        },
+        "model": {
+          "execution": "live-nebius",
+          "requests": 1,
+          "costUsd": 0.0014689199999999999
+        },
+        "diagnosisFailures": [],
+        "limitations": [
+          "HMAC verified privately in this process; export is not a public-key proof",
+          "Retained synthetic state survives restart until expiry; availability depends on retained storage",
+          "Model suggestions do not prove outcomes; this run alone does not establish competitive advantage"
+        ],
+        "artifactSha256": "84b9672b1e12c8adc045055bd076f72e221e3bc5e46d33b05d05823775076d06"
+      }
+    }
+  ],
+  "publicDeployment": false,
+  "tls": {
+    "privateLoopbackCertificatePinned": true,
+    "publicCertificate": false
+  },
+  "pageErrors": [],
+  "status": "completed",
+  "finishedAt": "2026-10-18T03:54:49.810Z"
+}

@@ -1,0 +1,54 @@
+{
+  "mode": "live",
+  "credentials": {
+    "apiKeyPresent": true,
+    "modelPresent": true,
+    "modelIsNemotron": true
+  },
+  "request": {
+    "destination": "api.tokenfactory.nebius.com",
+    "maxRequests": 1,
+    "maxOutputTokens": 1024,
+    "responseFormat": "json_schema",
+    "reasoningControls": "omitted: model-specific support not verified",
+    "automaticRetries": 0,
+    "estimatedInputTokenAllowance": 2553,
+    "safetyEstimateUsd": 0.00039893999999999997,
+    "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+  },
+  "liveValidated": true,
+  "requestsSent": 1,
+  "billing": {
+    "creditOnlyVerified": true,
+    "source": "owner-attested-no-card",
+    "checkedAt": "2026-10-18T03:54:09.864Z",
+    "coversAuthorizedLimit": true,
+    "noBankCardEverAdded": true,
+    "existingCreditsOnlyAuthorized": true,
+    "paidReplenishmentProhibited": true,
+    "expiryIndependentlyVerified": false,
+    "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+  },
+  "provider": {
+    "httpStatus": 200,
+    "modelIdentityVerified": true,
+    "finishReason": "stop",
+    "refused": false,
+    "contentCharacters": 102,
+    "reasoningTokens": 534
+  },
+  "usage": {
+    "promptTokens": 235,
+    "completionTokens": 573,
+    "totalTokens": 808,
+    "complete": true
+  },
+  "latencyMs": 2045.569219,
+  "estimatedModelCostUsd": 0.00015162,
+  "costBasis": "configured token-rate estimate; not a billing statement",
+  "authenticationVerified": true,
+  "modelIdentityVerified": true,
+  "jsonResponseVerified": true,
+  "actionSchemaVerified": true,
+  "browserTaskCompleted": false
+}

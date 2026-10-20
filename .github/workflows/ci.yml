@@ -1,9 +1,15 @@
-name: Foundation CI
+name: Phase 1 feasibility
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      run_offline_benchmark:
+        description: Run the offline benchmark separately from verification tests
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -11,11 +17,35 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Test
-        run: npm test
+      - name: Install frozen dependencies
+        run: npm ci
+      - name: Tracked source secret check
+        run: npm run security:check
+      - name: Dependency advisory check
+        run: npm audit --audit-level=moderate
+      - name: Install Chromium and system libraries
+        run: npm run browsers:install -- --with-deps
+      - name: Unit, HTTP, provider contract and real browser tests (no live APIs)
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:ci | tee test-output.log
+      - name: Offline benchmark (scripted control, not Nemotron)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_offline_benchmark }}
+        run: npm run benchmark -- --repetitions 1 --output results/local/ci.json
+      - name: Upload actual run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1-evidence
+          path: |
+            test-output.log
+            results/local/
+            .cache/qa/
+          if-no-files-found: warn

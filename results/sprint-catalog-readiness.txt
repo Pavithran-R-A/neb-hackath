@@ -1,0 +1,46 @@
+
+> neb-hackath@0.0.1 preflight:catalog
+> node --use-env-proxy scripts/catalog.mjs
+
+{
+  "catalog": {
+    "checkedAt": "2026-10-17T15:07:54.943Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "readiness": {
+    "mode": "dry-run",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.00039893999999999997,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": false,
+    "requestsSent": 0,
+    "billing": {
+      "creditOnlyVerified": false
+    },
+    "readyForApproval": false,
+    "remaining": [
+      "Explicit owner approval and current credit-only billing evidence are required for live execution",
+      "Use current verified token prices and an approved spending limit",
+      "CLI cannot inspect platform network-secret scope; verify protected environment metadata separately"
+    ]
+  }
+}

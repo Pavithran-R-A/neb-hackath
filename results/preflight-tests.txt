@@ -1,0 +1,56 @@
+
+> neb-hackath@0.0.1 test:ci
+> npm test
+
+
+> neb-hackath@0.0.1 test
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs
+
+✔ guard denies invented data, arbitrary selectors, navigation, JS and unknown controls (1.584287ms)
+✔ URL guard permits only the exact synthetic run and assets, never evaluator endpoints (0.260513ms)
+✔ settling a failed click handles a later response-wait rejection (384.357345ms)
+✔ server requires every step, valid fields, and explicit consent (45.791696ms)
+✔ receipt rejects mutation, wrong task, wrong run and duplicate submission (15.072804ms)
+✔ false-success display has no verifiable receipt (5.257559ms)
+✔ format validation, one-shot transient failure, and consent reset are reproducible (19.654116ms)
+✔ unknown runs and malformed requests fail without leaking evaluator state (5.727748ms)
+✔ summary separates expected negatives, false claims, blocked actions and actual completion (0.759224ms)
+▶ both browser agents execute all ten fixed cases; evaluator determines completion
+  ✔ grant-clean (643.674451ms)
+  ✔ workshop-clean (622.707208ms)
+  ✔ grant-renamed (1891.31543ms)
+  ✔ workshop-unlabeled (1918.737847ms)
+  ✔ grant-phone-format (2083.895424ms)
+  ✔ workshop-consent-reset (685.513441ms)
+  ✔ grant-transient (676.976148ms)
+  ✔ workshop-false-success (600.394913ms)
+  ✔ grant-invalid-email (1819.104303ms)
+  ✔ workshop-injection (581.471579ms)
+✔ both browser agents execute all ten fixed cases; evaluator determines completion (11777.691036ms)
+✔ premature done and an untrusted policy cannot forge server completion (518.55867ms)
+✔ Nebius adapter action contract drives the real browser (simulated transport; no inference) (585.026152ms)
+✔ the initial cloud-only test harness runs (0.735078ms)
+✔ the foundation smoke test does not need live API access (0.114052ms)
+✔ live inference requires key, explicit paid approval and NVIDIA Nemotron model (1.084563ms)
+✔ Nemotron client sends bounded JSON to official endpoint and accounts for measured usage (22.484427ms)
+✔ provider errors are sanitized, never retried or silently replaced (0.5175ms)
+✔ wrong model, invalid JSON, missing usage and excessive output fail safely (1.488092ms)
+✔ provider latency includes streamed response body, not just response headers (41.004905ms)
+✔ malformed null envelope never reports a real attempted call as free (0.801317ms)
+✔ dry-run checks presence without any network call or disclosure (1.35413ms)
+✔ no request without explicit approval, a positive spending limit, valid prices and credentials (0.955419ms)
+✔ one request validates exact model, JSON batch and complete usage with sanitized results (20.921733ms)
+✔ HTTP errors, transport failures and timeouts do not retry or leak provider text (2.008115ms)
+✔ unexpected models, malformed JSON/envelopes, truncated/refused responses and bad usage fail closed (5.210849ms)
+✔ CLI defaults to no network and cannot opt into billing accidentally (227.032943ms)
+✔ valid JSON key ordering does not affect the action contract (0.611201ms)
+✔ unexpected successful HTTP status is rejected (0.574625ms)
+✔ cleanup failure preserves the sanitized HTTP error (0.924773ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14845.402343
