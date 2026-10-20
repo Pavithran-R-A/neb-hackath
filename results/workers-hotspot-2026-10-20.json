@@ -75,7 +75,7 @@
     "source": "https://developers.cloudflare.com/workers/platform/limits/",
     "freeCpuMsPerInvocation": 10,
     "checkedAt": "2026-10-20",
-    "decision": "NO-GO: optimized local sampled active V8 p95 remains 11.661 ms; actual hosted Workers CPU/account entitlement was not available and this local measurement is not provider CPU accounting.",
+    "decision": "INDETERMINATE: local workerd inspector plus LOCAL_METRICS samples do not measure Cloudflare billed/request CPU and cannot adjudicate the Free 10ms invocation cap. The account-specific hosted experiment is still pending owner selection/approval.",
     "bodyEvidence": {
       "retrievalDate": "2026-10-20",
       "path": "https://developers.cloudflare.com/workers/platform/limits/",
@@ -102,7 +102,7 @@
   "tradeoffs": [
     "Sampled active V8 p95 fell 22.3%; p95 rows read fell 50%.",
     "P95 rows written increased 25% because the two indexes are maintained on append-only ledger writes.",
-    "p95 active V8 and max still exceed the published Free CPU limit used as a conservative screen; deployment remains blocked."
+    "The numeric local sampled-active-V8 p95 and max remain above 10ms, but are not comparable to Cloudflare CPU and do not prove a Free-plan failure."
   ],
   "limitations": [
     "Sampled active V8 stack time excludes idle and program samples; includes local metrics instrumentation and sampling/inspector overhead.",

@@ -1,0 +1,19 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "receiptlab-judge-experiment-20261020",
+  "main": "index.mjs",
+  "compatibility_date": "2026-08-06",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "INFERENCE_ENABLED": "false"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "receiptlab-judge-experiment-20261020",
+      "database_id": "REPLACE_ONLY_AFTER_OWNER_APPROVED_D1_CREATE"
+    }
+  ],
+  "observability": { "enabled": false }
+}

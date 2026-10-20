@@ -1,6 +1,9 @@
 # Actual cloud browser screenshots
 
-- `workbench-first-screen-2026-10-20.png`: first screen of the updated local Chromium workbench; it states the false-success problem, independent receipt proof and Nemotron's advisory role. It is not a hosted page and makes no model request.
+- `workbench-first-screen-2026-10-20.png`: first screen of the updated local Chromium workbench.
+- `workbench-first-screen-2026-10-20-rc.png`: first screen captured during the source-hash-manifested final video run.
+- `recorded-positive-local-recovery-2026-10-20.png`: actual current workbench positive path, local deterministic advice, explicit approval and independently verified signed receipt.
+- `recorded-negative-local-claim-2026-10-20.png`: actual current workbench false-success path; the completion claim is rejected and recovery remains unavailable. These three new captures are fictional local synthetic QA behavior, not hosted pages or live NVIDIA inference; see [the capture manifest](../../results/rc-final-pitch-video-manifest.json).
 - `workers-first-screen-2026-10-20.png`: first screen of the local Workers/D1 candidate after the same claim/proof/advice framing was added. Real Chromium confirmed keyboard labels and no horizontal overflow at320/768/1024/1440px; inference was disabled. A separate pinned local HTTPS test completes both guided outcomes, retains the valid receipt across Worker restart and records zero provider requests.
 
 - `desktop.png`, `mobile.png`: earlier manual/DOM synthetic workbench, no NVIDIA inference.

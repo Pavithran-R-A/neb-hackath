@@ -423,13 +423,14 @@
     "source": "https://developers.cloudflare.com/workers/platform/limits/",
     "freeCpuMsPerInvocation": 10,
     "checkedAt": "2026-10-20",
-    "decision": "NO-GO: newest follow-up local sampled active V8 p95 is 12.432 ms. This is not provider CPU accounting and no hosted account measurement was available."
+    "decision": "INDETERMINATE: local workerd inspector plus LOCAL_METRICS samples do not measure Cloudflare billed/request CPU and cannot adjudicate the Free 10ms invocation cap. The account-specific hosted experiment is still pending owner selection/approval."
   },
   "limits": [
     "Sampled active V8 stack time excludes idle and program samples; includes local metrics instrumentation and sampling/inspector overhead.",
     "Native crypto, SQLite service and runtime thread CPU are not comprehensively included; this is not Cloudflare billed/request CPU.",
     "Local debugger sampling cannot prove hosted Workers Free 10ms feasibility. No hosted execution, resource creation or live model request.",
-    "Model replies are deterministic mocks; no NVIDIA quality or network latency claim."
+    "Model replies are deterministic mocks; no NVIDIA quality or network latency claim.",
+    "The benchmark enables LOCAL_METRICS instrumentation and the V8 inspector; measured sample durations are not Cloudflare billed CPU and cannot be compared directly with the 10ms platform limit."
   ],
-  "interpretation": "Follow-up adds no app-source changes since the prior index run; profiler samples vary across runs. The independent Worker/D1 query optimization stands, but local sampled V8 p95 remains above the published Free CPU screen. No hosted execution, resource creation or model request."
+  "interpretation": "Local profile is instrumented and not Cloudflare CPU accounting. The numeric sample cannot be called a 10ms Free CPU failure; only the selected-account hosted metrics can decide. No hosted execution, resource creation or live model request."
 }
