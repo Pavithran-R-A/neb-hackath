@@ -11,6 +11,7 @@
     "GITHUB_OIDC_AUDIENCE": "receiptlab-cloudflare-experiment",
     "GITHUB_REPOSITORY": "Pavithran-R-A/neb-hackath",
     "GITHUB_REPOSITORY_ID": "1422019854",
+    "GITHUB_OWNER_ID": "92867708",
     "GITHUB_REF": "refs/pull/2/merge",
     "GITHUB_HEAD_REF": "feat/phase1-verified-completion",
     "GITHUB_BASE_REF": "main",

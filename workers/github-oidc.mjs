@@ -49,7 +49,7 @@ export async function verifyGitHubOidc(token, options) {
   if (!await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, decodeBase64Url(encodedSignature), signed)) throw new Error('OIDC signature rejected');
 
   const expected = options;
-  if (claims.iss !== issuer || claims.aud !== expected.audience || claims.sub !== `repo:${expected.repository}:pull_request` || claims.repository !== expected.repository || claims.repository_id !== expected.repositoryId || claims.ref !== expected.ref || claims.head_ref !== expected.headRef || claims.base_ref !== expected.baseRef || claims.workflow_ref !== `${expected.workflowPath}@${expected.ref}` || claims.event_name !== 'pull_request') throw new Error('OIDC identity rejected');
+  if (claims.iss !== issuer || claims.aud !== expected.audience || claims.sub !== `repo:${expected.repository.split('/')[0]}@${expected.ownerId}/${expected.repository.split('/')[1]}@${expected.repositoryId}:pull_request` || claims.repository !== expected.repository || claims.repository_id !== expected.repositoryId || claims.ref !== expected.ref || claims.head_ref !== expected.headRef || claims.base_ref !== expected.baseRef || claims.workflow_ref !== `${expected.workflowPath}@${expected.ref}` || claims.event_name !== 'pull_request') throw new Error('OIDC identity rejected');
   if (![claims.iat, claims.nbf, claims.exp].every(Number.isSafeInteger)) throw new Error('OIDC lifetime invalid');
   if (claims.exp <= now || claims.nbf > now + clockSkewSeconds || claims.iat > now + clockSkewSeconds || claims.exp <= claims.iat || claims.exp - claims.iat > maxLifetimeSeconds) throw new Error('OIDC token expired or lifetime invalid');
   return {repository: claims.repository, ref: claims.ref};

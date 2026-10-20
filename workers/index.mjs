@@ -37,7 +37,7 @@ export async function handle(request,env){try{
  if(env.EXPERIMENT_AUTH_REQUIRED==='true'){
   const authorization=request.headers.get('authorization')??'';
   const token=authorization.startsWith('Bearer ')?authorization.slice(7):'';
-  try{await verifyGitHubOidc(token,{audience:env.GITHUB_OIDC_AUDIENCE,repository:env.GITHUB_REPOSITORY,repositoryId:env.GITHUB_REPOSITORY_ID,ref:env.GITHUB_REF,headRef:env.GITHUB_HEAD_REF,baseRef:env.GITHUB_BASE_REF,workflowPath:env.GITHUB_WORKFLOW_PATH});}
+  try{await verifyGitHubOidc(token,{audience:env.GITHUB_OIDC_AUDIENCE,repository:env.GITHUB_REPOSITORY,repositoryId:env.GITHUB_REPOSITORY_ID,ownerId:env.GITHUB_OWNER_ID,ref:env.GITHUB_REF,headRef:env.GITHUB_HEAD_REF,baseRef:env.GITHUB_BASE_REF,workflowPath:env.GITHUB_WORKFLOW_PATH});}
   catch{problem(401,'GitHub Actions identity required');}
  }
  if(request.method==='GET'&&new URL(request.url).pathname==='/')return new Response(html,{headers:{'content-type':'text/html;charset=utf-8','cache-control':'no-store','content-security-policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"}});
