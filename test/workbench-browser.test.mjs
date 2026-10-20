@@ -9,6 +9,15 @@ import {verifyCompletion} from '../src/verification.mjs';
 import {evaluationV2} from '../src/evaluation-v2.mjs';
 const task={name:'Avery Example',email:'avery@example.invalid',phone:'5550101234',detail:'Community garden',flow:'grant',consent:true};
 
+test('first screen explains false-success risk, independent proof and NVIDIA boundary',async t=>{
+ const server=await createWorkbench();t.after(()=>server.close());const browser=await launchBrowser();t.after(()=>browser.close());const page=await browser.newPage();t.after(()=>page.close());const modelRequests=[];page.on('request',request=>{if(/\/diagnose(?:\?|$)/.test(request.url()))modelRequests.push(request.url());});
+ await page.goto(server.origin);await page.getByRole('heading',{level:1,name:'The page says “submitted.” Did the server commit it?'}).waitFor();
+ await page.getByText('ReceiptLab proves completion from the intended run, one server commit and a verified signed receipt.',{exact:false}).waitFor();
+ await page.getByText('Nemotron can suggest a recovery; only the independent receipt can prove completion.',{exact:true}).waitFor();
+ await page.getByRole('button',{name:'Start positive case',exact:true}).waitFor();await page.getByRole('button',{name:'Start negative case',exact:true}).waitFor();
+ await page.getByText('Connected. Start the positive case; no account or model call is required.',{exact:true}).waitFor();await mkdir('.cache/qa',{recursive:true});await page.setViewportSize({width:1440,height:1200});await page.screenshot({path:'.cache/qa/rc-first-screen-1440.png',fullPage:false});for(const width of [320,768,1024,1440]){await page.setViewportSize({width,height:900});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'First-screen horizontal overflow at '+width);}assert.deepEqual(modelRequests,[]);
+});
+
 test('workbench keyboard journey rejects false success, verifies real submission and exports evidence',async t=>{
  const server=await createWorkbench();t.after(()=>server.close());const browser=await launchBrowser();t.after(()=>browser.close());
  const context=await browser.newContext({acceptDownloads:true});t.after(()=>context.close());const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));

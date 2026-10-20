@@ -1,5 +1,8 @@
 # Actual cloud browser screenshots
 
+- `workbench-first-screen-2026-10-20.png`: first screen of the updated local Chromium workbench; it states the false-success problem, independent receipt proof and Nemotron's advisory role. It is not a hosted page and makes no model request.
+- `workers-first-screen-2026-10-20.png`: first screen of the local Workers/D1 candidate after the same claim/proof/advice framing was added. Real Chromium confirmed keyboard labels and no horizontal overflow at320/768/1024/1440px; inference was disabled. A separate pinned local HTTPS test completes both guided outcomes, retains the valid receipt across Worker restart and records zero provider requests.
+
 - `desktop.png`, `mobile.png`: earlier manual/DOM synthetic workbench, no NVIDIA inference.
 - `live-e-ambiguous.png`: actual campaignE NVIDIA ambiguous/stop failure. No recovery completed; preserved honestly.
 - `grant-transient-live-diagnosis.png`: actual campaignF model diagnosis before approval/recovery.

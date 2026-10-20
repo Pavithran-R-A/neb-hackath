@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS accounts(id TEXT PRIMARY KEY CHECK(id='nebius'), impo
 CREATE TRIGGER IF NOT EXISTS immutable_import BEFORE UPDATE OF imported_digest, imported_history ON accounts BEGIN SELECT RAISE(ABORT,'immutable account import'); END;
 CREATE TABLE IF NOT EXISTS campaigns(id TEXT PRIMARY KEY, approved INTEGER NOT NULL, source_digest TEXT NOT NULL, max_posts INTEGER NOT NULL, max_nano INTEGER NOT NULL, model TEXT NOT NULL, catalog_digest TEXT NOT NULL, input_nano INTEGER NOT NULL, output_nano INTEGER NOT NULL, max_tokens INTEGER NOT NULL, expires INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS ledger(id TEXT PRIMARY KEY, campaign_id TEXT NOT NULL, reservation_id TEXT NOT NULL, kind TEXT NOT NULL, nano INTEGER NOT NULL, created INTEGER NOT NULL);
+CREATE INDEX IF NOT EXISTS ledger_campaign_kind_nano ON ledger(campaign_id,kind,nano);
+CREATE INDEX IF NOT EXISTS ledger_kind_id_nano ON ledger(kind,id,nano);
 CREATE TRIGGER IF NOT EXISTS immutable_ledger_update BEFORE UPDATE ON ledger BEGIN SELECT RAISE(ABORT,'immutable ledger'); END;
 CREATE TRIGGER IF NOT EXISTS immutable_ledger_delete BEFORE DELETE ON ledger BEGIN SELECT RAISE(ABORT,'immutable ledger'); END;
 

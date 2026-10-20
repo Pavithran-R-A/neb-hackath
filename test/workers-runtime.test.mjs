@@ -20,6 +20,9 @@ test('real D1 Worker session isolation, transient form, approved recovery and si
  const recovery=await Promise.all([api('/api/runs/'+id+'/recover',body,a.cookie),api('/api/runs/'+id+'/recover',body,a.cookie)]);assert.deepEqual(recovery.map(r=>r.status).sort(),[200,409]);
  assert.equal((await api('/api/runs/'+id+'/verify',undefined,a.cookie)).body.completed,true);
 });
+test('HTTPS Worker request URL sets a Secure session cookie with same-origin policy',async t=>{
+ const {mf}=await fixture(t);const response=await mf.dispatchFetch('https://localhost/api/session',{method:'POST',headers:{origin:'https://localhost','content-type':'application/json'},body:'{}'});assert.equal(response.status,201);assert.match(response.headers.get('set-cookie'),/^receiptlab=[\w-]+; HttpOnly; SameSite=Strict; Path=\/; Max-Age=1800; Secure$/);
+});
 test('misleading success and invalid supplied email never become verified or executable',async t=>{
  const {api}=await fixture(t),s=await api('/api/session',{});
  for(const scenarioId of ['workshop-false-success','grant-invalid-email']){const r=await api('/api/runs',{scenarioId},s.cookie);for(let step=0;step<3;step++)await api('/api/runs/'+r.body.id+'/step',{step,values:r.body.task},s.cookie);assert.equal((await api('/api/runs/'+r.body.id+'/verify',undefined,s.cookie)).body.completed,false);const d=await api('/api/runs/'+r.body.id+'/diagnose',{mode:'deterministic'},s.cookie);assert.equal(d.body.recoveryExecutable,false);assert.equal((await api('/api/runs/'+r.body.id+'/approve',{diagnosisId:d.body.id,traceDigest:d.body.traceDigest,approved:true},s.cookie)).status,409);}
@@ -78,6 +81,14 @@ test('D1 admission enforces lifetime, daily, session and half-dollar envelope be
  await db.prepare("UPDATE quotas SET count=100 WHERE id='inference:total'").run();await assert.rejects(request('total','fresh'));await db.prepare("UPDATE quotas SET count=0 WHERE id='inference:total'").run();
  await db.prepare("INSERT INTO ledger VALUES('envelope','quota','envelope','reserved',480000001,0)").run();await assert.rejects(request('envelope-exceeded','fresh'));
  assert.equal((await db.prepare('SELECT active FROM accounts').first()).active,null);assert.equal((await db.prepare("SELECT COUNT(*) AS n FROM ledger WHERE kind='reserved'").first()).n,3);
+});
+test('D1 campaign and global account history checks use covering ledger indexes',async t=>{
+ const {db}=await fixture(t);
+ const campaign=await db.prepare("EXPLAIN QUERY PLAN SELECT COUNT(*) FROM ledger WHERE campaign_id=? AND kind='reserved'").bind('campaign').all();
+ const global=await db.prepare("EXPLAIN QUERY PLAN SELECT COALESCE(SUM(nano),0) FROM ledger WHERE kind='reserved' AND id NOT LIKE 'historical:%'").all();
+ const campaignPlan=campaign.results.map(row=>row.detail).join(' '),globalPlan=global.results.map(row=>row.detail).join(' ');
+ assert.match(campaignPlan,/ledger_campaign_kind_nano/);
+ assert.match(globalPlan,/ledger_kind_id_nano/);
 });
 test('public session quota and session write quota reject excess without creating state',async t=>{
  const {api,db}=await fixture(t);const s=await api('/api/session',{}),sessionId=s.cookie.split('=')[1],day=Math.floor(Date.now()/86400000);

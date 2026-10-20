@@ -1,6 +1,6 @@
 import {diagnosticSystem} from './provider-contract.mjs';
 import {measuredDatabase} from './local-metrics.mjs';
-import {html,javascript} from './page.mjs';
+import {html,css,javascript} from './page.mjs';
 import {scenarios} from '../src/scenarios.mjs';
 import {acceptDiagnosis} from './acceptance.mjs';
 import {diagnoseDeterministic} from './baseline.mjs';
@@ -33,7 +33,8 @@ export async function modelDiagnosis(t,env,body,sessionId){
  const suggestion=JSON.parse(c.message.content);validateDiagnosis(suggestion,t);const costNano=Math.ceil(u.prompt_tokens*campaign.input_nano+u.completion_tokens*campaign.output_nano);await settle(env.DB,reservation,costNano);return {suggestion,modelValidated:true,usage:u,estimatedCostUsd:costNano/1e9};
 }
 export async function handle(request,env){try{
- if(request.method==='GET'&&new URL(request.url).pathname==='/')return new Response(html,{headers:{'content-type':'text/html;charset=utf-8','cache-control':'no-store','content-security-policy':"default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"}});
+ if(request.method==='GET'&&new URL(request.url).pathname==='/')return new Response(html,{headers:{'content-type':'text/html;charset=utf-8','cache-control':'no-store','content-security-policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"}});
+ if(request.method==='GET'&&new URL(request.url).pathname==='/candidate.css')return new Response(css,{headers:{'content-type':'text/css;charset=utf-8','cache-control':'no-store'}});
  if(request.method==='GET'&&new URL(request.url).pathname==='/candidate.js')return new Response(javascript,{headers:{'content-type':'application/javascript','cache-control':'no-store'}});
  if(typeof env.RECEIPT_KEY!=='string'||env.RECEIPT_KEY.length<32)problem(503,'Signing secret unavailable');
  const url=new URL(request.url);if(request.method==='POST'&&request.headers.get('origin')!==url.origin)problem(403,'Same-origin request required');

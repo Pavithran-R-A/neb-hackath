@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-20T07:06:32.391Z",
+  "baseCommit": "92c269553b257a95b20e5016ed2894e2a651c1ec",
+  "runtime": "real local Miniflare/workerd D1; provider mocked",
+  "command": "node scripts/workers-benchmark.mjs .cache/workers-benchmark-final.json",
+  "toolVersions": {
+    "node": "v24.19.0",
+    "miniflare": "5.20261012.1-beta",
+    "wrangler": "4.151.1"
+  },
+  "cohorts": 2,
+  "iterationsPerCohort": 15,
+  "sourceHashes": {
+    "workers/acceptance.mjs": "27177333733289c4ddfd25e783731fa07fad316aeaae1cf4c34c0ea49470ecd1",
+    "workers/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+    "workers/contract.mjs": "84dd5e02b35ea48455821c76e6012c7058e1422d6157868c96011b839cfbab54",
+    "workers/crypto.mjs": "200b9ea68389bdde0b1e1fd17a967ac4c86103cfa2fbe66ee630ca7afbb62f7d",
+    "workers/index.mjs": "7cdc7977d3c725098b497c3a632d1eafa710b61c24d1b7316ffc39a6abebc6de",
+    "workers/local-metrics.mjs": "ca9c8121deb35edd50613c3720b23476cde8e88c3e4f97408c973da4d778e244",
+    "workers/page.mjs": "ef7c11b13eb31054b7d2a73f768db7ae410559899a58c5f077ad312b00c3d279",
+    "workers/provider-contract.mjs": "22790a30379ba305b6f22bc02465d973d5219c4f44dafdfc7d7a92bbfb18f123",
+    "workers/schema.sql": "e0411f8a585eb7cd061df2c6fb1ebefb829b75a151d7e73bce552e796691888a",
+    "workers/store.mjs": "55f344213dd051cf9111b6d7519b05f7d0e1feffcffcf5b93eaca010bf50fafd",
+    "workers/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+    "scripts/workers-runtime.mjs": "610e589b68ff22faedb2c21b60a5a60fa3f447cdf0d92e8311d946ab10a72e87",
+    "scripts/workers-benchmark.mjs": "8a240c7060e9a910dff203c628648015ed6537219c03ea9a81a7b7a682442147"
+  },
+  "providerCalls": 0,
+  "provider": "Deterministic mock only; no NVIDIA inference",
+  "priorOptimizedProfile": {
+    "artifact": "results/workers-hotspot-2026-10-20.profiles.json.gz",
+    "sha256": "91261dc6a8e793ab42a8576ad9b951ce05ada792121c7e463bf03a49817d251b",
+    "sampledActiveV8P95Ms": 11.661,
+    "rowsReadP95": 67,
+    "rowsWrittenP95": 20
+  },
+  "followup": {
+    "summary": {
+      "session": {
+        "n": 30,
+        "wallMs": {
+          "p50": 4.224986999999601,
+          "p95": 7.750199000000066,
+          "max": 16.755397000000357
+        },
+        "sampledActiveV8Ms": {
+          "p50": 2.144,
+          "p95": 3.823,
+          "max": 4.203
+        },
+        "queries": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsRead": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsWritten": {
+          "p50": 3,
+          "p95": 4,
+          "max": 4
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "create": {
+        "n": 30,
+        "wallMs": {
+          "p50": 5.426977000000079,
+          "p95": 8.196742999998605,
+          "max": 9.620267999999669
+        },
+        "sampledActiveV8Ms": {
+          "p50": 3.648,
+          "p95": 5.377,
+          "max": 8.218
+        },
+        "queries": {
+          "p50": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "rowsRead": {
+          "p50": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "rowsWritten": {
+          "p50": 5,
+          "p95": 6,
+          "max": 6
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "step0": {
+        "n": 30,
+        "wallMs": {
+          "p50": 6.4893590000001495,
+          "p95": 11.270575999999892,
+          "max": 15.075730999999905
+        },
+        "sampledActiveV8Ms": {
+          "p50": 5.043,
+          "p95": 6.4,
+          "max": 8.898
+        },
+        "queries": {
+          "p50": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "rowsRead": {
+          "p50": 7,
+          "p95": 7,
+          "max": 7
+        },
+        "rowsWritten": {
+          "p50": 3,
+          "p95": 3,
+          "max": 3
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "step1": {
+        "n": 30,
+        "wallMs": {
+          "p50": 6.636085000000094,
+          "p95": 8.798870999999963,
+          "max": 9.131620000000112
+        },
+        "sampledActiveV8Ms": {
+          "p50": 4.242,
+          "p95": 7.315,
+          "max": 8.1
+        },
+        "queries": {
+          "p50": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "rowsRead": {
+          "p50": 7,
+          "p95": 7,
+          "max": 7
+        },
+        "rowsWritten": {
+          "p50": 3,
+          "p95": 3,
+          "max": 3
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "step2": {
+        "n": 30,
+        "wallMs": {
+          "p50": 6.436088999999811,
+          "p95": 9.030789999999797,
+          "max": 10.184831999999915
+        },
+        "sampledActiveV8Ms": {
+          "p50": 4.211,
+          "p95": 6.015,
+          "max": 6.35
+        },
+        "queries": {
+          "p50": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "rowsRead": {
+          "p50": 7,
+          "p95": 7,
+          "max": 7
+        },
+        "rowsWritten": {
+          "p50": 3,
+          "p95": 3,
+          "max": 3
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "verifyIncomplete": {
+        "n": 30,
+        "wallMs": {
+          "p50": 3.71405600000071,
+          "p95": 5.071353000000272,
+          "max": 6.699894999999742
+        },
+        "sampledActiveV8Ms": {
+          "p50": 2.616,
+          "p95": 3.85,
+          "max": 4.075
+        },
+        "queries": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsRead": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsWritten": {
+          "p50": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 0,
+          "max": 0
+        }
+      },
+      "diagnoseRules": {
+        "n": 30,
+        "wallMs": {
+          "p50": 6.708929999999782,
+          "p95": 10.39147899999989,
+          "max": 10.68500099999983
+        },
+        "sampledActiveV8Ms": {
+          "p50": 4.725,
+          "p95": 7.35,
+          "max": 7.648
+        },
+        "queries": {
+          "p50": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "rowsRead": {
+          "p50": 6,
+          "p95": 6,
+          "max": 6
+        },
+        "rowsWritten": {
+          "p50": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "approve": {
+        "n": 30,
+        "wallMs": {
+          "p50": 6.8608600000006845,
+          "p95": 10.565872999999556,
+          "max": 10.888072000000648
+        },
+        "sampledActiveV8Ms": {
+          "p50": 4.783,
+          "p95": 7.526,
+          "max": 8.825
+        },
+        "queries": {
+          "p50": 6,
+          "p95": 6,
+          "max": 6
+        },
+        "rowsRead": {
+          "p50": 7,
+          "p95": 7,
+          "max": 7
+        },
+        "rowsWritten": {
+          "p50": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 1,
+          "max": 2
+        }
+      },
+      "recover": {
+        "n": 30,
+        "wallMs": {
+          "p50": 7.4634079999996175,
+          "p95": 11.773879999999735,
+          "max": 13.503499000000375
+        },
+        "sampledActiveV8Ms": {
+          "p50": 5.794,
+          "p95": 8.439,
+          "max": 10.375
+        },
+        "queries": {
+          "p50": 7,
+          "p95": 7,
+          "max": 7
+        },
+        "rowsRead": {
+          "p50": 17,
+          "p95": 24,
+          "max": 24
+        },
+        "rowsWritten": {
+          "p50": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 2,
+          "max": 2
+        }
+      },
+      "verifyComplete": {
+        "n": 30,
+        "wallMs": {
+          "p50": 3.720086000000265,
+          "p95": 7.335960000000341,
+          "max": 7.654441000000588
+        },
+        "sampledActiveV8Ms": {
+          "p50": 2.192,
+          "p95": 3.961,
+          "max": 5.981
+        },
+        "queries": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsRead": {
+          "p50": 2,
+          "p95": 2,
+          "max": 2
+        },
+        "rowsWritten": {
+          "p50": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 0,
+          "max": 0
+        }
+      },
+      "mockModel": {
+        "n": 30,
+        "wallMs": {
+          "p50": 11.121858999999858,
+          "p95": 15.63347799999974,
+          "max": 22.403510000000097
+        },
+        "sampledActiveV8Ms": {
+          "p50": 8.528,
+          "p95": 12.432,
+          "max": 14.039
+        },
+        "queries": {
+          "p50": 13,
+          "p95": 13,
+          "max": 13
+        },
+        "rowsRead": {
+          "p50": 46,
+          "p95": 67,
+          "max": 67
+        },
+        "rowsWritten": {
+          "p50": 18,
+          "p95": 20,
+          "max": 20
+        },
+        "sqlMs": {
+          "p50": 0,
+          "p95": 2,
+          "max": 2
+        }
+      }
+    },
+    "profileSha256": "a52b2be9455ae5119b976898fa1adaf814a12f683450b7bdbb7f451eeff4c7a3",
+    "compressedProfile": {
+      "path": "workers-hotspot-2026-10-20-followup.profiles.json.gz",
+      "bytes": 55849,
+      "sha256": "7de99c7a134a9491dc0025cd96260588bafb46c8d8e1b36a8c9f309eba8ab5da"
+    }
+  },
+  "comparison": {
+    "mockModel": {
+      "samples": 30,
+      "priorBaselineSampledActiveV8P95Ms": 15.003,
+      "followupSampledActiveV8P95Ms": 12.432,
+      "changePercent": 17.1,
+      "rowsReadP95": 67,
+      "rowsWrittenP95": 20,
+      "wallP95Ms": 15.633
+    }
+  },
+  "officialLimit": {
+    "source": "https://developers.cloudflare.com/workers/platform/limits/",
+    "freeCpuMsPerInvocation": 10,
+    "checkedAt": "2026-10-20",
+    "decision": "NO-GO: newest follow-up local sampled active V8 p95 is 12.432 ms. This is not provider CPU accounting and no hosted account measurement was available."
+  },
+  "limits": [
+    "Sampled active V8 stack time excludes idle and program samples; includes local metrics instrumentation and sampling/inspector overhead.",
+    "Native crypto, SQLite service and runtime thread CPU are not comprehensively included; this is not Cloudflare billed/request CPU.",
+    "Local debugger sampling cannot prove hosted Workers Free 10ms feasibility. No hosted execution, resource creation or live model request.",
+    "Model replies are deterministic mocks; no NVIDIA quality or network latency claim."
+  ],
+  "interpretation": "Follow-up adds no app-source changes since the prior index run; profiler samples vary across runs. The independent Worker/D1 query optimization stands, but local sampled V8 p95 remains above the published Free CPU screen. No hosted execution, resource creation or model request."
+}

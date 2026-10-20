@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-18T06:20:59.563152+00:00",
+  "createdAt": "2026-10-20T07:01:27.535432+00:00",
   "status": "Cloud-local narrated review draft; not uploaded, submitted or publicly deployed",
   "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
   "sourceCaptureManifest": {
@@ -36,8 +36,8 @@
   ],
   "output": {
     "cloudPath": ".cache/qa/rc-narrated-review.mp4",
-    "bytes": 4281066,
-    "sha256": "5591c23ef8a69542b8262e4f49edc7801ae1f75702c967adb036255c55d2ba9c"
+    "bytes": 4523650,
+    "sha256": "820371ab1b6c7bd4c4c1933ba2dcc97e9897275ceca29d13c054456b179d3402"
   },
   "ffprobe": {
     "programs": [],
@@ -48,27 +48,27 @@
         "codec_type": "video",
         "width": 1440,
         "height": 1200,
-        "duration": "143.840000"
+        "duration": "155.160000"
       },
       {
         "codec_name": "aac",
         "codec_type": "audio",
         "sample_rate": "48000",
         "channels": 2,
-        "duration": "143.861333"
+        "duration": "155.181333"
       },
       {
         "codec_name": "mov_text",
         "codec_type": "subtitle",
-        "duration": "142.825000"
+        "duration": "154.125000"
       }
     ],
     "format": {
-      "duration": "143.861333",
-      "size": "4281066"
+      "duration": "155.181333",
+      "size": "4523650"
     }
   },
-  "durationSeconds": 143.861333,
+  "durationSeconds": 155.181333,
   "audioPresent": true,
   "voice": {
     "engine": "FFmpeg flite filter / local libflite1 2.2-7",
@@ -79,52 +79,61 @@
     "humanVoiceClone": false
   },
   "approvalActor": "authorized automated synthetic QA; no human study",
-  "editing": "Five clearly separated segments. Entire 36.36-second L engineering preview retained as one continuous middle clip at original speed, re-encoded without internal cuts or speed changes; disclosure band added at top. Other four segments are explicit text slates, not fabricated UI footage. Existing English live captions retained. AAC narration padded with silence to segment duration. Full narration selectable English mov_text captions plus sidecar SRT; sentence timing approximated proportionally, not forced alignment.",
+  "editing": "Six clearly separated segments. Entire 36.36-second L engineering preview retained as one continuous second segment at original speed, re-encoded without internal cuts or speed changes; disclosure band added at top. A later current-first-screen segment uses a genuine local Chromium screenshot and is explicitly labeled as local/no inference. Other non-product segments are editorial text slates, not fabricated UI footage. Existing English live captions retained. AAC narration padded with silence to segment duration. Full narration selectable English mov_text captions plus sidecar SRT; sentence timing approximated proportionally, not forced alignment.",
   "segments": [
     {
       "name": "intro",
-      "durationSeconds": 19.92,
-      "speechDurationSeconds": 18.905,
-      "narration": "Receipt Lab investigates when browser agents say done without proof. NVIDIA Nemotron through Nebius Token Factory diagnoses source tagged traces. A private verifier, not the model, checks the signed receipt. This draft uses synthetic English narration and automated synthetic quality assurance on fictional forms.",
-      "slate": "ReceiptLab\nTrust the receipt. Inspect the claim.\n\nNVIDIA Nemotron via Nebius Token Factory\nActual private HTTPS integration footage follows\n\nSYNTHETIC ENGLISH VOICE / AUTOMATED SYNTHETIC QA\nFictional forms; no human usability study; no public deployment",
+      "durationSeconds": 24.6,
+      "speechDurationSeconds": 23.565,
+      "narration": "An agent says submitted. Did the server commit? ReceiptLab is a verification and failure-diagnosis workbench for fictional browser workflows. It checks the intended run, server state and signed receipt. NVIDIA Nemotron through Nebius Token Factory suggests diagnoses; it does not prove completion. This draft uses a synthetic English voice and automated synthetic quality assurance.",
+      "slate": "ReceiptLab\nTrust the receipt. Inspect the claim.\n\nNVIDIA Nemotron via Nebius Token Factory\nActual private HTTPS integration footage follows\n\nSYNTHETIC ENGLISH VOICE / AUTOMATED SYNTHETIC QA\nFictional workflows; no human usability study; no public deployment",
       "startSeconds": 0,
-      "endSeconds": 19.92
+      "endSeconds": 24.6
     },
     {
       "name": "live",
       "durationSeconds": 36.36,
-      "speechDurationSeconds": 24.235,
-      "narration": "This is the actual campaign L capture, continuous at original speed. A transient failure receives retry advice. Automated synthetic quality assurance explicitly approves the permitted retry, and the private verifier confirms a receipt. The next case shows misleading success. The real model waiting time remains visible. It recommends stop; no receipt exists, so completion remains unverified.",
+      "speechDurationSeconds": 25.755,
+      "narration": "This is actual private HTTPS browser footage from bounded campaign L. The model diagnoses a transient error. An explicitly authorized synthetic quality-assurance operator approves one guarded retry; the private verifier confirms a unique signed receipt. In the next actual case, Nemotron sees a misleading success claim and recommends stopping. No receipt exists, so completion remains unverified. Model waiting time is visible.",
       "slate": "",
-      "startSeconds": 19.92,
-      "endSeconds": 56.28
+      "startSeconds": 24.6,
+      "endSeconds": 60.96
     },
     {
       "name": "eval",
-      "durationSeconds": 35.36,
-      "speechDurationSeconds": 34.36,
-      "narration": "Separate campaign I evaluated sixteen synthetic cases with actual NVIDIA Lightning. Raw diagnosis and recovery agreement were twelve of sixteen, paired agreement ten. The telemetry comparator scored twelve, ten, and eight. Two model diagnoses were wrong at high confidence. A later consumed output replay accepted nine, abstained on four, and required review on three. Displayed paired agreement fell to six. This was post hoc adaptation, not fresh validation. Dataset authorship and labels visible review used AI agents, not external experts.",
-      "slate": "SEPARATE EVALUATION SUMMARY / NOT SCREEN FOOTAGE\n\nCampaign I: actual NVIDIA Lightning, 16 synthetic cases\nRaw diagnosis 12/16 | recovery 12/16 | pair 10/16\nTelemetry comparator: 12/16 | 10/16 | 8/16\nTwo high-confidence model diagnosis errors\n\nPost-hoc replay: 9 accepted / 4 abstained / 3 review-required\nDisplayed pair agreement 6/16; ZERO fresh inference\nAI-authored, labels-visible review; no external expert validation",
-      "startSeconds": 56.28,
-      "endSeconds": 91.64
+      "durationSeconds": 32.08,
+      "speechDurationSeconds": 31.055,
+      "narration": "Fresh v3 results were negative and partial. From sixteen frozen cases, four of five attempted diagnoses were usable; one exhausted the 8,192 output-token limit, and eleven were unattempted. On the same four cases, Nemotron matched one diagnosis label and two safe actions; the deterministic comparator matched three labels and three safe actions. The old gate falsely accepted an uncertain write. A consumed-output replay now requires review, but does not validate that fix.",
+      "slate": "FRESH V3 / PARTIAL NEGATIVE RESULT\n\n16 frozen cases; 5 diagnoses attempted after preflight\n4 usable | 1 truncated at 8,192 output tokens | 11 unattempted\n\nSame four paired cases:\nNemotron: 1/4 diagnosis | 2/4 safe actions\nDeterministic baseline: 3/4 diagnosis | 3/4 safe actions\n\nPrior gate falsely accepted one uncertain write\nConsumed-output replay now requires review; no fresh validation\nSix POSTs including preflight | estimated cost $0.00510714",
+      "startSeconds": 60.96,
+      "endSeconds": 93.03999999999999
     },
     {
-      "name": "failures",
-      "durationSeconds": 29.68,
-      "speechDurationSeconds": 28.665,
-      "narration": "Failures remain part of the record. In campaign F, the model wrongly recommended retry after misleading success. The private guard blocked it. Alternate model campaigns G and H failed structured output or returned an HTTP five hundred; unknown usage remains conservatively reserved. Campaign K stopped before diagnoses because its capture helper expected an old path. L corrected that capture. Earlier form comparisons found no completion rate advantage over competent DOM automation.",
-      "slate": "FAILURES RETAINED / NO SUPERIORITY CLAIM\n\nF: misleading-success case received incorrect retry advice\nPrivate guard blocked action; verifier rejected completion\nG / H: failed alternate-model experiments retained\nNano JSON/action preflight failed; Super diagnosis HTTP 500\nUnknown Super usage retains full campaign reservation\nK: capture helper stopped before diagnoses (old form path)\nL: corrected capture; known integration cases, not a benchmark\n\nEarlier form tests found no DOM completion-rate advantage",
-      "startSeconds": 91.64,
-      "endSeconds": 121.32
+      "name": "design",
+      "durationSeconds": 18.4,
+      "speechDurationSeconds": 17.385,
+      "narration": "The current workbench starts with a direct question and invites judges to try a positive recovery, then challenge a false success. It separates the browser claim, independent proof and model advice before any action. Page load sends no model request; NVIDIA inference is bounded and explicit.",
+      "slate": "CURRENT WORKBENCH FIRST SCREEN\nCloud-local Chromium capture · no inference request\n\nDEMO PATH\nPositive case: guarded recovery\nNegative case: misleading success\n\nClaim · independent proof · model advice",
+      "startSeconds": 93.03999999999999,
+      "endSeconds": 111.44
+    },
+    {
+      "name": "product",
+      "durationSeconds": 25.52,
+      "speechDurationSeconds": 24.495,
+      "narration": "Technically, we test D1 persistence, signed receipts and single-use approvals locally. The design keeps model advice separate from a human-approved recovery and the final verifier. The idea is to treat agent completion as a claim to verify. The intended impact is safer, more inspectable debugging; real-world adoption is not measured, and our partial v3 result does not show model superiority.",
+      "slate": "THE FOUR JUDGING LENSES\n\nIDEA  Treat “done” as a claim to verify\nIMPLEMENTATION  Source-tagged traces + D1 persistence\nSigned receipts + single-use approvals\nDESIGN  Guided positive/negative journeys; advice is not proof\nIMPACT  Safer agent debugging; adoption is unmeasured",
+      "startSeconds": 111.44,
+      "endSeconds": 136.96
     },
     {
       "name": "end",
-      "durationSeconds": 22.52,
-      "speechDurationSeconds": 21.505,
-      "narration": "Private Caddy HTTPS and retained state rehearsals establish local integration. Workers feasibility, hosting entitlement, licensing, owner eligibility and judge access remain gates. This is a review draft, with no public upload or submission. Credits: NVIDIA Nemotron and Nebius Token Factory. No endorsement is claimed.",
-      "slate": "DRAFT FOR OWNER REVIEW / NO PUBLIC RELEASE\n\nPrivate Caddy HTTPS + durable-state rehearsal: local evidence\nCloudflare Workers feasibility and hosting entitlement pending\nLicense ownership, eligibility and judge access gates remain\nNo upload, submission, public deployment or endorsement\n\nText credits: NVIDIA Nemotron / Nebius Token Factory\nVoice: local CMU Flite slt via FFmpeg (synthetic)\nFull provenance: results/rc-narrated-video-manifest.json",
-      "startSeconds": 121.32,
-      "endSeconds": 143.84
+      "durationSeconds": 18.2,
+      "speechDurationSeconds": 17.165,
+      "narration": "Text credits go to NVIDIA Nemotron and Nebius Token Factory. This is a cloud-local review draft. Hosting entitlement, owner licensing and eligibility review, and a public judge build remain unresolved. No upload or submission has occurred, and no endorsement is claimed.",
+      "slate": "DRAFT FOR OWNER REVIEW / NO PUBLIC RELEASE\n\nNo verified no-charge judge host or public test-build URL\nLicense ownership, eligibility and judge access remain gates\nNo video upload or Devpost submission\n\nText credits: NVIDIA Nemotron / Nebius Token Factory\nVoice: local CMU Flite slt via FFmpeg (synthetic)\nNo endorsement claimed",
+      "startSeconds": 136.96,
+      "endSeconds": 155.16
     }
   ],
   "evidence": [
@@ -142,6 +151,21 @@
       "cloudPath": "results/rc-semantic-review-amendment.json",
       "bytes": 36933,
       "sha256": "a550a4511661d258432f5482833a5d515bc42b75b2ca54d579eccda353e4556b"
+    },
+    {
+      "cloudPath": "results/judge-M-outcome.json",
+      "bytes": 15456,
+      "sha256": "54906bc87f386862b5fc9f8ecf3e3d01c3b9617f047c31ccb9a6565eab5bd552"
+    },
+    {
+      "cloudPath": "results/judge-M-analysis.json",
+      "bytes": 11642,
+      "sha256": "a6ddad5ebb318b6a3d9f1ce5f57a20f5988058483708d9a1ed0cd5cf7012db2f"
+    },
+    {
+      "cloudPath": "results/judge-M-posthoc-replay.json",
+      "bytes": 8524,
+      "sha256": "418551a5b92dd7c6a69f4c338ae789637bbadae0b70581ab006f413fb4ba5517"
     },
     {
       "cloudPath": "results/campaign-f-browser-outcome.json",
@@ -167,13 +191,22 @@
       "cloudPath": "results/rc-caddy-rehearsal.json",
       "bytes": 2217,
       "sha256": "689db01a5e33003a5d1d305297210c718cc42c08b3f1d8ce58c17e5fbe96bea8"
+    },
+    {
+      "cloudPath": ".cache/qa/rc-first-screen-1440.png",
+      "bytes": 148680,
+      "sha256": "f57560c11ca64d5c3d520c1d8e67fd7ef7107fb39f3b48f66780d7307a6d6f0c"
+    },
+    {
+      "path": "results/workers-hotspot-2026-10-20.json",
+      "sha256": "3d59e5faf1a888e62bef2582ceaa94275359588d078ecc3a0b106b24b9388c81"
     }
   ],
   "mediaProvenance": [
     {
       "cloudPath": ".cache/qa/narrated/build.py",
-      "bytes": 5747,
-      "sha256": "e50ea4d739f2c2ec5204a9f8df2f95a74bb11f35d570c9433b4f3ae6825ae040"
+      "bytes": 6048,
+      "sha256": "52be7df5d3dc887289e3af10f58ccaf4eb45cbac11f89f41ae36871450ea63c3"
     },
     {
       "cloudPath": ".cache/qa/narrated/caddy-LICENSE.txt",
@@ -187,8 +220,28 @@
     },
     {
       "cloudPath": ".cache/qa/narrated/concat.txt",
-      "bytes": 84,
-      "sha256": "3046cb61f87bc337180e763e7041d36ad304c6a0ac3f1117286d725f6b3c3e95"
+      "bytes": 101,
+      "sha256": "09abc550e5d5135dc96ad87c4ef902f8231e9426da0b5629d9ca958095c279a9"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/design-slate.txt",
+      "bytes": 205,
+      "sha256": "93b35fdd768ccf7d8afc0cf474f0cfae9fa4e706a46cf12d1b7efec0863c83fc"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/design.mp4",
+      "bytes": 493881,
+      "sha256": "58c71fe858615c3dcec02b24758aad8147af8e36019bfd0f271ad3a3053afadc"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/design.txt",
+      "bytes": 293,
+      "sha256": "1ebc70cef00d8124f7ca6eff05a100e9cca328ffc399a2d80e032ffe826d6f2c"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/design.wav",
+      "bytes": 1669038,
+      "sha256": "46a3606f02069c78d5aefc043d7f357f5f7afeadd85c4035ebe7338917bf247f"
     },
     {
       "cloudPath": ".cache/qa/narrated/disclosure.txt",
@@ -196,39 +249,69 @@
       "sha256": "2babe8c92ef572575b65b462dd56cc0034f077532aceaf601af5855fd975e4e4"
     },
     {
+      "cloudPath": ".cache/qa/narrated/end-review.png",
+      "bytes": 279326,
+      "sha256": "3dcbf13cf1e600999519a27ea9dde130d0a569f536bb5fd5ac8f7dbaab4972d6"
+    },
+    {
       "cloudPath": ".cache/qa/narrated/end-slate.txt",
-      "bytes": 447,
-      "sha256": "21bfa299160de606379f50c6ad28f684d68c85a5b086a874f1c3e9f96ffb8ee8"
+      "bytes": 328,
+      "sha256": "bcfd860b3f0188945102f8e534342a183851c3a7a260aaaae5321851e1312259"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/end.mp4",
+      "bytes": 414189,
+      "sha256": "0be6f81a6aecfe0708dbeff4ed277195ad40a1c0512d2416aa69199a35ded7e9"
     },
     {
       "cloudPath": ".cache/qa/narrated/end.txt",
-      "bytes": 320,
-      "sha256": "18454dfd8c0906005d2bfe6786e9cf216bf40b073efa9cd6610f6186dde1eb66"
+      "bytes": 271,
+      "sha256": "c94269770d95aa3d77b09baee5cd5695af23ede30f5c7284e6cf85299bf15230"
     },
     {
       "cloudPath": ".cache/qa/narrated/end.wav",
-      "bytes": 2064558,
-      "sha256": "36a4d288345f91b93b2fcf57bd7b063558b7ec5515548d933b535d0340d932b5"
+      "bytes": 1647918,
+      "sha256": "7640175039d9469afc623f6eaf1f4ae0d805e64a4eadcd418738652d4f6069a0"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/eval-review.png",
+      "bytes": 275728,
+      "sha256": "dec35535f66850f136d191c282bf76bbd830ed674880741ba6e7de2f1e3fe692"
     },
     {
       "cloudPath": ".cache/qa/narrated/eval-slate.txt",
-      "bytes": 423,
-      "sha256": "558347e8534d8291113818333fd9a8d274173c215a9c7e4e68070c9f40ac1645"
+      "bytes": 451,
+      "sha256": "915e30b47fa57f4bcd3e7e36bfdc148c9b76b7f37f1dcc0a08461675032add17"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/eval.mp4",
+      "bytes": 844890,
+      "sha256": "eeff6f36c3985c7f5d53c57a071da4f35e79900c59df24200c2b04fb918d26b7"
     },
     {
       "cloudPath": ".cache/qa/narrated/eval.txt",
-      "bytes": 544,
-      "sha256": "d5499df319b34a22d15925ba6d857aa471b5f7bcc2078d5f39d0e003c5d4a5fe"
+      "bytes": 475,
+      "sha256": "3e65e7e442f41b82ad8be449f880c51bdf4078c3f1e04a2330edcabff2160090"
     },
     {
       "cloudPath": ".cache/qa/narrated/eval.wav",
-      "bytes": 3298638,
-      "sha256": "9971f96f147ac8d63ad6f8a24f96e049c2afb973ab892e88fbc035d363921f56"
+      "bytes": 2981358,
+      "sha256": "0900c44f24d03e5b0bd187f62129a350270d24d66a9080ff838575b3fa3384d1"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/failures-review.png",
+      "bytes": 311723,
+      "sha256": "b20b6f479a68eb5c696f99b390cfac099f21bb3bd524b2bb5489946bfc4653bd"
     },
     {
       "cloudPath": ".cache/qa/narrated/failures-slate.txt",
       "bytes": 506,
       "sha256": "9dee74ccc9f71d51c572e77ddb750285a83ca2e381c7ac790c20f14be67912a6"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/failures.mp4",
+      "bytes": 751956,
+      "sha256": "9a9a46e5eb024c8458ac6f2e68d622a3502c2dde35ee6bce7c1ca345770c9cd1"
     },
     {
       "cloudPath": ".cache/qa/narrated/failures.txt",
@@ -247,23 +330,33 @@
     },
     {
       "cloudPath": ".cache/qa/narrated/finalize.py",
-      "bytes": 5136,
-      "sha256": "1f20a6d25fabf8ebce13222cf51de2fc583a23e889c2f96296d6e524b8079dcf"
+      "bytes": 5419,
+      "sha256": "1c8831c9193c473798ee73bd9bdedf5e1bf821b2de4f1c29a8c047ccb778d2ec"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/intro-review.png",
+      "bytes": 174291,
+      "sha256": "e78013b9d1508fe4197ef2c21c811159d49b4b7b433a2f7d30f034ffc61e2386"
     },
     {
       "cloudPath": ".cache/qa/narrated/intro-slate.txt",
-      "bytes": 254,
-      "sha256": "d14f55bae9d396ba16dd8a60e70b443ae237e084391426c003f03d9ae2c56863"
+      "bytes": 258,
+      "sha256": "caab3abcd9e6a49eed45571f831812ac4651067a4de2e1455b9a16889a508699"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/intro.mp4",
+      "bytes": 553474,
+      "sha256": "c0108b98666e8a40784e3c4ef1bf1e61576875b207e64aceb166055914da5aeb"
     },
     {
       "cloudPath": ".cache/qa/narrated/intro.txt",
-      "bytes": 314,
-      "sha256": "8d352553811e319a848a7c1a3c4b6cb9a6722fd954e9c3de222f7e0e58c1100f"
+      "bytes": 383,
+      "sha256": "68f24d53ccc04bd94a9e06afc7cdf666cb73e091a8aa75bd38a2325ad7c3e6a6"
     },
     {
       "cloudPath": ".cache/qa/narrated/intro.wav",
-      "bytes": 1814958,
-      "sha256": "f9317f2b3ca6be05c23fd40e37679d4f40e5c5ab0be7deeb8f991a16585f8b0d"
+      "bytes": 2262318,
+      "sha256": "6497ac7700f9ed3ea1dccc9cc91d1892518e525c97b81b86f618defea24658c6"
     },
     {
       "cloudPath": ".cache/qa/narrated/libflite1-copyright.txt",
@@ -271,24 +364,34 @@
       "sha256": "77d13a5e6cbe7277b4721033f9ad15707241c2832baa8c74ec823c9ee5ebf71c"
     },
     {
+      "cloudPath": ".cache/qa/narrated/live-review.png",
+      "bytes": 288084,
+      "sha256": "899f6410f0d5c0ac38b663c1bbc856413c3f63b831b39caf7d26108965e84e21"
+    },
+    {
       "cloudPath": ".cache/qa/narrated/live-slate.txt",
       "bytes": 1,
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
     },
     {
+      "cloudPath": ".cache/qa/narrated/live.mp4",
+      "bytes": 1641423,
+      "sha256": "46d40cf1a6b03eece7ff878fe20a8e069fd8d41dbe5dbce70d7a44e9354eb3de"
+    },
+    {
       "cloudPath": ".cache/qa/narrated/live.txt",
-      "bytes": 394,
-      "sha256": "b03ab23a73ed7350051d37e98e2399803e05ff851fc2ff22e84cb8664e5638a9"
+      "bytes": 429,
+      "sha256": "6b50eeaa89d854a1dc755d438eaf6c1ed7bf7b402a729804b66bb59fa357d71f"
     },
     {
       "cloudPath": ".cache/qa/narrated/live.wav",
-      "bytes": 2326638,
-      "sha256": "e0b84f477da9c84ad3f484f39ce3b6fad6a112d55484453b18040df9530ece1a"
+      "bytes": 2472558,
+      "sha256": "4582017995e2060970c6e42c93b49867c7790cdf80e620f4ac0b9ec6eeb5b7fe"
     },
     {
       "cloudPath": ".cache/qa/narrated/narration.en.srt",
-      "bytes": 3067,
-      "sha256": "d26f439ec4bfe4672a5906a57896c5ae2693bff323c9a6cae1b93ab2583783d1"
+      "bytes": 3188,
+      "sha256": "b293310eaeb3dedf554271b931ca3da388b9a87f3569b124e716712dff5ebdee"
     },
     {
       "cloudPath": ".cache/qa/narrated/node-LICENSE.txt",
@@ -296,21 +399,47 @@
       "sha256": "148eacf7863ef4329224a29398623077200a27194aa075569faf4a0a85566ca5"
     },
     {
+      "cloudPath": ".cache/qa/narrated/product-slate.txt",
+      "bytes": 279,
+      "sha256": "a7831b08e8fcca339ae9e798115b413f181768790de0d03da08ce93ccad41ffe"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/product.mp4",
+      "bytes": 578466,
+      "sha256": "1e8fa9776971e5be333c23eaa63f1ed47a3565dac2e502378f0c76f77b4cd2dd"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/product.txt",
+      "bytes": 395,
+      "sha256": "834bad329a566bf88eee6040289ca8c7575a9cd5481c28b90362c893d793b483"
+    },
+    {
+      "cloudPath": ".cache/qa/narrated/product.wav",
+      "bytes": 2351598,
+      "sha256": "f7516eb3e9f918f34ca67104df6d6c5f40bd4f98241b9ea252991e5c89e8d93f"
+    },
+    {
       "cloudPath": ".cache/qa/narrated/segments.json",
-      "bytes": 4384,
-      "sha256": "3dbb984382a3b6805ef81f6d924c2bd1fab3f537ba36f6ba24dc81fa01cc622c"
+      "bytes": 4616,
+      "sha256": "eb400592ab57f62e6617409ca1ebcfa908fb3d89c819374da1ddb64253681a4b"
+    },
+    {
+      "cloudPath": ".cache/qa/rc-first-screen-1440.png",
+      "bytes": 148680,
+      "sha256": "f57560c11ca64d5c3d520c1d8e67fd7ef7107fb39f3b48f66780d7307a6d6f0c"
     }
   ],
   "verification": {
     "originalCaptureHashesMatched": true,
     "ffmpegFullDecodeExitCode": 0,
-    "audioMeanDb": -19.6,
-    "audioMaxDb": -6.4,
+    "audioMeanDb": -19.5,
+    "audioMaxDb": -5.7,
     "visualFramesInspected": [
       "intro",
-      "evaluation",
       "live",
-      "failure",
+      "v3-evaluation",
+      "current-first-screen",
+      "judging-criteria",
       "end"
     ],
     "newInferenceCalls": 0
@@ -319,10 +448,41 @@
     "Owner has not approved licensing, ownership, eligibility, media publication, submission or public deployment.",
     "Synthetic English narration quality needs owner listening review; no human listening study or external expert validation claimed.",
     "Known L integration cases do not establish superiority or arbitrary-site reliability.",
-    "I evaluation used synthetic AI-authored cases; labels-visible independent AI review is not human expert review.",
-    "Review gate used consumed-output replay; coverage loss and high-confidence raw errors remain disclosed.",
-    "Historical F error, G/H model failures, K capture failure retained; not footage of those failed historical runs.",
-    "Private HTTPS is local evidence, not public availability; Workers hosting feasibility/entitlement remains pending.",
-    "Output MP4 and intermediate media remain ignored cloud-local assets, not versioned video hosting."
-  ]
+    "I and v3 use synthetic AI-authored cases and labels-visible AI review, not external human experts.",
+    "The amended gate has not been validated on fresh inference; the consumed-v3 replay is regression evidence only.",
+    "v3 stopped after five diagnoses: four usable; eleven unattempted; one truncated. The baseline comparison is paired on only four cases.",
+    "Private HTTPS is local evidence, not public availability; no verified no-charge host or entitlement exists.",
+    "Output MP4 and intermediate media remain ignored cloud-local assets, not versioned video hosting.",
+    "Sponsor/model names appear as spoken and written credits; owner must confirm trademark permission under current Devpost rules before publishing."
+  ],
+  "rightsReview": {
+    "logos": false,
+    "copyrightedMusic": false,
+    "stockFootage": false,
+    "thirdPartyNames": [
+      "NVIDIA",
+      "Nemotron",
+      "Nebius",
+      "Token Factory"
+    ],
+    "permissionStatus": "unconfirmed; official Devpost rules require permission for third-party trademarks in video"
+  },
+  "submissionCriteriaCoverage": {
+    "technologicalImplementation": "actual bounded private HTTPS NVIDIA footage; independent receipt verifier; local tests only, no hosted deployment",
+    "design": "current first-screen Chromium capture and guided positive/negative demo",
+    "potentialImpact": "intended audience described; no adoption/user/production impact measured",
+    "qualityOfIdea": "proof-first run-bound completion verification; no superiority claim"
+  },
+  "rulesEvidence": {
+    "url": "https://nebiusglobalaihackathon.devpost.com/rules",
+    "retrievedOn": "2026-10-20",
+    "sha256": "8d3e4cbb6add98d088bbb15caf9dfe31b90bda8ec8dd36ba4f19f213d3e8b586"
+  },
+  "currentFirstScreen": {
+    "path": "docs/release/screenshots/workbench-first-screen-2026-10-20.png",
+    "sha256": "f57560c11ca64d5c3d520c1d8e67fd7ef7107fb39f3b48f66780d7307a6d6f0c",
+    "width": 1440,
+    "height": 1200,
+    "source": "local Chromium, no model request"
+  }
 }
