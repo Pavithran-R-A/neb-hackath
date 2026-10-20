@@ -4,6 +4,7 @@ const maxTokenBytes = 8192;
 const maxLifetimeSeconds = 600;
 const clockSkewSeconds = 30;
 let cachedKeys;
+let recentlyVerified = null;
 let keysFetchedAt = 0;
 
 function decodeBase64Url(value) {
@@ -41,6 +42,10 @@ export async function verifyGitHubOidc(token, options) {
   const claims = decodeJson(encodedClaims);
   if (header.alg !== 'RS256' || typeof header.kid !== 'string' || header.typ !== 'JWT' || header.crit) throw new Error('OIDC algorithm rejected');
   const now = Math.floor((options.now ?? Date.now() / 1000));
+  // A validated token may be reused briefly within this isolate; never cache raw bearer credentials.
+  const context = JSON.stringify([options.audience, options.repository, options.repositoryId, options.ownerId, options.ref, options.headRef, options.baseRef, options.workflowPath]);
+  const fingerprint = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token))), b => b.toString(16).padStart(2,'0')).join('');
+  if (recentlyVerified?.fingerprint === fingerprint && recentlyVerified.context === context && now >= recentlyVerified.checkedAt && now < Math.min(recentlyVerified.expiresAt, recentlyVerified.checkedAt + 15)) return {repository: options.repository, ref: options.ref};
   const keys = await trustedKeys(options.fetchImpl ?? fetch, now);
   const jwk = keys.find(key => key.kid === header.kid && key.kty === 'RSA' && (!key.use || key.use === 'sig') && (!key.alg || key.alg === 'RS256'));
   if (!jwk) throw new Error('OIDC signing key unavailable');
@@ -52,5 +57,6 @@ export async function verifyGitHubOidc(token, options) {
   if (claims.iss !== issuer || claims.aud !== expected.audience || claims.sub !== `repo:${expected.repository.split('/')[0]}@${expected.ownerId}/${expected.repository.split('/')[1]}@${expected.repositoryId}:pull_request` || claims.repository !== expected.repository || claims.repository_id !== expected.repositoryId || claims.ref !== expected.ref || claims.head_ref !== expected.headRef || claims.base_ref !== expected.baseRef || claims.workflow_ref !== `${expected.workflowPath}@${expected.ref}` || claims.event_name !== 'pull_request') throw new Error('OIDC identity rejected');
   if (![claims.iat, claims.nbf, claims.exp].every(Number.isSafeInteger)) throw new Error('OIDC lifetime invalid');
   if (claims.exp <= now || claims.nbf > now + clockSkewSeconds || claims.iat > now + clockSkewSeconds || claims.exp <= claims.iat || claims.exp - claims.iat > maxLifetimeSeconds) throw new Error('OIDC token expired or lifetime invalid');
+  recentlyVerified = {fingerprint, context, checkedAt: now, expiresAt: claims.exp};
   return {repository: claims.repository, ref: claims.ref};
 }
