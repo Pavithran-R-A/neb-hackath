@@ -13,12 +13,12 @@ export function validateTrace(t){
  for(const e of t.events)if(typeof e.id!=='string'||!e.id||typeof e.text!=='string'||typeof e.kind!=='string'||!['task','server','browser','verifier','agent'].includes(e.source))throw new Error('Diagnosis event invalid');
  if(new TextEncoder().encode(JSON.stringify(t)).byteLength>14000)throw new Error('Diagnosis trace too large');return t;
 }
-export function validateDiagnosis(d,t){
+export function validateDiagnosis(d,t,{allowUnverifiedCompletion=false}={}){
  validateTrace(t);
  if(!d||typeof d!=='object'||Array.isArray(d)||Object.keys(d).sort().join(',')!=='confidence,diagnosis,evidenceIds,explanation,recovery'||!diagnoses.includes(d.diagnosis)||!['high','medium','low'].includes(d.confidence)||typeof d.explanation!=='string'||!d.explanation.trim()||d.explanation.length>1200)throw new Error('Diagnosis schema rejected');
  if(!Array.isArray(d.evidenceIds)||!d.evidenceIds.length||d.evidenceIds.length>6||new Set(d.evidenceIds).size!==d.evidenceIds.length||d.evidenceIds.some(id=>!t.events.some(e=>e.id===id)))throw new Error('Diagnosis citations rejected');
  const r=d.recovery;
  if(!r||Object.keys(r).sort().join(',')!=='action,reason'||!allowed[d.diagnosis].includes(r.action)||typeof r.reason!=='string'||!r.reason.trim()||r.reason.length>400)throw new Error('Diagnosis recovery rejected');
- if(d.diagnosis==='completed'&&t.verification?.completed===false)throw new Error('Diagnosis cannot override independent verification');
+ if(d.diagnosis==='completed'&&t.verification?.completed===false&&!allowUnverifiedCompletion)throw new Error('Diagnosis cannot override independent verification');
  return d;
 }

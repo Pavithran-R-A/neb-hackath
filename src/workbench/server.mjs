@@ -10,16 +10,21 @@ import {scenarios} from '../scenarios.mjs';
 import {evaluationV2} from '../evaluation-v2.mjs';
 import {verifyCompletion,digest} from '../verification.mjs';
 import {finalizeAttempt} from '../evaluation.mjs';
+import {createPostgresPool,openPostgresState} from '../runtime/postgres-state.mjs';
+import {trustedPublicRequest} from '../runtime/proxy-trust.mjs';
 const assets=new Map(await Promise.all([['/','index.html','text/html'],['/workbench.js','client.js','text/javascript'],['/workbench.css','style.css','text/css']].map(async([path,file,type])=>[path,{body:await readFile(new URL(file,import.meta.url)),type}])));
 const catalog=[...scenarios,...evaluationV2];
-export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius',allowedDiagnosticScenarios=null,publicMode=false,canonicalOrigin,stateDirectory,diagnosticBudgetDirectory,judgeOperating=null}={}){
- validatePublicConfiguration({publicMode,canonicalOrigin,stateDirectory,diagnosticPolicy:diagnosticPolicy??judgeOperating,diagnosticBudgetDirectory});
+export async function createWorkbench({port=Number(process.env.PORT??0),listenHost,now=Date.now,sessionTtlMs=1800000,maxRunsPerSession=5,maxSessions=32,diagnosticPolicy=null,diagnosticExecutionKind='live-nebius',allowedDiagnosticScenarios=null,publicMode=false,canonicalOrigin,stateDirectory,databaseUrl=process.env.DATABASE_URL,postgresPool,postgresNamespace='receiptlab',renderProxy=process.env.RECEIPTLAB_RENDER_PROXY==='true',diagnosticBudgetDirectory,judgeOperating=null}={}){
+ validatePublicConfiguration({publicMode,canonicalOrigin,stateDirectory,databaseUrl,diagnosticPolicy:diagnosticPolicy??judgeOperating,diagnosticBudgetDirectory});
+ if(publicMode&&databaseUrl&&(diagnosticPolicy||judgeOperating)&&!(judgeOperating?.postgresDurableBudget===true))throw new Error('PostgreSQL judge budget adapter is required before hosted inference can start');
  const provenance=await createProvenance();
  const suiteHashes={};for(const name of ['cases.json','labels.json','protocol.md','review.json']){try{suiteHashes[name]=createHash('sha256').update(await readFile(new URL('../../evaluation/diagnosis-v1/'+name,import.meta.url))).digest('hex');}catch{suiteHashes[name]=null;}}
- const durable=stateDirectory?openDurableState(stateDirectory):null;
+ const ownsPool=Boolean(publicMode&&databaseUrl&&!postgresPool),pool=postgresPool??(publicMode&&databaseUrl?createPostgresPool(databaseUrl):null);
+ const durable=stateDirectory?openDurableState(stateDirectory):publicMode&&databaseUrl?await openPostgresState(pool,{namespace:postgresNamespace}):null;
  const persist=()=>durable?.save();
+ const flush=()=>durable?.flush?.()??Promise.resolve();
  const assertHealthy=()=>durable?.assertHealthy();
- let app;try{app=await createApp({now,runTtlMs:sessionTtlMs,records:durable?.state.records,key:durable?Buffer.from(durable.state.key,'hex'):undefined,persist,assertHealthy});}catch(error){durable?.close();throw error;}
+ let app;try{app=await createApp({now,runTtlMs:sessionTtlMs,records:durable?.state.records,key:durable?Buffer.from(durable.state.key,'hex'):undefined,persist:databaseUrl?()=>{}:persist,assertHealthy});}catch(error){await durable?.close();if(ownsPool)await pool.end();throw error;}
  const sessions=durable?.state.sessions??new Map();let origin;
  const trustedOrigin=()=>publicMode?canonicalOrigin:origin;
  const sourceCommit=provenance.sourceCommit??'unrecorded';
@@ -32,13 +37,13 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
  };
  const activeRequests=new Set();
  const handle=async(req,res)=>{
-  const send=(status,data,type='application/json',headers={})=>{persist();res.writeHead(status,{'content-type':type,'cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",...headers});res.end(type==='application/json'?JSON.stringify(data):data);};
+  const send=async(status,data,type='application/json',headers={})=>{try{persist();await flush();}catch{status=503;data={error:'Workbench persistence unavailable; operation was not confirmed'};type='application/json';headers={};}res.writeHead(status,{'content-type':type,'cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",...headers});res.end(type==='application/json'?JSON.stringify(data):data);};
   try{
    assertHealthy();cleanup();
    const expectedOrigin=trustedOrigin();
-   if(req.headers.host!==new URL(expectedOrigin).host||(req.headers.origin&&req.headers.origin!==expectedOrigin)||(publicMode&&(req.headers.forwarded||req.headers['x-forwarded-host']||req.headers['x-forwarded-proto'])))return send(403,{error:'Origin or host denied'});
+   if(!trustedPublicRequest(req,expectedOrigin,{renderProxy:publicMode&&renderProxy}))return send(403,{error:'Origin, host or trusted HTTPS proxy denied'});
    const path=new URL(req.url,origin).pathname;
-   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating)});
+   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',storageMode:databaseUrl?'postgresql':durable?'sqlite':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating)});
    const id=/(?:^|;\s*)receiptlab=([a-f0-9]{64})(?:;|$)/.exec(req.headers.cookie??'')?.[1];let session=sessions.get(id);
    if(req.method==='GET'&&assets.has(path)){
     const headers={};
@@ -67,7 +72,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
     // Only browser-visible state is proxied; evaluator records, receipts and key stay private.
     return send(response.status,type==='application/json'?JSON.parse(data):data,type,{'content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
    }
-   if(path==='/api/session'&&req.method==='GET')return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating),diagnosticExecutionKind,judgeOperatingMode:Boolean(judgeOperating),judgeAccessRequired:Boolean(judgeOperating&&!judgeOperating.authorized(id)),expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
+   if(path==='/api/session'&&req.method==='GET')return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating),diagnosticExecutionKind,judgeOperatingMode:Boolean(judgeOperating),judgeAccessRequired:Boolean(judgeOperating&&!await judgeOperating.authorized(id)),expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
    if(!['GET','POST'].includes(req.method))return send(405,{error:'Method denied'});
    let body;
    if(req.method==='POST'){
@@ -76,7 +81,7 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
     try{body=JSON.parse(raw);}catch{return send(400,{error:'Invalid JSON'});}
     if(!body||typeof body!=='object'||Array.isArray(body))return send(400,{error:'Invalid request'});
    }
-   if(path==='/api/judge-access'&&req.method==='POST'&&judgeOperating){if(typeof body.code!=='string'||body.code.length>200||Object.keys(body).some(k=>k!=='code'))return send(400,{error:'A judge access code is required'});try{return judgeOperating.authorize(id,body.code)?send(200,{authorized:true}):send(403,{error:'Judge access denied'});}catch{return send(429,{error:'Judge access attempt limit reached'});}}
+   if(path==='/api/judge-access'&&req.method==='POST'&&judgeOperating){if(typeof body.code!=='string'||body.code.length>200||Object.keys(body).some(k=>k!=='code'))return send(400,{error:'A judge access code is required'});try{return await judgeOperating.authorize(id,body.code)?send(200,{authorized:true}):send(403,{error:'Judge access denied'});}catch{return send(429,{error:'Judge access attempt limit reached'});}}
    if(path==='/api/runs'&&req.method==='POST'){
     const scenario=catalog.find(s=>s.id===body.scenarioId);if(!scenario||Object.keys(body).some(k=>k!=='scenarioId'))return send(400,{error:'Choose a known synthetic challenge'});
     if(session.runs.size>=maxRunsPerSession)return send(429,{error:'Session run limit reached; reset the workbench'});
@@ -89,16 +94,16 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
     if(!['deterministic','nemotron'].includes(body.mode)||Object.keys(body).some(k=>k!=='mode'))return send(400,{error:'Choose a known diagnostic mode'});
     if(body.mode==='nemotron'&&allowedDiagnosticScenarios&&!allowedDiagnosticScenarios.includes(run.scenarioId))return send(409,{error:'This challenge is outside the approved model campaign'});
     if(body.mode==='nemotron'&&!diagnosticPolicy&&!judgeOperating)return send(409,{error:'NVIDIA diagnosis inactive; bounded owner-authorized service configuration required'});
-    if(body.mode==='nemotron'&&judgeOperating&&!judgeOperating.authorized(id))return send(403,{error:'Explicit judge access required'});
+    if(body.mode==='nemotron'&&judgeOperating&&!await judgeOperating.authorized(id))return send(403,{error:'Explicit judge access required'});
     if(run.diagnosing||(run.diagnoses?.length??0)>=8)return send(429,{error:'Diagnosis in progress or run limit reached'});
     if(run.interrupted)return send(409,{error:'Interrupted action requires a fresh challenge'});
-    run.diagnosing=true;persist();
-    try{return send(200,await diagnoseWorkflow({run,app,mode:body.mode,policy:judgeOperating?.policyFor({sessionId:id,runId:run.id,scenarioId:run.scenarioId})??diagnosticPolicy,executionKind:diagnosticExecutionKind}));}catch(error){if(error.code==='JUDGE_ADMISSION_DENIED')return send(429,{error:'Judge inference quota, expiry or review limit reached; no provider request was sent. Use local rules or contact the operator.'});run.diagnosisFailures??=[];run.diagnosisFailures.push({mode:body.mode,executionKind:diagnosticExecutionKind,providerOutcome:error.report??null,error:'Diagnosis failed safely; actual POST count is authoritative in the campaign ledger'});return send(502,{error:'Diagnosis failed safely; no recovery action executed'});}finally{run.diagnosing=false;persist();}
+    run.diagnosing=true;persist();await flush();
+    try{return send(200,await diagnoseWorkflow({run,app,mode:body.mode,policy:judgeOperating?.policyFor({sessionId:id,runId:run.id,scenarioId:run.scenarioId})??diagnosticPolicy,executionKind:diagnosticExecutionKind}));}catch(error){if(error.code==='JUDGE_ADMISSION_DENIED')return send(429,{error:'Judge inference quota, expiry or review limit reached; no provider request was sent. Use local rules or contact the operator.'});run.diagnosisFailures??=[];run.diagnosisFailures.push({mode:body.mode,executionKind:diagnosticExecutionKind,providerOutcome:error.report??null,error:'Diagnosis failed safely; actual POST count is authoritative in the campaign ledger'});return send(502,{error:'Diagnosis failed safely; no recovery action executed'});}finally{run.diagnosing=false;persist();await flush();}
    }
    if(match[2]==='recover'&&req.method==='POST'){
     if(run.interrupted)return send(409,{error:'Interrupted action requires a fresh challenge'});
     if(body.approve!==true||typeof body.diagnosisId!=='string'||typeof body.traceDigest!=='string'||Object.keys(body).some(k=>!['approve','diagnosisId','traceDigest'].includes(k)))return send(400,{error:'Explicit approval and matching diagnosis/trace are required'});
-    try{return send(200,await recoverWorkflow({run,app,body}));}catch{return send(409,{error:'Recovery stale, unsupported, failed or already consumed; no automatic retry'});}
+    try{return send(200,await recoverWorkflow({run,app,body,persist,flush}));}catch{return send(409,{error:'Recovery stale, unsupported, failed or already consumed; no automatic retry'});}
    }
    if(match[2]==='verify'&&req.method==='POST'){
     if(typeof body.claimedCompletion!=='boolean'||Object.keys(body).some(k=>k!=='claimedCompletion'))return send(400,{error:'A boolean completion claim is required'});
@@ -111,8 +116,10 @@ export async function createWorkbench({port=0,now=Date.now,sessionTtlMs=1800000,
    return send(405,{error:'Method denied'});
   }catch{if(!res.headersSent){res.writeHead(503,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify({error:'Workbench request failed safely; persistent state may be unavailable'}));}else res.destroy();}
  };
- const server=http.createServer((req,res)=>{const work=handle(req,res);activeRequests.add(work);work.then(()=>activeRequests.delete(work),()=>{activeRequests.delete(work);res.destroy();});});
- try{await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});}catch(error){await app.close();durable?.close();throw error;}
- origin='http://127.0.0.1:'+server.address().port;
- return {origin,close:async()=>{await new Promise((resolve,reject)=>{server.close(e=>e?reject(e):resolve());server.closeAllConnections();});await Promise.allSettled([...activeRequests]);await app.close();durable?.close();}};
+ let requestTail=Promise.resolve();
+ const server=http.createServer((req,res)=>{const work=databaseUrl?requestTail.then(()=>handle(req,res)):handle(req,res);if(databaseUrl)requestTail=work.catch(()=>{});activeRequests.add(work);work.then(()=>activeRequests.delete(work),()=>{activeRequests.delete(work);res.destroy();});});
+ const host=listenHost??(publicMode?'0.0.0.0':'127.0.0.1');
+ try{await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,host,resolve);});}catch(error){await app.close();await durable?.close();if(ownsPool)await pool.end();throw error;}
+ origin=publicMode?canonicalOrigin:'http://127.0.0.1:'+server.address().port;
+ return {origin,address:server.address(),close:async()=>{await new Promise((resolve,reject)=>{server.close(e=>e?reject(e):resolve());server.closeAllConnections();});await Promise.allSettled([...activeRequests]);await app.close();await durable?.close();if(ownsPool)await pool.end();}};
 }

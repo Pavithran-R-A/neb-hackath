@@ -4,12 +4,15 @@ import {isAbsolute,join,resolve,relative,sep} from 'node:path';
 import {randomBytes} from 'node:crypto';
 
 // Trusted operator configuration, never derived from HTTP/forwarded headers.
-export function validatePublicConfiguration({publicMode=false,canonicalOrigin,stateDirectory,diagnosticPolicy,diagnosticBudgetDirectory}={}){
+export function validatePublicConfiguration({publicMode=false,canonicalOrigin,stateDirectory,databaseUrl,diagnosticPolicy,diagnosticBudgetDirectory}={}){
  if(!publicMode)return;
  let url;try{url=new URL(canonicalOrigin);}catch{throw new Error('Public mode requires an explicit canonical HTTPS origin');}
  if(url.protocol!=='https:'||url.username||url.password||url.pathname!=='/'||url.search||url.hash||url.origin!==canonicalOrigin)throw new Error('Canonical origin must be an exact HTTPS origin');
- if(!stateDirectory||!isAbsolute(stateDirectory))throw new Error('Public mode requires an absolute persistent state directory');
+ if(stateDirectory&&databaseUrl)throw new Error('Public mode must choose one authoritative persistent store');
+ if(databaseUrl){let db;try{db=new URL(databaseUrl);}catch{throw new Error('Public mode DATABASE_URL is invalid');}if(!['postgres:','postgresql:'].includes(db.protocol)||!db.hostname||!db.username||!db.password)throw new Error('Public mode DATABASE_URL must be a credentialed PostgreSQL URI');}
+ else if(!stateDirectory||!isAbsolute(stateDirectory))throw new Error('Public mode requires an absolute persistent state directory or DATABASE_URL');
  if(diagnosticPolicy){
+  if(databaseUrl&&diagnosticPolicy.postgresDurableBudget===true)return;
   const root=resolve(stateDirectory),budget=diagnosticBudgetDirectory&&resolve(diagnosticBudgetDirectory),child=budget&&relative(root,budget);
   if(!budget||!child||child==='..'||child.startsWith('..'+sep)||isAbsolute(child)||diagnosticPolicy.durableBudgetDirectory!==budget)throw new Error('Public inference requires configured durable budget ledgers under the state directory');
  }

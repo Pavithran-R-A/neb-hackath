@@ -1,5 +1,15 @@
 # Isolated deployment preparation — no public service
 
+## October 26 hosted candidate status
+
+The previous hosting research predates Issue #5 and is superseded for the final route by [Render Free + the already-created Neon Free project](render-neon-runbook.md). Do not repeat Azure or Cloudflare work. This branch now includes a Node/Neon PostgreSQL session store, transactionally serialized persistent judge-budget ledger, strict Render HTTPS proxy/Host checks, Secure cookies and a guarded judge entry point. SQLite remains the local reference. PostgreSQL 17 tests exercise concurrent budget reservations, restart recovery, receipts, approval replay and simulated positive/negative model journeys.
+
+Issue #5 provider evidence identifies the dedicated Neon Free project and its account-specific limits. The Render account API could not expose the owner's stated $100 promotional balance, its expiry, payment-card state or a no-cash ceiling; no paid service or disk is authorized by that evidence. Use Render Free with Neon Free, no disk, no paid add-on and `autoDeploy: false`. Render spins down after idle and has an ephemeral filesystem; PostgreSQL is authoritative. This is a zero-additional-cash *candidate*, not proof of December availability or a public deployment.
+
+The exact runbook is the controlling setup path. In this Work session the GitHub connector is available, but Neon and Render resource tools are not exposed; `DATABASE_URL`, protected judge configuration/account history and judge access code are absent. The existing Nebius API key/model are present in protected environment settings, but their values were intentionally not read. No live inference or provider resource creation occurred. Consequently the public deployment/external NVIDIA journey cannot be completed from this session.
+
+Render's free blueprint remains configured for the feature branch, but service creation requires its protected values to be configured before startup. After the account connectors become callable, use only the existing Neon project and create at most the one service in [`render.yaml`](../../render.yaml). Verify `DATABASE_URL` connection with TLS validation, exact external origin, restart persistence and live bounded journey before calling it judge-ready. Do not switch to pay-as-you-go, add a card, attach a paid disk, or declare the $100 credits safe for use.
+
 Recommended next architecture: keep evaluation/Playwright in the protected cloud workspace, with a small Node manual evidence surface as a separately approved test build. The local rehearsal image contains Node, this repository's source/scripts and lockfile, and the public `evaluation/diagnosis-v1` dataset; it has no npm runtime dependencies, Chromium, API key or model endpoint. It is not the complete NVIDIA-powered judge application.
 
 ## Local cloud rehearsal

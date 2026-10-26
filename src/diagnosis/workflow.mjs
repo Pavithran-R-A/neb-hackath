@@ -25,17 +25,19 @@ export async function diagnoseWorkflow({run,app,mode,policy,executionKind='live-
  if(mode==='deterministic')output={suggestion:diagnoseDeterministic(trace),modelValidated:false,executionKind:'deterministic',estimatedCostUsd:0};
  else if(mode==='nemotron'&&policy)output={...await policy.diagnose(trace),executionKind};
  else throw new Error('Model inactive or diagnosis mode invalid');
- validateDiagnosis(output.suggestion,trace);
+ validateDiagnosis(output.suggestion,trace,{allowUnverifiedCompletion:mode==='nemotron'});
  const accepted=acceptDiagnosis(output.suggestion,trace,{allowedActions:['retry','reconfirm_consent','correct_format'].filter(a=>executableRecovery(a,run,app))});
  const result={...output,...accepted,id:randomUUID(),traceDigest:traceDigest(trace),trace,verifiedOutcome:trace.verification.completed,requiresHumanApproval:true,recoveryExecutable:accepted.semanticAssessment.status==='accepted'&&executableRecovery(accepted.suggestion.recovery.action,run,app)};
  run.diagnoses??=[];if(run.diagnoses.length>=8)throw new Error('Run diagnosis limit reached');
  run.diagnoses.push(result);return result;
 }
-export async function recoverWorkflow({run,app,body}){
+export async function recoverWorkflow({run,app,body,persist=()=>{},flush=()=>Promise.resolve()}){
  const diagnosis=run.diagnoses?.find(d=>d.id===body.diagnosisId);
  if(!diagnosis||diagnosis.used||run.recovering||body.traceDigest!==diagnosis.traceDigest||traceDigest(workflowTrace(run,app))!==diagnosis.traceDigest||!executableRecovery(diagnosis.suggestion.recovery.action,run,app))throw new Error('Recovery unavailable, stale or already used');
  run.recovering=true;diagnosis.used=true;
  try{
+  // Consume and durably record the approval before the consequential action begins.
+  await persist();await flush();
   const record=app.readRecord(run.id),action=diagnosis.suggestion.recovery.action;
   const values=action==='correct_format'?{...run.task,phone:run.task.phone.replace(/^(\d{3})(\d{3})(\d{4})$/,'$1-$2-$3')}:{consent:run.task.consent};
   const response=await fetch(app.origin+'/api/runs/'+run.id,{method:'POST',redirect:'error',signal:AbortSignal.timeout(5000),headers:{'content-type':'application/json'},body:JSON.stringify({step:record.step,values})});

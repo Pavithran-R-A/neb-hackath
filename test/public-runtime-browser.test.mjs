@@ -16,7 +16,7 @@ test('real Chromium uses one HTTPS origin and Secure cookie through TLS terminat
  const gateway=https.createServer({key:await readFile(join(directory,'key.pem')),cert:await readFile(join(directory,'cert.pem'))},(req,res)=>{
   if(!runtime){res.writeHead(503);return res.end();}
   const headers={...req.headers};delete headers.forwarded;delete headers['x-forwarded-host'];delete headers['x-forwarded-proto'];
-  const upstream=http.request(runtime.origin+req.url,{method:req.method,headers},reply=>{res.writeHead(reply.statusCode,reply.headers);reply.pipe(res);});upstream.on('error',()=>{res.writeHead(502);res.end();});req.pipe(upstream);
+  const upstream=http.request({hostname:'127.0.0.1',port:runtime.address.port,path:req.url,method:req.method,headers},reply=>{res.writeHead(reply.statusCode,reply.headers);reply.pipe(res);});upstream.on('error',()=>{res.writeHead(502);res.end();});req.pipe(upstream);
  });
  await new Promise(resolve=>gateway.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>{gateway.close(resolve);gateway.closeAllConnections();}));
  const canonicalOrigin='https://127.0.0.1:'+gateway.address().port;

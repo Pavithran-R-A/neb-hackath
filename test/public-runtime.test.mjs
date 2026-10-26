@@ -8,7 +8,7 @@ import {createWorkbench} from '../src/workbench/server.mjs';
 const canonicalOrigin='https://receiptlab.example.invalid';
 async function fixture(t){const directory=await mkdtemp(join(tmpdir(),'receiptlab-public-'));t.after(()=>rm(directory,{recursive:true,force:true}));return directory;}
 const call=(s,path,{cookie='',body,headers={}}={})=>new Promise((resolve,reject)=>{
- const req=httpRequest(s.origin+path,{method:body===undefined?'GET':'POST',headers:{host:new URL(canonicalOrigin).host,origin:canonicalOrigin,cookie,'content-type':'application/json',...headers}},res=>{const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(new Response(Buffer.concat(chunks),{status:res.statusCode,headers:res.headers})));});req.on('error',reject);req.end(body===undefined?undefined:JSON.stringify(body));
+ const req=httpRequest(`http://127.0.0.1:${s.address.port}${path}`,{method:body===undefined?'GET':'POST',headers:{host:new URL(canonicalOrigin).host,origin:canonicalOrigin,cookie,'content-type':'application/json',...headers}},res=>{const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(new Response(Buffer.concat(chunks),{status:res.statusCode,headers:res.headers})));});req.on('error',reject);req.end(body===undefined?undefined:JSON.stringify(body));
 });
 const session=async s=>{const r=await call(s,'/');assert.equal(r.status,200);assert.match(r.headers.get('set-cookie'),/; Secure/);return r.headers.get('set-cookie').split(';')[0];};
 test('public startup requires explicit trusted HTTPS origin and durable state, independent of forwarded headers',async t=>{
@@ -16,7 +16,7 @@ test('public startup requires explicit trusted HTTPS origin and durable state, i
  const stateDirectory=await fixture(t);
  await assert.rejects(createWorkbench({publicMode:true,stateDirectory,canonicalOrigin:'http://receiptlab.example.invalid'}),/HTTPS/);
  const s=await createWorkbench({publicMode:true,stateDirectory,canonicalOrigin});t.after(()=>s.close());
- assert.equal((await fetch(s.origin+'/',{headers:{'x-forwarded-host':new URL(canonicalOrigin).host,'x-forwarded-proto':'https'}})).status,403);
+ assert.equal((await call(s,'/',{headers:{'x-forwarded-host':new URL(canonicalOrigin).host,'x-forwarded-proto':'https'}})).status,403);
  assert.equal((await call(s,'/',{headers:{'x-forwarded-host':'attacker.invalid','x-forwarded-proto':'http'}})).status,403);
  assert.equal((await call(s,'/',{headers:{origin:'https://attacker.invalid'}})).status,403);
 });
@@ -71,7 +71,7 @@ test('SIGKILL releases single-instance lock while committed receipt/session surv
  const {spawn}=await import('node:child_process');const {once}=await import('node:events');
  const stateDirectory=await fixture(t);let child;
  const start=async()=>{
-  child=spawn(process.execPath,['--input-type=module','-e',`import {createWorkbench} from './src/workbench/server.mjs';const s=await createWorkbench(${JSON.stringify({publicMode:true,stateDirectory,canonicalOrigin})});process.send({origin:s.origin});`],{cwd:process.cwd(),stdio:['ignore','ignore','pipe','ipc']});
+  child=spawn(process.execPath,['--input-type=module','-e',`import {createWorkbench} from './src/workbench/server.mjs';const s=await createWorkbench(${JSON.stringify({publicMode:true,stateDirectory,canonicalOrigin})});process.send({origin:s.origin,address:s.address});`],{cwd:process.cwd(),stdio:['ignore','ignore','pipe','ipc']});
   let stderr='';child.stderr.on('data',data=>{stderr+=data;});
   return await new Promise((resolve,reject)=>{child.once('message',resolve);child.once('error',reject);child.once('exit',code=>reject(new Error('child exit '+code+' '+stderr)));});
  };

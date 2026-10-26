@@ -53,3 +53,10 @@ test('confident model retry on false-success UI cannot execute even with forged 
  assert.equal((await s.call('/api/runs/'+run.id+'/recover',{diagnosisId:d.id,traceDigest:d.traceDigest,approve:true})).status,409);
  const {data:out}=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:true});assert.equal(out.rejectedCompletionClaim,true);assert.equal(out.reportedCompletion,false);assert.equal(out.server.completionCount,0);
 });
+
+test('unsupported high-confidence completion is shown as an abstention instead of a transport failure',async t=>{
+ const diagnosticPolicy={diagnose:async()=>({suggestion:{diagnosis:'completed',explanation:'The page claims the submission was received.',evidenceIds:['ui-claim'],recovery:{action:'none',reason:'The model treats the page claim as completion.'},confidence:'high'},estimatedCostUsd:0})};
+ const server=await createWorkbench({diagnosticPolicy,diagnosticExecutionKind:'simulated-test'});t.after(()=>server.close());const s=await session(server),run=await prepare(server,s,'workshop-false-success');
+ const response=await s.call('/api/runs/'+run.id+'/diagnose',{mode:'nemotron'});assert.equal(response.status,200);assert.equal(response.data.rawSuggestion.diagnosis,'completed');assert.equal(response.data.semanticAssessment.status,'abstained');assert.equal(response.data.semanticAssessment.rawHighConfidenceRejected,true);assert.equal(response.data.suggestion.diagnosis,'ambiguous');assert.equal(response.data.recoveryExecutable,false);
+ const checked=await s.call('/api/runs/'+run.id+'/verify',{claimedCompletion:true});assert.equal(checked.data.verification.completed,false);assert.equal(checked.data.reportedCompletion,false);
+});

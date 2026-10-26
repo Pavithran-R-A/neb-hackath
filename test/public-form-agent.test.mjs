@@ -20,7 +20,7 @@ async function fixture(t){
  let runtime;
  const gateway=https.createServer({key:await readFile(join(directory,'key.pem')),cert},(req,res)=>{
   const headers={...req.headers};for(const h of ['forwarded','x-forwarded-host','x-forwarded-proto'])delete headers[h];
-  const upstream=http.request(runtime.origin+req.url,{method:req.method,headers},reply=>{res.writeHead(reply.statusCode,reply.headers);reply.pipe(res);});upstream.on('error',()=>{res.writeHead(502);res.end();});req.pipe(upstream);
+  const upstream=http.request({hostname:'127.0.0.1',port:runtime.address.port,path:req.url,method:req.method,headers},reply=>{res.writeHead(reply.statusCode,reply.headers);reply.pipe(res);});upstream.on('error',()=>{res.writeHead(502);res.end();});req.pipe(upstream);
  });
  await new Promise(resolve=>gateway.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>{gateway.close(resolve);gateway.closeAllConnections();}));
  const canonicalOrigin='https://127.0.0.1:'+gateway.address().port;

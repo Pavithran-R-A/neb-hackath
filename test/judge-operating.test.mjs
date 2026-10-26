@@ -12,7 +12,7 @@ const canonicalOrigin='https://judge-simulated.example.invalid',code='simulated-
 const clock=()=>Date.parse('2026-10-18T12:00:00Z');
 const plan={id:'simulated-judge-only',model:'nvidia/test-nemotron',sourceCommit:'a'.repeat(40),suiteSha256:'b'.repeat(64),maxRequests:4,dailyRequests:4,sessionRequests:1,maxOutputTokens:8192,spendLimitUsd:.1,inputUsdPerMillion:.1,outputUsdPerMillion:.3,scenarioIds:['grant-transient','workshop-false-success'],expiresAt:'2026-11-01T00:00:00Z'};
 const call=(s,path,{cookie='',body,headers={}}={})=>new Promise((resolve,reject)=>{
- const req=httpRequest(s.origin+path,{method:body===undefined?'GET':'POST',headers:{host:new URL(canonicalOrigin).host,origin:canonicalOrigin,cookie,'content-type':'application/json',...headers}},res=>{const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(new Response(Buffer.concat(chunks),{status:res.statusCode,headers:res.headers})));});req.on('error',reject);req.end(body===undefined?undefined:JSON.stringify(body));
+ const req=httpRequest(`http://127.0.0.1:${s.address.port}${path}`,{method:body===undefined?'GET':'POST',headers:{host:new URL(canonicalOrigin).host,origin:canonicalOrigin,cookie,'content-type':'application/json',...headers}},res=>{const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(new Response(Buffer.concat(chunks),{status:res.statusCode,headers:res.headers})));});req.on('error',reject);req.end(body===undefined?undefined:JSON.stringify(body));
 });
 async function session(s){const r=await call(s,'/');assert.equal(r.status,200);assert.match(r.headers.get('set-cookie'),/HttpOnly; SameSite=Strict.*; Secure/);return r.headers.get('set-cookie').split(';')[0];}
 async function fixture(t,{failure=null,overrides={}}={}){

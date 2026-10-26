@@ -36,7 +36,7 @@ function unresolvedWriteOutcome(trace){
 // This is a conservative acceptance boundary, not a semantic truth oracle. Source
 // facts must come from trusted application/verifier adapters, never model output.
 export function acceptDiagnosis(rawSuggestion,trace,{allowedActions}={}){
- validateDiagnosis(rawSuggestion,trace);const reasons=[],cited=trace.events.filter(e=>rawSuggestion.evidenceIds.includes(e.id)),trusted=trace.events.filter(authoritative);
+ validateDiagnosis(rawSuggestion,trace,{allowUnverifiedCompletion:true});const reasons=[],cited=trace.events.filter(e=>rawSuggestion.evidenceIds.includes(e.id)),trusted=trace.events.filter(authoritative);
  const facts={};for(const e of trusted)Object.assign(facts,e.facts??{});
  const d=rawSuggestion.diagnosis,a=rawSuggestion.recovery.action;
  if(d!=='completed'&&d!=='ambiguous'&&(trace.verification?.completed===true||(facts.commitCount===1&&facts.receiptValid===true&&facts.runMatches===true)))reasons.push('Current independent completion supersedes historical failure evidence.');

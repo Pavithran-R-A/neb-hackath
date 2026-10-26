@@ -4,7 +4,9 @@ import {createWorkbench} from '../src/workbench/server.mjs';
 const server=await createWorkbench({
  port:Number(process.env.PORT??3000),publicMode:true,
  canonicalOrigin:process.env.RECEIPTLAB_CANONICAL_ORIGIN,
- stateDirectory:process.env.RECEIPTLAB_STATE_DIRECTORY
+ stateDirectory:process.env.RECEIPTLAB_STATE_DIRECTORY,
+ databaseUrl:process.env.DATABASE_URL,
+ renderProxy:process.env.RECEIPTLAB_RENDER_PROXY==='true'
 });
-console.log('ReceiptLab persistent runtime started behind its configured HTTPS gateway; live inference disabled.');
+console.log(JSON.stringify({status:'ReceiptLab started',storage:process.env.DATABASE_URL?'postgresql':'sqlite',liveInferenceEnabled:false,publicInferenceEndpoint:false}));
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,async()=>{await server.close();process.exit(0);});

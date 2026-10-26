@@ -20,7 +20,7 @@ export function createDiagnosticPolicy({apiKey=process.env.NEBIUS_API_KEY,model=
   report.usage={inputTokens:u.prompt_tokens,outputTokens:u.completion_tokens,totalTokens:u.total_tokens};report.estimatedCostUsd=(u.prompt_tokens*inputUsdPerMillion+u.completion_tokens*outputUsdPerMillion)/1e6;
   if(u.completion_tokens>maxOutputTokens)fail('Diagnosis output limit exceeded');
   if(data.model!==model||!Array.isArray(data.choices)||data.choices.length!==1||c.finish_reason!=='stop'||c.message?.role!=='assistant'||c.message?.refusal||c.message?.tool_calls)fail('Diagnosis model or completion rejected');
-  let suggestion;try{if(typeof c.message.content!=='string'||c.message.content.length>8192)throw new Error();suggestion=JSON.parse(c.message.content);validateDiagnosis(suggestion,trace);}catch{fail('Diagnosis schema or grounding rejected');}
+  let suggestion;try{if(typeof c.message.content!=='string'||c.message.content.length>8192)throw new Error();suggestion=JSON.parse(c.message.content);validateDiagnosis(suggestion,trace,{allowUnverifiedCompletion:true});}catch{fail('Diagnosis schema or grounding rejected');}
   return {suggestion,...report,modelValidated:true,verifiedOutcome:trace.verification?.completed??null,provenance:'NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated'};
  }};
 }
