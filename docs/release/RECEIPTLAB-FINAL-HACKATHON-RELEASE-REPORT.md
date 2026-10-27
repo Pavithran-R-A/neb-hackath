@@ -11,18 +11,18 @@ This report distinguishes code and test results from provider deployment and pub
 ## Tested
 
 - `node --test test/workbench-judge-entrypoint.test.mjs`: **2 passed, 0 failed**. The new regression assertion was first run and failed because the shared namespace constant did not exist; it passed after the public and judge entry points were wired to the same constant.
-- `npm test`: **363 tests, 353 passed, 0 failed, 10 skipped**. Skips are PostgreSQL integration cases because `RECEIPTLAB_TEST_DATABASE_URL` is not configured in this workspace. The exact-head GitHub Actions workflow is expected to run those tests with PostgreSQL; its result must be checked after this branch update.
-- `npm run security:check`: **353 tracked files, 0 findings**. This is a protected-value source scan, not a full security certification.
+- `npm test`: local **363 tests, 353 passed, 0 failed, 10 skipped**. Skips are PostgreSQL integration cases because `RECEIPTLAB_TEST_DATABASE_URL` is not configured in this workspace. Exact-head GitHub Actions run [40455553594](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40455553594) on source commit `212174309caa7002a806250c7ccd91468631b3e2` passed **363, 0 failed, 0 skipped** using its PostgreSQL service.
+- `npm run security:check`: local **353 tracked files, 0 findings**; exact-head CI checked **354 files, 0 findings**. This is a protected-value source scan, not a full security certification.
 - `npm audit --audit-level=moderate`: **0 vulnerabilities**.
 - The private review video `.cache/qa/receiptlab-judge-pitch.mp4` exists in the cloud checkout. Its SHA256 is `cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6`; `ffprobe` reports H.264/AAC, 1920×1080, 119.261 seconds, and embedded English captions; full decode succeeded. It remains unpublished and is not part of the public repository.
 - Current read-only Token Factory catalog check: configured NVIDIA model `nvidia/Nemotron-3_5-Lightning` is present; catalog rates are **$0.06/M input tokens and $0.24/M output tokens**. The catalog check reports `inferenceRequests: 0`. Rates are catalog estimates, not a bill or hard spend cap.
-- A direct HTTPS health request from this Work runtime timed out after 15 seconds. This does not prove an outage. The last provider evidence in Issue #5 records a successful health response. The prior external GitHub Actions synthetic acceptance, run [40452641162](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40452641162), passed against the recorded public URL at PR source `acf98e3d0ae93b18d082741dc48a750a31044d35` with **zero model requests**.
+- A direct HTTPS health request from this Work runtime timed out after 15 seconds. This does not prove an outage. The latest external GitHub Actions synthetic acceptance, run [40455548159](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40455548159), passed against the recorded public URL at PR source `212174309caa7002a806250c7ccd91468631b3e2` with **zero model requests**.
 
 ## Deployed
 
 - Issue #5 records the existing public service `https://receiptlab-judge.onrender.com`, Render Free, Singapore, deployment `dep-dbg2qqt9fdbs73cjt8r0`, running source commit `9933f10c10a6eb05c7b38d9e60622ca436010176` with inference disabled. It records the dedicated Neon project `receiptlab-nebius-2026` and retained application namespace `receiptlab`.
 - The public URL is a deterministic synthetic workbench today. It is **not yet a public NVIDIA-powered judge runtime**. This session did not alter or redeploy the existing service. The recorded automatic-deploy setting is off.
-- The external acceptance at run `40452641162` verified HTTPS, a secure session cookie, retained PostgreSQL session, positive synthetic recovery and signed receipt, replay refusal, sanitized export, false-success rejection, denial of unsupported recovery, Origin validation and cross-session isolation. It did not verify process restart, current account quotas or live provider inference.
+- The external acceptance at run `40455548159` verified HTTPS, a secure session cookie, retained PostgreSQL session, positive synthetic recovery and signed receipt, replay refusal, sanitized export, false-success rejection, denial of unsupported recovery, Origin validation and cross-session isolation. It did not verify process restart, current account quotas or live provider inference.
 
 ## Published and submitted
 
@@ -48,4 +48,4 @@ This report distinguishes code and test results from provider deployment and pub
 
 ## Final decision
 
-**NO-GO for final submission today; GO for the existing deterministic public synthetic test and private review.** The product has a working hosted synthetic acceptance record and genuine historical NVIDIA integration evidence, but its current public deployment has inference disabled. The required live, bounded, judge-accessible NVIDIA path, fresh external uptime check, owner-approved license, public video and Devpost submission are not complete.
+**NO-GO for final submission today; GO for the existing deterministic public synthetic test and private review.** The product has a working hosted synthetic acceptance record and genuine historical NVIDIA integration evidence, but its current public deployment has inference disabled. The required live, bounded, judge-accessible NVIDIA path, fresh external uptime check, owner-approved license, public video and Devpost submission are not complete. The latest PR head, exact-head CI and hosted acceptance links are kept in [PR #2](https://github.com/Pavithran-R-A/neb-hackath/pull/2); the exact source-tested implementation milestone in this report is `212174309caa7002a806250c7ccd91468631b3e2`.
