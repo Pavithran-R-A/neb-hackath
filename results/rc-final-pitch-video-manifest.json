@@ -1,9 +1,9 @@
 {
-  "status": "owner-review draft; not uploaded, submitted, publicly deployed or licensed",
+  "status": "owner-review draft; not uploaded, submitted, licensed or represented as the live NVIDIA judge runtime",
   "supersedes": "The older 155-second narrated review cut remains preserved by results/rc-narrated-video-manifest.json; this is a new derivative candidate.",
   "video": ".cache/qa/receiptlab-judge-pitch.mp4",
-  "sha256": "cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6",
-  "bytes": 3507128,
+  "sha256": "737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5",
+  "bytes": 3566363,
   "ffprobe": {
     "programs": [],
     "stream_groups": [],
@@ -26,11 +26,11 @@
       }
     ],
     "format": {
-      "duration": "119.261333",
-      "size": "3507128"
+      "duration": "122.461333",
+      "size": "3566363"
     }
   },
-  "durationSeconds": 119.261333,
+  "durationSeconds": 122.461333,
   "narration": "Synthetic English CMU Flite slt voice, local/offline; not a human voice",
   "footage": "Actual Chromium recordings only: current local deterministic-only workbench and genuine earlier campaign L private-HTTPS NVIDIA/Nebius capture; synthetic QA interactions, not human user study. Current local section sends zero provider requests. Live section is a historical real campaign and is disclosed on screen.",
   "editing": "No speed changes. 90.3 seconds of source browser video/interaction at original speed plus 8.4 seconds of genuine historical Campaign L screenshots; 20.5 seconds editorial results/end slates. Product clips are normalized and labeled; v3 evidence remains negative and partial. English captions are selectable; sentence timing is approximate.",
@@ -97,8 +97,8 @@
     },
     {
       "path": ".cache/qa/build-final-pitch.py",
-      "sha256": "0de8295dbe743ac6db5087c9e4a7f55035f26458b49500432942ba51c0646af5",
-      "bytes": 11245
+      "sha256": "e240bae3960b90a1762b87b25600e195367109f08e9a506ef0a76420d3ed5c57",
+      "bytes": 11483
     }
   ],
   "captureAssertions": {
@@ -114,8 +114,9 @@
   "newInferenceRequests": 0,
   "limitations": [
     "Historical live campaign is not current behavior and must remain labeled as such.",
+    "The public URL is currently recorded as inference-disabled deterministic mode; current availability could not be confirmed in this session.",
     "Synthetic QA is not human usability evidence.",
-    "No public host; owner license, brand/media, upload and submission approval remain pending.",
-    "Voice/caption quality requires owner review."
+    "Owner license, brand/media, upload and submission approval remain pending.",
+    "Voice/caption quality requires owner listening review."
   ]
 }
