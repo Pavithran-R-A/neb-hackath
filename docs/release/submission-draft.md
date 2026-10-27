@@ -24,7 +24,7 @@ ReceiptLab's intended audience is developers debugging browser-agent failures an
 
 **Public repository:** https://github.com/Pavithran-R-A/neb-hackath
 
-**Source revision:** `4b77e6a856db9ce1bed334f0ac26c3dcd4b1a390` (draft PR #2; deployment currently reports older source `9933f10c10a6eb05c7b38d9e60622ca436010176`).
+**Source revision:** `1a2b4b87da9bd12bad127f3995b5d7b876243933` (draft PR #2; deployment currently reports older source `9933f10c10a6eb05c7b38d9e60622ca436010176`).
 
 **Model mode:** deterministic / live NVIDIA inference disabled in the deployed service. No judge access code is currently recorded in the submission materials.
 
