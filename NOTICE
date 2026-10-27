@@ -1,0 +1,14 @@
+ReceiptLab
+Copyright 2026 ReceiptLab contributors
+
+Original ReceiptLab source and documentation, insofar as the respective contributors
+own or are authorized to license them, are made available under the Apache License,
+Version 2.0. See LICENSE for the full license text.
+
+Third-party software and assets remain subject to their own applicable licenses
+and attribution requirements. See docs/release/third-party-inventory.md for an
+inventory; it is not a legal clearance of all third-party rights.
+
+NVIDIA, Nemotron, Nebius and related names are used for factual technical
+attribution only. Their trademarks, model weights, provider services and API
+credentials are not licensed by this notice. No endorsement is implied.
