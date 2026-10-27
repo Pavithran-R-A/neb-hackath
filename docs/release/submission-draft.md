@@ -2,7 +2,7 @@
 
 **Product:** ReceiptLab — trust the receipt, inspect the claim
 **Candidate track:** Best Apps and Agents, subject to owner eligibility/track confirmation
-**Status:** Public release is NO-GO. No working public test-build URL is available, no root license has been applied, the video is not uploaded, and Devpost has not been submitted.
+**Status:** Submission is not ready. Existing recorded test URL: https://receiptlab-judge.onrender.com, deployed in inference-disabled deterministic mode. External GitHub Actions acceptance passed synthetic positive and negative journeys; it did not exercise live Nemotron or process restart. This Work session could not currently reach `/health` (HTTPS request timed out). No root license has been applied, the video is not uploaded, and Devpost has not been submitted.
 
 The [official rules snapshot](../../results/hackathon-rules-check-2026-10-20.json) was retrieved October20, 2026. It requires runtime Token Factory inference or Nebius AI Cloud compute plus an NVIDIA open-source model; a working test-build URL; a public licensed repository and README; an under-three-minute public YouTube demonstration; feedback on tools/models; and free, unrestricted judge access through December15 at noon Pacific time. The equally weighted criteria are Technological Implementation, Design, Potential Impact and Quality of the Idea. Submission deadline is October30 at 10:00 PDT (17:00 UTC / 22:30 India).
 
@@ -22,14 +22,14 @@ ReceiptLab's intended audience is developers debugging browser-agent failures an
 
 | Official criterion | Evidence presented | Honest limitation |
 | --- | --- | --- |
-| Technological Implementation | Real bounded Nemotron/Token Factory journeys; grounded trace citations; semantic gate; single-use approval; independent signed-receipt verification; local Node HTTPS/restart and Worker/D1 persistence tests | No public host or hosted CPU/quota test; v3 is partial and negative; no measured model advantage |
+| Technological Implementation | Historical bounded Nemotron/Token Factory journeys; grounded trace citations; semantic gate; single-use approval; independent signed-receipt verification; hosted deterministic positive/negative acceptance; local Node/PostgreSQL restart tests | Current public deployment has inference disabled; hosted restart is unverified in this session; v3 is partial and negative; no measured model advantage |
 | Design | First screen says what false-success problem ReceiptLab addresses; guided positive/negative paths; claim, advice, approval and verifier outcome are separated; browser testing covers keyboard and320/768/1024/1440 widths | No human usability study, WCAG certification or public judge session |
 | Potential Impact | Specific target: agent developers diagnosing false completion and uncertain writes; demonstrates a useful audit boundary | No adoption, incident-reduction, external user, or production impact data |
 | Quality of the Idea | Proof-first, run-bound verification paired with model-generated failure diagnosis | Synthetic scope only; the model trails the comparator on the four paired v3 cases |
 
 ## Video and artifacts
 
-The [1:59.26 judge-pitch review cut and rights/quality assessment](narrated-video-plan.md) contains90.3seconds of source-hash-verified moving browser footage plus8.4seconds of separately labeled actual Campaign L screenshots. It shows current local-rule recovery and refusal plus genuine historical NVIDIA/Nebius advice and receipt evidence, preserving the partial negative v3 result. SHA256: `cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6`; details are in [the derivative manifest](../../results/rc-final-pitch-video-manifest.json). The MP4 remains cloud-local and unpublished.
+The [1:59.26 judge-pitch review cut and rights/quality assessment](narrated-video-plan.md) contains 90.3 seconds of source-hash-verified moving browser footage plus 8.4 seconds of separately labeled actual Campaign L screenshots. It shows current local-rule recovery and refusal plus genuine historical NVIDIA/Nebius advice and receipt evidence, preserving the partial negative v3 result. SHA256: `cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6`; details are in [the derivative manifest](../../results/rc-final-pitch-video-manifest.json). The MP4 is present in the cloud checkout and remains unpublished.
 
 Official rules prohibit third-party trademarks or copyrighted material in the public video without permission. The draft uses only textual NVIDIA/Nemotron/Nebius names, no logo, stock footage or music, but text attribution is not proof of permission. Owner clearance is required before upload. The narration is synthetic Flite voice; the owner must review listening quality and caption timing.
 
@@ -43,9 +43,9 @@ Official rules prohibit third-party trademarks or copyrighted material in the pu
 
 ## Remaining release decisions
 
-- **Hosting:** approve one isolated, verified no-card/no-additional-charge host and public test build. The local Workers samples do not measure Cloudflare's billed CPU, so Free feasibility is unknown until a one-shot selected-account experiment. Node/Caddy still needs a verified durable host. The single technical fallback is Vercel/Neon Free after account eligibility and transaction-port tests; if unavailable, public release is no-go. Oracle is unverified; Render Free is unsuitable.
+- **Hosting:** the existing isolated Render Free + Neon Free service is deployed; do not recreate it. It offers the deterministic public journey only. Confirm current account tier/quota and protected settings through the connected Render/Neon integrations, then complete hosted restart and bounded NVIDIA journeys. Render Free idle sleep and Neon quotas prevent a 24/7 guarantee.
 - **Ownership and licensing:** confirm all contribution ownership, team/affiliation/territorial eligibility, dependencies/media rights and approve the proposed MIT license before adding a root `LICENSE`.
 - **Brand/media rights:** confirm textual sponsor/model naming is allowed under Devpost's third-party trademark rule and review synthetic narration/captions.
-- **Submission:** supply an approved public demo URL with unrestricted free access through the judging period; owner review and separately authorize YouTube upload and Devpost submission. Keep PR#2 in draft and obtain separate approval to merge or deploy publicly.
+- **Submission:** activate and verify judge mode and unrestricted free testing through the judging period; review rights, apply an owner-approved license, approve YouTube upload and complete Devpost's final owner attestations. Keep PR #2 in draft. No PR merge is authorized.
 
-No approval is granted by this document. Existing Nebius inference authorization was not used for additional calls in this sprint. See [release evidence](../../results/sprint-release-evidence.json), [latest v3 result](../../results/judge-M-analysis.json), [video manifest](../../results/rc-final-pitch-video-manifest.json), [hosting assessment](workers-hosting-assessment.md) and [license proposal](license-proposal.md).
+No legal or publication approval is granted by this document. No additional Nebius inference was used in this sprint. See [release evidence](../../results/sprint-release-evidence.json), [latest v3 result](../../results/judge-M-analysis.json), [video manifest](../../results/rc-final-pitch-video-manifest.json), [hosting assessment](workers-hosting-assessment.md), [license proposal](license-proposal.md) and [final release report](RECEIPTLAB-FINAL-HACKATHON-RELEASE-REPORT.md).

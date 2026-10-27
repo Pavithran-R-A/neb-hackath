@@ -1,5 +1,7 @@
 # Workers Free + D1 hosting assessment
 
+> **Superseded for current release hosting:** Cloudflare Workers Free failed the CPU qualification in the isolated experiment recorded in Issue #3. The project now uses the existing Render Free + Neon Free service documented in [the current runbook](render-neon-runbook.md). This assessment remains as historical fallback analysis; do not repeat Cloudflare provisioning or infer that its earlier no-service conclusion describes the current Render deployment.
+
 Research basis: source `2066626`, official public pages retrieved October 18, 2026. [Machine-readable evidence](../../results/workers-hosting-research.json) records exact URLs, retrieval times, response/body/text hashes and selected excerpt hashes. These are current public-plan facts, not an account entitlement, hosting test, immutable price guarantee or authorization to publish. Research made HTTPS GETs only; no paid API, model call, provider account/resource creation or deployment occurred.
 
 **Decision: Cloudflare Free feasibility is UNKNOWN; public deployment remains NO-GO until account and hosted acceptance gates pass.** A Worker/D1 implementation replaces the documented Node SQLite/file-lock durability boundary; the current Node/Caddy service cannot simply be uploaded unchanged. Local feasibility, even if independently tested, cannot establish actual Workers CPU consumption, account quotas, durable remote commits or public judge access.

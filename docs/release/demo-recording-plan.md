@@ -1,6 +1,6 @@
 # ReceiptLab recording and judge rehearsal
 
-Target final edit:2:40, English narration/captions. Record only the running cloud application at the source/CI named in the evidence. No public URL, uploaded video or submission is implied by a local capture.
+The existing 1:59.26 owner-review candidate is recorded in [the narrated-video review](narrated-video-plan.md). Its local product interactions are explicitly labeled deterministic/no inference; genuine Campaign L model evidence is separately labeled and source-pinned. A local capture does not establish that the current public deployment runs the same commit or has live inference. The public URL is recorded in Issue #5. No YouTube upload or submission is implied.
 
 ## Shot list and narration
 
@@ -31,7 +31,7 @@ Use the ReceiptLab wordmark and factual text “NVIDIA Nemotron via Nebius Token
 
 No analytics service is required for the feasibility experiment. Do not send trace text, task values, receipts, run/session capability URLs or model prompts to PostHog. If separately authorized later, minimal opt-in anonymous counts (challenge created, verification outcome, diagnosis accepted/rejected, approved recovery outcome) should have bounded retention and no replay capture. Tavily/live search adds no value to synthetic-ground-truth verification. No analytics/search/hosting resources were created.
 
-Latest candidate evidence: separate campaignL at7f6e5f55 completed both actual private HTTPS NVIDIA journeys, total3POST/$0.00232932 estimated. Positive temporary_failure/retry required explicit automated synthetic-QA approval and obtained a privately verified receipt; negative unverified_claim/stop stayed unverified with no executable recovery. These are known integration cases, not independent evaluation. Preserve historical F model error and K harness failure. See [L outcome](../../results/rc-L-browser-outcome.json), [current costs](../../results/rc-credit-usage-summary.json) and [screenshots](screenshots/README.md). No public deployment/upload/submission.
+Latest live-model integration evidence remains Campaign L at `7f6e5f55`: three private HTTPS posts, estimated at $0.00232932. Positive transient-failure/retry required explicit synthetic-QA approval and obtained a privately verified receipt; negative unverified-claim/stop stayed incomplete without executable recovery. These are known integration cases, not independent evaluation and not proof of current public inference. Preserve the historical F model error and K harness failure. See [L outcome](../../results/rc-L-browser-outcome.json), [cost summary](../../results/rc-credit-usage-summary.json) and [screenshots](screenshots/README.md). The public deterministic service is recorded in Issue #5; no new deployment, upload or submission occurred here.
 
 ## Prepared private engineering preview
 

@@ -1,6 +1,10 @@
 import pg from 'pg';
 import {randomBytes} from 'node:crypto';
 
+// Hosted public and judge runtimes share the same durable application state.
+// This namespace already contains production sessions, receipt keys and approvals.
+export const POSTGRES_STATE_NAMESPACE = 'receiptlab';
+
 const encode = value => JSON.stringify(value, (_key, item) => item instanceof Map ? {$receiptlabMap: [...item]} : item);
 const decode = value => JSON.parse(typeof value === 'string' ? value : JSON.stringify(value), (_key, item) =>
   item && Object.keys(item).length === 1 && Array.isArray(item.$receiptlabMap) ? new Map(item.$receiptlabMap) : item);

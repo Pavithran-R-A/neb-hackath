@@ -1,5 +1,5 @@
 import {readFile,realpath} from 'node:fs/promises';import {createHash} from 'node:crypto';import {fileURLToPath} from 'node:url';
-import {createProvenance} from '../src/provenance.mjs';import {scenarios} from '../src/scenarios.mjs';import {openPostgresJudgeBudget} from '../src/runtime/postgres-judge-budget.mjs';import {createPostgresPool} from '../src/runtime/postgres-state.mjs';import {createJudgeController} from '../src/runtime/judge-policy.mjs';import {createWorkbench} from '../src/workbench/server.mjs';import {checkCatalog} from '../src/catalog.mjs';
+import {createProvenance} from '../src/provenance.mjs';import {scenarios} from '../src/scenarios.mjs';import {openPostgresJudgeBudget} from '../src/runtime/postgres-judge-budget.mjs';import {createPostgresPool,POSTGRES_STATE_NAMESPACE} from '../src/runtime/postgres-state.mjs';import {createJudgeController} from '../src/runtime/judge-policy.mjs';import {createWorkbench} from '../src/workbench/server.mjs';import {checkCatalog} from '../src/catalog.mjs';
 const args=process.argv.slice(2);let server,controller,pool;
 const repositoryRoot=await realpath(fileURLToPath(new URL('../',import.meta.url)));if(await realpath(process.cwd())!==repositoryRoot)throw Error('Run judge from this repository root only');
 const scope=['grant-transient','workshop-false-success'],suiteSha256=createHash('sha256').update(JSON.stringify(scenarios.filter(s=>scope.includes(s.id)))).digest('hex');
@@ -26,7 +26,7 @@ else try{
  pool=createPostgresPool(databaseUrl);
  const budget=await openPostgresJudgeBudget({pool,namespace:'receiptlab-judge',plan,accessCode,accountHistory});
  controller=createJudgeController({budget,apiKey:process.env.NEBIUS_API_KEY,model:process.env.NEBIUS_MODEL,checkPrices:checkCatalog});
- server=await createWorkbench({publicMode:true,databaseUrl,postgresPool:pool,postgresNamespace:'receiptlab-workbench',canonicalOrigin,renderProxy:process.env.RECEIPTLAB_RENDER_PROXY==='true',port:Number(process.env.PORT??3000),judgeOperating:controller,allowedDiagnosticScenarios:scope});
+ server=await createWorkbench({publicMode:true,databaseUrl,postgresPool:pool,postgresNamespace:POSTGRES_STATE_NAMESPACE,canonicalOrigin,renderProxy:process.env.RECEIPTLAB_RENDER_PROXY==='true',port:Number(process.env.PORT??3000),judgeOperating:controller,allowedDiagnosticScenarios:scope});
  console.log(JSON.stringify({mode:'bounded-judge',storage:'neon-postgresql',inferenceEnabled:true,sourceCommit:p.sourceCommit,expiresAt:plan.expiresAt,modelRequestsOnStartup:0,budget:await budget.summary()}));
  let ending=false;for(const signal of ['SIGINT','SIGTERM'])process.on(signal,async()=>{if(ending)return;ending=true;await server.close();await controller.close();await pool.end();process.exit(0);});
 }catch{if(server)await server.close();await controller?.close();await pool?.end();console.error('Judge startup failed closed; preserve account reservation and retained databases for review. No automatic retry.');process.exitCode=1;}

@@ -1,0 +1,51 @@
+# ReceiptLab final release status — 2026-10-27
+
+This report distinguishes code and test results from provider deployment and publication. It is a release checkpoint, not a claim that the submission is complete.
+
+## Implemented
+
+- Hosted public and judge entry points now share the PostgreSQL application-state namespace `receiptlab`. The judge budget remains isolated in `receiptlab-judge`. This prevents changing the service entry point from silently presenting an empty session store while production sessions, HMAC receipt keys and consumed approvals remain in the existing database.
+- README and release runbook now describe the actual existing Render/Neon service and distinguish the deterministic hosted acceptance from live model execution.
+- The original SQLite reference remains in place. The independent state verifier, approval/replay protections, campaign ledger, source/model/price controls, quotas and fail-closed provider behavior were not weakened.
+
+## Tested
+
+- `node --test test/workbench-judge-entrypoint.test.mjs`: **2 passed, 0 failed**. The new regression assertion was first run and failed because the shared namespace constant did not exist; it passed after the public and judge entry points were wired to the same constant.
+- `npm test`: **363 tests, 353 passed, 0 failed, 10 skipped**. Skips are PostgreSQL integration cases because `RECEIPTLAB_TEST_DATABASE_URL` is not configured in this workspace. The exact-head GitHub Actions workflow is expected to run those tests with PostgreSQL; its result must be checked after this branch update.
+- `npm run security:check`: **353 tracked files, 0 findings**. This is a protected-value source scan, not a full security certification.
+- `npm audit --audit-level=moderate`: **0 vulnerabilities**.
+- The private review video `.cache/qa/receiptlab-judge-pitch.mp4` exists in the cloud checkout. Its SHA256 is `cab7dcd13d6cffe71a5a33c55a5ba54ae1cd6c907479a3cc754ff3c9670b9ee6`; `ffprobe` reports H.264/AAC, 1920×1080, 119.261 seconds, and embedded English captions; full decode succeeded. It remains unpublished and is not part of the public repository.
+- Current read-only Token Factory catalog check: configured NVIDIA model `nvidia/Nemotron-3_5-Lightning` is present; catalog rates are **$0.06/M input tokens and $0.24/M output tokens**. The catalog check reports `inferenceRequests: 0`. Rates are catalog estimates, not a bill or hard spend cap.
+- A direct HTTPS health request from this Work runtime timed out after 15 seconds. This does not prove an outage. The last provider evidence in Issue #5 records a successful health response. The prior external GitHub Actions synthetic acceptance, run [40452641162](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40452641162), passed against the recorded public URL at PR source `acf98e3d0ae93b18d082741dc48a750a31044d35` with **zero model requests**.
+
+## Deployed
+
+- Issue #5 records the existing public service `https://receiptlab-judge.onrender.com`, Render Free, Singapore, deployment `dep-dbg2qqt9fdbs73cjt8r0`, running source commit `9933f10c10a6eb05c7b38d9e60622ca436010176` with inference disabled. It records the dedicated Neon project `receiptlab-nebius-2026` and retained application namespace `receiptlab`.
+- The public URL is a deterministic synthetic workbench today. It is **not yet a public NVIDIA-powered judge runtime**. This session did not alter or redeploy the existing service. The recorded automatic-deploy setting is off.
+- The external acceptance at run `40452641162` verified HTTPS, a secure session cookie, retained PostgreSQL session, positive synthetic recovery and signed receipt, replay refusal, sanitized export, false-success rejection, denial of unsupported recovery, Origin validation and cross-session isolation. It did not verify process restart, current account quotas or live provider inference.
+
+## Published and submitted
+
+- PR #2 remains open and draft; no merge was performed.
+- The MP4 remains private in the cloud workspace. No YouTube upload occurred.
+- No root `LICENSE` was added. MIT remains a proposal pending the owner's ownership, eligibility and license decision.
+- Devpost text remains a draft. No final owner attestation or submission occurred.
+
+## Model evidence and cost
+
+- No live inference request was made in this release checkpoint. The live catalog request was metadata-only.
+- Prior real Campaign L evidence remains: three requests including preflight, estimated provider usage **$0.00232932**, one positive model-assisted approved recovery with an independently verified receipt, and one misleading-success case where the model recommended stopping. It is historical integration evidence, not evidence of current hosted judge-mode activation or model superiority.
+- The latest v3 evaluation remains partial and negative: 4 usable results from 5 attempted diagnoses, one completion truncated at 8,192 output tokens, and 11 cases unattempted. On the four paired cases, Nemotron matched 1/4 diagnosis labels and 2/4 safe actions; the deterministic comparator matched 3/4 for each. This is not a general comparison claim.
+- The existing conservative ledger estimate of remaining credits is based on the owner's earlier $59 balance attestation less recorded reservations/usage. It is not a fresh provider balance or statement. The $50 judging reserve remains protected by the campaign policy; current balance and billing profile could not be independently read here. No payment method, purchase, top-up or new hosting resource was used.
+
+## Blockers and remaining approvals
+
+1. **Provider access in this Work session:** GitHub is callable, but the Render and Neon connectors are absent from the available tools. The workspace has no `DATABASE_URL`, `RECEIPTLAB_JUDGE_CODE`, `RECEIPTLAB_JUDGE_CONFIG_JSON` or Render API credential. The owner needs to enable the already-connected Render and Neon integrations for this Work session; do not paste secrets into chat.
+2. **Judge deployment:** inspect the existing protected settings and current Free-tier state, update that existing service only, then verify exact source, shared `receiptlab` state, external browser flows, restart recovery and bounded real Nemotron usage. Startup must not make an inference call. Keep the $50 judging reserve; do not infer provider credit balance from local bookkeeping.
+3. **Current accessibility:** the previous external GitHub runner succeeded, but this runtime's latest HTTPS probe timed out. Recheck from the GitHub Actions external runner after any provider update; Render Free idle sleep and Neon quota suspension remain availability limits through December 15.
+4. **Rights and release:** owner confirms contributor/team/territory eligibility and rights, then explicitly approves MIT before a root license is applied. Owner reviews the video attribution/voice/captions before YouTube publication and completes any required personal Devpost attestation before submission.
+5. **Exact-head CI:** record the new PR head and exact Actions run after pushing this checkpoint. CI is the qualifying evidence for this changed source; earlier green runs do not certify the updated branch.
+
+## Final decision
+
+**NO-GO for final submission today; GO for the existing deterministic public synthetic test and private review.** The product has a working hosted synthetic acceptance record and genuine historical NVIDIA integration evidence, but its current public deployment has inference disabled. The required live, bounded, judge-accessible NVIDIA path, fresh external uptime check, owner-approved license, public video and Devpost submission are not complete.
