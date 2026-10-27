@@ -1,0 +1,22 @@
+name: Hosted synthetic acceptance (no NVIDIA calls)
+
+on:
+  push:
+    branches:
+      - feat/phase1-verified-completion
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hosted-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Real external Render + Neon acceptance (synthetic only)
+        run: node scripts/hosted-acceptance.mjs
