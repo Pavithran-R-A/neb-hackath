@@ -2,7 +2,7 @@
 
 **Product:** ReceiptLab — trust the receipt, inspect the claim
 **Candidate track:** Best Apps and Agents, subject to owner eligibility/track confirmation
-**Status:** Submission is not ready. The public deterministic test URL is https://receiptlab-judge.onrender.com; its recorded deployment runs with inference disabled. On October 27, a direct HTTPS `/health` request returned HTTP 200 with `persistent-synthetic`, PostgreSQL storage and `liveInferenceEnabled:false`; an earlier 503 had recovered, so this is not continuous-availability proof. Exact-head external GitHub Actions acceptance passed synthetic positive and negative journeys, but did not exercise live Nemotron or process restart. PR #2 is open and draft at source `c74a8c3c3afc95eac78dcb8c11a23a9160f89c14`. Owner-approved Apache-2.0 LICENSE and NOTICE are present on the release branch and main; video is not uploaded, and Devpost has not been submitted.
+**Status:** Submission is not ready. The public deterministic test URL is https://receiptlab-judge.onrender.com; its recorded deployment runs with inference disabled. A direct health request returned HTTP 200 in 0.98 seconds at this check, after external reports of transient 503s; this is not continuous-availability proof or an established cold-start diagnosis. Exact-head external acceptance passed synthetic positive/negative journeys but did not exercise live Nemotron or process restart. PR #2 is open and draft at source `9af21a3e1dbf1552e28e41b7bb28bb4b2d77889c`. Apache-2.0 LICENSE and NOTICE are present on main and the release branch. The video is not uploaded, and Devpost has not been submitted.
 
 The [official rules snapshot](../../results/hackathon-rules-check-2026-10-20.json) was retrieved October20, 2026. It requires runtime Token Factory inference or Nebius AI Cloud compute plus an NVIDIA open-source model; a working test-build URL; a public licensed repository and README; an under-three-minute public YouTube demonstration; feedback on tools/models; and free, unrestricted judge access through December15 at noon Pacific time. The equally weighted criteria are Technological Implementation, Design, Potential Impact and Quality of the Idea. Submission deadline is October30 at 10:00 PDT (17:00 UTC / 22:30 India).
 
@@ -22,9 +22,11 @@ ReceiptLab's intended audience is developers debugging browser-agent failures an
 
 **Test build:** https://receiptlab-judge.onrender.com
 
-**Public repository:** https://github.com/Pavithran-R-A/neb-hackath
+**Public repository / license:** https://github.com/Pavithran-R-A/neb-hackath (Apache-2.0 detected on `main`)
 
-**Source revision:** `c74a8c3c3afc95eac78dcb8c11a23a9160f89c14` (draft PR #2; deployment currently reports older source `9933f10c10a6eb05c7b38d9e60622ca436010176`).
+**Complete hackathon source:** https://github.com/Pavithran-R-A/neb-hackath/tree/feat/phase1-verified-completion (draft PR #2; select this branch to browse/run the implementation). The default `main` branch currently contains 9 tracked files and no `src/` directory; the release branch contains the complete application. PR #2 has not been merged.
+
+**Source revision:** `9af21a3e1dbf1552e28e41b7bb28bb4b2d77889c` (draft PR #2; deployment currently reports older source `9933f10c10a6eb05c7b38d9e60622ca436010176`).
 
 **Model mode:** deterministic / live NVIDIA inference disabled in the deployed service. No judge access code is currently recorded in the submission materials.
 
