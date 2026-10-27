@@ -1,6 +1,6 @@
 # Third-party inventory — evidence for owner review
 
-This is an inventory of observed metadata and notices, not legal advice, clearance, a repository license grant, or a claim that distribution obligations have been discharged. No repository LICENSE is created. The [MIT proposal](license-proposal.md) still requires owner approval of rights holder, contributions, assets and eligibility. Regenerate this inventory with `node scripts/release-inventory.mjs` if the lockfile or binaries change.
+This is an inventory of observed metadata and notices, not legal advice, clearance, or proof that distribution obligations have been discharged. The owner-approved [Apache-2.0 project license](../../LICENSE) is in the root; third-party dependencies and other assets remain subject to their separate licenses and rights. See [licensing decision](license-proposal.md) for scope and outstanding rights/eligibility review. Regenerate this inventory with `node scripts/release-inventory.mjs` if the lockfile or binaries change.
 
 ## npm lockfile (all direct and transitive entries)
 
