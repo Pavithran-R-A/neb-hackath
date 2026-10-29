@@ -1,0 +1,25 @@
+{
+  "retrievedOn": "2026-10-20",
+  "url": "https://nebiusglobalaihackathon.devpost.com/rules",
+  "sha256": "8d3e4cbb6add98d088bbb15caf9dfe31b90bda8ec8dd36ba4f19f213d3e8b586",
+  "criteria": {
+    "equallyWeighted": [
+      "Technological Implementation",
+      "Design",
+      "Potential Impact",
+      "Quality of the Idea"
+    ]
+  },
+  "requirements": {
+    "runtime": "must call Token Factory inference API or run on Nebius AI Cloud compute and use an NVIDIA open-source model",
+    "demo": "working demo/hosted app/test-build URL",
+    "repository": "public repository with an open-source license and README instructions",
+    "video": "public YouTube video under 3 minutes showing project functionality",
+    "judgeAccess": "free and unrestricted access through the judging period",
+    "feedback": "provide tool/model feedback"
+  },
+  "timing": {
+    "submissionDeadline": "2026-10-30T10:00:00-07:00",
+    "judgingEnds": "2026-12-15T12:00:00-08:00"
+  }
+}

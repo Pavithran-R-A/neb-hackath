@@ -1,0 +1,28 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "receiptlab-judge-experiment-20261020",
+  "main": "index.mjs",
+  "compatibility_date": "2026-08-06",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "INFERENCE_ENABLED": "false",
+    "EXPERIMENT_AUTH_REQUIRED": "true",
+    "GITHUB_OIDC_AUDIENCE": "receiptlab-cloudflare-experiment",
+    "GITHUB_REPOSITORY": "Pavithran-R-A/neb-hackath",
+    "GITHUB_REPOSITORY_ID": "1422019854",
+    "GITHUB_OWNER_ID": "92867708",
+    "GITHUB_REF": "refs/pull/2/merge",
+    "GITHUB_HEAD_REF": "feat/phase1-verified-completion",
+    "GITHUB_BASE_REF": "main",
+    "GITHUB_WORKFLOW_PATH": "Pavithran-R-A/neb-hackath/.github/workflows/cloudflare-experiment.yml"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "receiptlab-judge-experiment-20261020",
+      "database_id": "REPLACE_ONLY_AFTER_OWNER_APPROVED_D1_CREATE"
+    }
+  ],
+  "observability": { "enabled": false }
+}

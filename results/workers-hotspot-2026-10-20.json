@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-20T06:48:02.251Z",
+  "baselineEvidence": "workers/feasibility-results.json (2026-10-19)",
+  "baselineProfileSha256": "13106b0d67106b91caedec0d26a4e37fe36b95d9d9d6ec15aa7aec0bc58766ea",
+  "optimizedProfileSha256": "12d93a510652493615c1860a6390efb4c4cdff0c6cd2a7d2cb43bf5de5a12dce",
+  "compressedProfile": {
+    "path": "workers-hotspot-2026-10-20.profiles.json.gz",
+    "bytes": 52502,
+    "sha256": "91261dc6a8e793ab42a8576ad9b951ce05ada792121c7e463bf03a49817d251b"
+  },
+  "baseCommit": "92c269553b257a95b20e5016ed2894e2a651c1ec",
+  "runtime": "real local Miniflare/workerd D1; provider mocked",
+  "command": "node scripts/workers-benchmark.mjs .cache/workers-benchmark-indexed.json",
+  "cohorts": 2,
+  "iterationsPerCohort": 15,
+  "sourceHashes": {
+    "workers/acceptance.mjs": "27177333733289c4ddfd25e783731fa07fad316aeaae1cf4c34c0ea49470ecd1",
+    "workers/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+    "workers/contract.mjs": "84dd5e02b35ea48455821c76e6012c7058e1422d6157868c96011b839cfbab54",
+    "workers/crypto.mjs": "200b9ea68389bdde0b1e1fd17a967ac4c86103cfa2fbe66ee630ca7afbb62f7d",
+    "workers/index.mjs": "848ab8cc1c1ec0b3ed50eac63e8fa0c97312df8ba46df0edcb6ad353a7f74269",
+    "workers/local-metrics.mjs": "ca9c8121deb35edd50613c3720b23476cde8e88c3e4f97408c973da4d778e244",
+    "workers/page.mjs": "9c25c5c678e7ca3432aa2292c00b2fbdf429fac1ad570c73ee10339885f36384",
+    "workers/provider-contract.mjs": "22790a30379ba305b6f22bc02465d973d5219c4f44dafdfc7d7a92bbfb18f123",
+    "workers/schema.sql": "e0411f8a585eb7cd061df2c6fb1ebefb829b75a151d7e73bce552e796691888a",
+    "workers/store.mjs": "55f344213dd051cf9111b6d7519b05f7d0e1feffcffcf5b93eaca010bf50fafd",
+    "workers/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+    "scripts/workers-runtime.mjs": "610e589b68ff22faedb2c21b60a5a60fa3f447cdf0d92e8311d946ab10a72e87",
+    "scripts/workers-benchmark.mjs": "8a240c7060e9a910dff203c628648015ed6537219c03ea9a81a7b7a682442147"
+  },
+  "providerCalls": 0,
+  "provider": "Mocked Nebius response; no NVIDIA inference",
+  "comparison": {
+    "route": "mockModel",
+    "before": {
+      "samples": 30,
+      "sampledActiveV8Ms": {
+        "p50": 8.693,
+        "p95": 15.003,
+        "max": 20.41
+      },
+      "wallMs": {
+        "p50": 11.493,
+        "p95": 22.37,
+        "max": 23.023
+      },
+      "d1RowsReadP95": 134,
+      "d1RowsWrittenP95": 16,
+      "queriesP95": 13
+    },
+    "after": {
+      "samples": 30,
+      "sampledActiveV8Ms": {
+        "p50": 8.086,
+        "p95": 11.661,
+        "max": 19.149
+      },
+      "wallMs": {
+        "p50": 10.523,
+        "p95": 16.273,
+        "max": 22.187
+      },
+      "d1RowsReadP95": 67,
+      "d1RowsWrittenP95": 20,
+      "queriesP95": 13
+    },
+    "p95ChangePercent": {
+      "sampledActiveV8Ms": 22.276,
+      "d1RowsRead": 50,
+      "d1RowsWritten": -25
+    }
+  },
+  "officialLimit": {
+    "source": "https://developers.cloudflare.com/workers/platform/limits/",
+    "freeCpuMsPerInvocation": 10,
+    "checkedAt": "2026-10-20",
+    "decision": "INDETERMINATE: local workerd inspector plus LOCAL_METRICS samples do not measure Cloudflare billed/request CPU and cannot adjudicate the Free 10ms invocation cap. The account-specific hosted experiment is still pending owner selection/approval.",
+    "bodyEvidence": {
+      "retrievalDate": "2026-10-20",
+      "path": "https://developers.cloudflare.com/workers/platform/limits/",
+      "sha256": "303fe9aa94800c05713d501e9b40916cbc0c4510465ca674f03f468deea62081"
+    }
+  },
+  "d1Limit": {
+    "source": "https://developers.cloudflare.com/d1/platform/pricing/",
+    "freeRowsReadPerDay": 5000000,
+    "freeRowsWrittenPerDay": 100000,
+    "accountDailyResetUtc": true,
+    "decision": "The campaign route sample consumed 67 rows read p95 / 20 rows written p95 locally; these are per-invocation simulation metadata, not a forecast of account-wide daily usage.",
+    "bodyEvidence": {
+      "retrievalDate": "2026-10-20",
+      "path": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "sha256": "fa2f0026287d236b8ba7cbafa0e73d60b7163204b791e15085fb7ac19605675f"
+    }
+  },
+  "changes": [
+    "Added covering ledger_campaign_kind_nano and ledger_kind_id_nano indexes for bounded campaign and cumulative reservation aggregates.",
+    "Changed duplicate-reservation guard from a reservation_id scan to the deterministic reserved-ledger primary key.",
+    "Regression test requires both hot accounting query plans to use their covering indexes."
+  ],
+  "tradeoffs": [
+    "Sampled active V8 p95 fell 22.3%; p95 rows read fell 50%.",
+    "P95 rows written increased 25% because the two indexes are maintained on append-only ledger writes.",
+    "The numeric local sampled-active-V8 p95 and max remain above 10ms, but are not comparable to Cloudflare CPU and do not prove a Free-plan failure."
+  ],
+  "limitations": [
+    "Sampled active V8 stack time excludes idle and program samples; includes local metrics instrumentation and sampling/inspector overhead.",
+    "Native crypto, SQLite service and runtime thread CPU are not comprehensively included; this is not Cloudflare billed/request CPU.",
+    "Local debugger sampling cannot prove hosted Workers Free 10ms feasibility. No hosted execution, resource creation or live model request.",
+    "Model replies are deterministic mocks; no NVIDIA quality or network latency claim."
+  ]
+}

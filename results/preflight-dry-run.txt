@@ -1,0 +1,30 @@
+
+> neb-hackath@0.0.1 preflight
+> node scripts/preflight.mjs
+
+{
+  "mode": "dry-run",
+  "credentials": {
+    "apiKeyPresent": true,
+    "modelPresent": true,
+    "modelIsNemotron": true
+  },
+  "request": {
+    "destination": "api.tokenfactory.nebius.com",
+    "maxRequests": 1,
+    "maxOutputTokens": 256,
+    "responseFormat": "json_object",
+    "automaticRetries": 0,
+    "estimatedInputTokenAllowance": 2603,
+    "safetyEstimateUsd": null,
+    "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+  },
+  "liveValidated": false,
+  "requestsSent": 0,
+  "readyForApproval": false,
+  "remaining": [
+    "Explicit owner spending approval is required before live execution",
+    "Use current verified token prices and an approved spending limit",
+    "CLI cannot inspect platform network-secret scope; verify protected environment metadata separately"
+  ]
+}

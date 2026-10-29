@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "campaign-F-workflow-protocol-owner6235724302",
+  "recordedAt": "2026-10-17T16:14:03.765Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Test runtime protocol clarification: draft progress is not committed submission; actual UI diagnosis/recovery plus false-success denial; known integration QA, not benchmark or automatic retry of E",
+  "sourceCommit": "fe3ac5f330eb0baccde4560a1890a246ac985374",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "scenarioIds": [
+    "grant-transient",
+    "workshop-false-success"
+  ],
+  "maxRequests": 3,
+  "preflightOutputTokens": 1024,
+  "diagnosisOutputTokens": 8192,
+  "spendLimitUsd": 0.02,
+  "conservativeUpperEstimateUsd": 0.00777792,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39048416815",
+  "judgingReserveUsd": 50,
+  "noRetries": true,
+  "noFallbacks": true,
+  "status": "recorded-before-execution"
+}

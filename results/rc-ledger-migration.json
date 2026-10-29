@@ -1,0 +1,12 @@
+{
+  "recordedAt": "2026-10-18T03:42:32.091370+00:00",
+  "kind": "Cloud-local canonical ledger relocation, no duplicate ledger or reset",
+  "oldCompatibilityPath": ".cache/account-budget",
+  "canonicalPath": ".cache/rc-public-state/budgets/account",
+  "sha256Before": "68cd36345497b9916d1454cfd65d8edb8f20b17a8d40e1d4620fc32dc573acc7",
+  "sha256After": "68cd36345497b9916d1454cfd65d8edb8f20b17a8d40e1d4620fc32dc573acc7",
+  "sameCanonicalLedger": true,
+  "activeCampaignBefore": false,
+  "noCredentialsCopied": true,
+  "publicDeployment": false
+}

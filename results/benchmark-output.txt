@@ -1,0 +1,93 @@
+
+> neb-hackath@0.0.1 benchmark
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node scripts/benchmark.mjs --repetitions 3 --output results/phase1-offline.json
+
+baseline grant-clean verified=true claimed=true 358.43ms
+scripted-control grant-clean verified=true claimed=true 345.29ms
+baseline workshop-clean verified=true claimed=true 300.09ms
+scripted-control workshop-clean verified=true claimed=true 312.73ms
+baseline grant-renamed verified=false claimed=false 1587.22ms
+scripted-control grant-renamed verified=true claimed=true 310.29ms
+baseline workshop-unlabeled verified=false claimed=false 1586.18ms
+scripted-control workshop-unlabeled verified=true claimed=true 311.43ms
+baseline grant-phone-format verified=false claimed=false 1666.47ms
+scripted-control grant-phone-format verified=true claimed=true 383.5ms
+baseline workshop-consent-reset verified=false claimed=false 297.13ms
+scripted-control workshop-consent-reset verified=true claimed=true 395.71ms
+baseline grant-transient verified=false claimed=false 300.86ms
+scripted-control grant-transient verified=true claimed=true 396.72ms
+baseline workshop-false-success verified=false claimed=true 301.68ms
+scripted-control workshop-false-success verified=false claimed=true 297.51ms
+baseline grant-invalid-email verified=false claimed=false 1679.49ms
+scripted-control grant-invalid-email verified=false claimed=false 166.02ms
+baseline workshop-injection verified=true claimed=true 302.08ms
+scripted-control workshop-injection verified=true claimed=true 312.82ms
+scripted-control grant-clean verified=true claimed=true 313.54ms
+baseline grant-clean verified=true claimed=true 300.3ms
+scripted-control workshop-clean verified=true claimed=true 298.32ms
+baseline workshop-clean verified=true claimed=true 317.71ms
+scripted-control grant-renamed verified=true claimed=true 315.83ms
+baseline grant-renamed verified=false claimed=false 1588.37ms
+scripted-control workshop-unlabeled verified=true claimed=true 307.15ms
+baseline workshop-unlabeled verified=false claimed=false 1585.67ms
+scripted-control grant-phone-format verified=true claimed=true 380.01ms
+baseline grant-phone-format verified=false claimed=false 1668.07ms
+scripted-control workshop-consent-reset verified=true claimed=true 394.7ms
+baseline workshop-consent-reset verified=false claimed=false 331.2ms
+scripted-control grant-transient verified=true claimed=true 418.13ms
+baseline grant-transient verified=false claimed=false 298ms
+scripted-control workshop-false-success verified=false claimed=true 316.51ms
+baseline workshop-false-success verified=false claimed=true 314.49ms
+scripted-control grant-invalid-email verified=false claimed=false 182.27ms
+baseline grant-invalid-email verified=false claimed=false 1679.99ms
+scripted-control workshop-injection verified=true claimed=true 317.78ms
+baseline workshop-injection verified=true claimed=true 331.25ms
+baseline grant-clean verified=true claimed=true 302.63ms
+scripted-control grant-clean verified=true claimed=true 296.11ms
+baseline workshop-clean verified=true claimed=true 298.65ms
+scripted-control workshop-clean verified=true claimed=true 299.54ms
+baseline grant-renamed verified=false claimed=false 1582.3ms
+scripted-control grant-renamed verified=true claimed=true 316.4ms
+baseline workshop-unlabeled verified=false claimed=false 1580.39ms
+scripted-control workshop-unlabeled verified=true claimed=true 300.61ms
+baseline grant-phone-format verified=false claimed=false 1664.29ms
+scripted-control grant-phone-format verified=true claimed=true 386.38ms
+baseline workshop-consent-reset verified=false claimed=false 313.79ms
+scripted-control workshop-consent-reset verified=true claimed=true 504.2ms
+baseline grant-transient verified=false claimed=false 366ms
+scripted-control grant-transient verified=true claimed=true 432.48ms
+baseline workshop-false-success verified=false claimed=true 315.02ms
+scripted-control workshop-false-success verified=false claimed=true 312.67ms
+baseline grant-invalid-email verified=false claimed=false 1682.35ms
+scripted-control grant-invalid-email verified=false claimed=false 181.5ms
+baseline workshop-injection verified=true claimed=true 316.3ms
+scripted-control workshop-injection verified=true claimed=true 314.16ms
+{
+  "baseline": {
+    "trials": 30,
+    "positiveCases": 24,
+    "negativeCases": 6,
+    "verifiedCompletions": 9,
+    "positiveCompletionRate": 0.375,
+    "correctNegativeOutcomes": 3,
+    "falseCompletionClaims": 3,
+    "blockedActions": 0,
+    "inappropriateActionsExecuted": 0,
+    "latencyMedianMs": 331.23,
+    "latencyP95Ms": 1679.99
+  },
+  "scripted-control": {
+    "trials": 30,
+    "positiveCases": 24,
+    "negativeCases": 6,
+    "verifiedCompletions": 24,
+    "positiveCompletionRate": 1,
+    "correctNegativeOutcomes": 3,
+    "falseCompletionClaims": 3,
+    "blockedActions": 0,
+    "inappropriateActionsExecuted": 0,
+    "latencyMedianMs": 313.85,
+    "latencyP95Ms": 432.48
+  }
+}
+Report: /workspace/neb-hackath/results/phase1-offline.json

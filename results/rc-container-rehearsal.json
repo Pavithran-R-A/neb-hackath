@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "kind": "private-network-none-container-retained-state-rehearsal",
+  "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+  "startedAt": "2026-10-18T03:56:36.751Z",
+  "finishedAt": "2026-10-18T03:56:54.920Z",
+  "outcome": "passed",
+  "build": {
+    "command": "DOCKER_CONFIG=\"$PWD/.cache/docker\" docker build --network=none -f deployment/Dockerfile --build-arg SOURCE_COMMIT=7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0 -t neb-hackath-rc:7f6e5f55 .",
+    "exitCode": 0,
+    "imageId": "sha256:e8b8523c2f18babdf80dcc12999e1523d7f9c29effd21ad0207911439c2de184",
+    "baseImage": "node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df",
+    "sourceCommitBasis": "operator build argument; runtime content verified against generated manifest"
+  },
+  "isolation": {
+    "network": "none",
+    "publishedPorts": [],
+    "readOnlyRootFilesystem": true,
+    "uid": 1000,
+    "user": "node",
+    "memoryBytes": 268435456,
+    "nanoCpus": 500000000,
+    "pidsLimit": 64,
+    "capabilitiesDropped": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "writableMounts": [
+      "/state (temporary retained bind directory)"
+    ],
+    "publicResources": false
+  },
+  "entrypoint": [
+    "node",
+    "scripts/workbench-public.mjs"
+  ],
+  "healthcheck": "Explicit canonical Host override for the persistent-mode entrypoint; image default healthcheck targets local mode",
+  "phases": [
+    {
+      "phase": "initial",
+      "status": "passed",
+      "uid": 1000,
+      "rootWriteDenied": true,
+      "mode": "persistent-synthetic",
+      "receiptVerified": true,
+      "sessionRestored": false,
+      "duplicateDenied": true,
+      "foreignSessionDenied": true,
+      "sanitizedExport": true,
+      "forwardedSpoofDenied": true,
+      "secureCookie": "observed during creation",
+      "modelRequests": 0,
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+      "provenance": {
+        "sourceCommitBasis": "build-manifest",
+        "codeTreeDirty": null,
+        "runtimeMatchesBuild": true,
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
+      },
+      "suiteHashes": {
+        "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+        "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+        "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+        "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+      }
+    },
+    {
+      "phase": "restart",
+      "status": "passed",
+      "uid": 1000,
+      "rootWriteDenied": true,
+      "mode": "persistent-synthetic",
+      "receiptVerified": true,
+      "sessionRestored": true,
+      "duplicateDenied": true,
+      "foreignSessionDenied": true,
+      "sanitizedExport": true,
+      "forwardedSpoofDenied": true,
+      "secureCookie": "retained session from initial phase",
+      "modelRequests": 0,
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+      "provenance": {
+        "sourceCommitBasis": "build-manifest",
+        "codeTreeDirty": null,
+        "runtimeMatchesBuild": true,
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
+      },
+      "suiteHashes": {
+        "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+        "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+        "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+        "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+      }
+    },
+    {
+      "phase": "replacement",
+      "status": "passed",
+      "uid": 1000,
+      "rootWriteDenied": true,
+      "mode": "persistent-synthetic",
+      "receiptVerified": true,
+      "sessionRestored": true,
+      "duplicateDenied": true,
+      "foreignSessionDenied": true,
+      "sanitizedExport": true,
+      "forwardedSpoofDenied": true,
+      "secureCookie": "retained session from initial phase",
+      "modelRequests": 0,
+      "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+      "provenance": {
+        "sourceCommitBasis": "build-manifest",
+        "codeTreeDirty": null,
+        "runtimeMatchesBuild": true,
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+        "buildManifestSha256": "7b1ac62e67cd79f79c8ec479e197c29597c00e70c987d23ebfac860ec78f2a45"
+      },
+      "suiteHashes": {
+        "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+        "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+        "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+        "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+      }
+    }
+  ],
+  "modelRequests": 0,
+  "cleanup": {
+    "containerRemoved": true,
+    "temporaryStateAndSessionCookieRemoved": true,
+    "imageRetainedLocallyForReview": true
+  },
+  "limitations": [
+    "No public listener, TLS gateway or remote host: canonical HTTPS configuration was exercised using internal HTTP with explicit Host/Origin only.",
+    "Separate actual-Caddy TLS evidence is recorded in results/rc-caddy-rehearsal.json.",
+    "Retained local filesystem mount demonstrates container restart/replacement durability, not provider volume entitlement, backup or hosted availability.",
+    "No model call or budget ledger modification; inference remained disabled."
+  ],
+  "runtimeParity": {
+    "checkoutSourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+    "checkoutCodeTreeDirty": false,
+    "checkoutRuntimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec",
+    "recordedCampaignExports": [
+      {
+        "file": "results/rc-L-grant-transient-live-export.json",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec"
+      },
+      {
+        "file": "results/rc-L-workshop-false-success-live-export.json",
+        "sourceCommit": "7f6e5f55e267c8d69ef2ab6dfcdd1a07960978f0",
+        "runtimeSha256": "3f0f703af93006b9f689179b5536895e14d1200aadcc4ec84f082124f1c7c5ec"
+      }
+    ],
+    "allMatch": true,
+    "meaning": "Runtime content consistency; rehearsal makes no inference call and does not independently reproduce recorded model results"
+  }
+}

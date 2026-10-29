@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-17T15:10:10.599Z",
+  "basis": "Read-only saved cloud environment config metadata, not an independent runtime egress audit",
+  "apiKeySavedBinding": true,
+  "apiKeyBindingError": null,
+  "allowedDomains": [
+    "api.tokenfactory.nebius.com"
+  ],
+  "pendingRuntimeRequirements": 0
+}

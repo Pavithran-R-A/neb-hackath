@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "campaign-E-live-workbench-owner6235724302",
+  "status": "closed-by-operator",
+  "stage": "serving-local-workbench",
+  "sourceCommit": "26f784038afea644472dabb998787dead2d91c8a",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "campaign": {
+    "requestsReserved": 2,
+    "reservedUsd": 0.00269838,
+    "knownCostUsd": 0.0011781,
+    "usageComplete": true,
+    "halted": false,
+    "closed": true
+  },
+  "finishedAt": "2026-10-17T16:08:28.765Z"
+}

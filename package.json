@@ -4,10 +4,31 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=24.19.0"
   },
   "scripts": {
-    "test": "node --test",
-    "test:ci": "node --test"
+    "start": "node scripts/demo.mjs",
+    "workbench": "node scripts/workbench.mjs",
+    "test": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs",
+    "test:ci": "npm test",
+    "security:check": "node scripts/security-check.mjs",
+    "browsers:install": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright playwright install chromium",
+    "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/benchmark.mjs",
+    "preflight": "node --use-env-proxy scripts/preflight.mjs",
+    "diagnosis:plan": "node scripts/diagnosis-campaign.mjs",
+    "diagnosis:campaign": "node --use-env-proxy scripts/diagnosis-campaign.mjs",
+    "build:manifest": "node scripts/build-manifest.mjs",
+    "campaign:plan": "node scripts/campaign.mjs",
+    "campaign": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --use-env-proxy scripts/campaign.mjs",
+    "preflight:catalog": "node --use-env-proxy scripts/catalog.mjs",
+    "workbench:live": "node --use-env-proxy scripts/workbench-live.mjs"
+  },
+  "devDependencies": {
+    "miniflare": "^5.20261023.0-beta",
+    "playwright": "1.64.1",
+    "wrangler": "^4.153.0"
+  },
+  "dependencies": {
+    "pg": "^8.23.1"
   }
 }

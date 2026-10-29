@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T06:27:10.298Z",
+  "files": {
+    "evaluation/diagnosis-v3/cases.json": "a517ee0a480b23bb54ec9f194472e636cfc553600d93c627c6a972dc943f49f3",
+    "evaluation/diagnosis-v3/labels.json": "2aae3ce21efbb0345daf2274eef16e2336d9dae62876bf1d2f660cfd39d4c79a",
+    "evaluation/diagnosis-v3/protocol.md": "100dd84aabca18c827f6d2873739c68433824b7e1cc1e10ca4664cd308062143",
+    "evaluation/diagnosis-v3/review.json": "a4e34b00fef1ce0efb60fe8fd8424c9d60c987541d7e11a58cd36664a71faac8",
+    "src/diagnosis/acceptance.mjs": "b82268bd44351b3cccfb0ce1cdfd837cda8e2a54265f3495927c93b255d31c60",
+    "src/diagnosis/telemetry-baseline.mjs": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7",
+    "src/diagnosis/nebius.mjs": "742ae17aa1508ac6eae89945aab043bb5caf5e2e48a43b2c2977f4272c6af4c4",
+    "src/diagnosis/safety-evaluation.mjs": "4233440ab8c9d4ab2637a1f15a80411d8684549a8b49a18d1af328bf15022ade"
+  },
+  "suiteSha256": "4d356b56c78937d7b48abc2bca2edcba0d1e1c14e75fb3a9a2de6fa8924150e2",
+  "policyFreeze": "judge-v3-policy-freeze.json",
+  "modelEvaluated": false,
+  "chronology": "Author/reviewer implementation-blind; one label ambiguity corrected pre-inference. Coordinator froze unchanged policy before reading cases/labels, then wrote generic scorer. Labels and allowedActions never enter model, comparator, or gate inputs.",
+  "metrics": "High confidence errors are diagnosis/action-label proxies; explanation truth requires independent review. False abstention counts rejected raw-correct advice on supported cases. No recovery execution measured on static traces."
+}

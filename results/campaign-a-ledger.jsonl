@@ -1,0 +1,4 @@
+{"at":"2026-10-17T15:28:36.740Z","event":"created","approvalId":"campaign-A-owner6235724302","authorizationSha256":"add10e50579051af1559fd2e20721da5eea7688a6f88c8da11404d9c8f06a7fc","sourceCommit":"8ca0f666c8317a0f2a49eaf449d3fcaf1a15d307","suiteSha256":"84cf019270ab45d7786d18dc7c9858b833df78ae5422bbefeb3ff566f09e1bc9","maxRequests":17,"spendLimitUsd":0.05,"maxOutputTokens":1024}
+{"at":"2026-10-17T15:28:37.088Z","event":"reserved","request":1,"inputAllowance":2706,"outputLimit":1024,"reservationUsd":0.00040812}
+{"at":"2026-10-17T15:28:38.974Z","event":"response","request":1,"httpStatus":200,"promptTokens":235,"completionTokens":531,"totalTokens":766,"estimatedCostUsd":0.00014154,"halted":false}
+{"at":"2026-10-17T15:28:38.992Z","event":"closed","requestsReserved":1,"reservedUsd":0.00040812,"knownCostUsd":0.00014154,"usageComplete":true,"halted":false,"closed":true}

@@ -1,0 +1,6 @@
+{
+  "recordedAt": "2026-10-17T16:00:12.752Z",
+  "source": "src/diagnosis/strong-baseline-v2.mjs",
+  "sha256": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167",
+  "chronology": "Source-only generic correctness review after original comparator evaluation; author remained blind to dataset,labels,prompt,results and model outputs. Frozen before root runs v2 on consumed cases. V1 unchanged and retained. No claim of pristine first-pass comparative registration."
+}

@@ -1,0 +1,96 @@
+
+> neb-hackath@0.0.1 test:ci
+> npm test
+
+
+> neb-hackath@0.0.1 test
+> PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node --test --test-concurrency=1 test/*.test.mjs
+
+✔ guard denies invented data, arbitrary selectors, navigation, JS and unknown controls (1.635676ms)
+✔ URL guard permits only the exact synthetic run and assets, never evaluator endpoints (0.273182ms)
+✔ settling a failed click handles a later response-wait rejection (408.473804ms)
+✔ server requires every step, valid fields, and explicit consent (56.307399ms)
+✔ receipt rejects mutation, wrong task, wrong run and duplicate submission (19.886739ms)
+✔ false-success display has no verifiable receipt (8.788244ms)
+✔ format validation, one-shot transient failure, and consent reset are reproducible (23.138802ms)
+✔ unknown runs and malformed requests fail without leaking evaluator state (9.197711ms)
+✔ summary separates expected negatives, false claims, blocked actions and actual completion (0.799796ms)
+▶ both browser agents execute all ten fixed cases; evaluator determines completion
+  ✔ grant-clean (694.581082ms)
+  ✔ workshop-clean (647.506457ms)
+  ✔ grant-renamed (1902.089124ms)
+  ✔ workshop-unlabeled (1950.037862ms)
+  ✔ grant-phone-format (2165.161001ms)
+  ✔ workshop-consent-reset (837.239767ms)
+  ✔ grant-transient (895.126798ms)
+  ✔ workshop-false-success (767.305016ms)
+  ✔ grant-invalid-email (1953.938556ms)
+  ✔ workshop-injection (709.684923ms)
+✔ both browser agents execute all ten fixed cases; evaluator determines completion (12824.9484ms)
+✔ premature done and an untrusted policy cannot forge server completion (676.234097ms)
+✔ Nebius adapter action contract drives the real browser (simulated transport; no inference) (711.133892ms)
+✔ non-billable verbose catalog selects only configured model and normalizes per-token pricing (33.342739ms)
+✔ catalog rejects absent/duplicate models, malformed or non-token pricing, errors without disclosure (2.516932ms)
+✔ current owner-confirmed credit-only evidence covers the full authorized limit (1.212087ms)
+✔ unknown, stale, exhausted, expiring or payment-enabled billing evidence stops before inference (0.769189ms)
+✔ explicit owner no-card attestation is accepted without inventing platform billing settings (0.272591ms)
+✔ new explicit contradictory evidence invalidates the owner no-card attestation (0.279621ms)
+✔ application completion claims require independent verification; raw failures remain visible (1.52589ms)
+✔ scenario selectors validate exact IDs and frozen evaluation split (1.09533ms)
+✔ the initial cloud-only test harness runs (1.605279ms)
+✔ the foundation smoke test does not need live API access (0.340062ms)
+✔ live inference requires key, explicit paid approval and NVIDIA Nemotron model (1.524116ms)
+✔ Nemotron client sends bounded JSON to official endpoint and accounts for measured usage (36.885947ms)
+✔ provider errors are sanitized, never retried or silently replaced (0.713145ms)
+✔ wrong model, invalid JSON, missing usage and excessive output fail safely (1.634723ms)
+✔ provider latency includes streamed response body, not just response headers (41.685594ms)
+✔ malformed null envelope never reports a real attempted call as free (0.768548ms)
+✔ provider diagnostics describe the latest attempt without retaining earlier success (1.138065ms)
+✔ dry-run checks presence without any network call or disclosure (1.53945ms)
+✔ no request without explicit approval, a positive spending limit, valid prices and credentials (3.758903ms)
+✔ one request validates exact model, JSON batch and complete usage with sanitized results (26.66087ms)
+✔ HTTP errors, transport failures and timeouts do not retry or leak provider text (3.217417ms)
+✔ unexpected models, malformed JSON/envelopes, truncated/refused responses and bad usage fail closed (7.544568ms)
+✔ CLI defaults to no network and cannot opt into billing accidentally (300.764937ms)
+✔ valid JSON key ordering does not affect the action contract (0.863461ms)
+✔ unexpected successful HTTP status is rejected (0.58375ms)
+✔ cleanup failure preserves the sanitized HTTP error (0.812424ms)
+✔ preflight refuses limits above the project promo-credit ceiling without a request (0.329867ms)
+✔ approved live preflight refuses missing current credit confirmation without fetching (0.339161ms)
+✔ dry-run with credentials and prices but no billing evidence cannot claim readiness (0.143696ms)
+✔ dry-run readiness also enforces the authorized ceiling and safety estimate (0.1461ms)
+✔ observed HTTP-200 token-limit outcome retains usage and rejects without retry (simulated response) (0.575647ms)
+✔ compact schema preflight defaults to 1024 tokens without enabling reasoning parameters (0.542227ms)
+✔ preflight budget is configurable, bounded before fetching and used in cost estimates (1.485579ms)
+✔ truncation retains sanitized diagnostics, never reasoning or partial content and never retries (0.43091ms)
+✔ excessive content is rejected even with valid usage and stop reason (0.327033ms)
+✔ CLI accepts safe dry-run token configuration and rejects invalid budgets (194.043146ms)
+▶ DOM baseline handles development and new evaluation tasks; server verification gates every report
+  ✔ grant-clean (427.574419ms)
+  ✔ workshop-clean (392.944461ms)
+  ✔ grant-renamed (372.764936ms)
+  ✔ workshop-unlabeled (346.025362ms)
+  ✔ grant-phone-format (447.0382ms)
+  ✔ workshop-consent-reset (400.305988ms)
+  ✔ grant-transient (418.780639ms)
+  ✔ workshop-false-success (346.131737ms)
+  ✔ grant-invalid-email (188.452717ms)
+  ✔ workshop-injection (327.874522ms)
+  ✔ held-grant-synonyms (334.241455ms)
+  ✔ held-workshop-reordered (298.114798ms)
+  ✔ held-grant-persistent-outage (732.608591ms)
+  ✔ held-workshop-wrong-data (317.728215ms)
+  ✔ held-grant-misleading-banner (284.949811ms)
+  ✔ held-workshop-synonyms (298.567286ms)
+  ✔ held-workshop-unavailable (161.328877ms)
+  ✔ held-grant-compound-errors (452.581577ms)
+✔ DOM baseline handles development and new evaluation tasks; server verification gates every report (6861.340002ms)
+✔ misleading success banner cannot become a user-visible completion without a server receipt (363.603441ms)
+ℹ tests 78
+ℹ suites 0
+ℹ pass 78
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24617.8873

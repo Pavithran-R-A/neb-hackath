@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-K-private-https-ui",
+  "approved": true,
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "purpose": "Release candidate end-to-end private HTTPS durable-session UI rehearsal: one live transient diagnosis with synthetic explicit approval and signed receipt; one false-success diagnosis safely rejected. Known integration QA, not fresh benchmark.",
+  "approvedAt": "2026-10-18T03:49:14.116Z",
+  "expiresAt": "2026-10-18T04:03:14.116Z",
+  "sourceCommit": "922a9cb8bd317b4df606354bd55945b3f590142f",
+  "runtimeSha256": "b0801bb70910c4398c4a2f2444a4add16759827db79b65d0e8418c6bdbce05b9",
+  "suiteSha256": "e6be598a257c94f8606fe954ac7324e62535cb54024e72d64ab7afb2e152b19c",
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "maxRequests": 3,
+  "maxOutputTokens": 8192,
+  "responseContract": "preflight-then-diagnosis",
+  "scenarioIds": [
+    "grant-transient",
+    "workshop-false-success"
+  ],
+  "diagnosticSampling": {
+    "temperature": 1,
+    "top_p": 1
+  },
+  "spendLimitUsd": 0.02,
+  "inputUsdPerMillion": 0.06,
+  "outputUsdPerMillion": 0.24,
+  "sourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39094869975",
+  "judgingReserveUsd": 50,
+  "noRetries": true,
+  "noFallbacks": true,
+  "publicDeployment": false,
+  "recordedBeforeExecution": true
+}

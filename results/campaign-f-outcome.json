@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "campaign-F-workflow-protocol-owner6235724302",
+  "status": "closed-by-operator",
+  "stage": "serving-local-workbench",
+  "sourceCommit": "fe3ac5f330eb0baccde4560a1890a246ac985374",
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "campaign": {
+    "requestsReserved": 3,
+    "reservedUsd": 0.00505812,
+    "knownCostUsd": 0.00135918,
+    "usageComplete": true,
+    "halted": false,
+    "closed": true
+  },
+  "finishedAt": "2026-10-17T16:15:01.617Z"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T15:50:29.770Z",
+  "policyFilesSha256": {
+    "src/diagnosis/baseline.mjs": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9",
+    "src/diagnosis/contract.mjs": "f0c8efe2619f122c2f297e16ae9aa8e722853b02b3277608a8f21ef1ed046ffa",
+    "src/diagnosis/nebius.mjs": "1c3b0afb0c52460fa9254bc77b24d71a627ee6af6e149892914b2f5f3266786d"
+  },
+  "datasetFilesSha256": {
+    "cases.json": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+    "labels.json": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244",
+    "protocol.md": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c",
+    "review.json": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+  },
+  "suiteSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf",
+  "independence": "Independent author and separate label reviewer did not access policy implementation. Root read protocol only, not cases/labels, before this freeze. Cases synthetic; review by AI agent with labels visible, not human expert validation.",
+  "preEvaluationProtocolAmendment": "Original policy expected runtime verification. Static protocol hides author verification field. Make verification optional for both policies; suggestions on visible events cannot claim independent runtime verification. No case text/label/outcome inspected or model evaluation performed before amendment.",
+  "configurationAmendment": "After B preflight success and first diagnostic truncation at2048, allow8192 output and60s timeout; retain identical prompt/schema/baseline/dataset/labels. Add reasoning-count/content-length metadata. First case now consumed; remaining15 have not received model inference. No semantic tuning to answers; unsuccessful B retained."
+}

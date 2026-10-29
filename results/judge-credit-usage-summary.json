@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T07:56:04.181Z",
+  "sourceLedger": "canonical .cache/account-budget/account.jsonl; snapshot excludes secrets",
+  "ownerAttestedStartingCreditsUsd": 59,
+  "judgeReserveUsd": 50,
+  "preCampaignConservativeCommittedUsd": 0.0848933,
+  "campaigns": {
+    "judge-M-fresh-v3-c2bae63d2f45": {
+      "sourceCommit": "c2bae63d2f451774b33718573447e709445d0678",
+      "maxEnvelopeUsd": 0.1,
+      "requestsReserved": 6,
+      "usageComplete": true,
+      "knownEstimatedTokenCostUsd": 0.00510714,
+      "unknownUsageRequests": 0,
+      "settlement": "actual known usage; unused envelope released"
+    }
+  },
+  "cumulativeConservativeCommittedUsd": 0.09000044,
+  "estimatedCreditsRemainingUsd": 58.90999956,
+  "estimatedHeadroomAboveReserveUsd": 8.90999956,
+  "calculation": "Owner-attested USD59 less recorded known token estimates and the full historical unresolved USD0.05 H reservation; M measured usage added, no M unknown usage",
+  "providerBalanceObserved": false,
+  "cardOrTopupAdded": false,
+  "paidHostingOrServices": false,
+  "limits": [
+    "A local estimate, not a provider balance or bill",
+    "Prices are catalog estimates, not a hard provider-enforced spend ceiling",
+    "Existing credits only; no card, paid replenishment or automatic top-up"
+  ]
+}

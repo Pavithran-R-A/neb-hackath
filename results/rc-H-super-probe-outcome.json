@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-H-super-probe",
+  "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+  "suiteSha256": "50b3721c3fd69b7c477de3fe1b208eeff72b9bc13a185daee62458a684dd7728",
+  "suiteId": "config-probes-v1",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "sampling": {
+    "temperature": 1,
+    "top_p": 0.95
+  },
+  "startedAt": "2026-10-18T03:27:35.575Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "modelExecution": "live-nebius",
+  "raw": [
+    {
+      "id": "consumed-runtime-probe-1",
+      "error": "Provider or contract rejected",
+      "providerOutcome": null
+    }
+  ],
+  "accepted": [],
+  "baseline": [
+    {
+      "id": "consumed-runtime-probe-1",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "verdict",
+          "event-5"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 4.648255999999947
+    },
+    {
+      "id": "consumed-runtime-probe-2",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "verdict",
+          "ui-claim"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.669159000000036
+    }
+  ],
+  "stage": "diagnoses",
+  "noRetries": true,
+  "catalog": {
+    "checkedAt": "2026-10-18T03:27:35.858Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.3,
+    "outputUsdPerMillion": 0.9,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "preflight": {
+    "mode": "live",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.0016875,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": true,
+    "requestsSent": 1,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-18T03:27:30.068Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "provider": {
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "refused": false,
+      "contentCharacters": 102,
+      "reasoningTokens": 84
+    },
+    "usage": {
+      "promptTokens": 235,
+      "completionTokens": 123,
+      "totalTokens": 358,
+      "complete": true
+    },
+    "latencyMs": 1160.4959130000002,
+    "estimatedModelCostUsd": 0.00018119999999999999,
+    "costBasis": "configured token-rate estimate; not a billing statement",
+    "authenticationVerified": true,
+    "modelIdentityVerified": true,
+    "jsonResponseVerified": true,
+    "actionSchemaVerified": true,
+    "browserTaskCompleted": false
+  },
+  "status": "stopped",
+  "failedStage": "diagnoses",
+  "error": "Campaign stopped safely; no retry",
+  "providerOutcome": null,
+  "semantic": {
+    "accepted": 0,
+    "abstained": 0,
+    "rawHighConfidenceRejected": 0
+  },
+  "finishedAt": "2026-10-18T03:27:37.372Z",
+  "campaign": {
+    "requestsReserved": 2,
+    "reservedUsd": 0.010847699999999998,
+    "knownCostUsd": 0.00018119999999999999,
+    "usageComplete": false,
+    "halted": true,
+    "closed": true
+  }
+}

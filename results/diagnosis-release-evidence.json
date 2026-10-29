@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T16:19:17.662267+00:00",
+  "implementationSourceCommit": "fe3ac5f330eb0baccde4560a1890a246ac985374",
+  "implementationSourceCI": "https://github.com/Pavithran-R-A/neb-hackath/actions/runs/39048416815",
+  "runtimeSha256": "2a3fece29616d2e95454354edf4dbc17b88375f4443c0f31d6b318ea6387f515",
+  "localVerification": {
+    "command": "npm test",
+    "exitCode": 0,
+    "passed": 236,
+    "failed": 0,
+    "skipped": 0,
+    "testLogSha256": "311938fd7650f3100f980ef9b0e7780077e8c96d624a67a9d84422f70d19f5bf",
+    "tree": "Implementation source plus observed-F false-success guard regression committed with this evidence",
+    "audit": "npm audit --audit-level=moderate:0 known advisories",
+    "sourceScan": "Exact protected-value/private-key scan:0findings; not comprehensive certification"
+  },
+  "liveEvidence": "results/campaign-f-browser-outcome.json",
+  "evaluationEvidence": "results/diagnosis-comparison-v1.json",
+  "accounting": "results/credit-usage-summary.json",
+  "decision": "Proceed bounded verification/diagnosis prototype; pivot away autonomous form-filling superiority; public-release no-go pending gates",
+  "remainingApprovals": [
+    "Owner contribution ownership/license and personal/competition eligibility",
+    "Public deployment/hosting choice and access controls (no paid hosting authorized)",
+    "Merge",
+    "Final video upload and Devpost submission"
+  ],
+  "limitations": [
+    "Partial16case model evaluation;6accepted/7attempted,9unattempted; one truncation",
+    "Synthetic AI-agent authored/reviewed labels, no external expert/user study; deterministic comparator natural-language coverage weak",
+    "Real runtime negative model advice wrong/highconfidence; independent guard blocks; do not claim correct modelnegative",
+    "App state/keys ephemeral, no public demo or judgeaccess; deployment/security gates remain",
+    "Linear/hosting tools and canonical deep-security scanner unavailable; no claimed connector updates/provisioning/security certification"
+  ]
+}

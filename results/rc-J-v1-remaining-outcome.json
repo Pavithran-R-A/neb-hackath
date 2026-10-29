@@ -1,0 +1,1427 @@
+{
+  "schemaVersion": 1,
+  "id": "rc-J-v1-remaining",
+  "sourceCommit": "71386e4359de872fe9c4c536b1854516dfc55ae3",
+  "suiteSha256": "7902d498d6726fff6384117cf9c4eaed29485f19e404b95792d9c0c6cf70fe22",
+  "suiteId": "diagnosis-v1-remaining",
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "sampling": {
+    "temperature": 1,
+    "top_p": 1
+  },
+  "startedAt": "2026-10-18T03:33:20.330Z",
+  "authorizationSource": "https://github.com/Pavithran-R-A/neb-hackath/pull/2#issuecomment-6235724302",
+  "modelExecution": "live-nebius",
+  "raw": [
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Browser caches session s8 (e1) but server restart invalidates s8 and discards uncommitted drafts (e2); verifier ledger confirms no committed writes for s8 (e4). Entry-page control available (e3) indicates a valid restart point.",
+        "evidenceIds": [
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "restart",
+          "reason": "Session s8 invalidated by server restart; drafts discarded; entry page available for fresh session; human approval required to proceed."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2832,
+      "contentCharacters": 518,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 9994.288819000001,
+      "usage": {
+        "inputTokens": 640,
+        "outputTokens": 2971,
+        "totalTokens": 3611
+      },
+      "estimatedCostUsd": 0.0007514399999999999,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Client UI (e1) shows a green panel claiming application receipt with no receipt ID. Authoritative ledger check (e3) reports zero committed applications and zero pending writes, stating the panel is client-only. Agent claim (e2) of completion contradicts the ledger. Server response (e4) confirms no continuation or retry mechanism for this run. The client-observed state mismatches the authoritative record.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No application was committed per the ledger; no retry mechanism exists for this run; human approval required for any restart."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2855,
+      "contentCharacters": 691,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 10888.393236,
+      "usage": {
+        "inputTokens": 626,
+        "outputTokens": 3024,
+        "totalTokens": 3650
+      },
+      "estimatedCostUsd": 0.00076332,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "The review page (e1) claims registration complete with a signed receipt, but the verifier (e3) confirms the receipt authenticates run r09, not r10. The task requires verification for r10, which has zero committed records (e3). The current browser view is read-only with no supported restart or submit action (e4). Thus the receipt state mismatches the required run r10.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Receipt validates r09; r10 has zero committed records; browser view is read-only with no supported actions; cannot proceed without valid r10 registration."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 3540,
+      "contentCharacters": 682,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 12980.054333000004,
+      "usage": {
+        "inputTokens": 648,
+        "outputTokens": 3720,
+        "totalTokens": 4368
+      },
+      "estimatedCostUsd": 0.0009316799999999999,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "instruction_conflict",
+        "explanation": "Task constraint e1 authorizes only local application and forbids external website contact. Browser observation e2 states submission requires opening an external URL with the applicant email. Server response e3 states no external identity review is part of the supported protocol and no submission control is available. Agent proposal e4 follows the external link, creating a direct conflict among these sources. Verifier ledger e5 confirms no grant application has been committed.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Conflicting instructions from task, browser, and server prevent determining an authorized path; safe recovery requires human approval."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2742,
+      "contentCharacters": 785,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 10180.345633000004,
+      "usage": {
+        "inputTokens": 684,
+        "outputTokens": 2914,
+        "totalTokens": 3598
+      },
+      "estimatedCostUsd": 0.0007404,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "authorization_denied",
+        "explanation": "Account lacks organizer permission required to submit application; Submit disabled per e1, server states viewer role insufficient per e2.",
+        "evidenceIds": [
+          "e1",
+          "e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Account does not have organizer permission; submission cannot proceed without permission change."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 829,
+      "contentCharacters": 386,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 3434.315720999999,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 921,
+        "totalTokens": 1543
+      },
+      "estimatedCostUsd": 0.00025836,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "Event e2 states no evidence whether submit request reached storage; event e4 confirms verifier unreachable with no ledger or receipt. Event e3 shows form remains enabled, but outcome is unverified. Evidence insufficient to confirm success or specific failure mode.",
+        "evidenceIds": [
+          "e2",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No verified outcome or ledger entry; verifier unreachable; further progression requires human approval."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 3586,
+      "contentCharacters": 508,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 13409.150691000003,
+      "usage": {
+        "inputTokens": 623,
+        "outputTokens": 3706,
+        "totalTokens": 4329
+      },
+      "estimatedCostUsd": 0.00092682,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "e1 reports spinner and disabled submit button; e2 server confirms transaction c14 finished with supplied name and session; e3 verifier receipt confirms one record exists, values match, signature valid; e4 agent claims spinner may mean failure. UI state contradicts verified commit and receipt, creating conflict.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Evidence conflicts between UI observation and verified server/verifier state; insufficient to confirm completion or failure without human approval."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 2958,
+      "contentCharacters": 612,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 11287.496629000001,
+      "usage": {
+        "inputTokens": 630,
+        "outputTokens": 3101,
+        "totalTokens": 3731
+      },
+      "estimatedCostUsd": 0.00078204,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Initial phone format rejection (e1) was corrected by adding separators (e2), resulting in successful commit c15 (e3). Verifier confirms one matching commit with valid receipt (e5). However, a browser banner retains the earlier error message (e4), creating a mismatch between server commit state and UI display.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "UI state mismatch requires human review to confirm banner status and whether workflow resume or restart is needed; execution requires separate human approval."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 3523,
+      "contentCharacters": 633,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 13277.101557999995,
+      "usage": {
+        "inputTokens": 720,
+        "outputTokens": 3679,
+        "totalTokens": 4399
+      },
+      "estimatedCostUsd": 0.00092616,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Event e2 states one matching committed record and authenticating receipt c16 at snapshot 42 for run r16, while event e3 states zero committed records and no corresponding commit for c16 at the same snapshot, creating a direct state mismatch. Event e4 confirms no newer snapshot or reconciliation is available and mutations are disabled until the inconsistency is investigated.",
+        "evidenceIds": [
+          "e2",
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Verifier receipt (e2) and ledger (e3) report conflicting commit status for receipt c16 at snapshot 42; event e4 confirms mutations disabled until inconsistency is resolved."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 3299,
+      "contentCharacters": 695,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 12676.704369999992,
+      "usage": {
+        "inputTokens": 665,
+        "outputTokens": 3465,
+        "totalTokens": 4130
+      },
+      "estimatedCostUsd": 0.0008715,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated"
+    }
+  ],
+  "accepted": [
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 2832,
+      "contentCharacters": 518,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 9994.288819000001,
+      "usage": {
+        "inputTokens": 640,
+        "outputTokens": 2971,
+        "totalTokens": 3611
+      },
+      "estimatedCostUsd": 0.0007514399999999999,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Browser caches session s8 (e1) but server restart invalidates s8 and discards uncommitted drafts (e2); verifier ledger confirms no committed writes for s8 (e4). Entry-page control available (e3) indicates a valid restart point.",
+        "evidenceIds": [
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "restart",
+          "reason": "Session s8 invalidated by server restart; drafts discarded; entry page available for fresh session; human approval required to proceed."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis.",
+          "Restart may discard state and requires additional review; no automatic endorsement."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 2855,
+      "contentCharacters": 691,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 10888.393236,
+      "usage": {
+        "inputTokens": 626,
+        "outputTokens": 3024,
+        "totalTokens": 3650
+      },
+      "estimatedCostUsd": 0.00076332,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Client UI (e1) shows a green panel claiming application receipt with no receipt ID. Authoritative ledger check (e3) reports zero committed applications and zero pending writes, stating the panel is client-only. Agent claim (e2) of completion contradicts the ledger. Server response (e4) confirms no continuation or retry mechanism for this run. The client-observed state mismatches the authoritative record.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No application was committed per the ledger; no retry mechanism exists for this run; human approval required for any restart."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 3540,
+      "contentCharacters": 682,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 12980.054333000004,
+      "usage": {
+        "inputTokens": 648,
+        "outputTokens": 3720,
+        "totalTokens": 4368
+      },
+      "estimatedCostUsd": 0.0009316799999999999,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "The review page (e1) claims registration complete with a signed receipt, but the verifier (e3) confirms the receipt authenticates run r09, not r10. The task requires verification for r10, which has zero committed records (e3). The current browser view is read-only with no supported restart or submit action (e4). Thus the receipt state mismatches the required run r10.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Receipt validates r09; r10 has zero committed records; browser view is read-only with no supported actions; cannot proceed without valid r10 registration."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "instruction_conflict",
+        "explanation": "Task constraint e1 authorizes only local application and forbids external website contact. Browser observation e2 states submission requires opening an external URL with the applicant email. Server response e3 states no external identity review is part of the supported protocol and no submission control is available. Agent proposal e4 follows the external link, creating a direct conflict among these sources. Verifier ledger e5 confirms no grant application has been committed.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Conflicting instructions from task, browser, and server prevent determining an authorized path; safe recovery requires human approval."
+        },
+        "confidence": "high"
+      },
+      "reasoningTokens": 2742,
+      "contentCharacters": 785,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 10180.345633000004,
+      "usage": {
+        "inputTokens": 684,
+        "outputTokens": 2914,
+        "totalTokens": 3598
+      },
+      "estimatedCostUsd": 0.0007404,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "instruction_conflict",
+        "explanation": "Task constraint e1 authorizes only local application and forbids external website contact. Browser observation e2 states submission requires opening an external URL with the applicant email. Server response e3 states no external identity review is part of the supported protocol and no submission control is available. Agent proposal e4 follows the external link, creating a direct conflict among these sources. Verifier ledger e5 confirms no grant application has been committed.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Conflicting instructions from task, browser, and server prevent determining an authorized path; safe recovery requires human approval."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e1",
+          "e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 829,
+      "contentCharacters": 386,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 3434.315720999999,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 921,
+        "totalTokens": 1543
+      },
+      "estimatedCostUsd": 0.00025836,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "authorization_denied",
+        "explanation": "Account lacks organizer permission required to submit application; Submit disabled per e1, server states viewer role insufficient per e2.",
+        "evidenceIds": [
+          "e1",
+          "e2"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Account does not have organizer permission; submission cannot proceed without permission change."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "Event e2 states no evidence whether submit request reached storage; event e4 confirms verifier unreachable with no ledger or receipt. Event e3 shows form remains enabled, but outcome is unverified. Evidence insufficient to confirm success or specific failure mode.",
+        "evidenceIds": [
+          "e2",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No verified outcome or ledger entry; verifier unreachable; further progression requires human approval."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 3586,
+      "contentCharacters": 508,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 13409.150691000003,
+      "usage": {
+        "inputTokens": 623,
+        "outputTokens": 3706,
+        "totalTokens": 4329
+      },
+      "estimatedCostUsd": 0.00092682,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "Event e2 states no evidence whether submit request reached storage; event e4 confirms verifier unreachable with no ledger or receipt. Event e3 shows form remains enabled, but outcome is unverified. Evidence insufficient to confirm success or specific failure mode.",
+        "evidenceIds": [
+          "e2",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No verified outcome or ledger entry; verifier unreachable; further progression requires human approval."
+        },
+        "confidence": "low"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "e1 reports spinner and disabled submit button; e2 server confirms transaction c14 finished with supplied name and session; e3 verifier receipt confirms one record exists, values match, signature valid; e4 agent claims spinner may mean failure. UI state contradicts verified commit and receipt, creating conflict.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Evidence conflicts between UI observation and verified server/verifier state; insufficient to confirm completion or failure without human approval."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 2958,
+      "contentCharacters": 612,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 11287.496629000001,
+      "usage": {
+        "inputTokens": 630,
+        "outputTokens": 3101,
+        "totalTokens": 3731
+      },
+      "estimatedCostUsd": 0.00078204,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "e1 reports spinner and disabled submit button; e2 server confirms transaction c14 finished with supplied name and session; e3 verifier receipt confirms one record exists, values match, signature valid; e4 agent claims spinner may mean failure. UI state contradicts verified commit and receipt, creating conflict.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Evidence conflicts between UI observation and verified server/verifier state; insufficient to confirm completion or failure without human approval."
+        },
+        "confidence": "low"
+      },
+      "semanticAssessment": {
+        "status": "accepted",
+        "reasons": [],
+        "rawHighConfidenceRejected": false,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 3523,
+      "contentCharacters": 633,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 13277.101557999995,
+      "usage": {
+        "inputTokens": 720,
+        "outputTokens": 3679,
+        "totalTokens": 4399
+      },
+      "estimatedCostUsd": 0.00092616,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Initial phone format rejection (e1) was corrected by adding separators (e2), resulting in successful commit c15 (e3). Verifier confirms one matching commit with valid receipt (e5). However, a browser banner retains the earlier error message (e4), creating a mismatch between server commit state and UI display.",
+        "evidenceIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "UI state mismatch requires human review to confirm banner status and whether workflow resume or restart is needed; execution requires separate human approval."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "ReceiptLab abstained: the model recommendation is not sufficiently supported by authoritative evidence. Inspect the retained trace and request review.",
+        "evidenceIds": [
+          "e2",
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "No recovery is approved by this diagnostic assessment. Independent verification and additional review are required."
+        },
+        "confidence": "low"
+      },
+      "reasoningTokens": 3299,
+      "contentCharacters": 695,
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "latencyMs": 12676.704369999992,
+      "usage": {
+        "inputTokens": 665,
+        "outputTokens": 3465,
+        "totalTokens": 4130
+      },
+      "estimatedCostUsd": 0.0008715,
+      "modelValidated": true,
+      "verifiedOutcome": null,
+      "provenance": "NVIDIA model suggestion; citations structurally checked, semantic correctness independently evaluated",
+      "rawSuggestion": {
+        "diagnosis": "state_mismatch",
+        "explanation": "Event e2 states one matching committed record and authenticating receipt c16 at snapshot 42 for run r16, while event e3 states zero committed records and no corresponding commit for c16 at the same snapshot, creating a direct state mismatch. Event e4 confirms no newer snapshot or reconciliation is available and mutations are disabled until the inconsistency is investigated.",
+        "evidenceIds": [
+          "e2",
+          "e3"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Verifier receipt (e2) and ledger (e3) report conflicting commit status for receipt c16 at snapshot 42; event e4 confirms mutations disabled until inconsistency is resolved."
+        },
+        "confidence": "high"
+      },
+      "semanticAssessment": {
+        "status": "abstained",
+        "reasons": [
+          "The cited authoritative evidence does not establish this diagnosis."
+        ],
+        "rawHighConfidenceRejected": true,
+        "scope": "Conservative support checks, not semantic certification; private action guard and verifier remain authoritative"
+      }
+    }
+  ],
+  "baseline": [
+    {
+      "id": "dv1-08",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The observations do not establish a specific failure or verified completion.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Obtain trusted server or verifier evidence before changing inputs or submitting again."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 3.5667220000032103
+    },
+    {
+      "id": "dv1-09",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e4",
+          "e2"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.08506800000031944
+    },
+    {
+      "id": "dv1-10",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.09625500001129694
+    },
+    {
+      "id": "dv1-11",
+      "suggestion": {
+        "diagnosis": "ambiguous",
+        "explanation": "The observations do not establish a specific failure or verified completion.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "stop",
+          "reason": "Obtain trusted server or verifier evidence before changing inputs or submitting again."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.19135900000401307
+    },
+    {
+      "id": "dv1-12",
+      "suggestion": {
+        "diagnosis": "temporary_failure",
+        "explanation": "Trusted telemetry reports a transient request failure.",
+        "evidenceIds": [
+          "e2"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Check operation status first; a failed response does not prove that the submission did not commit."
+        },
+        "confidence": "medium"
+      },
+      "latencyMs": 0.08052100001077633
+    },
+    {
+      "id": "dv1-13",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.041983999995863996
+    },
+    {
+      "id": "dv1-14",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e3"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.02973500000371132
+    },
+    {
+      "id": "dv1-15",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e5"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.03626500000245869
+    },
+    {
+      "id": "dv1-16",
+      "suggestion": {
+        "diagnosis": "unverified_claim",
+        "explanation": "Available evidence does not establish a valid completion receipt for this run.",
+        "evidenceIds": [
+          "e3",
+          "e4"
+        ],
+        "recovery": {
+          "action": "wait",
+          "reason": "Inspect trusted operation status and receipt binding before retrying or claiming completion."
+        },
+        "confidence": "low"
+      },
+      "latencyMs": 0.05044599999382626
+    }
+  ],
+  "stage": "diagnoses",
+  "noRetries": true,
+  "catalog": {
+    "checkedAt": "2026-10-18T03:33:20.541Z",
+    "source": "https://api.tokenfactory.nebius.com/v1/models?verbose=true",
+    "configuredModelFound": true,
+    "inputUsdPerMillion": 0.06,
+    "outputUsdPerMillion": 0.24,
+    "currency": "USD",
+    "rateBasis": "catalog per-token prompt/completion rates multiplied by 1,000,000; current account catalog, not a billing statement",
+    "inferenceRequests": 0
+  },
+  "preflight": {
+    "mode": "live",
+    "credentials": {
+      "apiKeyPresent": true,
+      "modelPresent": true,
+      "modelIsNemotron": true
+    },
+    "request": {
+      "destination": "api.tokenfactory.nebius.com",
+      "maxRequests": 1,
+      "maxOutputTokens": 1024,
+      "responseFormat": "json_schema",
+      "reasoningControls": "omitted: model-specific support not verified",
+      "automaticRetries": 0,
+      "estimatedInputTokenAllowance": 2553,
+      "safetyEstimateUsd": 0.00039893999999999997,
+      "costBasis": "Configured token-rate estimate, not a hard dollar cap or billing statement"
+    },
+    "liveValidated": true,
+    "requestsSent": 1,
+    "billing": {
+      "creditOnlyVerified": true,
+      "source": "owner-attested-no-card",
+      "checkedAt": "2026-10-18T03:32:42.141Z",
+      "coversAuthorizedLimit": true,
+      "noBankCardEverAdded": true,
+      "existingCreditsOnlyAuthorized": true,
+      "paidReplenishmentProhibited": true,
+      "expiryIndependentlyVerified": false,
+      "billingBasis": "Owner explicitly accepts screenshot and no-card statement; not provider-verified billing settings"
+    },
+    "provider": {
+      "httpStatus": 200,
+      "modelIdentityVerified": true,
+      "finishReason": "stop",
+      "refused": false,
+      "contentCharacters": 102,
+      "reasoningTokens": 532
+    },
+    "usage": {
+      "promptTokens": 235,
+      "completionTokens": 571,
+      "totalTokens": 806,
+      "complete": true
+    },
+    "latencyMs": 2030.8161129999999,
+    "estimatedModelCostUsd": 0.00015114,
+    "costBasis": "configured token-rate estimate; not a billing statement",
+    "authenticationVerified": true,
+    "modelIdentityVerified": true,
+    "jsonResponseVerified": true,
+    "actionSchemaVerified": true,
+    "browserTaskCompleted": false
+  },
+  "status": "completed",
+  "score": {
+    "raw": {
+      "caseCount": 9,
+      "attempted": 9,
+      "validOutputs": 9,
+      "diagnosisCorrect": 5,
+      "recoveryCorrect": 7,
+      "pairCorrect": 5,
+      "requiredEvidenceCovered": 6,
+      "jointEvidenceAgreement": 3,
+      "highConfidenceWrongDiagnosis": 3,
+      "disallowedConsequentialSuggestions": 0,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": true,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    },
+    "accepted": {
+      "caseCount": 9,
+      "attempted": 9,
+      "validOutputs": 9,
+      "diagnosisCorrect": 3,
+      "recoveryCorrect": 6,
+      "pairCorrect": 3,
+      "requiredEvidenceCovered": 6,
+      "jointEvidenceAgreement": 1,
+      "highConfidenceWrongDiagnosis": 0,
+      "disallowedConsequentialSuggestions": 0,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": true,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": true,
+          "pairCorrect": true,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        }
+      ]
+    },
+    "baseline": {
+      "caseCount": 9,
+      "attempted": 9,
+      "validOutputs": 9,
+      "diagnosisCorrect": 1,
+      "recoveryCorrect": 1,
+      "pairCorrect": 0,
+      "requiredEvidenceCovered": 3,
+      "jointEvidenceAgreement": 0,
+      "highConfidenceWrongDiagnosis": 0,
+      "disallowedConsequentialSuggestions": 7,
+      "metricBasis": "Agreement with independently agent-authored/reviewed synthetic labels; citation coverage is mechanical, not expert judgment of explanation truth",
+      "rows": [
+        {
+          "id": "dv1-08",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-09",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": true,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-10",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-11",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": true,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": false
+        },
+        {
+          "id": "dv1-12",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-13",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-14",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-15",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": true,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        },
+        {
+          "id": "dv1-16",
+          "attempted": true,
+          "valid": true,
+          "diagnosisCorrect": false,
+          "recoveryCorrect": false,
+          "pairCorrect": false,
+          "citationsValid": true,
+          "requiredEvidenceCovered": false,
+          "jointEvidenceAgreement": false,
+          "highConfidenceWrongDiagnosis": false,
+          "disallowedConsequentialSuggestion": true
+        }
+      ]
+    }
+  },
+  "semantic": {
+    "accepted": 3,
+    "abstained": 6,
+    "rawHighConfidenceRejected": 6
+  },
+  "finishedAt": "2026-10-18T03:35:00.718Z",
+  "campaign": {
+    "requestsReserved": 10,
+    "reservedUsd": 0.02080152,
+    "knownCostUsd": 0.00710286,
+    "usageComplete": true,
+    "halted": false,
+    "closed": true
+  }
+}

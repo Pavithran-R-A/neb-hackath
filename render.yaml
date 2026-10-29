@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: receiptlab-judge
+    runtime: node
+    plan: free
+    region: singapore
+    branch: feat/phase1-verified-completion
+    autoDeploy: false
+    buildCommand: npm ci
+    startCommand: node scripts/workbench-judge.mjs --config-env
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: RECEIPTLAB_RENDER_PROXY
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: NEBIUS_MODEL
+        sync: false
+      - key: RECEIPTLAB_JUDGE_CODE
+        sync: false
+      - key: RECEIPTLAB_JUDGE_CONFIG_JSON
+        sync: false
