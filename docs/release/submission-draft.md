@@ -2,7 +2,7 @@
 
 **Product:** ReceiptLab — trust the receipt, inspect the claim
 **Candidate track:** Best Apps and Agents, subject to owner eligibility/track confirmation
-**Status:** Submission is not ready. The public deterministic test URL is https://receiptlab-judge.onrender.com; its recorded deployment runs with inference disabled. A direct health request returned HTTP 200 in 0.98 seconds at this check, after external reports of transient 503s; this is not continuous-availability proof or an established cold-start diagnosis. Exact-head external acceptance passed synthetic positive/negative journeys but did not exercise live Nemotron or process restart. PR #2 is open and draft at source `9af21a3e1dbf1552e28e41b7bb28bb4b2d77889c`. Apache-2.0 LICENSE and NOTICE are present on main and the release branch. The video is not uploaded, and Devpost has not been submitted.
+**Status:** Submission is incomplete. The public deterministic test URL is https://receiptlab-judge.onrender.com; live inference is disabled. A direct health request returned HTTP 200 on October 29, 2026; this is not continuous-availability proof. Post-merge main commit `e90f032f8cef1901e563208791c5460ff06ec40b` passed full CI (363 passed, 0 failed, 0 skipped). Hosted synthetic positive/negative acceptance passed without model calls; it did not exercise live Nemotron or process restart. PR #2 is merged and closed. The public `main` repository contains the app and owner-approved Apache-2.0 LICENSE/NOTICE. The video is not uploaded, and Devpost has not been submitted.
 
 The [official rules snapshot](../../results/hackathon-rules-check-2026-10-20.json) was retrieved October20, 2026. It requires runtime Token Factory inference or Nebius AI Cloud compute plus an NVIDIA open-source model; a working test-build URL; a public licensed repository and README; an under-three-minute public YouTube demonstration; feedback on tools/models; and free, unrestricted judge access through December15 at noon Pacific time. The equally weighted criteria are Technological Implementation, Design, Potential Impact and Quality of the Idea. Submission deadline is October30 at 10:00 PDT (17:00 UTC / 22:30 India).
 
@@ -24,9 +24,9 @@ ReceiptLab's intended audience is developers debugging browser-agent failures an
 
 **Public repository / license:** https://github.com/Pavithran-R-A/neb-hackath (Apache-2.0 detected on `main`)
 
-**Complete hackathon source:** https://github.com/Pavithran-R-A/neb-hackath/tree/feat/phase1-verified-completion (draft PR #2; select this branch to browse/run the implementation). The default `main` branch currently contains 9 tracked files and no `src/` directory; the release branch contains the complete application. PR #2 has not been merged.
+**Complete hackathon source:** https://github.com/Pavithran-R-A/neb-hackath/tree/main (default branch; PR #2 merged October 29, 2026).
 
-**Source revision:** `9af21a3e1dbf1552e28e41b7bb28bb4b2d77889c` (draft PR #2; deployment currently reports older source `9933f10c10a6eb05c7b38d9e60622ca436010176`).
+**Source revision:** public `main` merge commit `e90f032f8cef1901e563208791c5460ff06ec40b`. Latest recorded Render deployment SHA is `d3a6f6614898e3f8bd2997c72326059b463ed0c6`; current Render deployment settings have not been independently inspected in this Work session, so the merge SHA must not be represented as deployed.
 
 **Model mode:** deterministic / live NVIDIA inference disabled in the deployed service. No judge access code is currently recorded in the submission materials.
 
@@ -37,7 +37,7 @@ Suggested reviewer journey (synthetic data only):
 3. Inspect the trace, request deterministic diagnosis, explicitly approve the eligible retry, and verify the signed receipt independently. Export the evidence and confirm the completion proof comes from server state.
 4. Start the negative false-success case. Complete its fictional form, return to ReceiptLab, and check the claim. The verifier must reject the claim and keep unsupported recovery disabled.
 
-This is an accurate test of the current public service. It does not demonstrate current hosted Nemotron inference, durable state after a Render restart, or availability guarantees through the judging window. Do not submit this as the completed live NVIDIA demo until those release gates pass.
+This is an accurate test of the recorded public synthetic service. It does not demonstrate current hosted Nemotron inference, durable state after a Render restart, or availability guarantees through the judging window. Do not present it as a live NVIDIA demo.
 
 ## Screenshot attachments prepared
 
@@ -49,7 +49,7 @@ This is an accurate test of the current public service. It does not demonstrate 
 | [`rc-L-grant-transient-live-diagnosis.png`](screenshots/rc-L-grant-transient-live-diagnosis.png) | Actual historical Nemotron recommendation and provider metrics | Campaign L at its pinned historical source; not current public runtime |
 | [`rc-L-workshop-false-success-live-outcome.png`](screenshots/rc-L-workshop-false-success-live-outcome.png) | False-success claim rejected despite historical model recommendation | Campaign L historical model advice; independent guard/verifier denied completion |
 
-The public Devpost form requires image uploads. These repository assets are ready for selection, but no browser/Devpost connector is available in this Work session to upload them.
+The public Devpost form requires image uploads. These repository assets are ready for selection, but no browser/Devpost connector is available in this Work session to upload them. Apache-2.0 licensing is approved and published; media rights and personal eligibility attestations remain separate owner decisions.
 
 ## Evidence for the four criteria
 
@@ -79,6 +79,6 @@ Official rules prohibit third-party trademarks or copyrighted material in the pu
 - **Hosting:** the existing isolated Render Free + Neon Free service is deployed; do not recreate it. It offers the deterministic public journey only. Confirm current account tier/quota and protected settings through the connected Render/Neon integrations, then complete hosted restart and bounded NVIDIA journeys. Render Free idle sleep and Neon quotas prevent a 24/7 guarantee.
 - **Ownership and licensing:** the owner approved Apache-2.0 and root LICENSE/NOTICE are present. Independently confirm contribution and dependency/media rights, and team/affiliation/territorial eligibility before final submission.
 - **Brand/media rights:** confirm textual sponsor/model naming is allowed under Devpost's third-party trademark rule and review synthetic narration/captions.
-- **Submission:** activate and verify judge mode and unrestricted free testing through the judging period; complete remaining rights review, confirm Apache-2.0 detection, approve YouTube upload and complete Devpost's final owner attestations. Keep PR #2 in draft. No PR merge is authorized.
+- **Submission:** activate and verify bounded judge mode and free testing through the judging period; complete remaining rights review; confirm Apache-2.0 detection; publish the reviewed video; and complete Devpost's final owner attestations. PR #2 is already merged; no further merge is pending.
 
-The owner approved the Apache-2.0 software license grant separately; this document grants no video-publication approval, eligibility attestation, or Devpost submission approval. No additional Nebius inference was used in this sprint. See [release evidence](../../results/sprint-release-evidence.json), [latest v3 result](../../results/judge-M-analysis.json), [video manifest](../../results/rc-final-pitch-video-manifest.json), [hosting assessment](workers-hosting-assessment.md), [license proposal](license-proposal.md) and [final release report](RECEIPTLAB-FINAL-HACKATHON-RELEASE-REPORT.md).
+The owner-approved Apache-2.0 software license is already published. It does not grant video-publication rights, make personal eligibility attestations, or authorize final Devpost submission. The October 29 catalog check made zero inference calls and reported `creditOnlyVerified:false`; no new model usage is claimed. See [release evidence](../../results/sprint-release-evidence.json), [latest v3 result](../../results/judge-M-analysis.json), [video manifest](../../results/rc-final-pitch-video-manifest.json), [hosting assessment](workers-hosting-assessment.md), [license proposal](license-proposal.md), [final release report](RECEIPTLAB-FINAL-HACKATHON-RELEASE-REPORT.md) and [current go/no-go](final-go-no-go.md).

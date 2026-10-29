@@ -1,36 +1,37 @@
-# Final submission go/no-go
+# Final submission go/no-go — October 29, 2026
 
-**Decision: NO-GO for final submission; GO for the deterministic synthetic test build and the public, licensed source branch.** The software branch is qualified, Apache-2.0 is published, and exact-head CI/hosted synthetic acceptance pass. Live hosted Nemotron inference, account billing/settings verification, a durable hosted restart test, public video and Devpost submission are still outstanding.
+**Decision: NO-GO for a complete/qualified hackathon submission; GO for the published Apache-2.0 source and the deterministic synthetic demo.** The project is merged on `main` and exact post-merge CI passed. The public service still runs without live inference. Video publication, the official Devpost submission, provider billing/configuration checks, restart qualification and real hosted NVIDIA acceptance remain unverified.
 
-## Exact current qualification
+## Verified status
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Release source | PR #2 branch `feat/phase1-verified-completion`, SHA `9af21a3e1dbf1552e28e41b7bb28bb4b2d77889c` | Public; PR open/draft |
-| Full CI | [Run 40488726457](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40488726457), 363 passed, 0 failed, 0 skipped; PostgreSQL integration; source scan and audit passed | PASS |
-| Hosted synthetic acceptance | [Run 40488719781](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40488719781), positive recovery/receipt and misleading-success rejection | PASS; zero NVIDIA requests |
-| Open-source license | Root `LICENSE` and `NOTICE`; GitHub detects `Apache-2.0`; owner approval recorded in Issue #5 | PASS for project material licensable by the owner; not third-party media clearance |
-| Public implementation discoverability | `main` has 9 tracked files and no `src/`; public release branch has the complete 357-file implementation | Branch is public; use its direct URL. Merge approval is not recorded |
-| Deployed source | Existing Render Free service and dedicated Neon project; last recorded deployed SHA `9933f10c10a6eb05c7b38d9e60622ca436010176`; inference disabled | Not promoted to release SHA |
-| Public health | External report observed a transient 503; a later external check and a fresh Work-session GET returned 200. This Work GET took 0.98s and reported PostgreSQL-backed synthetic mode, inference disabled | Point-in-time PASS; cold-start cause and continuous availability unproven |
-| Live Nemotron | Historical Campaign L evidence exists, but no live call was made in this release session. Current catalog check reports `nvidia/Nemotron-3_5-Lightning`, $0.06/M input and $0.24/M output; dry-run reports `creditOnlyVerified:false` | BLOCKED pending secure billing/config checks |
-| Video | Private candidate SHA-256 `737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5`, 122.461s, H.264/AAC 1080p with captions; full decode passed | Prepared; media/voice rights review and YouTube publication pending |
-| Devpost | Draft prepared in [`submission-draft.md`](submission-draft.md) | Not submitted; personal eligibility/final attestation pending |
+| Public source and license | Repository default branch `main`, merge commit `e90f032f8cef1901e563208791c5460ff06ec40b`; GitHub detects Apache-2.0 | PASS |
+| Post-merge CI | [Run 40834879951](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40834879951), exact SHA `e90f032…`; 363 passed, 0 failed, 0 skipped. Source secret scan, dependency audit and Chromium/PostgreSQL test job passed. | PASS |
+| Hosted synthetic acceptance | [Run 40510973580](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40510973580), positive and false-success synthetic workflows; zero NVIDIA requests | PASS for synthetic behavior only |
+| Public health | `GET https://receiptlab-judge.onrender.com/health` returned HTTP 200 on October 29, 2026 at 07:46 UTC (0.42 s TTFB), `persistent-synthetic`, PostgreSQL storage, inference disabled | Point-in-time PASS; uptime/restart unproven |
+| Render deployment | Latest provider evidence records Free service `srv-dbfn8bavcj2c738p2b80`, deployment `dep-dbhegue7bikc73ee1ifg`, source `d3a6f6614898e3f8bd2997c72326059b463ed0c6`; automatic deploy off | Not verified against current dashboard in this session; not exact merge SHA |
+| Neon persistence | Existing dedicated project and `receiptlab` application namespace are recorded in Issue #5. No current database read/write/restart verification was possible in this session. | Historical evidence only |
+| NVIDIA/Nebius | Current Token Factory catalog check at `2026-10-29T07:48:53Z` found configured `nvidia/Nemotron-3_5-Lightning` at $0.06/M input and $0.24/M output. `inferenceRequests:0`; dry-run says `creditOnlyVerified:false`, `readyForApproval:false`. | Not enabled; live hosted journey not run |
+| Video | Existing private MP4 SHA-256 `737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5`, duration 122.461 s. | Prepared; not published |
+| Devpost | Submission material is in [`submission-draft.md`](submission-draft.md). | Not submitted |
 
-## Cost and judge-access limits
+## Spending and access
 
-No purchase, upgrade, inference request, redeploy or production mutation occurred. The latest catalog GET was metadata only. The owner-attested historical $59 starting balance minus the durable usage ledger is an estimate, not a current provider balance. The $50 reserve is policy-protected, but a fresh account statement and billing exposure were not available in this Work session.
+No inference request, purchase, top-up, plan change, redeploy or database mutation occurred in this checkpoint. The catalog read is metadata only, not a credit balance, account statement, invoice cap or billing-mode proof. The one-request dry-run estimates $0.00039894 at current catalog rates and allows 1,024 output tokens, but readiness is false. The environment confirmed only that the model and key settings are present; the key value was not displayed. It cannot verify the provider network-secret scope, current promotional credits/expiry, no-card billing status or the $50 judging reserve.
 
-Render and Neon are recorded as Free. The latest Issue #5 provider note observed about 12.44 MB of outbound Render data in the sampled period, not a monthly billing statement or proof against overages. Current Render usage, any payment method or overage settings, Neon quotas and billing settings could not be inspected because this Work session has no provider connectors or authenticated browser. Render Free sleep and Neon suspension prevent a 24/7 availability guarantee through December 15.
+Render and Neon remain the existing Free resources, but their account settings, current usage, overage controls, exact deployed revision and stored judge-budget row were not accessible through this Work session. Do not infer a no-cash guarantee from their plan labels. Render Free can sleep; no availability guarantee through December 15 is established.
 
-The current judge plan is fail-closed with a $0.50 maximum envelope, source/runtime/suite/history pins, persistent PostgreSQL accounting, call/day/session quotas and no startup inference. However, production `RECEIPTLAB_JUDGE_CONFIG_JSON`, judge code, database URL and Render settings are inaccessible here. The app is not serving the bounded judge runtime.
+## Release decisions still required
 
-## Release and submission blockers
+1. Provide this Work session access to the existing Render and Neon account connectors or authenticated cloud browser. Do not send secrets in chat. Confirm current billing/usage exposure, protected settings, `receiptlab` state revision and durable judge accounting before any deployment change.
+2. Enable the bounded hosted judge only if the current account-credit gate and protected configuration pass. Pin the actual deployed source/runtime/suite/history/model/catalog rates, preserve the $50 judging reserve and $0.50 campaign maximum, then record actual positive and negative external model journeys. The current preflight fails closed; do not bypass it.
+3. Verify restart/session/receipt/replay behavior and exact deployed SHA from Render and Neon. A green CI run does not prove these production properties.
+4. Owner reviews the already-created video’s rights, voice, captions, sponsor attribution and accuracy, then authorizes public YouTube publication. No YouTube connection is available here.
+5. Owner completes Devpost’s personal eligibility and originality attestations and final-submission confirmation after reviewing the live demo and video. No Devpost connection is available here.
 
-1. Enable the existing Render and Neon integrations, or an authenticated cloud browser, in this Work session. Do not send secrets in chat. Verify current Free billing exposure, protected variables, database namespace/revision, and retained judge-budget state before any production change.
-2. Reconcile the public repository default branch: it contains only the foundation, while the complete Apache-licensed implementation is on the public release branch. The Devpost source link must use [`feat/phase1-verified-completion`](https://github.com/Pavithran-R-A/neb-hackath/tree/feat/phase1-verified-completion). If judges must use `main`, obtain explicit merge approval first; do not merge draft PR #2 without it.
-3. Review and activate the exact source-pinned judge configuration only after current credit-only status and the $50 reserve are verified. Preserve the $0.50 envelope and all no-retry/fail-closed controls. Then run one real positive and one real negative hosted model journey and retain actual provider results.
-4. Owner reviews the existing video's media, attribution, synthetic voice and captions, then authorizes public YouTube upload. Verify its public URL and playback.
-5. Owner completes personal eligibility attestations and authorizes final Devpost submission after reviewing the prepared entry. Verify the actual public project URL.
+## Evidence limits
 
-Keep the draft PR open until the owner authorizes a merge. Preserve the partial negative v3 findings and never represent synthetic acceptance as live model performance. The release report and Issue #5 are the technical evidence record; submission is not complete until the public video and Devpost page are independently verified.
+The October 19 v3 model evaluation remains a partial negative result: four usable diagnoses of five attempted, one truncated at 8,192 output tokens, and eleven cases unattempted. On the four paired cases Nemotron matched 1/4 diagnosis labels and 2/4 safe actions, compared with 3/4 for each on the deterministic comparator. Earlier Campaign L provides real historical model-assisted integration evidence, but does not prove current hosted model execution. No superiority claim is made. Independent server state and signed-receipt verification remain authoritative.
+
+The MP4 is private and its local checksum is verified; no public watch URL exists. No Devpost project URL exists. Accordingly, the entry is not fully submitted and must not be described as 100% complete.

@@ -77,3 +77,40 @@ Remaining external actions are narrowly defined: provide this Work session the e
 - The existing video SHA remains `737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5`, duration 122.461 seconds; it was not rebuilt or uploaded. Devpost remains a draft. No deployment, database mutation, purchase, upgrade, or model request occurred.
 
 The current Devpost source pointer is branch-specific because `main` lacks the application implementation. If official review requires the complete source on `main`, pause and obtain explicit merge authorization. Other remaining owner/account gates: secure provider integrations to inspect billing/protected settings; safe bounded hosted inference; video media/voice approval and public upload; personal eligibility and final Devpost attestation/submission. No credential should be pasted into chat.
+
+## October 29 — final submission checkpoint from merged `main`
+
+This checkpoint supersedes earlier branch and PR state above. The earlier dated entries are retained as historical evidence; they are not the current status.
+
+### Implemented
+
+- GitHub confirms public default branch `main` at merge SHA `e90f032f8cef1901e563208791c5460ff06ec40b`; PR #2 is closed/merged. The application and Apache-2.0 LICENSE/NOTICE are on `main`, and GitHub detects the license. The README and submission materials now point reviewers to the default branch and distinguish source from the older deployment SHA.
+- The existing private video candidate remains unchanged at `.cache/qa/receiptlab-judge-pitch.mp4`, SHA-256 `737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5`, 122.461 seconds. It was not uploaded.
+
+### Tested
+
+- Exact post-merge main CI [run 40834879951](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40834879951) passed at `e90f032f8cef1901e563208791c5460ff06ec40b`: **363 passed, 0 failed, 0 skipped**, with Chromium and PostgreSQL. Protected-source scan, dependency audit and test job passed.
+- Hosted synthetic acceptance [run 40510973580](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40510973580) passed positive recovery and misleading-success rejection without any live NVIDIA request.
+- Direct public `GET /health` on October 29, 2026 at 07:46 UTC returned HTTP 200 in 0.42 seconds with `persistent-synthetic`, PostgreSQL storage and `liveInferenceEnabled:false`. It is point-in-time evidence only, not uptime or restart proof.
+- A fresh read-only Token Factory catalog request at `2026-10-29T07:48:53Z` verified configured model `nvidia/Nemotron-3_5-Lightning` and listed $0.06 per million input tokens / $0.24 per million output tokens. The catalog reports `inferenceRequests:0`. A one-request, 1,024-output-token dry-run estimated $0.00039894 but set `creditOnlyVerified:false` and `readyForApproval:false`. This catalog is not a credit/billing statement or hard spend cap. **No inference request was made.**
+- Environment presence was checked without printing secret values: `NEBIUS_API_KEY` and `NEBIUS_MODEL` are present; `DATABASE_URL`, `RECEIPTLAB_JUDGE_CODE`, `RECEIPTLAB_JUDGE_CONFIG_JSON` and `RENDER_API_KEY` are absent in this Work environment. Platform secret destination metadata and Render/Neon protected settings were not accessible.
+
+### Deployed
+
+- Existing public service remains `https://receiptlab-judge.onrender.com`. The latest recorded successful Render deployment is `dep-dbhegue7bikc73ee1ifg`, SHA `d3a6f6614898e3f8bd2997c72326059b463ed0c6`, Render Free, inference disabled. The main merge commit `e90f032…` has not been verified as the deployed SHA. No deploy, restart test, Neon mutation or production configuration change occurred in this session.
+- Existing Neon project/namespace were not accessed directly in this session; previous reports record the dedicated project and `receiptlab` namespace. Current row revision, judge-budget state, restart recovery and billing usage remain unverified.
+
+### Published and submitted
+
+- **Published:** no YouTube upload. The video remains a private workspace asset. The publication packet is prepared, but the owner’s rights/voice/captions review and authenticated YouTube path are outstanding.
+- **Submitted:** no Devpost submission. Draft text is prepared and updated for public `main`; screenshot selection/upload, any personal eligibility/originality attestations, final authorization and resulting public project URL remain outstanding.
+- **License:** Apache-2.0 source license is approved and published; licensing is not an open gate. This does not clear third-party media rights.
+
+### Blocked / decision
+
+- The only available non-GitHub tools in this Work session are cloud environment onboarding tools. Render, Neon, authenticated Cloud Browser, YouTube and Devpost integrations are absent. Do not send API keys or database credentials through chat.
+- Current account credit balance/expiry, no-card/auto-replenishment status, Render usage/overage settings, Neon quota/state, Render protected configuration and judge-code access could not be verified. Because the current safe dry-run explicitly reports `creditOnlyVerified:false`, the hosted NVIDIA journey was not enabled. Preserve the standing $50 judging reserve and $0.50 campaign envelope; do not treat catalog estimates or historical balances as proof of available credit.
+- Historical Campaign L remains genuine earlier model-assisted evidence; it does not prove current production inference. The v3 evaluation remains partial and negative (Nemotron 1/4 label matches and 2/4 safe actions versus the deterministic comparator’s 3/4 on the same four cases); one of five attempts truncated at 8,192 tokens and eleven cases were unattempted. No superiority claim is made.
+- **Final verdict: not fully submitted and not 100% complete.** The public licensed source, merge CI and synthetic hosted test are verified. Live hosted NVIDIA use, provider settings/billing qualification, restart proof, public video and final Devpost entry are not.
+
+See the current [go/no-go](final-go-no-go.md), [submission draft](submission-draft.md), [YouTube publication packet](youtube-publication-packet.md), and [Issue #5 evidence](https://github.com/Pavithran-R-A/neb-hackath/issues/5).
