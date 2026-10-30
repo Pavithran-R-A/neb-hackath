@@ -4,7 +4,7 @@
 
 This section supersedes earlier deployment and publication statements below; older checkpoints remain as historical evidence.
 
-**Implemented:** public `main` is `1db019dbf0784a20ce3ef211d7ec97d6f155615d` (release-document synchronization) atop the application source deployed at `ebf2ee7274087a40c4967111817904bd88e27357`. PR #2 is merged. The existing Render/Neon service is verified live at deployment `dep-dbi3r8dg1s2s73dtqdfg`, bounded judge mode enabled. No replacement service/database or application namespace was created.
+**Implemented:** public `main` includes the non-blocking health fix merged in PR #6 as `faef4f19b070ded82d5a7898b18781dbeeb6e822`; PR #2 is also merged. Render remains deployed at `ebf2ee7274087a40c4967111817904bd88e27357`, deployment `dep-dbi3r8dg1s2s73dtqdfg`, with bounded judge mode enabled. The health fix has not been promoted. No replacement service/database or application namespace was created.
 
 **Tested:** previous exact-source CI [40891258475](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40891258475) passed **363/363** with PostgreSQL and Chromium; source-pin workflow [40891258476](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40891258476) and hosted synthetic acceptance [40902880407](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40902880407) succeeded without inference. PR #6 merged to `main` as `faef4f19b070ded82d5a7898b18781dbeeb6e822`. Exact-head CI [41038435951](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/41038435951) passed **363/363, zero failures/skips**; the PostgreSQL-backed test observed the five-second diagnosis while `/health` returned within the one-second bound. The fix is in source `main` but has not been deployed to Render.
 
