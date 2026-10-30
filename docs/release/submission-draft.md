@@ -26,7 +26,7 @@ ReceiptLab's intended audience is developers debugging browser-agent failures an
 
 **Complete hackathon source:** https://github.com/Pavithran-R-A/neb-hackath/tree/main (default branch; PR #2 merged October 29, 2026).
 
-**Source revision:** `ebf2ee7274087a40c4967111817904bd88e27357`. Issue #5 records existing Render deployment `dep-dbi3r8dg1s2s73dtqdfg` running this SHA; this Work session independently verified the public service responds, but has no Render dashboard connector.
+**Source revision:** `ebf2ee7274087a40c4967111817904bd88e27357`. Issue #5 and the connected Render API confirm deployment `dep-dbi3r8dg1s2s73dtqdfg` running this SHA; the connected Neon API confirms the campaign budget has zero requests and is not halted. Protected configuration values remain unavailable.
 
 **Model mode:** bounded judge runner configured and health reports inference enabled. No new real provider call has been independently verified in this session. A private judge access code is required and must be issued to judges via an approved private access path; never put it in the repository or public page description. The saved plan allows 100 lifetime requests, 20/day, 2/session and a $0.50 total reservation; the existing expiry is Dec 15, shorter than the Dec 23 rules requirement. Do not claim qualified access until a safe migration is verified.
 
@@ -76,7 +76,7 @@ Official rules prohibit third-party trademarks or copyrighted material in the pu
 
 ## Remaining release decisions
 
-- **Hosting:** the existing isolated Render + Neon service is in bounded-judge mode; do not recreate it. The account integrations are not available in this Work session. Confirm current account tier/quota and protected settings, capture a real hosted model call and complete restart/budget migration. Render Free idle sleep and Neon quotas prevent a 24/7 guarantee.
+- **Hosting:** the existing isolated Render + Neon service is in bounded-judge mode; do not recreate it. Render and Neon connectors verified the existing resources and budget, but do not expose the protected config values. Capture a real hosted model call and complete the safely versioned restart/budget migration only after the exact protected plan and billing guard are verifiable. Render Free idle sleep and Neon quotas prevent a 24/7 guarantee.
 - **Ownership and licensing:** the owner approved Apache-2.0 and root LICENSE/NOTICE are present. Independently confirm contribution and dependency/media rights, and team/affiliation/territorial eligibility before final submission.
 - **Brand/media rights:** confirm textual sponsor/model naming is allowed under Devpost's third-party trademark rule and review synthetic narration/captions.
 - **Submission:** verify hosted inference, migrate the budget through Dec 23 without resetting history, complete rights review, publish the video and complete Devpost's final owner attestations. PR #2 is already merged; no further merge is pending.
