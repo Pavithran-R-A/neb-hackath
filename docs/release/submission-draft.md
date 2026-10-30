@@ -39,6 +39,10 @@ Suggested reviewer journey (synthetic data only):
 
 This describes the actual hosted synthetic journey and historical local browser captures. It does not qualify judge access through Dec 23 or demonstrate production restart recovery. The current campaign is halted; do not instruct judges to expect model access until a non-destructive plan/ledger migration, restart, and bounded availability check are independently verified.
 
+## Significant work during the submission period
+
+ReceiptLab was substantially built and extended during the hackathon submission period. The public application now includes guided synthetic browser workflows, durable Render/Neon PostgreSQL state, run-bound private verification, signed receipts and replay protection. It integrates live Nemotron diagnosis through Nebius Token Factory, with source-cited advice separated from the independent verifier, a semantic safety gate, explicit single-use human approval, and bounded request/cost accounting that retains unknown usage and halts safely. Recent public milestones include the durable judge runtime (`9933f10`, Oct 26), shared hosted state and acceptance evidence (`21217430`, Oct 27), Apache-2.0 licensing (`0ea42010`, Oct 27), source-pinned deployment setup (`ebf2ee72`, Oct 29), and the PostgreSQL-backed health responsiveness fix (`faef4f19`, Oct 30). The health fix is merged but not deployed. PR #9 is a separate, unmerged source-cutoff proposal; it does not migrate the protected judge plan or clear the halted budget.
+
 ## Screenshot attachments prepared
 
 | Candidate attachment | What it shows | Evidence boundary |
