@@ -1,8 +1,9 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,rm,readFile,mkdir,writeFile} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
-import {openJudgeBudget} from '../src/runtime/judge-budget.mjs';
+import {openJudgeBudget} from '../src/runtime/judge-budget.mjs';import {JUDGE_ACCESS_END} from '../src/runtime/judge-window.mjs';
+import {JUDGE_ACCESS_END as WORKER_JUDGE_ACCESS_END} from '../workers/judge-window.mjs';
 const sourceCommit='a'.repeat(40),suiteSha256='b'.repeat(64),code='fictional-judge-access-secret-0001';
 async function fixture(t){const d=await mkdtemp(join(tmpdir(),'receiptlab-judge-'));t.after(()=>rm(d,{recursive:true,force:true}));await mkdir(join(d,'account'));await writeFile(join(d,'account','account.jsonl'),JSON.stringify({event:'initial',initialAccountUsd:59,judgeReserveUsd:50,initialSpentUsd:.0848933})+'\n');return d;}
-const plan={id:'judge-release',sourceCommit,suiteSha256,model:'nvidia/test-nemotron',maxRequests:4,dailyRequests:3,sessionRequests:2,spendLimitUsd:.02,inputUsdPerMillion:.06,outputUsdPerMillion:.24,maxOutputTokens:8192,expiresAt:'2026-12-15T20:00:00.000Z',scenarioIds:['grant-transient','workshop-false-success']};
+const plan={id:'judge-release',sourceCommit,suiteSha256,model:'nvidia/test-nemotron',maxRequests:4,dailyRequests:3,sessionRequests:2,spendLimitUsd:.02,inputUsdPerMillion:.06,outputUsdPerMillion:.24,maxOutputTokens:8192,expiresAt:JUDGE_ACCESS_END,scenarioIds:['grant-transient','workshop-false-success']};
 test('judge reservations, access and request quotas survive restart; unknown calls never replay',async t=>{
  const d=await fixture(t);let time=Date.parse('2026-10-18T00:00:00Z');let b=await openJudgeBudget({directory:join(d,'judge'),accountDirectory:join(d,'account'),plan,accessCode:code,now:()=>time});
  assert.equal(b.authorized('s1'),false);assert.equal(b.authorize('s1','wrong'),false);assert.equal(b.authorize('s1',code),true);
@@ -13,6 +14,15 @@ test('judge reservations, access and request quotas survive restart; unknown cal
  assert.throws(()=>b.reserve({sessionId:'s1',runId:'r3',scenarioId:'grant-transient',inputAllowance:1000,outputLimit:8192}),/quota/);
  assert.equal(b.summary().requests,2);assert.ok(b.summary().committedUsd>0);assert.equal(b.summary().knownCostUsd,.000036);
  assert.ok((await readFile(join(d,'account','account.jsonl'),'utf8')).includes('judge-release'));
+});
+test('judge campaign expiry permits the official December 23 end and rejects later plans and calls',async t=>{
+ assert.equal(WORKER_JUDGE_ACCESS_END,JUDGE_ACCESS_END);
+ const d=await fixture(t),opts={directory:join(d,'judge'),accountDirectory:join(d,'account'),plan,accessCode:code,now:()=>Date.parse('2026-10-18T00:00:00Z')},b=await openJudgeBudget(opts);t.after(()=>b.close());
+ b.authorize('judge',code);
+ await assert.rejects(()=>openJudgeBudget({...opts,plan:{...plan,expiresAt:'2026-12-23T20:00:00.001Z'}}),/Invalid bounded judge configuration/);
+ const end=Date.parse(JUDGE_ACCESS_END);let time=end-1,endDir=await fixture(t);
+ const atEnd=await openJudgeBudget({directory:join(endDir,'judge'),accountDirectory:join(endDir,'account'),plan:{...plan,expiresAt:new Date(end).toISOString()},accessCode:code,now:()=>time});t.after(()=>atEnd.close());atEnd.authorize('judge',code);time=end;
+ assert.throws(()=>atEnd.reserve({sessionId:'judge',runId:'at-end',scenarioId:'grant-transient',inputAllowance:1000,outputLimit:8192}),/expired/);
 });
 test('judge access throttles failures and denies foreign scope, expiry and concurrent instance',async t=>{
  const d=await fixture(t),opts={directory:join(d,'judge'),accountDirectory:join(d,'account'),plan,accessCode:code,now:()=>Date.parse('2026-10-18')},b=await openJudgeBudget(opts);t.after(()=>b.close());
