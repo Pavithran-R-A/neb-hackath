@@ -14,6 +14,9 @@ const origin='https://receiptlab.onrender.com';
 const baseHistory=JSON.stringify({event:'initial',initialAccountUsd:59,judgeReserveUsd:50})+'\n';
 const plan={id:'pg-journey-fixture',model:'nvidia/test-nemotron',sourceCommit:'c'.repeat(40),suiteSha256:'d'.repeat(64),accountHistoryBaseSha256:createHash('sha256').update(baseHistory).digest('hex'),maxRequests:2,dailyRequests:2,sessionRequests:1,maxOutputTokens:8192,spendLimitUsd:.1,inputUsdPerMillion:.1,outputUsdPerMillion:.3,scenarioIds:['grant-transient','workshop-false-success'],expiresAt:'2026-11-01T00:00:00Z'};
 const history=baseHistory+JSON.stringify({event:'reserved',campaignId:plan.id,maxReservedUsd:.1,sourceCommit:plan.sourceCommit,suiteSha256:plan.suiteSha256})+'\n';
+let diagnosisStartedResolve;
+const diagnosisStarted=new Promise(resolve=>{diagnosisStartedResolve=resolve;});
+
 
 function request(server,path,{cookie,body}={}){return new Promise((resolve,reject)=>{const req=http.request({hostname:'127.0.0.1',port:server.address.port,path,method:body===undefined?'GET':'POST',headers:{host:new URL(origin).host,'x-forwarded-proto':'https',...(cookie?{cookie}:{}),...(body===undefined?{}:{origin,'content-type':'application/json'})}},res=>{const chunks=[];res.on('data',b=>chunks.push(b));res.on('end',()=>{const raw=Buffer.concat(chunks).toString();resolve({status:res.statusCode,headers:res.headers,json:()=>JSON.parse(raw),text:raw});});});req.on('error',reject);req.end(body===undefined?undefined:JSON.stringify(body));});}
 
@@ -23,7 +26,7 @@ test('Neon state and budget power a mocked positive and negative end-to-end jour
  const open=async()=>{
   budget=await openPostgresJudgeBudget({pool,namespace:budgetNs,plan,accessCode:code,accountHistory:history,now:()=>Date.parse('2026-10-26T12:00:00Z')});
   controller=createJudgeController({budget,apiKey:'SIMULATED-ONLY',model:plan.model,checkPrices:async()=>({inputUsdPerMillion:.1,outputUsdPerMillion:.3}),fetchImpl:async(_url,init)=>{
-   posts++;const body=JSON.parse(init.body),trace=JSON.parse(body.messages.at(-1).content);let result;
+   posts++;if(posts===1){diagnosisStartedResolve();await new Promise(resolve=>setTimeout(resolve,5000));}const body=JSON.parse(init.body),trace=JSON.parse(body.messages.at(-1).content);let result;
    if(trace.verification.completed===false&&trace.events.some(event=>event.id==='ui-claim'))result={diagnosis:'completed',explanation:'SIMULATED model accepts the page success banner.',evidenceIds:['ui-claim'],recovery:{action:'none',reason:'SIMULATED model believes the banner proves success.'},confidence:'high'};
    else {const event=trace.events.find(item=>item.text.includes('Temporary submission error'));result={diagnosis:'temporary_failure',explanation:'SIMULATED provider event reports a temporary submission error.',evidenceIds:[event.id],recovery:{action:'retry',reason:'SIMULATED request may be retried once with explicit approval.'},confidence:'high'};}
    return new Response(JSON.stringify({model:plan.model,choices:[{finish_reason:'stop',message:{role:'assistant',content:JSON.stringify(result)}}],usage:{prompt_tokens:100,completion_tokens:50,total_tokens:150}}));
@@ -38,7 +41,11 @@ test('Neon state and budget power a mocked positive and negative end-to-end jour
  const unlock=async cookie=>assert.equal((await request(server,'/api/judge-access',{cookie,body:{code}})).status,200);
  const diagnose=async(cookie,id)=>request(server,`/api/runs/${id}/diagnose`,{cookie,body:{mode:'nemotron'}});
  const positiveCookie=await createSession(),positive=await run(positiveCookie,'grant-transient');await unlock(positiveCookie);
- const diagnosis=await diagnose(positiveCookie,positive.id);assert.equal(diagnosis.status,200,diagnosis.text);const advice=diagnosis.json();assert.equal(advice.executionKind,'simulated-test');assert.equal(advice.semanticAssessment.status,'accepted');assert.equal(advice.recoveryExecutable,true);assert.equal(posts,1);
+ const pendingDiagnosis=diagnose(positiveCookie,positive.id);await diagnosisStarted;
+ const healthStarted=Date.now(),health=await request(server,'/health');
+ assert.equal(health.status,200,health.text);assert.equal(health.json().ok,true);
+ assert.ok(Date.now()-healthStarted<1000,'/health waited behind the simulated five-second diagnosis');
+ const diagnosis=await pendingDiagnosis;assert.equal(diagnosis.status,200,diagnosis.text);const advice=diagnosis.json();assert.equal(advice.executionKind,'simulated-test');assert.equal(advice.semanticAssessment.status,'accepted');assert.equal(advice.recoveryExecutable,true);assert.equal(posts,1);
  const approved=await request(server,`/api/runs/${positive.id}/recover`,{cookie:positiveCookie,body:{approve:true,diagnosisId:advice.id,traceDigest:advice.traceDigest}});assert.equal(approved.status,200,approved.text);
  const verified=await request(server,`/api/runs/${positive.id}/verify`,{cookie:positiveCookie,body:{claimedCompletion:true}});assert.equal(verified.json().verification.completed,true);
  const negativeCookie=await createSession(),negative=await run(negativeCookie,'workshop-false-success');await unlock(negativeCookie);
