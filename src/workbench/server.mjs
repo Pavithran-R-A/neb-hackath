@@ -39,11 +39,18 @@ export async function createWorkbench({port=Number(process.env.PORT??0),listenHo
  const handle=async(req,res)=>{
   const send=async(status,data,type='application/json',headers={})=>{try{persist();await flush();}catch{status=503;data={error:'Workbench persistence unavailable; operation was not confirmed'};type='application/json';headers={};}res.writeHead(status,{'content-type':type,'cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",...headers});res.end(type==='application/json'?JSON.stringify(data):data);};
   try{
-   assertHealthy();cleanup();
+   assertHealthy();
    const expectedOrigin=trustedOrigin();
    if(!trustedPublicRequest(req,expectedOrigin,{renderProxy:publicMode&&renderProxy}))return send(403,{error:'Origin, host or trusted HTTPS proxy denied'});
    const path=new URL(req.url,origin).pathname;
-   if(path==='/health'&&req.method==='GET')return send(200,{ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',storageMode:databaseUrl?'postgresql':durable?'sqlite':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating)});
+   // Health is read-only: answer without waiting for PostgreSQL persistence or cleanup.
+   if(path==='/health'&&req.method==='GET'){
+    const data={ok:true,mode:publicMode?'persistent-synthetic':'local-synthetic',storageMode:databaseUrl?'postgresql':durable?'sqlite':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating)};
+    res.writeHead(200,{'content-type':'application/json','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'});
+    res.end(JSON.stringify(data));
+    return;
+   }
+   cleanup();
    const id=/(?:^|;\s*)receiptlab=([a-f0-9]{64})(?:;|$)/.exec(req.headers.cookie??'')?.[1];let session=sessions.get(id);
    if(req.method==='GET'&&assets.has(path)){
     const headers={};
@@ -117,7 +124,14 @@ export async function createWorkbench({port=Number(process.env.PORT??0),listenHo
   }catch{if(!res.headersSent){res.writeHead(503,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify({error:'Workbench request failed safely; persistent state may be unavailable'}));}else res.destroy();}
  };
  let requestTail=Promise.resolve();
- const server=http.createServer((req,res)=>{const work=databaseUrl?requestTail.then(()=>handle(req,res)):handle(req,res);if(databaseUrl)requestTail=work.catch(()=>{});activeRequests.add(work);work.then(()=>activeRequests.delete(work),()=>{activeRequests.delete(work);res.destroy();});});
+ const server=http.createServer((req,res)=>{
+  let health=false;
+  try{health=req.method==='GET'&&new URL(req.url,origin).pathname==='/health';}catch{}
+  const queued=Boolean(databaseUrl)&&!health;
+  const work=queued?requestTail.then(()=>handle(req,res)):handle(req,res);
+  if(queued)requestTail=work.catch(()=>{});
+  activeRequests.add(work);work.then(()=>activeRequests.delete(work),()=>{activeRequests.delete(work);res.destroy();});
+ });
  const host=listenHost??(publicMode?'0.0.0.0':'127.0.0.1');
  try{await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,host,resolve);});}catch(error){await app.close();await durable?.close();if(ownsPool)await pool.end();throw error;}
  origin=publicMode?canonicalOrigin:'http://127.0.0.1:'+server.address().port;
