@@ -1,5 +1,5 @@
 import {readFile,realpath} from 'node:fs/promises';import {createHash} from 'node:crypto';import {fileURLToPath} from 'node:url';
-import {createProvenance} from '../src/provenance.mjs';import {scenarios} from '../src/scenarios.mjs';import {openPostgresJudgeBudget} from '../src/runtime/postgres-judge-budget.mjs';import {createPostgresPool,POSTGRES_STATE_NAMESPACE} from '../src/runtime/postgres-state.mjs';import {createJudgeController} from '../src/runtime/judge-policy.mjs';import {createWorkbench} from '../src/workbench/server.mjs';import {checkCatalog} from '../src/catalog.mjs';import {JUDGE_ACCESS_END} from '../src/runtime/judge-window.mjs';
+import {createProvenance} from '../src/provenance.mjs';import {scenarios} from '../src/scenarios.mjs';import {openPostgresJudgeBudget} from '../src/runtime/postgres-judge-budget.mjs';import {createPostgresPool,POSTGRES_STATE_NAMESPACE} from '../src/runtime/postgres-state.mjs';import {createJudgeController} from '../src/runtime/judge-policy.mjs';import {createWorkbench} from '../src/workbench/server.mjs';import {checkCatalog} from '../src/catalog.mjs';import {JUDGE_ACCESS_END} from '../src/runtime/judge-window.mjs';import {readCanonicalJudgeHistory} from '../src/runtime/judge-account-history.mjs';
 const args=process.argv.slice(2);let server,controller,pool;
 const repositoryRoot=await realpath(fileURLToPath(new URL('../',import.meta.url)));if(await realpath(process.cwd())!==repositoryRoot)throw Error('Run judge from this repository root only');
 const scope=['grant-transient','workshop-false-success'],suiteSha256=createHash('sha256').update(JSON.stringify(scenarios.filter(s=>scope.includes(s.id)))).digest('hex');
@@ -18,17 +18,9 @@ else try{
  const accountHistoryBase=await readFile(new URL('../workers/account-history.jsonl',import.meta.url),'utf8');
  const accountHistoryBaseSha256=createHash('sha256').update(accountHistoryBase).digest('hex');
  if(plan.accountHistoryBaseSha256!==accountHistoryBaseSha256)throw Error('Canonical account-history source pin mismatch');
- // A source-pinned successor must reuse the exact predecessor reservation.
- // Read the audited predecessor from the additive migration table; absence means legacy mode.
+ // Preserves the original reservation for both legacy and successor source pins.
  pool=createPostgresPool(databaseUrl);
- let reservationPlan=plan;
- try {
-  const versions=await pool.query("SELECT from_plan_json FROM receiptlab_judge_budget_migrations WHERE namespace=$1 AND to_plan_json=$2 AND status IN ('prepared','active')",['receiptlab-judge',JSON.stringify(plan)]);
-  if(versions.rowCount>1)throw Error('Conflicting judge migration records');
-  if(versions.rowCount===1)reservationPlan=JSON.parse(versions.rows[0].from_plan_json);
- }catch(error){if(error.code!=='42P01')throw error;}
- const reservation={event:'reserved',campaignId:reservationPlan.id,maxReservedUsd:reservationPlan.spendLimitUsd,purpose:'Bounded hosted judge inference envelope; unknown usage is retained and halts admission',sourceCommit:reservationPlan.sourceCommit,suiteSha256:reservationPlan.suiteSha256};
- const accountHistory=accountHistoryBase+JSON.stringify(reservation)+'\n';
+ const accountHistory=await readCanonicalJudgeHistory({pool,baseHistory:accountHistoryBase,plan});
  const deployedOrigin=process.env.RECEIPTLAB_CANONICAL_ORIGIN??process.env.RENDER_EXTERNAL_URL;
  let canonicalOrigin;try{const u=new URL(deployedOrigin);if(u.protocol!=='https:'||u.username||u.password||u.pathname!=='/'||u.search||u.hash||(!process.env.RECEIPTLAB_CANONICAL_ORIGIN&&!u.hostname.endsWith('.onrender.com')))throw Error();canonicalOrigin=u.origin;}catch{throw Error('An explicit HTTPS Render origin is required');}
  if(!databaseUrl||!canonicalOrigin)throw Error('Protected PostgreSQL judge configuration is incomplete');
