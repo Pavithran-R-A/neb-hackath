@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T11:15:42.909Z",
+  "createdAt": "2026-10-30T11:16:47.743Z",
   "repository": "Pavithran-R-A/neb-hackath",
   "baselineGitHubMainSha": "4ce632e2a53dd3bcc2f1224b1f939cb1efeb8d59",
   "auditBranch": "release/grand-prize-audit-20261030",
@@ -91,7 +91,7 @@
       "path": "README.md",
       "category": "documentation",
       "auditLevel": "fully-inspected",
-      "workingTreeSha256": "32266f8e04841aedf7b527826ee7f106b1630f69f1f3a09d399f19163bf63c49"
+      "workingTreeSha256": "c59ca322744a0ad1e9613ff2b8a01131b77793ad6caeaca85c2f32517a492cbd"
     },
     {
       "path": "deployment/Caddyfile",
@@ -169,7 +169,7 @@
       "path": "docs/release/RECEIPTLAB-FINAL-HACKATHON-RELEASE-REPORT.md",
       "category": "documentation",
       "auditLevel": "inventoried",
-      "workingTreeSha256": "91cf62defaa84f14ff5f6b80a4f6bc4a469c966cdb62f0b1723048d5d5e88d21"
+      "workingTreeSha256": "6518efecec34c354ef74ea22e7722aebb3f55dae2e7659fe9125d758b273bf52"
     },
     {
       "path": "docs/release/architecture.md",
@@ -211,7 +211,7 @@
       "path": "docs/release/final-go-no-go.md",
       "category": "documentation",
       "auditLevel": "inventoried",
-      "workingTreeSha256": "ddb75d364aded3a8d88d19f4f3fcd5eb8ed3c4b264557f5359829f32af910b20"
+      "workingTreeSha256": "3c124d26421f24b6cd8de4c72d027beaf73af8cfed9c70c946e0e8af845ba470"
     },
     {
       "path": "docs/release/judge-guide.md",
@@ -403,7 +403,7 @@
       "path": "docs/release/submission-draft.md",
       "category": "documentation",
       "auditLevel": "inventoried",
-      "workingTreeSha256": "08681c15bca83b3f625da6dec2d4a67b69f77d1e01289f4e6eb78810d61abe40"
+      "workingTreeSha256": "c494ed99b388c2b91a58f794998e21bc990f15b25bd0e0fbc6d803bcb20604d7"
     },
     {
       "path": "docs/release/third-party-inventory.md",
