@@ -1,5 +1,25 @@
 # ReceiptLab final release status — 2026-10-27
 
+## October 30 emergency release checkpoint — current state
+
+This section supersedes earlier deployment and publication statements below; older checkpoints remain as historical evidence.
+
+**Implemented:** public `main` contains the complete Apache-2.0 application at `ebf2ee7274087a40c4967111817904bd88e27357`. PR #2 is merged. The existing Render/Neon service is reported in GitHub Issue #5 as live at Render deployment `dep-dbi3r8dg1s2s73dtqdfg`, same source SHA, with the bounded judge runtime enabled. No replacement service/database or application namespace was created.
+
+**Tested:** exact-head full GitHub CI [40891258475](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40891258475) passed **363/363, zero failures/skips**, including PostgreSQL and Chromium. Read-only judge source-pin workflow [40891258476](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40891258476) succeeded. Hosted synthetic acceptance [40902880407](https://github.com/Pavithran-R-A/neb-hackath/actions/runs/40902880407) succeeded without inference. Current-session public `/health` and `/` both returned HTTP 200; health body states `persistent-synthetic`, PostgreSQL and `liveInferenceEnabled:true`. This proves that bounded mode is configured and reachable, not that a provider request completed.
+
+**Provider preflight:** the current metadata-only Token Factory catalog request at `2026-10-30T07:51:33Z` confirmed the configured Nemotron model is in the catalog at $0.06/M input and $0.24/M output tokens. It sent zero inference requests. The dry run estimates $0.00039894 for a 1,024-output-token preflight, but returns `creditOnlyVerified:false`, `readyForApproval:false`; this is not a billing balance or a provider-enforced cap. `NEBIUS_API_KEY` and `NEBIUS_MODEL` exist in this Work environment, but values were not printed. The protected judge code, Render variables, Neon connection and financial account evidence are not available here. No positive/negative live call, token settlement, signed receipt from a model-assisted recovery, or model rejection was observed in this checkpoint.
+
+**Deployed:** Issue #5 records deployment `dep-dbi3r8dg1s2s73dtqdfg` on Render Free, source `ebf2ee7274087a40c4967111817904bd88e27357`, startup `bounded-judge`, zero startup calls, and budget row initially at zero. No Render/Neon API connector is available in this Work session; this deployment detail is attributed to the linked Issue evidence, while HTTP health was independently checked here. No new deploy, database mutation or restart test was done by this session.
+
+**Access expiry blocker:** persisted PostgreSQL budget plan expires `2026-12-15T20:00:00Z`, but the official rules state judging access through `2026-12-23T20:00:00Z`. The row is bound to plan/history hashes. A blind config date edit would fail closed; changing or recreating the row could erase usage/reservations and is prohibited. Controlled backup, versioned migration and restart proof are not possible without the existing Neon account connection. Access through the rules' full judging period is therefore not qualified.
+
+**Published:** no. The original private MP4 still hashes to `737696338926edb06466bbe05eaec503e7fb4e7c77b206fe060245abb2a4d2e5`, 122.461 s. Its “live judge mode pending” slate was accurate at record time; the current hosted mode is now enabled, but this video does not show a new live request. The updated [YouTube publication packet](youtube-publication-packet.md) explains this boundary. No authenticated YouTube tool is available and the owner's media/right-to-publish approval remains outstanding.
+
+**Submitted:** no Devpost submission URL exists. The updated draft uses `main`, records the current bounded mode while disclosing that current live provider behavior is not independently proven, retains the partial negative v3 result and lists the time-limited campaign. No authenticated Devpost tool is available; personal eligibility/originality declarations and final submit authorization are owner-only.
+
+**Decision:** source/CI and public bounded-mode startup are verified. Real hosted NVIDIA acceptance, campaign extension, current billing/credit-only exposure, public video and final Devpost entry are outstanding. Do not claim full qualification or 100% completion. Latest incident/evidence log: [Issue #5](https://github.com/Pavithran-R-A/neb-hackath/issues/5).
+
 This report distinguishes code and test results from provider deployment and publication. It is a release checkpoint, not a claim that the submission is complete.
 
 ## Implemented
