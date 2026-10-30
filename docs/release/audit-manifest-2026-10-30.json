@@ -1,0 +1,2173 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-30T11:14:06.614Z",
+  "repository": "Pavithran-R-A/neb-hackath",
+  "baselineGitHubMainSha": "4ce632e2a53dd3bcc2f1224b1f939cb1efeb8d59",
+  "auditBranch": "release/grand-prize-audit-20261030",
+  "baselineTrackedFiles": 358,
+  "createdDuringAudit": [
+    {
+      "path": "src/runtime/judge-window.mjs",
+      "category": "production-source",
+      "workingTreeSha256": "75bd8ec96932f606996265b1786a463a262704325d1ecc2290dce86dfe6bb5c0"
+    },
+    {
+      "path": "workers/judge-window.mjs",
+      "category": "worker-source",
+      "workingTreeSha256": "77c84696dadf77eea54160e212ec889f5e09e0cfbe35b295754105a2889446e9"
+    }
+  ],
+  "manifestSelfExcluded": true,
+  "workingTreeChangesPresent": true,
+  "scopeNote": "All files tracked at the stated main SHA were enumerated and content-hashed; two new deadline-constant modules are listed separately. “Fully inspected” is limited to files read in detail. Other production code received only the repository protected-value scan; semantic line-by-line review is incomplete. Test files were invoked by npm test, but browser-dependent assertions could not start without Chromium and PostgreSQL integration tests were skipped without RECEIPTLAB_TEST_DATABASE_URL.",
+  "entries": [
+    {
+      "path": ".dockerignore",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f4176c0b237a7bf1b738f95c8c50b76bc0d04bebbbf2b390885b2f76e236bb76"
+    },
+    {
+      "path": ".env.example",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "123d4dd9cb1a2b6f46e4a2199be7f92ac2dfc134fc10d6f630e21f71440ba107"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "category": "ci-workflow",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "30ce799e77b83c07c77ccb590d4d57b06186e5f0a7924f238f1d8e4992bd6575"
+    },
+    {
+      "path": ".github/workflows/cloudflare-experiment.yml",
+      "category": "ci-workflow",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "471914eee80b17d82c623fd560be1ad9f4670ebc9acea548eaaf631440292091"
+    },
+    {
+      "path": ".github/workflows/hosted-acceptance.yml",
+      "category": "ci-workflow",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "dfb2aedffae493420348acb6691ada62a53db1e27dc9cf6f2e4ebb6fd27c13df"
+    },
+    {
+      "path": ".github/workflows/judge-plan-readonly.yml",
+      "category": "ci-workflow",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "643420c2dc66a2b6b13cb6bc6fd1c20fd89df025e67736a704040194339772db"
+    },
+    {
+      "path": ".gitignore",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "0f8d6cb1dfed7eabe540a9a8e1aba674f58e566bfc486c6a213af0b469f162c6"
+    },
+    {
+      "path": ".npmrc",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "defea6402c02ae36eb0dd65699d44ddd342487167e5e2fd805211fe84401ad82"
+    },
+    {
+      "path": "AGENTS.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "2757e541d5e448abffd41453d64ce10f70876177eb5219ab002cb2e08ee326eb"
+    },
+    {
+      "path": "LICENSE",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "NOTICE",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "019d1daba8575d936e535255f7e8a4def588935592abe849792ff7d8db7657ed"
+    },
+    {
+      "path": "README.md",
+      "category": "documentation",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "32266f8e04841aedf7b527826ee7f106b1630f69f1f3a09d399f19163bf63c49"
+    },
+    {
+      "path": "deployment/Caddyfile",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "0577a8d8f08d702a345f6d575d295251c82694524da80772bda487e1904929f5"
+    },
+    {
+      "path": "deployment/Dockerfile",
+      "category": "deployment-config",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "193bb97b9c755abb12ef36bf6b19b4b1ee10a9277606ba9675c67c0768e5ebf1"
+    },
+    {
+      "path": "deployment/receiptlab.service",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "41a3081fea9f97852ec079cda46d65c284fc9a5a8a9a82205608cece6ec5de8b"
+    },
+    {
+      "path": "deployment/runtime.env.example",
+      "category": "configuration-or-other",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "190a91381bb7a0d99400a9a8a74cee611184aabeb875c2d3374d2361c5c9579a"
+    },
+    {
+      "path": "docs/authorized-preflight.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f1fc153ffa484adf685f52f77010e8f1194204dbb460f67ab00b13104d2680f2"
+    },
+    {
+      "path": "docs/coordination.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "ec0f08cbae4c6237861293c81c20cf92cfd35af4d5673ab11be0da076abf83bb"
+    },
+    {
+      "path": "docs/evaluation-v1.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "1f9c0eeecf9e9a4aba4b2c6889d97fa2830c7f0f8168677c9d9d080dae5270c0"
+    },
+    {
+      "path": "docs/live-preflight-2026-10-17.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "b5b03c41a5c5821db99d7c19d029a2715e3a54ea00d1befac331ab9207b24051"
+    },
+    {
+      "path": "docs/nemotron-preflight.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "e0e3ce11250691d129b227b08f2bd8dd9d9e2bac86c596bf5f29e3dcd26e6b58"
+    },
+    {
+      "path": "docs/phase1-results.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f63225c28d0bf789b339e6129dfb7dd56dc888d7d76590caa9247faf8817fdd5"
+    },
+    {
+      "path": "docs/plans/2026-10-18-judge-release.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "d3f67d17f35e143ef6d636a727cc7cde3925e9f792aeaea67bac360168f63b52"
+    },
+    {
+      "path": "docs/preflight-revision-2026-10-17.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "4125195311557f73c9d0bcfd0912b2a763dc0fdd91e9dd770931aad51cbd0451"
+    },
+    {
+      "path": "docs/release/RECEIPTLAB-FINAL-HACKATHON-RELEASE-REPORT.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "05889701649935d453e5c3c1437258e520ad6c1507c25a065384b6b513101e40"
+    },
+    {
+      "path": "docs/release/architecture.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "01553ffb0a2c3d3a1abc9897e6ff24ac8391d5ae36d0f0bdfc01e60e2d95c222"
+    },
+    {
+      "path": "docs/release/campaign.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "62a1ef895352a608d79c9f169cf9820b0d42ccd9df2ba80c8ea99c09cf49ed9e"
+    },
+    {
+      "path": "docs/release/cloudflare-experiment-runbook.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "9fef5446f49dcce2dec96000f7f21d02179d2a1060ffc13f896b7e3d7ca8d2d3"
+    },
+    {
+      "path": "docs/release/demo-recording-plan.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "c41ae3728a4c11288ee632b915efb00320eec7929859586e3e14ac22de3a92f9"
+    },
+    {
+      "path": "docs/release/deployment.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "dc7da7c822e865d2fc3a1b3284c27625d00bf184f3edad26e1cdacd532b1ab9f"
+    },
+    {
+      "path": "docs/release/diagnosis-sprint.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "e6b82e11cec891292aeb29251b4f8e332e60cb99978bb391b0c1916737f4c860"
+    },
+    {
+      "path": "docs/release/final-go-no-go.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "ddb75d364aded3a8d88d19f4f3fcd5eb8ed3c4b264557f5359829f32af910b20"
+    },
+    {
+      "path": "docs/release/judge-guide.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "11e04fd1fe201b35865bee9f44f6616be0e6b125d6d365c9384cfe8ea9179027"
+    },
+    {
+      "path": "docs/release/license-proposal.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "c3e48aa87bc64315d761ecbe6e0b66dfe46221a29e64707ae8bc329d09117868"
+    },
+    {
+      "path": "docs/release/model-config-research.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "38b298ef4a3645ee25468669b85ed7f50c3463e945bfcd752831b49bf936e676"
+    },
+    {
+      "path": "docs/release/narrated-video-plan.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "4b5cb43d70a3c9b29827c9e76608fb8cca384fcb6057096fac91c1f5b0a7ff41"
+    },
+    {
+      "path": "docs/release/product-decision.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "82aebf894ddbf2831ad7e74c541db62d31498803142388d537dd635951b38eda"
+    },
+    {
+      "path": "docs/release/progress.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "7d27f005b7233561626bd07533eb69ebf1c141750958b581a90e680b18dc9f27"
+    },
+    {
+      "path": "docs/release/rc-demo-preview.srt",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "12edc41ebcf853c940a8ae34689441f3410baedf5350a299e628a5cce93a76f1"
+    },
+    {
+      "path": "docs/release/rc-sprint.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "d868a5dbff7ab12ea13a2880dded711f484d7b5928549969df71332eb161a41d"
+    },
+    {
+      "path": "docs/release/render-neon-runbook.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "5e2bf0972991e7c2010288ea99de2e63882cb608490c455e214b40aabc211367"
+    },
+    {
+      "path": "docs/release/screenshots/README.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "db3af91af0763f1c9419faeebf15e6240b5eb262fea1d767410a377841030503"
+    },
+    {
+      "path": "docs/release/screenshots/desktop.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "d3eece38c020dfa5039ff6ff812badfd63866adfb5a58290df5c21786c356964"
+    },
+    {
+      "path": "docs/release/screenshots/grant-transient-live-diagnosis.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "447ad6b10dcd8d94e3f89113e27f7e09297b1fbbb2eceb8169d15af2f056c30e"
+    },
+    {
+      "path": "docs/release/screenshots/grant-transient-live-mobile.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "57a5a6636a202f0b9b275af854aa68a13935654c0bf5188615682665acbb31ad"
+    },
+    {
+      "path": "docs/release/screenshots/grant-transient-live-outcome.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "1631df305dba53e26c5c4ccdbe0ae2946f94dd21b450690fda7006bc2b74ecf7"
+    },
+    {
+      "path": "docs/release/screenshots/live-e-ambiguous.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "9489aa2a085812558d64d073d970c447e9b61aa954ab8382d9c785d54278393c"
+    },
+    {
+      "path": "docs/release/screenshots/mobile.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "b6b182d71da3efa837b6041fc117e6a2b0d0aeda913f814d4618b3a3509e5af9"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-grant-transient-live-diagnosis.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "a35d46f1c86e086cd716488597f9867c9cf1bb3a0e8b2b962a186f527c5e9640"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-grant-transient-live-mobile.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "8b4922f2e32070852951da1dc5a5c33d455083b5bfc1e05302fe3f37adb14972"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-grant-transient-live-outcome.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "c2905f65789cc485964942fb9fe06ca9416a8ddcc2011150658d1a5ad9e6d766"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-workshop-false-success-live-diagnosis.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "3cfd66206d226cf21467ea078803c6e0a16b503f9b62f0d61df3f934c0f1acb3"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-workshop-false-success-live-mobile.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "84a3bfd18dc7d08159092b2a061a577341821caf76f4970ee31ca1bf86186e0d"
+    },
+    {
+      "path": "docs/release/screenshots/rc-L-workshop-false-success-live-outcome.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "3cfd66206d226cf21467ea078803c6e0a16b503f9b62f0d61df3f934c0f1acb3"
+    },
+    {
+      "path": "docs/release/screenshots/recorded-negative-local-claim-2026-10-20.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "7812bb6e74aefc06aa6f23d1bc69d203cb7b20de7eb9ddb489beb8428c666157"
+    },
+    {
+      "path": "docs/release/screenshots/recorded-positive-local-recovery-2026-10-20.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "59a6d3fc5365c3361f6739f90e54b8047fdcb005665b34ba8ab235cd8b2b1fbd"
+    },
+    {
+      "path": "docs/release/screenshots/workbench-first-screen-2026-10-20-rc.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f57560c11ca64d5c3d520c1d8e67fd7ef7107fb39f3b48f66780d7307a6d6f0c"
+    },
+    {
+      "path": "docs/release/screenshots/workbench-first-screen-2026-10-20.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f57560c11ca64d5c3d520c1d8e67fd7ef7107fb39f3b48f66780d7307a6d6f0c"
+    },
+    {
+      "path": "docs/release/screenshots/workers-first-screen-2026-10-20.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "5f4f1d7e983a52bfa7f6d4384070be431efc91f0a298ca600fa469338ff4d436"
+    },
+    {
+      "path": "docs/release/screenshots/workshop-false-success-live-mobile.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "ca325f28eb7a654d67636edd7d1c920319f52d475dd73a4e501d36853b1ff388"
+    },
+    {
+      "path": "docs/release/screenshots/workshop-false-success-live-outcome.png",
+      "category": "asset",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "096bd800a170a05f8549c5a8574825cdf4b490d131f09feac51e14837ffa555a"
+    },
+    {
+      "path": "docs/release/security-qa.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f9dddce6064be82d12c4a19066dce0b91d0a52a99be34930b25b0cd3424c5881"
+    },
+    {
+      "path": "docs/release/sprint-2026-10-20.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "6b7319f0d420e681106034d740d1c976c14c84b91c086b5c376a8441a4af91ea"
+    },
+    {
+      "path": "docs/release/submission-draft.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "08681c15bca83b3f625da6dec2d4a67b69f77d1e01289f4e6eb78810d61abe40"
+    },
+    {
+      "path": "docs/release/third-party-inventory.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "f3cda08d89f115581cfdcb5c69d40017b62cefda17c90f08c91d7a6bdb683e4e"
+    },
+    {
+      "path": "docs/release/workers-hosting-assessment.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "bfb920857b4a33f3b5b23f9ef3019255b729eb2145be884b75e27541918f93a7"
+    },
+    {
+      "path": "docs/release/youtube-publication-packet.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "8eff75ec6f793cec358f02bf58f342fd828f426a108c219d37b2fc370c47c06a"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-16-phase1.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "95c9b6cc308d9f74d0c6a29223247ad7911c3c633a299cbc5776b4f119fb5ee5"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-17-release-candidate.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "86134bb343f7f92ca273b742c0d352bf3372d511f7eea333b401a1c474dcbbd4"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-17-release-sprint.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "9aa93666aac51d0ec135068e3ca653433dd2894c6826eb8d3891b5f65f41fe05"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-26-render-neon-deployment.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "d90363b80bec66fc5d743336fe70206fde469670ddb1ddf2307fa1f573bc8624"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-10-16-phase1-design.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "20b85ee0568c2f76f27e7dffe9588cc1b1686e0b1648636e83cbab081ab029d7"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-10-17-release-candidate.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "68b28d5a13d44512042a413f6d3707008f13387718fa54417bef4ff1c9e37802"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-10-17-release-sprint.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "e15b063127a6d8bdc4d226f1d7f10f29c03da32699864e73da4908a83fff0b40"
+    },
+    {
+      "path": "evaluation/config-probes-v1.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "894ba0995bafccff1ab69d76d19fa6167ab8e082a7028387558be2235ce13834"
+    },
+    {
+      "path": "evaluation/diagnosis-v1/cases.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "3fc8565df621bcc5ee78aeb7c780810d75ecde607ca20127f53eed017cc16eaf"
+    },
+    {
+      "path": "evaluation/diagnosis-v1/labels.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d94d4ad32a9ccb81f7d55a828f6b373ed9223302ab896607584a07d953c04244"
+    },
+    {
+      "path": "evaluation/diagnosis-v1/protocol.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "c44b9796e207c23777b5d700b7ddcc84c85a9124eeed4a88367c2c393fc1a71c"
+    },
+    {
+      "path": "evaluation/diagnosis-v1/review.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e0ee9a3e9bf5d05422f2e27c24d7b323117818acb59bd44dce5278487cc7d95f"
+    },
+    {
+      "path": "evaluation/diagnosis-v2/cases.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "9c4909d949d8f5269fe254a1348823e2f7a15ff86cd480deb4020019c6509aae"
+    },
+    {
+      "path": "evaluation/diagnosis-v2/labels.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "df07f8eebd6f3d58ac84bfea7de2d6b108b20f53350de426c33ab37df293caa1"
+    },
+    {
+      "path": "evaluation/diagnosis-v2/protocol.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "fc5fa8181b2575818c8a14b8521a627111e48e5aca2b10dad817825a07863a28"
+    },
+    {
+      "path": "evaluation/diagnosis-v2/review.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "c27ff10c55d218adb7959148d517e7e91500e87d08bab3c61021a2b3bce74675"
+    },
+    {
+      "path": "evaluation/diagnosis-v3/cases.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a517ee0a480b23bb54ec9f194472e636cfc553600d93c627c6a972dc943f49f3"
+    },
+    {
+      "path": "evaluation/diagnosis-v3/labels.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2aae3ce21efbb0345daf2274eef16e2336d9dae62876bf1d2f660cfd39d4c79a"
+    },
+    {
+      "path": "evaluation/diagnosis-v3/protocol.md",
+      "category": "documentation",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "100dd84aabca18c827f6d2873739c68433824b7e1cc1e10ca4664cd308062143"
+    },
+    {
+      "path": "evaluation/diagnosis-v3/review.json",
+      "category": "data-or-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a4e34b00fef1ce0efb60fe8fd8424c9d60c987541d7e11a58cd36664a71faac8"
+    },
+    {
+      "path": "migrations/neon/001_runtime.sql",
+      "category": "database-migration",
+      "auditLevel": "inventoried",
+      "workingTreeSha256": "0556c1f115e9678ed306f5eed3d64f829cff470f62ecf10c0ac0a1aa3bc48f05"
+    },
+    {
+      "path": "migrations/neon/002_judge_budget.sql",
+      "category": "database-migration",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "99e98573bee3feb3c0ec036e55718cd33e9d1a61cff8050a15f36b6a142dba06"
+    },
+    {
+      "path": "package-lock.json",
+      "category": "dependency-manifest",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "0bf140b1baf790d63bb7f78a1a792cdaf4bfad9e1ea9cff7592ed37fa9c50522"
+    },
+    {
+      "path": "package.json",
+      "category": "dependency-manifest",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "7350e25fd99cd7ba385ecff3b15a0f953ae33a67a569b2423538a3ff6493e8c2"
+    },
+    {
+      "path": "render.yaml",
+      "category": "deployment-config",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "0dff5c2abcb5114809c1c777a46e002c6ab8458fc33d51a7acf50bffd5a4e185"
+    },
+    {
+      "path": "results/authorized-preflight-readiness.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "885163ebfb95b273e2d28b8828be3c257b6a412c9626b4c0692d8cfec0a63abb"
+    },
+    {
+      "path": "results/authorized-preflight-status.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b7713cff56b979c385b9cfcd6fa7ea12ca6d6b575398cea23d318d824a28fec5"
+    },
+    {
+      "path": "results/authorized-preflight-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "6fb46de94bdabd6329415b0cbb2779abd263a1e1d9e0a4137dff4b5d8793144e"
+    },
+    {
+      "path": "results/benchmark-output.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e4924d2c2cb13c206b83f4d1e978eb1915dbfb96248dd1499bafb636f3d975ab"
+    },
+    {
+      "path": "results/campaign-a-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5d406505c1208dc4d90f43cc65d025e068f76a17e89e6948feb4cf993c393fed"
+    },
+    {
+      "path": "results/campaign-a-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5fe5d383a96a959768f1d873a24c6f6f75463fa8ece9c40ece7903f0c2a42a66"
+    },
+    {
+      "path": "results/campaign-a-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "400427128900d33d00cd39dfbc3dd5c1c0e65ccc0e1fa854a5394f0713a7cb5d"
+    },
+    {
+      "path": "results/campaign-b-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d0a45e13c90d858061104d38ce665e5d419654c30c608b372f7c6dea7562164f"
+    },
+    {
+      "path": "results/campaign-b-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b6918778e09504142fcfd1b87c55dd9714f0cf04b18d16dafca8eb26c7eae3d1"
+    },
+    {
+      "path": "results/campaign-b-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "4506e93ff45765a7d6a8ba2513a69b70ac9af57aa415e4b9dd1da668743780b0"
+    },
+    {
+      "path": "results/campaign-c-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "1765728e076eebc00319d5f546f820d904362c0e6c61998423486f01578f1ce7"
+    },
+    {
+      "path": "results/campaign-c-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "661ceadda81c456ad17719b229045ef652c181754a56c07097e7c98548f6a72f"
+    },
+    {
+      "path": "results/campaign-c-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "80cf263388cfb5976c6c738af3a603fa2989f3e452da08ec42839919c96e2919"
+    },
+    {
+      "path": "results/campaign-d-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e412c62a587fa8afcf2556cdcf3d09474acb4befa3a3dafe703c6f9a34841c0e"
+    },
+    {
+      "path": "results/campaign-d-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "442a7e2fcbdd989d27bd420ce3d3a3a667c5eccda126336722cd7100f1f4ddc9"
+    },
+    {
+      "path": "results/campaign-d-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "65809d104b767553f09d94b41d2a25c589b68f894db9b1e9493c7e6bab0362bb"
+    },
+    {
+      "path": "results/campaign-e-browser-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "6f0c677c7611dad1f683efb9cf04c82dd7f1ca78676a6526ed27f2e9bed11c85"
+    },
+    {
+      "path": "results/campaign-e-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "ebead69e30fbed17cc20e258a8f0110c25ea993835526cb71c813a2436aa1061"
+    },
+    {
+      "path": "results/campaign-e-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "9e0a7abe1d64cfb9cb58925606fa2f586b0e53afe63c112436583de522d8f266"
+    },
+    {
+      "path": "results/campaign-e-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "8bfce31ac851a47e102fc6b9fb0073079a36e28e3252acf1a0d6c1b22bcb1285"
+    },
+    {
+      "path": "results/campaign-e-preflight.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "64bb500c71f10f3ba411f68fea439b68471964786e045b0c37011f35fb99456a"
+    },
+    {
+      "path": "results/campaign-f-browser-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "8fdce076cbfa6770ec567751d69a96d9e8770260ef321e27d60c200c074cb19e"
+    },
+    {
+      "path": "results/campaign-f-diagnoses.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "75504c939eea3017a8e57dc98aa1d97cd2a2a110ad3fd5dd65c386b1646a392f"
+    },
+    {
+      "path": "results/campaign-f-grant-transient-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a6c0c5c02270c479aaffb323844f3e2bb81e4aaa6a14a642cd104d11caf926ee"
+    },
+    {
+      "path": "results/campaign-f-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "0e5e1cb54624de142467b418e7cd73271e2861ed89e06c6745d57a9609d8357d"
+    },
+    {
+      "path": "results/campaign-f-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "09384250e4c8df5cc5956a9394fde385889ce2ec8ca5a2adc17b17a8ef397c98"
+    },
+    {
+      "path": "results/campaign-f-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "57fd7022f26081ee6fedbc85a29c8c237af75fcf9c0ac5ce4477178ed3782736"
+    },
+    {
+      "path": "results/campaign-f-preflight.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "c9b86dbf50dca2d91fe8f0cd696f9b55c83af1a27428b8bdce3dc4772f7bb146"
+    },
+    {
+      "path": "results/campaign-f-workshop-false-success-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e13f357964a8d07fd9fc32faa742669a01a4c01b9da55bdb5e08778e9a06cbe5"
+    },
+    {
+      "path": "results/catalog-readiness.json.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "aeafc884987595d1d53e137fa47817cbad72250981ea176bc0989789a23a83fc"
+    },
+    {
+      "path": "results/cloudflare-oidc-experiment-preparation-2026-10-20.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b9dbd450a5454cc575a83eb683759cc7b43516bf6c28bf99ed4c8b4840107709"
+    },
+    {
+      "path": "results/credit-usage-summary.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2b47e0d9b828a64b5d7e3bc9f03377ba50c15ec4fbfa7c94c5e9da42594729e2"
+    },
+    {
+      "path": "results/diagnosis-comparison-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "abd5b127f492c7537f9751c6a59657c6193881bcded3c579ba8c09fff6f05676"
+    },
+    {
+      "path": "results/diagnosis-freeze-budget8192.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "153a34fd46feba0f7e81fd76f99985f12d7c924663cebe086bc8655d3ac0686e"
+    },
+    {
+      "path": "results/diagnosis-freeze-schema-visible.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b650edf38103aba0329f4d72ad23af27372442a442510eecba7ceabdce0b096b"
+    },
+    {
+      "path": "results/diagnosis-freeze-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "758334d43970c8419ef85beaf586b7717a9d8c1b0166da27c2e9e8937736c7f6"
+    },
+    {
+      "path": "results/diagnosis-mocked-regression-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e45237c52adf4c53c2bc25639db1c711c95b16bd19d1d4397a4e1d5407628cf2"
+    },
+    {
+      "path": "results/diagnosis-policy-freeze-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "31fd1dffb8336ee60688a68806c6a3d417912e1d6c3c7d553b7e8e9a0ecc8c4d"
+    },
+    {
+      "path": "results/diagnosis-release-evidence.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "f07041a2345d9f2fd2cb14d6e716c9518f1512a84153e81ea8ed428c609aa98c"
+    },
+    {
+      "path": "results/evaluation-output.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "beab7539ebda74f531e8eb7cd50a32a151f35873f88af8dbb84b80cc81bf23f6"
+    },
+    {
+      "path": "results/evaluation-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "ee0ee490cf6234bc02b14d9127798fc4389945a38f270e73a24678924d5fd8c9"
+    },
+    {
+      "path": "results/evaluation-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "4fe09647f31aa52c19ced1a2795c6deb688a653ba3e6394f54594db48c69e6fb"
+    },
+    {
+      "path": "results/evaluation-v1.json.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "f6a8f657bed5a10bfb3e87dc88534f9c35c323ddaf0090f7cf6f9e2fa736554a"
+    },
+    {
+      "path": "results/evaluation-v2-freeze.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "6cfdc812490289e863425776c6144ed5882b01cd5de2e05476ecc1f842be6969"
+    },
+    {
+      "path": "results/hackathon-rules-check-2026-10-20.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2f49a509e6eb597a2e73220499924ed4982d307f2234fde4fd76a37a77406fc4"
+    },
+    {
+      "path": "results/judge-M-analysis.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a6ddad5ebb318b6a3d9f1ce5f57a20f5988058483708d9a1ed0cd5cf7012db2f"
+    },
+    {
+      "path": "results/judge-M-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "0bb49de119c1e9922ecf04cbbc3764617900eeda3fd85602e2ab07249e9f70b1"
+    },
+    {
+      "path": "results/judge-M-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "54906bc87f386862b5fc9f8ecf3e3d01c3b9617f047c31ccb9a6565eab5bd552"
+    },
+    {
+      "path": "results/judge-M-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e9fe0dcc4ff4e3e72ec2e309b60341a5844b3da353f9d94c16fcec968a77bacc"
+    },
+    {
+      "path": "results/judge-M-posthoc-replay.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "418551a5b92dd7c6a69f4c338ae789637bbadae0b70581ab006f413fb4ba5517"
+    },
+    {
+      "path": "results/judge-credit-usage-summary.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "018149dbb9677ef137426c7730bc833f8581a2d2269dde2818bd3ae342c7796f"
+    },
+    {
+      "path": "results/judge-v3-freeze.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "701d7f08c29b8d369be4487571334c4250d242853b405d502be3f51793791067"
+    },
+    {
+      "path": "results/judge-v3-policy-freeze.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "c98d3184fa62db778ce166c6ef2e642d586f0f35c1c3cb4ed780e2e06e106ad3"
+    },
+    {
+      "path": "results/live-preflight-2026-10-17.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b53174c32cd2a59db22e6ee47633325f2b64084faf1138c363dd9c8a5a533f23"
+    },
+    {
+      "path": "results/live-preflight-execution.patch",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "f8231338f3fda56d9d054dbd290072b74b501ae9432c14b1cd1d01b5daed56a7"
+    },
+    {
+      "path": "results/live-preflight-regression-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a39a44ee01858c3b7c42352ef6744a0b15b62031e78c7983dfaf49be3c24ef2b"
+    },
+    {
+      "path": "results/live-prerequisite-output.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2ea929739fde131430d45b8d32689dd8efa5d69ec7c9d47c78238f93ee957809"
+    },
+    {
+      "path": "results/local-video-manifest.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a878b45330dd907566693556e934e17d2898844547d9b7ef16bae0cb3f0db76c"
+    },
+    {
+      "path": "results/phase1-offline.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2d89bfe9e6c103128e85122da904bbdb4aed282033852332211083b324be5c88"
+    },
+    {
+      "path": "results/phase1-offline.json.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "008e10c9ce75fd0bf104754fcf0ff4fdfe1b5a82faa695993df71277121429ca"
+    },
+    {
+      "path": "results/preflight-dry-run.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "669b14d4f6e4ad85197cbc60a0bc5bc5d1399e302d38857e9141989aaa7d4f23"
+    },
+    {
+      "path": "results/preflight-revision-plan-2026-10-17.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "3a0689d1f10f0abed24627ed801cb0a06eeb7f58ad2e3a5662f8592fc36afd83"
+    },
+    {
+      "path": "results/preflight-revision-regression-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "cefc3a20627877045bdce9f134f980f6663d54c10489c58a9ced5fc3cc2f72c1"
+    },
+    {
+      "path": "results/preflight-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a409747cc2c85b10bd0b1c6f9fabc184e57c317b9a2778f851d9684e6c7f9aa3"
+    },
+    {
+      "path": "results/rc-G-nano-probe-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "1376a71c99c47cf492c81688ec209f2d543290488377fe112922c0aa470f31f6"
+    },
+    {
+      "path": "results/rc-G-nano-probe-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "86af19fd7db87c176f58336fbccb0d4d2b0a3f090b2e89be6fbcc033624d5012"
+    },
+    {
+      "path": "results/rc-G-nano-probe-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5d0463908488dd02fbb833d2b4a4247eeaf43c81c96b134a3da316f9998968b7"
+    },
+    {
+      "path": "results/rc-H-super-probe-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "70eec00c5a5106818098188857270773a6c7143123396bebd539ec424e0b3faa"
+    },
+    {
+      "path": "results/rc-H-super-probe-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e63bfeab23910f0609d59a58462f7c398f709fc6ec8adfcb6ee5e17ded3f713d"
+    },
+    {
+      "path": "results/rc-H-super-probe-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "35486cc7d2fc0e81b94b851816fc02bc47ac18d78fbef93094374afc2c2012da"
+    },
+    {
+      "path": "results/rc-I-lightning-v2-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5b7a8f73c50d9b4107341f1373d9c094286e7679af2cade944e1dc276bacf0c6"
+    },
+    {
+      "path": "results/rc-I-lightning-v2-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "f8852f4526e944fd2ecad4c66dd1d8667c5e367e34e75869d3e885e41e88802e"
+    },
+    {
+      "path": "results/rc-I-lightning-v2-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "cff7085556a8bdcba281c85fbfe68966da00bfce896c170c8ee40f55eaa5a624"
+    },
+    {
+      "path": "results/rc-J-v1-remaining-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "466373cb5ea452378a2c47e74a9034fa3e8ac146b5c6375bd9f75bd119568fdc"
+    },
+    {
+      "path": "results/rc-J-v1-remaining-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b63bf9013a3f8aa304a127c27f418286da9ee37f27b8e3d450782447417398b3"
+    },
+    {
+      "path": "results/rc-J-v1-remaining-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "8ed3f777b7b6e6bedab5e497334a0f017750e764c5e564445f5f23034bb28b7b"
+    },
+    {
+      "path": "results/rc-K-browser-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a8f1ab1e295bb33629123f5ec9f9c74b82ad2914fdd9feef0cfda89f8368367b"
+    },
+    {
+      "path": "results/rc-K-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "10c9f0b492cbfb7875979f2c09886baaebdc239edec1e7b4ec57935a8e814f1c"
+    },
+    {
+      "path": "results/rc-K-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "11117a85bf20c1789152b3ce6d261c7cc4b5ab3bf4245d6699ec6d7365aab0ab"
+    },
+    {
+      "path": "results/rc-K-preflight.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2cc65963d112c9a8efb8903724ef9c7ca1401bd0b0fe1f8f7a3a2fc01c22460b"
+    },
+    {
+      "path": "results/rc-K-service-report.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "6f673a75b9b1d08be340e36e70171cfc338b3d47e3c1cf0200dee6ae05fae477"
+    },
+    {
+      "path": "results/rc-L-browser-outcome.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "bfb7442aa4a0140026223bed8e67e5177e81f3cadd52a98b6035be11f9f85061"
+    },
+    {
+      "path": "results/rc-L-diagnoses.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "01d4bf41ffdd27288b27e369114be0f1d4965e6a5d224933f77580ae0a05c651"
+    },
+    {
+      "path": "results/rc-L-grant-transient-live-before-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "464f80d644e5573f297cd948b075ab4d3aa92a8cb921f119b464aa52c0c187fd"
+    },
+    {
+      "path": "results/rc-L-grant-transient-live-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "f76f2414e27cd840978bfafabdde5a8725370709b1964b0c7ef320d09b37d37d"
+    },
+    {
+      "path": "results/rc-L-ledger.jsonl",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "4a4df71a8f58d7e1c8028b99d575083081799ef601efb32c67d5fe82391d8b03"
+    },
+    {
+      "path": "results/rc-L-plan.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d268424d1bb4a059701e4c63f3495c830eebb7861dee39d4ec7314803862e64b"
+    },
+    {
+      "path": "results/rc-L-preflight.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "926d11629f6df29eccdc138e007083eabc2ffc188716e0f3bf3827a48931e6b2"
+    },
+    {
+      "path": "results/rc-L-service-report.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5c9455b389be861e2d0b260513138a7d2614e5a21a3f8cf4915a39dfe936f4c0"
+    },
+    {
+      "path": "results/rc-L-workshop-false-success-live-before-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "ca41ebaad7f8c36800e3a2f7c6fd623ab2dfddc40145400f3d519dc83187c6ee"
+    },
+    {
+      "path": "results/rc-L-workshop-false-success-live-export.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a51dcaa68c5ee61a04cbcb9d3bf99c4df30b21f5e9fff9e11d7e7cc78b03ab70"
+    },
+    {
+      "path": "results/rc-caddy-rehearsal.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "689db01a5e33003a5d1d305297210c718cc42c08b3f1d8ce58c17e5fbe96bea8"
+    },
+    {
+      "path": "results/rc-container-rehearsal.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5b2ddc358c8e916d70e4c5f9af51b4e783d69a9d783d47c993d8446f3127f97a"
+    },
+    {
+      "path": "results/rc-credit-usage-summary.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "482203a7d8ef63bb006417e425110393e377480675c933658073481a5d7b39fb"
+    },
+    {
+      "path": "results/rc-final-pitch-video-manifest.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "4589dc2aeef2c26930e4c8090e4b84045a2de99c9dd134ddf6986da98fdbca22"
+    },
+    {
+      "path": "results/rc-latency-token-summary.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "e888b4df0768d25b534d042dc3dd182df8e7480e84a97db78232952b66f14385"
+    },
+    {
+      "path": "results/rc-ledger-migration.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "da794d6411bb719625e1191e7c76bcc2dff9559e306f5ea70a5ff19bd8e34376"
+    },
+    {
+      "path": "results/rc-narrated-video-manifest.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "22965824c56ef7ca9cde85d333ff26dc9d28d163bdb597bac93ba73115073d02"
+    },
+    {
+      "path": "results/rc-release-evidence.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "620f85bef76d33cba9d3293aabb08040a7865db7b74c3349a87250fde9c97b07"
+    },
+    {
+      "path": "results/rc-semantic-review-amendment.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "a550a4511661d258432f5482833a5d515bc42b75b2ca54d579eccda353e4556b"
+    },
+    {
+      "path": "results/rc-v2-baseline.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "523593285d902f8d2685e92ce529f3e8f5fe1ef7191e5736753df6e7bc8d555b"
+    },
+    {
+      "path": "results/rc-v2-freeze-review.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d33e2289583cd953f90eadcd217cd7620d85ec7d1d193d0eb0363758ac50c1a1"
+    },
+    {
+      "path": "results/rc-v2-freeze.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5d2d652ce9cacf66ee3afb967a2b3489e406b27883c527218d5db87000c23ba3"
+    },
+    {
+      "path": "results/rc-video-manifest.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "54ae1271917b2a3a886f9b2ee210c115882e1f5c835b9c7e9c2bb2dc7a6f7e46"
+    },
+    {
+      "path": "results/sprint-catalog-readiness.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d65d615398eff488455c933474f11a397afad316658f8f0f577bd82f6dac5dec"
+    },
+    {
+      "path": "results/sprint-core-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b68c9348c6d659403dd0e8eb9af682cbc805fe5f91f08295f7e17507265e635a"
+    },
+    {
+      "path": "results/sprint-environment-metadata.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "722ee67c2c5736f0c4c7da554bb77cd017f917e75075ccb70fc7b3da9464afeb"
+    },
+    {
+      "path": "results/sprint-final-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "5c3e939cd7b3e1f4f4b5daa46ed039cebea51edc20c58d844956762b025b33ce"
+    },
+    {
+      "path": "results/sprint-release-evidence.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "6dc3b7c8b3ac11f5addd7111c4be00099a32799896f192d16ea1f12dad4d47d6"
+    },
+    {
+      "path": "results/sprint-workbench-tests.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d46822c6f935ee6e64ed77f68e87e7f1dadeb0b4713ea5d8681c850ecb50cea4"
+    },
+    {
+      "path": "results/strong-baseline-evaluation-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "8cbb4f4234832f8348239e67bc3268f7674d273a58a4a341dd99e47f7f112e20"
+    },
+    {
+      "path": "results/strong-baseline-evaluation-v2.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "b9104605c7edca65685051d64eead1f745add7ef888a47f7383889c0214c6ace"
+    },
+    {
+      "path": "results/strong-baseline-freeze-v1.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2d2e8cca0146dcdfc9791ba2ddb6718155c418f50b1756d9af0438447c79aaa2"
+    },
+    {
+      "path": "results/strong-baseline-freeze-v2.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "d0e3e40253edd0e64d48fc6c0af509b9d17c0f5edb0d67e95eeea7168c82448d"
+    },
+    {
+      "path": "results/test-output.txt",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "56338c402ca5127251433e7963418b6d446301754d016d8f6f35b485e89d310e"
+    },
+    {
+      "path": "results/workbench-example-evidence.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "8692e47c7bf3a5c257daa50456d7ff58bf0b2ceb5bd65a2136036c7274cc9b29"
+    },
+    {
+      "path": "results/workers-hosting-research.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "21b0f4939acdaa3089c8fbfbc087923f5ca41dcb7375de9b1359fa49aba408b3"
+    },
+    {
+      "path": "results/workers-hotspot-2026-10-20-followup.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2f2e823aa93f3024816434d8604d9eb54096d0bc540ba25d6b2a2c70eb4c17c8"
+    },
+    {
+      "path": "results/workers-hotspot-2026-10-20-followup.profiles.json.gz",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "7de99c7a134a9491dc0025cd96260588bafb46c8d8e1b36a8c9f309eba8ab5da"
+    },
+    {
+      "path": "results/workers-hotspot-2026-10-20.json",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "2474e76d383b61b12048bbbcab2a1d4e79db8b8d124b1d78d2f6c25f9272bd85"
+    },
+    {
+      "path": "results/workers-hotspot-2026-10-20.profiles.json.gz",
+      "category": "archival-evidence",
+      "auditLevel": "provenance/inventory review; content not line-by-line",
+      "workingTreeSha256": "91261dc6a8e793ab42a8576ad9b951ce05ada792121c7e463bf03a49817d251b"
+    },
+    {
+      "path": "scripts/benchmark.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "1dc3acf2577fe3a521b1bf3aff6f06548cef7012a0940bedc90ee5f5e7df5286"
+    },
+    {
+      "path": "scripts/build-manifest.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "5a4e140cf08f1cbd328f6bc7b99e760eb50295e49d49249877f10f9f676a6cc9"
+    },
+    {
+      "path": "scripts/campaign.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "e5cc3f119ea649460511de46bd31f13af8a5b82fab3c967d433dc9a85910ff0d"
+    },
+    {
+      "path": "scripts/capture-live-journey.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "e8736ff347d111abdb5b853fb11d7c302795d428fdfad725eccb2864d563d458"
+    },
+    {
+      "path": "scripts/catalog.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "11f01330ca34081c759cbe499dde7dde9bcd7b2e08e66a31d2292d9e77a360bf"
+    },
+    {
+      "path": "scripts/cloudflare-experiment-client.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "3f1cca8cb748995420a58656a5df39a5e34baa7a1f832abd858fb0e0d950bfe9"
+    },
+    {
+      "path": "scripts/demo.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "27fd49f681d7642a99220b286d52ec4a31eb804d2cc5b0ab25abad4f3ac77e98"
+    },
+    {
+      "path": "scripts/diagnosis-campaign.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "9dcd44708aa1db0f5dee351b55039d2407a1a9fb919d47b343329fc68f8d9200"
+    },
+    {
+      "path": "scripts/hosted-acceptance.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "93ef6c8aac2ed7d4f07cd1a78a2f61694ab00ab4dd26a51a3d043f65b908fe02"
+    },
+    {
+      "path": "scripts/judge-safety-campaign.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "430de0f16c57849d0156158269212618748e967ec8b5a5e37b2b467fe8c2486d"
+    },
+    {
+      "path": "scripts/preflight.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "9d133af6ca7f5c74ebef6b10341fccde5b413140efadaf7a6408c63691fd38f2"
+    },
+    {
+      "path": "scripts/rc-campaign.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "5366c3d1c282e62d53c29c214a204da3711a7ed4a7c26edc113eaa160271873d"
+    },
+    {
+      "path": "scripts/record-release-demo.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "3c7d3df1fd46e456aadae2e1e24f0fcab21d3e5c503f98a34642a70a15dd3f03"
+    },
+    {
+      "path": "scripts/rehearse-caddy.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "7b5941dc88af3fc188bcdea6c1aa01e896639c78f24f2b81dd0ebd37d6377dc9"
+    },
+    {
+      "path": "scripts/release-inventory.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "301aa50cc7daeeb038b7e1afd603edb2be5ea544f6994fc5ad84b92805eac27f"
+    },
+    {
+      "path": "scripts/security-check.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "58537fd6ae0b0816f8be03f96bda7a0b06b3d63e55a1f5fc7fec7c230b655b7d"
+    },
+    {
+      "path": "scripts/smoke-workbench.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8365a2d9b97d52b42f454f5ca17485e1f641ac33303b411cb96830edb912e30a"
+    },
+    {
+      "path": "scripts/workbench-judge.mjs",
+      "category": "executable-script",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "75be136ffdc606504686bd53a99f6d901c6ff8a9427f22e9a0f544cd543de547"
+    },
+    {
+      "path": "scripts/workbench-live.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "7868532f4d412d7fc4732dec252e3c80ae8276b549be48d412d23d14ec097a4e"
+    },
+    {
+      "path": "scripts/workbench-public.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "3ddb2aa7b7f4f7a1d6116500a1f337b8ff89167a2d3a45469641745ccd6aa887"
+    },
+    {
+      "path": "scripts/workbench.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "4e07c519b5f7462c9830a3908b8b209136133e2c4661560bc0653d95d88fdeed"
+    },
+    {
+      "path": "scripts/workers-benchmark.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8a240c7060e9a910dff203c628648015ed6537219c03ea9a81a7b7a682442147"
+    },
+    {
+      "path": "scripts/workers-import-account.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "bd3c4e86afe9c874f08e54f57acde2bb374c898a04ab17ae41313c5bc4836fe1"
+    },
+    {
+      "path": "scripts/workers-runtime.mjs",
+      "category": "executable-script",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "610e589b68ff22faedb2c21b60a5a60fa3f447cdf0d92e8311d946ab10a72e87"
+    },
+    {
+      "path": "src/account-budget.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "efb2092d95ceb76de0bafa694cfa40e0d264a17d4a0bd5f9d05258915bcb8f3f"
+    },
+    {
+      "path": "src/agents/actions.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "a22b26cf663bc9e37e36bf776a200b9757a58f79380fae12424b3f72df03fcaa"
+    },
+    {
+      "path": "src/agents/baseline.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8d549dafa500516f37ca66da4e03db5a4c11d006a3d8a0b42e4f5eb38b1326d7"
+    },
+    {
+      "path": "src/agents/browser.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "6f903d35c085637b301b7970c5a33085cc82fc4f28577fc398d1d1337871004d"
+    },
+    {
+      "path": "src/agents/dom-baseline.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "178c2a550943d4a897aaf2e7f712895e4658eb07f8901163d5e6f61917a01d46"
+    },
+    {
+      "path": "src/agents/guarded.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "c4edd8576eb327c5aa37f6b8c60d58b7ad11642d57d392bc3035b6f57c30175a"
+    },
+    {
+      "path": "src/agents/nebius.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "004cc029d86264ad89862f793efa5ca42c4b1e560542983a493156cb10dfa41c"
+    },
+    {
+      "path": "src/agents/scripted.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "f6df21699d8ee32a7c86446b571d9dc2a7827ae4d447e90c60a4fb6c268d6648"
+    },
+    {
+      "path": "src/app/client.js",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "b5204d047bde7814bf82825b10c58fdab704a14dce06d76ff55d62f30b8d1eae"
+    },
+    {
+      "path": "src/app/index.html",
+      "category": "application-asset",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8fa225c839e6d4c09857643004a673187f107ed6641d80122218d3f47fb03513"
+    },
+    {
+      "path": "src/app/server.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "a341b37f9bf51863998499f2643a51e50ca81ee8b125e45b591a67bca2fa1a3c"
+    },
+    {
+      "path": "src/benchmark.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "d732013e40e0277c41ecfc439d8466c3ef832e2bfa6bbc9a08b691e492565c61"
+    },
+    {
+      "path": "src/campaign.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "862b80c865b437183e22c85a27e82444516ced49337964e442148e6d097e9d79"
+    },
+    {
+      "path": "src/catalog.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "4a9e91c84a5005f436ea3312d21b5f0367677f9034634cf434433fee7d3f6f1a"
+    },
+    {
+      "path": "src/credit-gate.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "073d89bb2d6f187e8404c43a37cfb7593119fad460217d03513f3c2e8caa28bb"
+    },
+    {
+      "path": "src/diagnosis/acceptance.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "24997efdb2e762fced12f1611f932e802b1b709805a2b2efa6c70320c2a1e92d"
+    },
+    {
+      "path": "src/diagnosis/baseline.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9"
+    },
+    {
+      "path": "src/diagnosis/contract.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "3ad3c84c0aa5f9183a879e2bbd5c322d960e81e193eb1ff27046c4e7146d49d3"
+    },
+    {
+      "path": "src/diagnosis/drain.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "c8d5a1e72c3b809dba1df728544ba52d4ed770a705bff1e431db3ec5d57035ec"
+    },
+    {
+      "path": "src/diagnosis/evaluation.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "3085dd4446a1ab1a460169f5bc3388a805d2593eea0357cb194be4c2fd61790e"
+    },
+    {
+      "path": "src/diagnosis/experiment.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "e81588564efbce8fe837abc791ce81fbba334ddec8863b03f118f039c6699891"
+    },
+    {
+      "path": "src/diagnosis/nebius.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "6199e5a350a9fa6511c6cfa3e3889810744e820c080450d32bd683077e89b665"
+    },
+    {
+      "path": "src/diagnosis/safety-evaluation.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "4233440ab8c9d4ab2637a1f15a80411d8684549a8b49a18d1af328bf15022ade"
+    },
+    {
+      "path": "src/diagnosis/strong-baseline-v2.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8113d3c29f284f585be0ef3a8eae63f40e1013c9bb62616183b6a81619cd1167"
+    },
+    {
+      "path": "src/diagnosis/strong-baseline.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "6652d9e799031051339072f2569b6a275da80f4b63011e249a60f78f4a47a2a5"
+    },
+    {
+      "path": "src/diagnosis/telemetry-baseline-policy.md",
+      "category": "application-asset",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "263d6c73aac9657756434e9cdc0d2d06deb3b3a86f9d044bf90f803bfe9fe5bb"
+    },
+    {
+      "path": "src/diagnosis/telemetry-baseline.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7"
+    },
+    {
+      "path": "src/diagnosis/workflow.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "20527d03f230932118f05131b5f0ca0cad5537dcc2c53742ef61c5afa6932087"
+    },
+    {
+      "path": "src/evaluation-v2.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "abefd3ae4135406cfea929ec802d7cfdc51bf265520256c58644a00e8e44d283"
+    },
+    {
+      "path": "src/evaluation.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "6f216f79125eba467038160b01a8e8ac786448386bbcd658bfb064c9669b8731"
+    },
+    {
+      "path": "src/holdout.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "a7b2e1e83e285a50e3004847bae82c17694f4c2776de76a2ebea7f75e162853c"
+    },
+    {
+      "path": "src/preflight-contract.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "9962b7622ff46ec92b3e876e6ecfecbb854395a174798c3a224ed43c76151849"
+    },
+    {
+      "path": "src/preflight.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "9d85cf0f9e1cd738da6482c3147b6912526f013e44ff3674a4b8904c5bceef5f"
+    },
+    {
+      "path": "src/provenance.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "80e2567ae2c0ae06fba5008948b9a54dd1a847d76fae323193d9c015431e01ae"
+    },
+    {
+      "path": "src/runtime/campaign-paths.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "c34a7b63bc52d07a2a1f537173673f39dbce34b3f4522a69b7906b88225f9b90"
+    },
+    {
+      "path": "src/runtime/capture-target.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "6776f1dbc36ad80ef093d5dc3272c523b5bdfb7a422f767c5c84bccfb3462161"
+    },
+    {
+      "path": "src/runtime/durable-state.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "6d2691ce48338931db7a80793ed5b104ff993cd0b88fa964f7e5898c82a3df4f"
+    },
+    {
+      "path": "src/runtime/exclusive-evidence.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "dcbbdc1f9d4da6faf8acf46ab17ccfb1c96d10af9c9808dfc682ccfea91d3838"
+    },
+    {
+      "path": "src/runtime/judge-budget.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "2865f164fd7179a5b13ae18caad0b688f6acc5a012a491107ef3e2eaede8dfea"
+    },
+    {
+      "path": "src/runtime/judge-policy.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "18adaeb536caf56cc784231f69c42f68f9c208ce217959a41853fc2a2ca411e8"
+    },
+    {
+      "path": "src/runtime/postgres-judge-budget.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "00803efe16a3f955e70fec5004ddc8a0ebb68e7f18a69b34acf971076f8cf095"
+    },
+    {
+      "path": "src/runtime/postgres-state.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "6f3490699e8baa6edfff45170bbde08f934e0828b88b3f2941eff9b91233b230"
+    },
+    {
+      "path": "src/runtime/proxy-trust.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "0c4a4e775ede0782f0a35f190f9375bcbfb297c273b2a9a440f4ece0d5653116"
+    },
+    {
+      "path": "src/scenarios.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "4d0d381a55730e3143398cc725afd53556526ed4647e67231f0bb211663f9c2d"
+    },
+    {
+      "path": "src/source-safety.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "7a0fe87e4e84f64bad7ca58de9849638cae0cca0872849b19b6b37fbb578e019"
+    },
+    {
+      "path": "src/verification.mjs",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "023528d8f9e821be11c3197322ac12d68be901971a27940801969f62d04eed52"
+    },
+    {
+      "path": "src/workbench/client.js",
+      "category": "production-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "fc3cdc38250293e599546712ba267478fb4a5dd6b38aa85d97341710dc82a475"
+    },
+    {
+      "path": "src/workbench/index.html",
+      "category": "application-asset",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "56cb3a2b2745ab9d6e770ad818f00919029a489ece966f5d1a0715472c3c2170"
+    },
+    {
+      "path": "src/workbench/server.mjs",
+      "category": "production-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "705e20298fb9c4ff73ad42898cc758e50dcbcd5330d9c857823d309e4b2fdf9f"
+    },
+    {
+      "path": "src/workbench/style.css",
+      "category": "application-asset",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "ca605874c1fcf82b308e4962e9e774b4a9762a6b727c8cdabaee63781fcaa767"
+    },
+    {
+      "path": "test/account-budget.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "d15ea3ba84a0427344d2144f9f76d23a04cee5a9d31ad998c0f09715744f9736"
+    },
+    {
+      "path": "test/agents.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "7823b4282193d0535c17b62f31ac5ccecf00cc5d9f41697a67689967c562eba9"
+    },
+    {
+      "path": "test/app.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "cf0c29049dc8f071ff7d907d560db64ac135a8f69cdf0c51d1abd7dac3daab71"
+    },
+    {
+      "path": "test/benchmark.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "b6c12c65250b94ffa8abf787172142d984eb73f66dbe1e01965d9d834f2564c1"
+    },
+    {
+      "path": "test/browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "3ee12fff213e3c5f656f56813effe9d6ff4193d1c6ec5ebdb89d22df885bc771"
+    },
+    {
+      "path": "test/campaign-account-guard.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "b47da780ee8b3d34773f88a2e889707b33b13e13e162524283edb5bab531d8bf"
+    },
+    {
+      "path": "test/campaign-paths.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8ba40e8fcf4421220ff6e155f1a143a6dbcaf91014a52a9d4179a465b46c0e90"
+    },
+    {
+      "path": "test/campaign.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "4484d7551629bcea9db436c0c4630b045d41873f3bf6284560fbfbe665696420"
+    },
+    {
+      "path": "test/capture-plan.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "d569e3f97b2b67bd6e62fe4e24bf97cbd69cf76fe72ccafbed7cdf0fb4acec4e"
+    },
+    {
+      "path": "test/capture-target.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "1f7ad359b675dab595708f15b973c0246f9bd29e12d4422f754815019c868693"
+    },
+    {
+      "path": "test/catalog.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "7fd8020166fec8b3442778be6153652e2b39e74ab12d982a557f07acd1654b42"
+    },
+    {
+      "path": "test/credit-gate.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "579e46db53d33f224a8ba59420d85f2f11f1c24bdcbfbfbfb51c3cca9bf91d56"
+    },
+    {
+      "path": "test/diagnosis-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "affb961a725e7f049691cdb0254338a9596584b9d1fa02854b78870a1d1c3b41"
+    },
+    {
+      "path": "test/diagnosis-drain.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "ef7d950b0959486bddd68ca2016d0200d56ef55b448c68fac3af8df42d8c45cc"
+    },
+    {
+      "path": "test/diagnosis-evaluation.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "2fa0250d15b7bed4ae2f22149987647e1c02466e19630ea908de3314c7554e6b"
+    },
+    {
+      "path": "test/diagnosis-workbench.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "afe3e5131344b55848db821510f4da1bade86008b9ade970211dc90738713344"
+    },
+    {
+      "path": "test/diagnosis.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8b96325ee9c2295dd6dc7b5584b55c45a178256a600e109413836e32680c742e"
+    },
+    {
+      "path": "test/evaluation-v2.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "b4814a5840728b4954e43e606f345c9e4fbf24b35ff4ba3a4d90ac9698a1dc8d"
+    },
+    {
+      "path": "test/evaluation.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "9415ca2b333ba5f0ac1001f39ebc9df07e09ef2c24a3aff337a5241e98cb0c12"
+    },
+    {
+      "path": "test/foundation.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "e6e44e1c51492757de9c9be8b8ef506003c9e210b4a6ed07a011a6739d04ad30"
+    },
+    {
+      "path": "test/github-oidc.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8ad24316e206c88caf42851f1cb86246a3b14e0f5447e7994050ec41d6880c71"
+    },
+    {
+      "path": "test/judge-budget.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "cdb79e28898a461b6616d8a9208e336154ac5e28f5ed666f94f037c1413d2d13"
+    },
+    {
+      "path": "test/judge-operating-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8bb5665cc44858e3293a51d95e1046351a60050e400e2ecebd21c2f4b64bce16"
+    },
+    {
+      "path": "test/judge-operating.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "06e0f4eb3c672cce255ef728930371dba20a08f071196590974c98ac78571035"
+    },
+    {
+      "path": "test/judge-safety-campaign.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8fc2668218cf87c4dba90117ad9ac53d9314ada4a7deee35d6cce115dd85eb78"
+    },
+    {
+      "path": "test/nebius.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "8e4976af7ecd07b4cc14bda8ad789f34d930448a1eb711dfe503e141437339e3"
+    },
+    {
+      "path": "test/postgres-judge-budget.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "ebb45b0124567ab2eae3e32799ba7e36843bc61be2fa5813917f24d39f1f4c47"
+    },
+    {
+      "path": "test/postgres-judge-workbench.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "22d26053b38bc463c36cd5ede1393d3d15e3f7f50e02311f2a44045347cce2ab"
+    },
+    {
+      "path": "test/postgres-state.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "2108086fb196f7819c0b61a533f43f029b23115cc41e7ad3f8fe7445ebc8c1cb"
+    },
+    {
+      "path": "test/preflight.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "31ae04af8e3a56c3fec04b524abf0b4cfabc3d2208ff4133ab4a2594eba9f351"
+    },
+    {
+      "path": "test/provenance.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "46d2f2484399177d9514c00e227d9fe026b6c80a249b30b774f9b507debc523d"
+    },
+    {
+      "path": "test/public-form-agent.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "5cb87b995ac333065682bd2b2224a722da09cfb89733423ed6edc67fb85fbb44"
+    },
+    {
+      "path": "test/public-runtime-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "c138b3df83293e2ac2b57abc8a11fe20dd0752ef6327d5e858e9b2b315f037ce"
+    },
+    {
+      "path": "test/public-runtime.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "dc9d089e5f6b3227995c64cf290706a32756da02cb879d37b6ebd0cd4294ff13"
+    },
+    {
+      "path": "test/rc-campaign-integration.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "d48a18c54d80ce10354e593987233cde6a27249fe99d8071ae49e93b81cbdcd4"
+    },
+    {
+      "path": "test/rc-campaign.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "ecedad529d710d8c92da8e734568d4b42efd692b1459cc395f4cc4db1cb1da6d"
+    },
+    {
+      "path": "test/rc-judge-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "66e52c33ba4b35b70fbe8812572a6bc04adb618ef3a1b26c1da722f207f9c5ed"
+    },
+    {
+      "path": "test/recovery-durable-intent.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "dfa307c1f5919a3b3a8350e0e476a18c2419370dc9506af5fb88dfcaa596f82e"
+    },
+    {
+      "path": "test/render-config.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "44da859da11698df17557736493ba3a0cee6674e39d9037e35759cd329c0142c"
+    },
+    {
+      "path": "test/robust-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "d75997f6dd4f02abb789db3061ddc804eab860a44f4a5159c7d8939d7f2c3971"
+    },
+    {
+      "path": "test/safety-evaluation.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "ad786453cf921b8d41ab814743bbd62d83f413e912e371d0c208fa295b4ca6f9"
+    },
+    {
+      "path": "test/security-check.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "963abb677225ea0621ccdc39ca36d9540dcbba17de466049020efce1ebc3557f"
+    },
+    {
+      "path": "test/semantic-acceptance.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "7e09771b218011b42ab98d1c8430edaf5dabc7d92a138df806f305eb9280f549"
+    },
+    {
+      "path": "test/strong-diagnosis-v2.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "6ff6ee4bde7cf7987c7e73dcce33d6833c5ef687014ffe9093fb0ddf03049003"
+    },
+    {
+      "path": "test/strong-diagnosis.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "cf332fc5f84e9fbb8ff066c94985ccffa5062ec3d2e1530be560b7e6f9b7fcf7"
+    },
+    {
+      "path": "test/telemetry-baseline.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "9fe2f088ce0207e7c4b3a7a6ce2cdaedad25576a55057a52bcee6d4c7c952a0c"
+    },
+    {
+      "path": "test/workbench-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "93dffe134d20c7e9e0e80009d05b41f085c2c2402d039405dd196c6561b0ff09"
+    },
+    {
+      "path": "test/workbench-judge-entrypoint.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "dbf3de31c16935a009da03fb0543d0ebdb3c0d38156e6cbdbba48ccbbef5c74d"
+    },
+    {
+      "path": "test/workbench.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "748ad6d2a7a6f6522689399c0d7c5fea49ca72561163d7c8afc92aa7429c53a8"
+    },
+    {
+      "path": "test/workers-browser.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "bc74032869ac85b709e1c0d92e6ceebf1a8922b367043b08c7a7a3e2f3a9a80d"
+    },
+    {
+      "path": "test/workers-runtime.test.mjs",
+      "category": "automated-test",
+      "auditLevel": "invoked by full test command; browser/database limitations apply",
+      "workingTreeSha256": "7277ce4a3d866b7f96f0eaedd5061226b180cce9f2c0e9c43c8036423d4b3091"
+    },
+    {
+      "path": "workers/README.md",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "1ccbe12db5c6c81a757693ae00f2961dfc7c3b7d253364aeed2efbb2a5e75c07"
+    },
+    {
+      "path": "workers/acceptance.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "24997efdb2e762fced12f1611f932e802b1b709805a2b2efa6c70320c2a1e92d"
+    },
+    {
+      "path": "workers/account-history.jsonl",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "ce5356eb30f3cb4c358b2a608224d784886ab9caa88e0adc98d82f676238da84"
+    },
+    {
+      "path": "workers/baseline.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "abe91f4bcbad6f3c43b42b55d2d05bfff7e3c898097995e566400af5f543dcd9"
+    },
+    {
+      "path": "workers/contract.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "60309283ba43dd5b81e76f1116399192b95046e2730210c083b9ac051662194f"
+    },
+    {
+      "path": "workers/crypto.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "200b9ea68389bdde0b1e1fd17a967ac4c86103cfa2fbe66ee630ca7afbb62f7d"
+    },
+    {
+      "path": "workers/feasibility-profiles.json.gz",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "8330c16ca4ebbe4eef75c726eb980807598ca2dd2057edb7795e4c4af0044094"
+    },
+    {
+      "path": "workers/feasibility-results.json",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "c4164dfd7db064d7fd46e1d22bbfa26ca7b8845ba72fd8a8ec750592e21d258c"
+    },
+    {
+      "path": "workers/feasibility-results.profiles.json",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "13106b0d67106b91caedec0d26a4e37fe36b95d9d9d6ec15aa7aec0bc58766ea"
+    },
+    {
+      "path": "workers/github-oidc.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "ed189aff4d02f4f546de61b724a2546f8a66828e42e74d9ae505e21be36b249e"
+    },
+    {
+      "path": "workers/index.mjs",
+      "category": "worker-source",
+      "auditLevel": "fully-inspected",
+      "workingTreeSha256": "fc6275e43630ad0e37f39006a3289f7370572b6ea49526a210398afd85c6c746"
+    },
+    {
+      "path": "workers/local-metrics.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "ca9c8121deb35edd50613c3720b23476cde8e88c3e4f97408c973da4d778e244"
+    },
+    {
+      "path": "workers/page.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "ef7c11b13eb31054b7d2a73f768db7ae410559899a58c5f077ad312b00c3d279"
+    },
+    {
+      "path": "workers/ports.json",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "fbb9f0082ac0ca5ca598f7461dacf6acd685e0d53e675927b725d70f9f1f8ffd"
+    },
+    {
+      "path": "workers/provider-contract.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "22790a30379ba305b6f22bc02465d973d5219c4f44dafdfc7d7a92bbfb18f123"
+    },
+    {
+      "path": "workers/schema.sql",
+      "category": "database-schema",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "e0411f8a585eb7cd061df2c6fb1ebefb829b75a151d7e73bce552e796691888a"
+    },
+    {
+      "path": "workers/store.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "55f344213dd051cf9111b6d7519b05f7d0e1feffcffcf5b93eaca010bf50fafd"
+    },
+    {
+      "path": "workers/telemetry-baseline.mjs",
+      "category": "worker-source",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "67f3130e214555c03fe788638ad97aaa421b37c22bf0a099335a3d9332d468a7"
+    },
+    {
+      "path": "workers/wrangler.experiment.jsonc",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "7af858de86469a26674fbd75fed4dc089f80056c2bd287c80fa3883efa0ec179"
+    },
+    {
+      "path": "workers/wrangler.jsonc",
+      "category": "worker-data-or-docs",
+      "auditLevel": "protected-value scan only; semantic line-by-line review incomplete",
+      "workingTreeSha256": "fb613522ca25d708d70ad6a364edc03e1afc60bcd25dee2e753e4cebea8ccdcd"
+    }
+  ]
+}

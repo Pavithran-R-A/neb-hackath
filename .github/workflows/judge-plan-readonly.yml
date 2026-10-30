@@ -48,7 +48,7 @@ jobs:
             spendLimitUsd:0.5,
             inputUsdPerMillion:0.06,
             outputUsdPerMillion:0.24,
-            expiresAt:'2026-12-15T20:00:00Z'
+            expiresAt:'2026-12-23T20:00:00Z'
           };
           writeFileSync('judge-config-INACTIVE-TEMPLATE.json',JSON.stringify(template,null,2)+'\n');
           console.log('SOURCE COMMIT',pins.sourceCommit);

@@ -1,4 +1,5 @@
 import {createHash, randomUUID, timingSafeEqual} from 'node:crypto';
+import {JUDGE_ACCESS_END_MS} from './judge-window.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 const nano = value => Math.round(value * 1e9);
@@ -15,7 +16,7 @@ function validatePlan(plan, accessCode, now) {
       !Number.isFinite(plan.spendLimitUsd) || plan.spendLimitUsd <= 0 || plan.spendLimitUsd > .5 ||
       ![plan.inputUsdPerMillion, plan.outputUsdPerMillion].every(n => Number.isFinite(n) && n > 0) ||
       JSON.stringify(plan.scenarioIds) !== JSON.stringify(['grant-transient', 'workshop-false-success']) ||
-      !Number.isFinite(Date.parse(plan.expiresAt)) || Date.parse(plan.expiresAt) <= now() || Date.parse(plan.expiresAt) > Date.parse('2026-12-15T20:00:00Z')) {
+      !Number.isFinite(Date.parse(plan.expiresAt)) || Date.parse(plan.expiresAt) <= now() || Date.parse(plan.expiresAt) > JUDGE_ACCESS_END_MS) {
     throw new Error('Invalid bounded judge configuration');
   }
 }
