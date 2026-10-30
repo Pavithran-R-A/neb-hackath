@@ -224,7 +224,7 @@ export async function openPostgresJudgeBudget({pool, namespace = 'receiptlab', p
     } else {
       const migrations = await initClient.query(`SELECT * FROM receiptlab_judge_budget_migrations
         WHERE namespace=$1 AND to_plan_hash=$2 AND to_history_hash=$3 ORDER BY prepared_at DESC LIMIT 1 FOR UPDATE`, [namespace,planHash,historyHash]);
-      if (!migrations.rowCount) throw new Error('Judge plan or canonical account history changed; explicit migration required');
+      if (!migrations.rowCount) throw new Error('Judge reservation/history or plan changed; explicit migration required');
       migration = migrations.rows[0];
       if (migration.from_plan_hash !== saved.rows[0].plan_hash || migration.from_history_hash !== saved.rows[0].history_hash) throw new Error('Successor migration predecessor hashes do not match; inference halted');
       const previousPlan = JSON.parse(migration.from_plan_json), recordedNextPlan = JSON.parse(migration.to_plan_json);
