@@ -6,7 +6,7 @@ export async function readCanonicalJudgeHistory({pool, baseHistory, plan, namesp
   let predecessor=plan;
   try {
     const rows=await pool.query(
-      "SELECT from_plan_json FROM receiptlab_judge_budget_migrations WHERE namespace=$1 AND to_plan_json::jsonb=$2::jsonb AND status IN ('prepared','active','halted')",
+      "SELECT from_plan_json FROM receiptlab_judge_budget_migrations WHERE namespace=$1 AND to_plan_json=$2 AND status IN ('prepared','active','halted')",
       [namespace,JSON.stringify(plan)]);
     if(rows.rowCount>1)throw Error('Conflicting judge successor records');
     if(rows.rowCount===1)predecessor=JSON.parse(rows.rows[0].from_plan_json);
