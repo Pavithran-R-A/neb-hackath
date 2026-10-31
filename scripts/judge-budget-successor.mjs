@@ -1,5 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {createPostgresPool} from '../src/runtime/postgres-state.mjs';
+import {readCanonicalJudgeHistory} from '../src/runtime/judge-account-history.mjs';
 import {preparePostgresJudgeBudgetSuccessor,activatePostgresJudgeBudgetSuccessor} from '../src/runtime/postgres-judge-budget.mjs';
 
 const [mode, migrationId] = process.argv.slice(2);
@@ -14,9 +15,11 @@ else {
     const oldPlan = JSON.parse(process.env.RECEIPTLAB_PREVIOUS_JUDGE_CONFIG_JSON ?? 'null');
     const nextPlan = JSON.parse(process.env.RECEIPTLAB_SUCCESSOR_JUDGE_CONFIG_JSON ?? 'null');
     const accessCode = process.env.RECEIPTLAB_JUDGE_CODE;
-    const accountHistory = await readFile(new URL('../workers/account-history.jsonl',import.meta.url),'utf8');
+    const baseHistory = await readFile(new URL('../workers/account-history.jsonl',import.meta.url),'utf8');
     if (!oldPlan || !nextPlan || typeof accessCode !== 'string' || !process.env.DATABASE_URL) throw new Error('Protected migration inputs are unavailable');
     pool = createPostgresPool(process.env.DATABASE_URL);
+    // Both migration stages must preserve the exact predecessor reservation entry.
+    const accountHistory = await readCanonicalJudgeHistory({pool,baseHistory,plan:oldPlan});
     if (mode === '--prepare') {
       const result = await preparePostgresJudgeBudgetSuccessor({pool,namespace:'receiptlab-judge',migrationId,previousPlan:oldPlan,nextPlan,accessCode,previousAccountHistory:accountHistory,nextAccountHistory:accountHistory});
       console.log(JSON.stringify({operation:'prepare-successor',...result}));
