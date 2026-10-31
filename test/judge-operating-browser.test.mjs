@@ -33,7 +33,7 @@ test('cited event links support keyboard inspection with source and task status 
 
 test('judge access is metadata-gated, explicitly submitted and immediately cleared; rules fallback needs no code',async t=>{
  const {server,page}=await setup(t);let unlocked=false,posts=0,release;const waiting=new Promise(resolve=>{release=resolve;});
- await page.route('**/api/session',async route=>{const response=await route.fetch();await route.fulfill({json:{...await response.json(),judgeOperatingMode:true,judgeAccessRequired:!unlocked,liveInferenceEnabled:true,diagnosticExecutionKind:'simulated-test'}});});
+ await page.route('**/api/session',async route=>{const response=await route.fetch();await route.fulfill({json:{...await response.json(),judgeOperatingMode:true,judgeAccessRequired:!unlocked,liveInferenceEnabled:true,liveInferenceAvailable:true,judgeAdmissionState:'available',diagnosticExecutionKind:'simulated-test'}});});
  await page.route('**/api/judge-access',async route=>{posts++;assert.deepEqual(route.request().postDataJSON(),{code:'synthetic-test-code'});await waiting;unlocked=true;await route.fulfill({json:{ok:true}});});
  await create(page,server.origin);await page.locator('#guided-negative').click();await page.waitForFunction(()=>document.getElementById('scenario').value==='workshop-false-success'&&!document.getElementById('guided-negative').disabled);assert.equal(await page.locator('#judge-access').isVisible(),true);assert.equal(await page.locator('#diagnose-model').isDisabled(),true);assert.equal(await page.locator('#diagnose-rules').isDisabled(),false);
  assert.match(await page.locator('#fallback-note').textContent(),/workbench server must stay reachable/);
