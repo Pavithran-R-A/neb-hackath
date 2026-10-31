@@ -87,7 +87,8 @@ export async function createWorkbench({port=Number(process.env.PORT??0),listenHo
       admissionState='unavailable';
       try{
        const status=await judgeOperating.summary();
-       admissionState=status?.halted?'halted':(Date.parse(status?.expiresAt)<=now()?'expired':'available');
+       const expiry=Date.parse(status?.expiresAt);
+       admissionState=status?.halted?'halted':(!Number.isFinite(expiry)?'unavailable':(expiry<=now()?'expired':'available'));
       }catch{admissionState='unavailable';}
      }
      const available=admissionState==='available';
