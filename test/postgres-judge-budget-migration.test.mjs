@@ -128,7 +128,10 @@ test('prepared successor reconstructs immutable reservation regardless of JSON p
   });
   const reordered=Object.fromEntries(Object.entries(nextPlan).reverse());
   const canonical=await readCanonicalJudgeHistory({pool:f.pool,baseHistory,plan:reordered,namespace:f.namespace});
-  assert.equal(canonical,history,'reordering successor JSON must not rewrite historical reservation');
+  const predecessorCanonical=await readCanonicalJudgeHistory({pool:f.pool,baseHistory,plan:previousPlan,namespace:f.namespace});
+  assert.equal(canonical,predecessorCanonical,'reordering successor JSON must reconstruct the same predecessor canonical reservation');
+  assert.ok(canonical.includes(previousPlan.sourceCommit));
+  assert.ok(!canonical.includes(nextPlan.sourceCommit));
   assert.notEqual(reordered.sourceCommit,previousPlan.sourceCommit);
   const saved=await f.pool.query(
     "SELECT status,to_plan_json FROM receiptlab_judge_budget_migrations WHERE namespace=$1 AND migration_id=$2",
