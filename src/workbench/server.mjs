@@ -79,7 +79,23 @@ export async function createWorkbench({port=Number(process.env.PORT??0),listenHo
     // Only browser-visible state is proxied; evaluator records, receipts and key stay private.
     return send(response.status,type==='application/json'?JSON.parse(data):data,type,{'content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});
    }
-   if(path==='/api/session'&&req.method==='GET')return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating),diagnosticExecutionKind,judgeOperatingMode:Boolean(judgeOperating),judgeAccessRequired:Boolean(judgeOperating&&!await judgeOperating.authorized(id)),expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
+   if(path==='/api/session'&&req.method==='GET'){
+     // Configured inference is not the same as admitted inference. Never disclose
+     // private budget history or consume a provider request to compute this status.
+     let admissionState=diagnosticPolicy?'available':'inactive';
+     if(judgeOperating){
+      admissionState='unavailable';
+      try{
+       const status=await judgeOperating.summary();
+       admissionState=status?.halted?'halted':(Date.parse(status?.expiresAt)<=now()?'expired':'available');
+      }catch{admissionState='unavailable';}
+     }
+     const available=admissionState==='available';
+     return send(200,{storageMode:durable?'retained':'ephemeral',liveInferenceEnabled:Boolean(diagnosticPolicy||judgeOperating),
+      liveInferenceAvailable:available,judgeAdmissionState:admissionState,diagnosticExecutionKind,
+      judgeOperatingMode:Boolean(judgeOperating),judgeAccessRequired:Boolean(judgeOperating&&!await judgeOperating.authorized(id)),
+      expiresAt:new Date(session.expiresAt).toISOString(),scenarios:catalog.map(s=>({id:s.id,title:s.purpose??s.id,flow:s.flow}))});
+    }
    if(!['GET','POST'].includes(req.method))return send(405,{error:'Method denied'});
    let body;
    if(req.method==='POST'){
