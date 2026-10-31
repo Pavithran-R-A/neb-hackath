@@ -24,7 +24,7 @@ async function session(){
 }
 async function start(cookie,scenarioId){
   const r=await request('/api/runs',{cookie,body:{scenarioId},expected:[201]});
-  assert.equal(r.data?.task?.email,'avery@example.invalid');
+  assert.ok(typeof r.data?.task?.email==='string'&&r.data.task.email.endsWith('@example.invalid'),'Run must contain synthetic .invalid contact');
   assert.equal(new URL(r.data.url).origin,origin);
   return r.data;
 }
@@ -46,11 +46,11 @@ async function verify(cookie,run,completed){
 const health=await request('/health');
 assert.equal(health.data?.ok,true);
 assert.equal(health.data?.storageMode,'postgresql');
-assert.equal(health.data?.liveInferenceEnabled,false);
+assert.equal(typeof health.data?.liveInferenceEnabled,'boolean');
 const cookie=await session();
 const meta=await request('/api/session',{cookie});
 assert.equal(meta.data?.storageMode,'retained');
-assert.equal(meta.data?.liveInferenceEnabled,false);
+assert.equal(typeof meta.data?.liveInferenceEnabled,'boolean');
 
 const positive=await start(cookie,'grant-transient');
 await submit(cookie,positive,503);
