@@ -98,3 +98,20 @@ test('a consumed run cannot POST twice even while the session has another call a
  await f.stop();await f.start();assert.equal((await diagnose(f.server,a,r.id)).status,429);assert.equal(f.posts,1);
  const fresh=await run(f.server,a);assert.equal((await diagnose(f.server,a,fresh.id)).status,200);assert.equal(f.posts,2);assert.equal(f.budget.summary().requests,2);
 });
+
+test('judge session separates configured model from live admission after an unresolved provider failure',async t=>{
+ const f=await fixture(t,{failure:'http'}),cookie=await session(f.server),r=await run(f.server,cookie);
+ const before=await(await call(f.server,'/api/session',{cookie})).json();
+ assert.equal(before.liveInferenceEnabled,true);
+ assert.equal(before.liveInferenceAvailable,true);
+ assert.equal(before.judgeAdmissionState,'available');
+ await unlock(f.server,cookie);
+ assert.equal((await diagnose(f.server,cookie,r.id)).status,502);
+ assert.equal(f.posts,1);
+ const after=await(await call(f.server,'/api/session',{cookie})).json();
+ assert.equal(after.liveInferenceEnabled,true,'provider adapter remains configured');
+ assert.equal(after.liveInferenceAvailable,false,'halt must prohibit misleading model button');
+ assert.equal(after.judgeAdmissionState,'halted');
+ assert.equal((await call(f.server,'/api/runs/'+r.id+'/diagnose',{cookie,body:{mode:'deterministic'}})).status,200);
+ assert.equal(f.posts,1,'status check and local diagnosis must not call Nebius');
+});

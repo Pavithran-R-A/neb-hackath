@@ -8,6 +8,7 @@ import {diagnosisSchema,validateDiagnosis} from './contract.mjs';
 import {sha,receipt,verify,canonical} from './crypto.mjs';
 import {stmt,reserve,settle} from './store.mjs';
 import {verifyGitHubOidc} from './github-oidc.mjs';
+import {JUDGE_ACCESS_END_MS} from './judge-window.mjs';
 const json=(body,status=200,headers={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store',...headers}});
 const problem=(status,message)=>{throw Object.assign(new Error(message),{status});};
 const executable=s=>s.status!=='completed'&&!s.displaySuccess&&s.task.consent===true&&(s.step===2&&(s.error==='temporary_failure'||s.error==='consent_expired')||s.step===0&&s.variant==='format'&&s.error==='validation'&&/^\d{10}$/.test(s.task.phone));
@@ -23,7 +24,7 @@ async function advance(state,body,env,recovery=false){const s=structuredClone(st
 export async function modelDiagnosis(t,env,body,sessionId){
  if(env.INFERENCE_ENABLED!=='true'||!env.NEBIUS_API_KEY||!/^nvidia\/[^\s]*nemotron[^\s]*$/i.test(env.MODEL??'')||typeof body.requestId!=='string'||!body.requestId||body.requestId.length>80)problem(403,'Protected inference inactive');
  const campaign=await stmt(env.DB,'SELECT * FROM campaigns WHERE id=? AND approved=1',body.campaignId??'').first();
- if(Date.now()>=Date.parse('2026-12-15T20:00:00Z')||!campaign||!Number.isSafeInteger(campaign.expires)||campaign.expires<=Date.now()||campaign.expires>Date.now()+86400000||campaign.model!==env.MODEL||campaign.catalog_digest!==env.CATALOG_DIGEST||!Number.isSafeInteger(campaign.input_nano)||campaign.input_nano<0||!Number.isSafeInteger(campaign.output_nano)||campaign.output_nano<0||!Number.isSafeInteger(campaign.max_tokens)||campaign.max_tokens<1||campaign.max_tokens>8192)problem(403,'Model catalog and price approval required');
+ if(Date.now()>=JUDGE_ACCESS_END_MS||!campaign||!Number.isSafeInteger(campaign.expires)||campaign.expires<=Date.now()||campaign.expires>Date.now()+86400000||campaign.model!==env.MODEL||campaign.catalog_digest!==env.CATALOG_DIGEST||!Number.isSafeInteger(campaign.input_nano)||campaign.input_nano<0||!Number.isSafeInteger(campaign.output_nano)||campaign.output_nano<0||!Number.isSafeInteger(campaign.max_tokens)||campaign.max_tokens<1||campaign.max_tokens>8192)problem(403,'Model catalog and price approval required');
  const maxInputTokens=new TextEncoder().encode(JSON.stringify(t)).length*4+8192;
  if(maxInputTokens*campaign.input_nano+campaign.max_tokens*campaign.output_nano>20000000)problem(403,'Pinned price envelope exceeds reservation');
  const reservation=await reserve(env.DB,{id:body.requestId,campaignId:body.campaignId,sourceDigest:env.SOURCE_DIGEST,reservationNano:20000000,sessionId});

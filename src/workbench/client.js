@@ -33,7 +33,18 @@ $('verify').addEventListener('click',()=>busy($('verify'),async()=>{
 $('reset').addEventListener('click',()=>busy($('reset'),async()=>{++generation;await api('/api/reset',{});run=undefined;clearDiagnosis();$('run').hidden=true;$('empty').hidden=false;$('create').focus();}));
 async function loadSession(){
  const previousScenario=$('scenario').value;$('retry-session').hidden=true;$('error').textContent='';
- try{const data=await api('/api/session');session=data;$('storage-note').textContent=data.storageMode==='retained'?'Sessions expire after 30 minutes; this configured runtime preserves them across restart.':'Sessions expire after 30 minutes; local sessions disappear on restart.';$('judge-access').hidden=!(data.judgeOperatingMode&&data.judgeAccessRequired);$('diagnose-model').disabled=!data.liveInferenceEnabled||Boolean(data.judgeOperatingMode&&data.judgeAccessRequired);$('model-status').textContent=data.liveInferenceEnabled?(data.diagnosticExecutionKind==='simulated-test'?'Simulated model transport for integration testing; no live NVIDIA claim.':'NVIDIA Nemotron via Nebius Token Factory: enabled under a bounded owner-authorized credit campaign. One click sends one request; no automatic retry.'):'NVIDIA diagnosis is inactive. Continue the full receipt journey with local rules at no inference cost; this does not demonstrate live NVIDIA functionality.';
+  try{const data=await api('/api/session');session=data;
+  $('storage-note').textContent=data.storageMode==='retained'?'Sessions expire after 30 minutes; this configured runtime preserves them across restart.':'Sessions expire after 30 minutes; local sessions disappear on restart.';
+  const available=data.liveInferenceAvailable??data.liveInferenceEnabled;
+  $('judge-access').hidden=!(data.judgeOperatingMode&&data.judgeAccessRequired&&available);
+  $('diagnose-model').disabled=!available||Boolean(data.judgeOperatingMode&&data.judgeAccessRequired);
+  $('model-status').textContent=!available&&data.judgeAdmissionState==='halted'?
+   'NVIDIA diagnosis is temporarily halted due to an unresolved provider outcome. No model request can be made. Local rules and signed-receipt checks remain available; reload this page if the operator restores inference.':
+   !available&&data.judgeAdmissionState==='expired'?
+   'NVIDIA judge access has expired. Local rules and signed-receipt checks remain available without inference cost.':
+   !available&&data.judgeAdmissionState==='unavailable'?
+   'NVIDIA admission cannot be verified right now. No model request will be sent. Continue safely using local rules.':
+   available?(data.diagnosticExecutionKind==='simulated-test'?'Simulated model transport for integration testing; no live NVIDIA claim.':'NVIDIA Nemotron via Nebius Token Factory: admitted under a bounded credit campaign. One click sends one request; no automatic retry.'):'NVIDIA diagnosis is inactive. Continue the full receipt journey with local rules at no inference cost; this does not demonstrate live NVIDIA functionality.';
  $('scenario').replaceChildren(...data.scenarios.map(s=>{const option=textNode('option',s.id.replaceAll('-',' '));option.value=s.id;return option;}));if(data.scenarios.some(s=>s.id===previousScenario))$('scenario').value=previousScenario;for(const id of ['scenario','create','guided-positive','guided-negative'])$(id).disabled=false;describe();$('guide-progress').textContent='Connected. Start the positive case; no account or model call is required.';
  }catch(error){fail(error);$('retry-session').hidden=false;$('guide-progress').textContent='Connection unavailable. The service may need time to start. Retry connection when ready.';}
 }
