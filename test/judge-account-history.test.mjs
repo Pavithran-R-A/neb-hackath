@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
 import {readCanonicalJudgeHistory} from '../src/runtime/judge-account-history.mjs';
 
 const base='{"event":"initial","initialAccountUsd":59,"judgeReserveUsd":50}\n';
@@ -41,4 +42,12 @@ test('successor startup fails closed on incompatible predecessor and database fa
   await assert.rejects(()=>readCanonicalJudgeHistory({
     pool:{async query(){return {rowCount:2,rows:[]};}},
     baseHistory:base,plan:newPlan}),/Conflicting/);
+});
+
+// Contract tripwire: production CLI must reconstruct the original reserved entry,
+// not pass the base-only history directly into parseHistory on prepare.
+test('successor CLI composes preserved canonical history before prepare',async()=>{
+  const source=await readFile(new URL('../scripts/judge-budget-successor.mjs',import.meta.url),'utf8');
+  assert.match(source,/readCanonicalJudgeHistory\(\{pool,baseHistory,plan:oldPlan\}\)/);
+  assert.match(source,/previousAccountHistory:accountHistory,nextAccountHistory:accountHistory/);
 });
