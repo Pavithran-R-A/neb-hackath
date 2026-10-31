@@ -4,6 +4,7 @@ import pg from 'pg';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {openPostgresJudgeBudget,preparePostgresJudgeBudgetSuccessor,activatePostgresJudgeBudgetSuccessor} from '../src/runtime/postgres-judge-budget.mjs';
+import {readCanonicalJudgeHistory} from '../src/runtime/judge-account-history.mjs';
 
 const connectionString = process.env.RECEIPTLAB_TEST_DATABASE_URL;
 const code = 'isolated-migration-fixture-only-access-code';
@@ -115,4 +116,24 @@ test('successor migration preparation is idempotent under concurrent duplicate a
   assert.equal(results.filter(result=>result.idempotent).length,1);
   assert.equal((await f.pool.query('SELECT count(*)::int AS n FROM receiptlab_judge_budget_migrations WHERE namespace=$1',[f.namespace])).rows[0].n,1);
   assert.equal((await f.pool.query('SELECT count(*)::int AS n FROM receiptlab_judge_budget_migration_events WHERE namespace=$1',[f.namespace])).rows[0].n,1);
+});
+
+test('prepared successor reconstructs immutable reservation regardless of JSON property order',skip,async t=>{
+  const f=await fixture(t);
+  await setupHalted(f);
+  await installMigrationSchema(f.pool);
+  await preparePostgresJudgeBudgetSuccessor({
+    pool:f.pool,namespace:f.namespace,migrationId:'order-independent-2026',
+    previousPlan,nextPlan,accessCode:code,previousAccountHistory:history,nextAccountHistory:history,now:clock
+  });
+  const reordered=Object.fromEntries(Object.entries(nextPlan).reverse());
+  const canonical=await readCanonicalJudgeHistory({pool:f.pool,baseHistory,plan:reordered,namespace:f.namespace});
+  assert.equal(canonical,history,'reordering successor JSON must not rewrite historical reservation');
+  assert.notEqual(reordered.sourceCommit,previousPlan.sourceCommit);
+  const saved=await f.pool.query(
+    "SELECT status,to_plan_json FROM receiptlab_judge_budget_migrations WHERE namespace=$1 AND migration_id=$2",
+    [f.namespace,'order-independent-2026']);
+  assert.equal(saved.rows[0].status,'prepared');
+  assert.notEqual(saved.rows[0].to_plan_json,JSON.stringify(reordered));
+  assert.equal(saved.rows[0].to_plan_json,JSON.stringify(nextPlan));
 });
